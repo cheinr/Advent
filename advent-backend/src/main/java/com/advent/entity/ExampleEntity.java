@@ -1,15 +1,11 @@
 package com.advent.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "example_entity")
 public class ExampleEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String characteristic;
 
@@ -19,6 +15,9 @@ public class ExampleEntity {
         this.characteristic = characteristic;
     }
 
+    @Id
+    @Column(name = "id", unique = true, nullable = false, length = 20)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public Long getId() {
         return id;
     }
@@ -27,6 +26,7 @@ public class ExampleEntity {
         this.id = id;
     }
 
+    @Column(name = "characteristic", nullable = false)
     public String getCharacteristic() {
         return characteristic;
     }
