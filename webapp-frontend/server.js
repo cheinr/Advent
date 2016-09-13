@@ -1,11 +1,12 @@
-var http = require('http');
+var express = require('express');
 
-function handleRequest(request, response){
-  response.end('Hello world!');
-}
+const port = 8080;
 
-var server = http.createServer(handleRequest);
+const app = express();
 
-server.listen(8080, function(){
-  console.log("Server listening on: http://localhost:" + 8080);
+app.get('/', function(req, res) {
+    res.send("Hello world!");
 });
+app.listen(port);
+
+console.log("Running on localhost:" + port);
