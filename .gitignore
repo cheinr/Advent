@@ -3,7 +3,7 @@
 .gradle
 build/
 
-# Ignore Gradle GUI config
+# Ignore Gradle GUI com.advent.config
 gradle-app.setting
 
 # Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
@@ -189,7 +189,7 @@ Temporary Items
 Thumbs.db
 ehthumbs.db
 
-# Folder config file
+# Folder com.advent.config file
 Desktop.ini
 
 # Recycle Bin used on file shares
