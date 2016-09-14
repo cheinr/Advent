@@ -9,6 +9,10 @@ public class ExampleEntity {
     private Long id;
     private String characteristic;
 
+    protected ExampleEntity() {
+
+    }
+
     public ExampleEntity(String characteristic) {
         this.characteristic = characteristic;
     }
