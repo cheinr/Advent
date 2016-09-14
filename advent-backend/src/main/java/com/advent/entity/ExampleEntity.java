@@ -9,15 +9,14 @@ public class ExampleEntity {
     private Long id;
     private String characteristic;
 
-    protected ExampleEntity() {}
-
     public ExampleEntity(String characteristic) {
         this.characteristic = characteristic;
     }
 
     @Id
     @Column(name = "id", unique = true, nullable = false, length = 20)
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
+    @SequenceGenerator(name = "generator", sequenceName = "example_entity_seq", allocationSize = 1)
     public Long getId() {
         return id;
     }
