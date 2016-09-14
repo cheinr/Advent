@@ -1,0 +1,47 @@
+<html>
+  <!--
+      This is a simple example based on the helloworld.html example at:
+      facebook.github.io/react/docs/getting-started.html
+
+      However it uses the react build from the cloudflare cdn instead of the one
+      included in the Starter Kit.
+
+      I think using cdn's would definitely be the easiest way to get started
+      using react. We could look at using tools like webpack to build libraries
+      (react, react-dom, babel etc.) but that takes a lot of work to get setup.
+    -->
+      
+  <head>
+    <meta charset="UTF-8" />
+    <title>Example 1</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.1/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.1/react-dom.js"></script>
+    <script src="https://unpkg.com/babel-core@5.8.38/browser.min.js"></script>
+    
+  </head>
+
+  <body>
+    <div id="example">
+      <!--
+	  This empty div is used as a mounting point for our react app.
+	-->
+    </div>
+
+    
+    <!--
+	Setting the script type to "text/babel" tells the browser to interpret
+	using babel to convert jsx into normal javascript (on the fly?)
+
+	The ReactDom.render function takes the code in the first argument 
+	(notice the xml like syntax), and attaches it to the element supplied
+	in the second argument.
+      -->
+    <script type="text/babel">    
+      ReactDOM.render(
+        <h1>Hello React!</h1>,
+        document.getElementById('example')
+      );
+    </script>
+  </body>
+  
+</html>
