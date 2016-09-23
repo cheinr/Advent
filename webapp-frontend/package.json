@@ -1,0 +1,14 @@
+{
+  "name": "advent",
+  "version": "0.0.1",
+  "main": "server.js",
+  "author": "clai",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "devDependencies": {},
+  "dependencies": {
+    "express": "^4.14.0",
+    "webpack": "^1.13.2"
+  }
+}
