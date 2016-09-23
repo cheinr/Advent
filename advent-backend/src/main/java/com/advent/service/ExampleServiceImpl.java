@@ -2,14 +2,14 @@ package com.advent.service;
 
 import com.advent.entity.ExampleEntity;
 import com.advent.repo.ExampleEntityRepo;
-import com.advent.service.interfaces.ExampleEntityService;
+import com.advent.service.interfaces.ExampleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class ExampleEntityServiceImpl implements ExampleEntityService {
+public class ExampleServiceImpl implements ExampleService {
 
     @Autowired
     private ExampleEntityRepo exampleEntityRepo;

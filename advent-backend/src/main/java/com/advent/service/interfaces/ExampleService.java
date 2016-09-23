@@ -4,7 +4,7 @@ import com.advent.entity.ExampleEntity;
 
 import java.util.List;
 
-public interface ExampleEntityService {
+public interface ExampleService {
 
     ExampleEntity saveExampleEntity(ExampleEntity exampleEntity);
 
