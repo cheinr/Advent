@@ -1,17 +1,15 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { Router, Route, Link, browserHistory } from 'react-router'
 
-
+import MainLayout from './components/main-layout';
 import App from './components/app';
 
-var reducer = function() {
-    return true;
-};
-
 ReactDom.render(
-    <Provider store={createStore(reducer)}>
-        <App />
-    </Provider>,
-document.querySelector('.container'));
+    <Router history={browserHistory}>
+        <Route component={MainLayout}>
+            <Route path="/" component={App}/>
+            <Route/>
+        </Route>
+    </Router>
+, document.querySelector('.container'));
