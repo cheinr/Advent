@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class UserMangementManagementServiceImpl implements UserManagementService {
+public class UserManagementServiceImpl implements UserManagementService {
 
     @Autowired
     private UserRepo userRepo;
@@ -27,6 +27,8 @@ public class UserMangementManagementServiceImpl implements UserManagementService
         return userDTO;
     }
 
+
+    // TODO dszopa 9/27/16 - Add delete user by Id
     @Override
     public void deleteUser(UserDTO userDTO) {
         userRepo.delete(userDTO.getId());
