@@ -3,7 +3,6 @@ package com.advent.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import java.io.File;
 
 @Entity
 @Table(name = "user")
@@ -15,7 +14,7 @@ public class User {
     private String email;
     private String password;
     private String description;
-    private File profilePicture;
+    private String pictureFilename;
     // TODO dszopa 9/25/16 - Add List of groups the user is in (groups need to be made first)
     // TODO dszopa 9/25/16 - Add List of chats the user is in (chats need to be made first)
 
@@ -78,12 +77,12 @@ public class User {
     }
 
     @JsonIgnore
-    public File getProfilePicture() {
-        return profilePicture;
+    public String getPictureFilename() {
+        return pictureFilename;
     }
 
-    public void setProfilePicture(File profilePicture) {
-        this.profilePicture = profilePicture;
+    public void setPictureFilename(String pictureFilename) {
+        this.pictureFilename = pictureFilename;
     }
 
     @Override
@@ -95,7 +94,7 @@ public class User {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", description='" + description + '\'' +
-                ", profilePicture=" + profilePicture.getName() +
+                ", pictureFilename=" + pictureFilename +
                 '}';
     }
 }

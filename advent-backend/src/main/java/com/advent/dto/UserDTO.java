@@ -1,7 +1,5 @@
 package com.advent.dto;
 
-import java.io.File;
-
 public class UserDTO {
 
     private Long id;
@@ -10,7 +8,7 @@ public class UserDTO {
     private String email;
     private String password;
     private String description;
-    private File profilePicture;
+    private String pictureFilename;
 
     public Long getId() {
         return id;
@@ -60,12 +58,12 @@ public class UserDTO {
         this.description = description;
     }
 
-    public File getProfilePicture() {
-        return profilePicture;
+    public String getPictureFilename() {
+        return pictureFilename;
     }
 
-    public void setProfilePicture(File profilePicture) {
-        this.profilePicture = profilePicture;
+    public void setPictureFilename(String pictureFilename) {
+        this.pictureFilename = pictureFilename;
     }
 
     @Override
@@ -80,7 +78,7 @@ public class UserDTO {
         if (!displayName.equals(userDTO.displayName)) return false;
         if (!email.equals(userDTO.email)) return false;
         if (description != null ? !description.equals(userDTO.description) : userDTO.description != null) return false;
-        return profilePicture != null ? profilePicture.equals(userDTO.profilePicture) : userDTO.profilePicture == null;
+        return pictureFilename != null ? pictureFilename.equals(userDTO.pictureFilename) : userDTO.pictureFilename == null;
 
     }
 
@@ -91,7 +89,7 @@ public class UserDTO {
         result = 31 * result + displayName.hashCode();
         result = 31 * result + email.hashCode();
         result = 31 * result + (description != null ? description.hashCode() : 0);
-        result = 31 * result + (profilePicture != null ? profilePicture.hashCode() : 0);
+        result = 31 * result + (pictureFilename != null ? pictureFilename.hashCode() : 0);
         return result;
     }
 
@@ -103,7 +101,7 @@ public class UserDTO {
                 ", displayName='" + displayName + '\'' +
                 ", email='" + email + '\'' +
                 ", description='" + description + '\'' +
-                ", profilePicture=" + profilePicture +
+                ", pictureFilename=" + pictureFilename +
                 '}';
     }
 }
