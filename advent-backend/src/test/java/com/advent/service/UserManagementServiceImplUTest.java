@@ -1,6 +1,6 @@
 package com.advent.service;
 
-import com.advent.config.AbstractServiceTest;
+import com.advent.config.AbstractServiceUTest;
 import com.advent.dto.UserDTO;
 import com.advent.entity.User;
 import com.advent.factory.UserFactory;
@@ -16,7 +16,7 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
-public class UserManagementServiceImplUTest extends AbstractServiceTest {
+public class UserManagementServiceImplUTest extends AbstractServiceUTest {
 
     @Mock
     private UserRepo userRepo;

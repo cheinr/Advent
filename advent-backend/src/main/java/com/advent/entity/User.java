@@ -12,6 +12,7 @@ public class User {
     private String username;
     private String displayName;
     private String email;
+    // TODO dszopa 9/27/16 - Decide on how we want to manage passwords
     private String password;
     private String description;
     private String pictureFilename;
@@ -86,6 +87,23 @@ public class User {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        User user = (User) o;
+
+        if (id != null ? !id.equals(user.id) : user.id != null) return false;
+        if (!username.equals(user.username)) return false;
+        if (!displayName.equals(user.displayName)) return false;
+        if (!email.equals(user.email)) return false;
+        if (!password.equals(user.password)) return false;
+        if (description != null ? !description.equals(user.description) : user.description != null) return false;
+        return pictureFilename != null ? pictureFilename.equals(user.pictureFilename) : user.pictureFilename == null;
+
+    }
+
+    @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
@@ -94,7 +112,7 @@ public class User {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", description='" + description + '\'' +
-                ", pictureFilename=" + pictureFilename +
+                ", pictureFilename='" + pictureFilename + '\'' +
                 '}';
     }
 }

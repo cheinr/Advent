@@ -1,6 +1,6 @@
 package com.advent.controller;
 
-import com.advent.config.AbstractControllerTest;
+import com.advent.config.AbstractControllerUTest;
 import com.advent.dto.UserDTO;
 import com.advent.service.interfaces.UserManagementService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -23,7 +23,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-public class UserMangementControllerUTest extends AbstractControllerTest {
+public class UserMangementControllerUTest extends AbstractControllerUTest {
 
     @Mock
     private UserManagementService userManagementService;

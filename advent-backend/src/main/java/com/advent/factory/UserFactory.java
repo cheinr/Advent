@@ -8,18 +8,21 @@ import org.springframework.stereotype.Component;
 public class UserFactory {
 
     public UserDTO createUserDTO() {
+        // We possibly want users to join a certain group
+        // automatically for example
         return new UserDTO();
     }
 
     public UserDTO userToUserDTO(User user) {
         UserDTO userDTO = new UserDTO();
 
-        userDTO.setDescription(user.getDescription());
-        userDTO.setDisplayName(user.getDisplayName());
+        userDTO.setId(user.getId());
         userDTO.setEmail(user.getEmail());
-        userDTO.setPictureFilename(user.getPictureFilename());
         userDTO.setUsername(user.getUsername());
         userDTO.setPassword(user.getPassword());
+        userDTO.setDisplayName(user.getDisplayName());
+        userDTO.setDescription(user.getDescription());
+        userDTO.setPictureFilename(user.getPictureFilename());
 
         return userDTO;
     }
@@ -27,12 +30,13 @@ public class UserFactory {
     public User userDTOToUser(UserDTO userDTO) {
         User user = new User();
 
-        user.setDescription(userDTO.getDescription());
-        user.setDisplayName(userDTO.getDisplayName());
+        user.setId(userDTO.getId());
         user.setEmail(userDTO.getEmail());
-        user.setPictureFilename(userDTO.getPictureFilename());
         user.setUsername(userDTO.getUsername());
         user.setPassword(userDTO.getPassword());
+        user.setDisplayName(userDTO.getDisplayName());
+        user.setDescription(userDTO.getDescription());
+        user.setPictureFilename(userDTO.getPictureFilename());
 
         return user;
     }
