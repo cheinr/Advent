@@ -66,6 +66,7 @@ public class UserDTO {
         this.pictureFilename = pictureFilename;
     }
 
+    // TODO regenerate this
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -14,15 +14,15 @@ public class UserManagementController {
     @Autowired
     private UserManagementService userManagementService;
 
+    //TODO dszopa 9/27/16 - These probably all want to return response bodies
     @RequestMapping(value = "/users/create", method = RequestMethod.POST)
     public UserDTO createUser(@RequestBody UserDTO userDTO) {
         return userManagementService.saveUser(userDTO);
     }
 
     @RequestMapping(value = "/users/delete", method = RequestMethod.POST)
-    public Boolean deleteUser(@RequestBody UserDTO userDTO) {
+    public void deleteUser(@RequestBody UserDTO userDTO) {
         userManagementService.deleteUser(userDTO);
-        return true;
     }
 
     @RequestMapping(value = "/users/id/{userId}", method = RequestMethod.GET)
@@ -36,7 +36,7 @@ public class UserManagementController {
     }
 
     @RequestMapping(value = "/users/email/{email}", method = RequestMethod.GET)
-    public UserDTO getByEmail(@PathVariable("email") String email) {
+    public UserDTO getUserByEmail(@PathVariable("email") String email) {
         return userManagementService.findUserByEmail(email);
     }
 
