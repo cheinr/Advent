@@ -4,12 +4,13 @@ import { Router, Route, Link, browserHistory } from 'react-router'
 
 import MainLayout from './components/main-layout';
 import App from './components/app';
+import Home from './components/home';
 
 ReactDom.render(
     <Router history={browserHistory}>
         <Route component={MainLayout}>
             <Route path="/" component={App}/>
-            <Route/>
+            <Route path="/main" component={Home} />
         </Route>
     </Router>
 , document.querySelector('.container'));

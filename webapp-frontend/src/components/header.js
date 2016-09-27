@@ -7,6 +7,7 @@ const Header = React.createClass({
             <div id="header" className="clearfix">
                 <ul className="headerBar">
                     <li className="headerLink"><Link to="/">Advent</Link></li>
+                    <li className="headerLink"><Link to="/main">Main</Link></li>
                 </ul>
             </div>
         )
