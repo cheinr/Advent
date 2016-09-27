@@ -2,6 +2,8 @@ package com.advent.service.interfaces;
 
 import com.advent.dto.UserDTO;
 
+import java.util.List;
+
 public interface UserService {
 
     UserDTO saveUser(UserDTO userDTO);
@@ -13,4 +15,6 @@ public interface UserService {
     UserDTO findUserByUsername(String username);
 
     UserDTO findUserByEmail(String Email);
+
+    List<UserDTO> findAllUsers();
 }

@@ -8,6 +8,9 @@ import com.advent.service.interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -45,5 +48,17 @@ public class UserServiceImpl implements UserService {
     public UserDTO findUserByEmail(String email) {
         User user = userRepo.findByEmail(email);
         return userFactory.userToUserDTO(user);
+    }
+
+    @Override
+    public List<UserDTO> findAllUsers() {
+        List<User> users = userRepo.findAll();
+        List<UserDTO> userDTOs = new ArrayList<>();
+
+        users.forEach(user->
+            userDTOs.add(userFactory.userToUserDTO(user))
+        );
+
+        return userDTOs;
     }
 }
