@@ -23,7 +23,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-public class UserMangementControllerUTest extends AbstractControllerUTest {
+public class UserManagementControllerUTest extends AbstractControllerUTest {
 
     @Mock
     private UserManagementService userManagementService;
