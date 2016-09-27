@@ -4,7 +4,7 @@ import com.advent.dto.UserDTO;
 
 import java.util.List;
 
-public interface UserService {
+public interface UserManagementService {
 
     UserDTO saveUser(UserDTO userDTO);
 
