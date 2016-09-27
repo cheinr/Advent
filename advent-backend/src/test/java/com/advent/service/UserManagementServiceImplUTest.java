@@ -27,16 +27,17 @@ public class UserManagementServiceImplUTest extends AbstractServiceTest {
     @InjectMocks
     private UserManagementServiceImpl userManagementService;
 
+    private User user;
+    private UserDTO userDTO;
+
     @Before
     public void setup() throws Exception {
-
+        user = new User();
+        userDTO = new UserDTO();
     }
 
     @Test
     public void saveUser() throws Exception {
-        UserDTO userDTO = new UserDTO();
-        User user = new User();
-
         when(userFactory.userDTOToUser(userDTO)).thenReturn(user);
 
         UserDTO returnedUserDTO = userManagementService.saveUser(userDTO);
@@ -48,7 +49,6 @@ public class UserManagementServiceImplUTest extends AbstractServiceTest {
 
     @Test
     public void deleteUser() throws Exception {
-        UserDTO userDTO = new UserDTO();
         userDTO.setId(1L);
 
         userManagementService.deleteUser(userDTO);
@@ -58,9 +58,6 @@ public class UserManagementServiceImplUTest extends AbstractServiceTest {
 
     @Test
     public void findUser() throws Exception {
-        User user = new User();
-        UserDTO userDTO = new UserDTO();
-
         when(userRepo.findOne(1L)).thenReturn(user);
         when(userFactory.userToUserDTO(user)).thenReturn(userDTO);
 
@@ -73,9 +70,6 @@ public class UserManagementServiceImplUTest extends AbstractServiceTest {
 
     @Test
     public void findUserByUsername() throws Exception {
-        User user = new User();
-        UserDTO userDTO = new UserDTO();
-
         when(userRepo.findByUsername("username")).thenReturn(user);
         when(userFactory.userToUserDTO(user)).thenReturn(userDTO);
 
@@ -88,9 +82,6 @@ public class UserManagementServiceImplUTest extends AbstractServiceTest {
 
     @Test
     public void findUserByEmail() throws Exception {
-        User user = new User();
-        UserDTO userDTO = new UserDTO();
-
         when(userRepo.findByEmail("email")).thenReturn(user);
         when(userFactory.userToUserDTO(user)).thenReturn(userDTO);
 
@@ -103,8 +94,6 @@ public class UserManagementServiceImplUTest extends AbstractServiceTest {
 
     @Test
     public void findAllUsers() throws Exception {
-        User user = new User();
-        UserDTO userDTO = new UserDTO();
         List<User> users = Arrays.asList(user);
         List<UserDTO> userDTOs = Arrays.asList(userDTO);
 
