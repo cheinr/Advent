@@ -26,7 +26,23 @@ var rootElement =
         React.createElement('a', {href: 'mailto:joe@example.com'}, 'joe@example.com')
       )
     )
-  )
+  );
+  
+var ContactItem = React.createClass({
+  propTypes: {
+    name: React.PropTypes.string.isRequired,
+  },
 
-ReactDOM.render(rootElement, document.getElementById('react-app'))
+  render: function() {
+    return (
+      React.createElement('li', {className: 'Contact'},
+        React.createElement('h2', {className: 'Contact-name'}, this.props.name)
+      )
+    )
+  },
+});
+
+var element = React.createElement(ContactItem, {name: "James K Nelson"})
+
+ReactDOM.render(rootElement, document.getElementById('react-app'));
 </script>
