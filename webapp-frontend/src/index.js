@@ -7,11 +7,25 @@ import App from './components/app';
 import Home from './components/home';
 
 import ScheduleAddEvent from './components/schedule-add-event';
+import SignIn from './components/sign-in';
+
+import auth from './auth';
+
+
+function requireAuth(nextState, replace) {
+  if (!auth.loggedIn()) {
+    replace({
+      pathname: '/login',
+      state: { nextPathname: nextState.location.pathname }
+    })
+  }
+}
 
 ReactDom.render(
     <Router history={browserHistory}>
         <Route component={MainLayout}>
-            <Route path="/" component={App}/>
+            <Route path="/" component={App}  onEnter={requireAuth}/>
+            <Route path="/login" component={SignIn}/>
             <Route path="/main" component={Home} />
             <Route path="/schedule/addevent" component={ScheduleAddEvent}/>
         </Route>
