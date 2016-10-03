@@ -36,12 +36,11 @@ dependencies {
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 
-// To run in intellij as test, you need to go to editConfigurations,
-// make a new gradle task, then set
-// gradle project: advent-backend
-// tasks: bootRun
-// VM Options: -Dspring.profiles.active=test
-// TODO dszopa 10/3/16 - continue to try to figure out how to make a separate gradle task that does this
-bootRun {
-    systemProperties System.properties
+task bootRunTest(type: org.springframework.boot.gradle.run.BootRunTask, dependsOn: 'build') {
+    group = 'Application'
+    doFirst() {
+        main = project.mainClassName
+        classpath = sourceSets.main.runtimeClasspath
+        systemProperty 'spring.profiles.active', 'test'
+    }
 }
