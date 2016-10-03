@@ -16,10 +16,9 @@ import javax.sql.DataSource;
 public class TestDataSourceConfig {
 
     /**
-     * For right now, if we want the embedded database instead of the autoconfigured one we need to
-     * uncomment this.
+     * Creates the embedded database to be used as a datasouce
      * @return
-     *  The embedded database data source
+     *  The embedded database datasource
      */
     @Bean
     public DataSource dataSource() {
