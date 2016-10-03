@@ -11,6 +11,7 @@ export default class EventCreateContainer extends Component {
     }
 
     testFunc() {
+        console.log("changed");
         this.setState({test: "after"});
     }
 

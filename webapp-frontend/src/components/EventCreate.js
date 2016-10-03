@@ -6,8 +6,8 @@ export default class EventCreate extends Component {
             <div className="Test">
                 <input
                     type="button"
-                    value={this.test}
-                    onClick={this.testFunc} />
+                    value={this.props.test}
+                    onClick={this.props.testFunc} />
             </div>
         );
     }
