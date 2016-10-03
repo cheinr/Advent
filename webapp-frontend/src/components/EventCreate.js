@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
+import RaisedButton from 'material-ui/RaisedButton';
 
 export default class EventCreate extends Component {
     render() {
         return (
             <div className="Test">
-                <input
-                    type="button"
-                    value={this.props.test}
-                    onClick={this.props.testFunc} />
+                <RaisedButton
+                    label={this.props.test}
+                    onTouchTap={this.props.submitForm} />
             </div>
         );
     }

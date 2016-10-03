@@ -1,4 +1,4 @@
-import React, { Component, CameraRoll } from 'react';
+import React, { Component } from 'react';
 import EventCreate from './../components/EventCreate.js';
 
 export default class EventCreateContainer extends Component {
@@ -7,17 +7,16 @@ export default class EventCreateContainer extends Component {
         this.state = {
             test: "before"
         };
-        this.testFunc = this.testFunc.bind(this);
+        this.submitForm = this.submitForm.bind(this);
     }
 
-    testFunc() {
-        console.log("changed");
+    submitForm() {
         this.setState({test: "after"});
     }
 
     render() {
         return <EventCreate
-            testFunc={this.testFunc}
+            submitForm={this.submitForm}
             test={this.state.test}
         />
     }
