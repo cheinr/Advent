@@ -77,7 +77,7 @@ public class User {
         this.description = description;
     }
 
-    @JsonIgnore
+    @Column(name = "picture_filename")
     public String getPictureFilename() {
         return pictureFilename;
     }
