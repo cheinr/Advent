@@ -16,6 +16,12 @@ public class DataSourceConfig {
     private DataSource dataSource;
 
     // TODO dszopa 10/2/16 - create a way to easily choose what db gets built on runtime
+    /**
+     * For right now, if we want the embedded database instead of the autoconfigured one we need to
+     * uncomment this.
+     * @return
+     *  The embedded database data source
+     */
 //    @Bean
 //    public DataSource dataSource() {
 //        return new EmbeddedDatabaseBuilder()
@@ -25,8 +31,14 @@ public class DataSourceConfig {
 //                .addScript("db/schema.sql")
 //                .build();
 //    }
-//
 
+
+    /**
+     * Creates a manager for entities that will create tables in the database for the specified entity in the
+     * transaction if there are no tables for the entity currently in the database.
+     * @return
+     *  EntityManagerFactory that does the above.
+     */
     @Bean
     public EntityManagerFactory entityManagerFactory() {
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
