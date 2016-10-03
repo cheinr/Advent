@@ -1,21 +1,28 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <link rel="stylesheet" href="static/styles/styles.css">
+<head>
+  <link rel="stylesheet" href="static/styles/styles.css">
 
-    <!--
-      Google sign-in stuff
-    -->
-    <meta name="google-signin-scope" content="profile email">
-    <meta name="google-signin-client_id" content="833501818150-94qfhnk1c77cqt73ak0asil9hpqudpl8.apps.googleusercontent.com">
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <!--
-    -->
+  <!--
+  Google sign-in stuff
+-->
+<meta name="google-signin-scope" content="profile email">
+<meta name="google-signin-client_id" content="833501818150-94qfhnk1c77cqt73ak0asil9hpqudpl8.apps.googleusercontent.com">
+<script src="https://apis.google.com/js/platform.js?onload=triggerGoogleLoader" async defer></script>
+<!--
+-->
+<script>
+//  Here we create an event that tells us when google libraries have loaded.
+function triggerGoogleLoader() {
+  window.dispatchEvent(new Event('google-loaded'));
+}
 
-  </head>
-  <body>
-    <div class="container"></div>
-  </body>
+</script>
 
-  <script src="/bundle.js"></script>
+</head>
+<body>
+  <div class="container"></div>
+</body>
+
+<script src="/bundle.js"></script>
 </html>

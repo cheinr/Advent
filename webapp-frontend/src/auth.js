@@ -14,13 +14,12 @@ module.exports = {
     console.log("ID Token: " + id_token);
 
     //store the token
-    //we'll need to send this to our backend eventually
+    //we will use this token to authenticate with our backend
     localStorage.token = id_token;
 
     if(cb) cb();
 
   },
-
 
   /*
   login(email, pass, cb) {
@@ -44,17 +43,17 @@ module.exports = {
 */
 
   getToken() {
-    return localStorage.token
+    return localStorage.token;
   },
 
   logout(cb) {
-    delete localStorage.token
+    delete localStorage.token;
     if (cb) cb()
     this.onChange(false)
   },
 
   loggedIn() {
-    return !!localStorage.token
+    return !!localStorage.token;
   },
 
   onChange() {}

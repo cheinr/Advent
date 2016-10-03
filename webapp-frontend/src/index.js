@@ -21,12 +21,24 @@ function requireAuth(nextState, replace) {
   }
 }
 
+//this onEnter function is used to prevent logged in users from visiting
+//the login route.
+function requireNoAuth(nextState, replace) {
+  if(auth.loggedIn()) {
+    replace({
+      pathname: '/main',
+      state: { nextPathname: nextState.location.pathname}
+    })
+  }
+}
+
+
 ReactDom.render(
     <Router history={browserHistory}>
+        <Route path="/login" component={SignIn} onEnter={requireNoAuth}/>
         <Route component={MainLayout}>
             <Route path="/" component={App}  onEnter={requireAuth}/>
-            <Route path="/login" component={SignIn}/>
-            <Route path="/main" component={Home} />
+            <Route path="/main" component={Home} onEnter={requireAuth}/>
             <Route path="/schedule/addevent" component={ScheduleAddEvent}/>
         </Route>
     </Router>
