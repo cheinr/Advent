@@ -13,6 +13,7 @@ const Header = React.createClass({
       <ul className="headerBar">
       <li className="headerLink"><Link to="/">Advent</Link></li>
       <li className="headerLink"><Link to="/main">Main</Link></li>
+      <li className="headerLink"><Link to="/calendar">Calendar</Link></li>
       <li className="headerLink">
         <SignOut/>
       </li>
