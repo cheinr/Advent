@@ -1,5 +1,6 @@
 package com.advent.controller;
 
+import com.advent.dto.EventDTO;
 import com.advent.entity.Event;
 import com.advent.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ public class EventController {
 
     //TODO clai add group id when that is implemented
     @RequestMapping(value = "/event/create", method = RequestMethod.POST)
-    public Event createEvent(@RequestBody Event event) {
+    public EventDTO createEvent(@RequestBody EventDTO event) {
         return eventService.createEvent(event);
     }
 }

@@ -1,33 +1,23 @@
-package com.advent.entity;
+package com.advent.dto;
 
-import javax.persistence.*;
+import com.advent.entity.User;
+
 import java.util.Date;
 import java.util.List;
 
-@Entity
-@Table(name = "event")
-public class Event {
-
-    @Id
+/**
+ * Created by clai on 10/3/16.
+ */
+public class EventDTO {
     private Long id;
-    @Column(name = "name")
     private String name;
-    @Column(name = "description")
     private String description;
-    @Column(name = "start_date")
-    private Date startDate;
-    @Column(name = "end_date")
-    private Date endDate;
-    @Column(name = "location")
+    private String startDate;
+    private String endDate;
     private String location;
-    @Column(name = "is_private")
     private Boolean isPrivate;
-
-    // Temporarily Transient group should relate to groups
-
-    @Transient
+    // todo clai when groups are implemented
     private String group;
-    @Transient
     private List<User> usersGoing;
 
     public Long getId() {
@@ -54,19 +44,19 @@ public class Event {
         this.description = description;
     }
 
-    public Date getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
 
