@@ -15,4 +15,4 @@ ReactDom.render(
             <Route path="/event/create" component={EventCreateContainer} />
         </Route>
     </Router>
-, document.querySelector('.container'));
+, document.querySelector('#container'));

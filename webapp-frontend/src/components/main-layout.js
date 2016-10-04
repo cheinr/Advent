@@ -1,24 +1,21 @@
 import React from 'react';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-var injectTapEventPlugin = require("react-tap-event-plugin");
-injectTapEventPlugin();
 
 import Header from './header';
 
 const MainLayout = React.createClass({
     render: function() {
         return (
-            <MuiThemeProvider>
-                <div id="header" className="clearfix">
-                    <header></header>
-                    <aside>
-                        <Header />
-                    </aside>
-                    <main>
+            <div id="header" className="clearfix container-fluid">
+                <header></header>
+                <aside>
+                    <Header />
+                </aside>
+                <main>
+                    <div className="container-fluid">
                         {this.props.children}
-                    </main>
-                </div>
-            </MuiThemeProvider>
+                    </div>
+                </main>
+            </div>
         )
     }
 });
