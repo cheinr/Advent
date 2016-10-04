@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+       #map {
+        height: 600px;
+        width: 75%;
+       }
+    </style>
+  </head>
+  <body>
+    <h3>Google Maps Demo</h3>
+    <div id="map"></div>
+    <script>
+      function initMap() {
+        var ames = {lat: 42.0308, lng: -93.6319};
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 11,
+          center: ames
+        });
+        var marker = new google.maps.Marker({
+          position: ames,
+          map: map
+        });
+      }
+    </script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA9PyMi9CT7ZuWBBI6k4E9FIaLiiN8KSAA&callback=initMap">
+    </script>
+  </body>
+</html>
