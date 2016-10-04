@@ -15,12 +15,16 @@ const SignIn = withRouter(React.createClass({ //withRouter gives this component 
   },
 
   componentDidMount: function() {
-    window.addEventListener('google-loaded',this.renderGoogleLoginButton);
-  },
+      window.addEventListener('google-loaded',this.renderGoogleLoginButton);
+      //As we can see it is possible for us to try and render the button twice.
+      //If this happens we will end up failing on the first render, as gapi
+      //will be undefined. TODO 
+      this.renderGoogleLoginButton();
+    },
 
   renderGoogleLoginButton: function() {
     console.log('rendering google signin button')
-    gapi.signin2.render('my-signin2', {
+    gapi.signin2.render('signin2', {
       'scope': 'https://www.googleapis.com/auth/plus.login',
       'width': 200,
       'height': 50,
@@ -33,7 +37,7 @@ const SignIn = withRouter(React.createClass({ //withRouter gives this component 
   render: function() {
     return (
       <div>
-      <div id="my-signin2"></div>
+      <div id="signin2"></div>
       </div>
     );
   }

@@ -17,11 +17,9 @@ const SignOut = withRouter(React.createClass({ //withRouter gives this component
   signOut : function() {
     var auth2 = gapi.auth2.getAuthInstance();
 
-    auth2.signOut().then(function () {
-      console.log('User signed out.');
-    });
+    
 
-    auth.logout(() => {
+    auth.logout(auth2, () => {
       this.props.router.replace('/login');
     });
 

@@ -46,9 +46,12 @@ module.exports = {
     return localStorage.token;
   },
 
-  logout(cb) {
+ //I hate handling google signout here but I couldn't find a better way to do it.
+  logout(auth2, cb) {
     delete localStorage.token;
-    if (cb) cb()
+    auth2.signOut().then(function () {
+      if (cb) cb();
+    });
     this.onChange(false)
   },
 
