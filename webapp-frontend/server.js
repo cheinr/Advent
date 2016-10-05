@@ -15,7 +15,7 @@ app.use(require('webpack-dev-middleware')(compiler, {
 app.use('/static', express.static('static'));
 
 app.get('/*', function(req, res) {
-    res.sendFile(__dirname + '/examples/calendar-quickstart.html');
+    res.sendFile(__dirname + '/index.html');
 });
 
 app.listen(port, 'localhost', (err) => {

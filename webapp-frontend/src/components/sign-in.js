@@ -18,7 +18,7 @@ const SignIn = withRouter(React.createClass({ //withRouter gives this component 
       window.addEventListener('google-loaded',this.renderGoogleLoginButton);
       //As we can see it is possible for us to try and render the button twice.
       //If this happens we will end up failing on the first render, as gapi
-      //will be undefined. TODO 
+      //will be undefined. TODO
       this.renderGoogleLoginButton();
     },
 

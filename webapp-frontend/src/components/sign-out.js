@@ -5,21 +5,29 @@ import {withRouter} from 'react-router';
 
 const SignOut = withRouter(React.createClass({ //withRouter gives this component the router in props
   componentDidMount: function() {
-    window.addEventListener('google-loaded',this.onGoogleLoad);
+    gapi.load('auth2', function() {
+        gapi.auth2.init();
+    });
+    /*if(googleApiLoaded) {
+      //do nothing?
+    } else {
+      window.addEventListener('google-loaded', this.onGoogleLoad);
+    } */
   },
 
   onGoogleLoad : function() {
+    console.log("google loaded!");
     gapi.load('auth2', function() {
         gapi.auth2.init();
     });
   },
 
   signOut : function() {
-    var auth2 = gapi.auth2.getAuthInstance();
+  //  var auth2 = gapi.auth2.getAuthInstance();
 
 
 
-    auth.logout(auth2, () => {
+    auth.logout(gapi.auth2.getAuthInstance(), () => {
       this.props.router.replace('/login');
     });
 
