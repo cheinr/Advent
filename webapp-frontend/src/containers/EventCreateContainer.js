@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import EventCreate from './../components/EventCreate.js';
+import Map from './../components/Map.js';
 import axios from 'axios';
 
 export default class EventCreateContainer extends Component {
@@ -57,14 +58,20 @@ export default class EventCreateContainer extends Component {
     };
 
     render() {
-        return <EventCreate
-            nameChange={this.nameChange}
-            descChange={this.descChange}
-            startChange={this.startChange}
-            endChange={this.endChange}
-            locChange={this.locChange}
-            submitForm={this.submitForm}
-            values={this.state}
-        />
+        return (
+        <div>
+            <EventCreate
+                nameChange={this.nameChange}
+                descChange={this.descChange}
+                startChange={this.startChange}
+                endChange={this.endChange}
+                locChange={this.locChange}
+                submitForm={this.submitForm}
+                values={this.state}
+            />
+
+            <Map/>
+        </div>
+        )
     }
 }
