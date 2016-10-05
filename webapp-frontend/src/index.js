@@ -6,6 +6,8 @@ import MainLayout from './components/main-layout';
 import App from './components/app';
 import Home from './components/home';
 import EventCreateContainer from './containers/EventCreateContainer';
+import EventListContainer from './containers/EventListContainer';
+
 
 ReactDom.render(
     <Router history={browserHistory}>
@@ -13,6 +15,7 @@ ReactDom.render(
             <Route path="/" component={App}/>
             <Route path="/main" component={Home} />
             <Route path="/event/create" component={EventCreateContainer} />
+            <Route path="/event/list" component={EventListContainer} />
         </Route>
     </Router>
 , document.querySelector('#container'));

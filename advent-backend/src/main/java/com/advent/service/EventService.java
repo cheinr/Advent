@@ -7,6 +7,8 @@ import com.advent.repo.EventRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class EventService {
 
@@ -18,6 +20,10 @@ public class EventService {
     public EventDTO createEvent(EventDTO eventDTO) {
         Event event = eventRepo.save(eventConverter.eventDTOtoEvent(eventDTO));
         return eventConverter.eventToEventDTO(event);
+    }
+
+    public List<EventDTO> getAllEvents() {
+        return eventConverter.eventsToEventDTOs(eventRepo.findAll());
     }
 
 }

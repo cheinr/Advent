@@ -3,10 +3,13 @@ package com.advent.factory;
 import com.advent.dto.EventDTO;
 import com.advent.entity.Event;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by clai on 10/3/16.
@@ -41,10 +44,21 @@ public class EventConverter {
         return event;
     }
 
+    public List<EventDTO> eventsToEventDTOs(List<Event> events) {
+        List<EventDTO> eventDTOs = new ArrayList<>();
+        for (Event event : events) {
+            eventDTOs.add(eventToEventDTO(event));
+        }
+        return eventDTOs;
+    }
+
     private Date stringToDate(String dateStr) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         try {
-            return format.parse(dateStr);
+            if (!StringUtils.isEmpty(dateStr)) {
+                return format.parse(dateStr);
+            }
+            return null;
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -54,7 +68,10 @@ public class EventConverter {
     private String dateToString(Date date) {
 
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        return format.format(date);
+        if (date != null) {
+            return format.format(date);
+        }
+        return null;
 
     }
 }

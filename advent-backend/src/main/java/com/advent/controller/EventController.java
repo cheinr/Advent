@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api")
 public class EventController {
@@ -20,6 +22,12 @@ public class EventController {
     @RequestMapping(value = "/event/create", method = RequestMethod.POST)
     public EventDTO createEvent(@RequestBody EventDTO event) {
         return eventService.createEvent(event);
+    }
+
+    // Temp
+    @RequestMapping(value = "/event/list", method = RequestMethod.POST)
+    public List<EventDTO> getAllEvents() {
+        return eventService.getAllEvents();
     }
 }
 

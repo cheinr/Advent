@@ -9,6 +9,8 @@ import java.util.List;
 public class Event {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
+    @SequenceGenerator(name = "generator", sequenceName = "event_seq", allocationSize = 1)
     private Long id;
     @Column(name = "name")
     private String name;
