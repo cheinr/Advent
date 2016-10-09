@@ -2,7 +2,7 @@ package com.advent.controller;
 
 import com.advent.config.AbstractControllerUTest;
 import com.advent.dto.UserDTO;
-import com.advent.service.interfaces.UserManagementService;
+import com.advent.service.UserManagementService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;

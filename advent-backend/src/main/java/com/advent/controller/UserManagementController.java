@@ -1,7 +1,7 @@
 package com.advent.controller;
 
 import com.advent.dto.UserDTO;
-import com.advent.service.interfaces.UserManagementService;
+import com.advent.service.UserManagementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

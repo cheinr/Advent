@@ -5,6 +5,7 @@ import com.advent.dto.UserDTO;
 import com.advent.entity.User;
 import com.advent.factory.UserFactory;
 import com.advent.repo.UserRepo;
+import com.advent.service.impl.UserManagementServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;

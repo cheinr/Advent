@@ -1,10 +1,10 @@
-package com.advent.service;
+package com.advent.service.impl;
 
 import com.advent.dto.UserDTO;
 import com.advent.entity.User;
 import com.advent.factory.UserFactory;
 import com.advent.repo.UserRepo;
-import com.advent.service.interfaces.UserManagementService;
+import com.advent.service.UserManagementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

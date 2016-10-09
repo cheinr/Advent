@@ -1,4 +1,4 @@
-package com.advent.service.interfaces;
+package com.advent.service;
 
 import com.advent.dto.UserDTO;
 
