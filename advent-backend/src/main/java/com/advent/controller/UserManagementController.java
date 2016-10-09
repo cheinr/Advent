@@ -14,7 +14,6 @@ public class UserManagementController {
     @Autowired
     private UserManagementService userManagementService;
 
-    //TODO dszopa 9/27/16 - These probably all want to return response bodies
     @RequestMapping(value = "/users/create", method = RequestMethod.POST)
     public UserDTO createUser(@RequestBody UserDTO userDTO) {
         return userManagementService.saveUser(userDTO);
@@ -25,19 +24,24 @@ public class UserManagementController {
         userManagementService.deleteUser(userDTO);
     }
 
+    @RequestMapping(value = "/users/delete/id/{userId}", method = RequestMethod.POST)
+    public void deleteUserById(@RequestBody Long userId) {
+        userManagementService.deleteUserById(userId);
+    }
+
     @RequestMapping(value = "/users/id/{userId}", method = RequestMethod.GET)
     public UserDTO getUser(@PathVariable("userId") Long userId) {
         return userManagementService.findUser(userId);
     }
 
-    @RequestMapping(value = "/users/username/{username}", method = RequestMethod.GET)
-    public UserDTO getUserByUsername(@PathVariable("username") String username) {
-        return userManagementService.findUserByUsername(username);
-    }
-
     @RequestMapping(value = "/users/email/{email}", method = RequestMethod.GET)
     public UserDTO getUserByEmail(@PathVariable("email") String email) {
         return userManagementService.findUserByEmail(email);
+    }
+
+    @RequestMapping(value = "/users/display_name/{displayName}", method = RequestMethod.GET)
+    public List<UserDTO> getUsersByDisplayName(@PathVariable("displayName") String displayName) {
+        return userManagementService.findUsersByDisplayName(displayName);
     }
 
     @RequestMapping(value = "/users", method = RequestMethod.GET)

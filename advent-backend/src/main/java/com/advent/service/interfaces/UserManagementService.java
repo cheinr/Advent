@@ -10,11 +10,13 @@ public interface UserManagementService {
 
     void deleteUser(UserDTO userDTO);
 
+    void deleteUserById(Long id);
+
     UserDTO findUser(Long id);
 
-    UserDTO findUserByUsername(String username);
-
     UserDTO findUserByEmail(String Email);
+
+    List<UserDTO> findUsersByDisplayName(String displayName);
 
     List<UserDTO> findAllUsers();
 }

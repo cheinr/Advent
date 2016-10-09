@@ -27,11 +27,14 @@ public class UserManagementServiceImpl implements UserManagementService {
         return userDTO;
     }
 
-
-    // TODO dszopa 9/27/16 - Add delete user by Id
     @Override
     public void deleteUser(UserDTO userDTO) {
         userRepo.delete(userDTO.getId());
+    }
+
+    @Override
+    public void deleteUserById(Long id) {
+        userRepo.delete(id);
     }
 
     @Override
@@ -41,15 +44,21 @@ public class UserManagementServiceImpl implements UserManagementService {
     }
 
     @Override
-    public UserDTO findUserByUsername(String username) {
-        User user = userRepo.findByUsername(username);
+    public UserDTO findUserByEmail(String email) {
+        User user = userRepo.findByEmail(email);
         return userFactory.userToUserDTO(user);
     }
 
     @Override
-    public UserDTO findUserByEmail(String email) {
-        User user = userRepo.findByEmail(email);
-        return userFactory.userToUserDTO(user);
+    public List<UserDTO> findUsersByDisplayName(String displayName) {
+        List<User> users = userRepo.findAllByDisplayName(displayName);
+        List<UserDTO> userDTOs = new ArrayList<>();
+
+        users.forEach(user ->
+            userDTOs.add(userFactory.userToUserDTO(user))
+        );
+
+        return userDTOs;
     }
 
     @Override

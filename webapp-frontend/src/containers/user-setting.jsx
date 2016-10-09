@@ -32,6 +32,7 @@ export default class UserSetting extends React.Component {
           <div className="col-xs-3">
             <a href="#" className="thumbnail no-margin-bottom">
               {/* A simple placeholder until we host our own */}
+              {/* TODO - The users picture will come from their google account */}
               <img src="http://xacatolicos.com/app/images/avatar/icon-user.png" alt="..." />
             </a>
           </div>
@@ -41,6 +42,9 @@ export default class UserSetting extends React.Component {
         </div>
         <div>
           <TextBox fieldName="Description" placeholder={this.state.description} />
+        </div>
+        <div>
+          {/* TODO Save button */}
         </div>
       </div>
     );

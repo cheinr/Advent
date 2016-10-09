@@ -68,6 +68,11 @@ public class UserManagementControllerUTest extends AbstractControllerUTest {
     }
 
     @Test
+    public void deleteUserById() throws Exception {
+        // TOOD
+    }
+
+    @Test
     public void getUser() throws Exception {
         when(userManagementService.findUser(1L)).thenReturn(userDTO);
 
@@ -75,17 +80,6 @@ public class UserManagementControllerUTest extends AbstractControllerUTest {
                 .andExpect(status().isOk());
 
         verify(userManagementService, times(1)).findUser(1L);
-        JSONAssert.assertEquals(mapper.writeValueAsString(userDTO), result.andReturn().getResponse().getContentAsString(), false);
-    }
-
-    @Test
-    public void getUserByUsername() throws Exception {
-        when(userManagementService.findUserByUsername("username")).thenReturn(userDTO);
-
-        ResultActions result = mockMvc.perform(get("/api/users/username/{username}", "username"))
-                .andExpect(status().isOk());
-
-        verify(userManagementService, times(1)).findUserByUsername("username");
         JSONAssert.assertEquals(mapper.writeValueAsString(userDTO), result.andReturn().getResponse().getContentAsString(), false);
     }
 
@@ -98,6 +92,11 @@ public class UserManagementControllerUTest extends AbstractControllerUTest {
 
         verify(userManagementService, times(1)).findUserByEmail("email");
         JSONAssert.assertEquals(mapper.writeValueAsString(userDTO), result.andReturn().getResponse().getContentAsString(), false);
+    }
+
+    @Test
+    public void getUsersByDisplayName() throws Exception {
+        // TODO
     }
 
     @Test
