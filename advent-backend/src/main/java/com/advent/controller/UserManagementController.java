@@ -14,8 +14,9 @@ public class UserManagementController {
     @Autowired
     private UserManagementService userManagementService;
 
+    // TODO this method needs user testing to see if it overwrites or creates a new
     @RequestMapping(value = "/users/create", method = RequestMethod.POST)
-    public UserDTO createUser(@RequestBody UserDTO userDTO) {
+    public UserDTO saveUser(@RequestBody UserDTO userDTO) {
         return userManagementService.saveUser(userDTO);
     }
 
@@ -25,22 +26,22 @@ public class UserManagementController {
     }
 
     @RequestMapping(value = "/users/delete/id/{userId}", method = RequestMethod.POST)
-    public void deleteUserById(@RequestBody Long userId) {
+    public void deleteUserById(@PathVariable Long userId) {
         userManagementService.deleteUserById(userId);
     }
 
     @RequestMapping(value = "/users/id/{userId}", method = RequestMethod.GET)
-    public UserDTO getUser(@PathVariable("userId") Long userId) {
+    public UserDTO getUser(@PathVariable Long userId) {
         return userManagementService.findUser(userId);
     }
 
     @RequestMapping(value = "/users/email/{email}", method = RequestMethod.GET)
-    public UserDTO getUserByEmail(@PathVariable("email") String email) {
+    public UserDTO getUserByEmail(@PathVariable String email) {
         return userManagementService.findUserByEmail(email);
     }
 
     @RequestMapping(value = "/users/display_name/{displayName}", method = RequestMethod.GET)
-    public List<UserDTO> getUsersByDisplayName(@PathVariable("displayName") String displayName) {
+    public List<UserDTO> getUsersByDisplayName(@PathVariable String displayName) {
         return userManagementService.findUsersByDisplayName(displayName);
     }
 

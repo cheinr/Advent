@@ -43,7 +43,7 @@ public class UserManagementControllerUTest extends AbstractControllerUTest {
     }
 
     @Test
-    public void createUser() throws Exception {
+    public void saveUser() throws Exception {
         String userDTOJson = mapper.writeValueAsString(userDTO);
 
         when(userManagementService.saveUser(any(UserDTO.class))).thenReturn(userDTO);
@@ -69,7 +69,10 @@ public class UserManagementControllerUTest extends AbstractControllerUTest {
 
     @Test
     public void deleteUserById() throws Exception {
-        // TOOD
+        mockMvc.perform(post("/api/users/delete/id/{userId}", 1L))
+                .andExpect(status().isOk());
+
+        verify(userManagementService, times(1)).deleteUserById(1L);
     }
 
     @Test
@@ -96,7 +99,15 @@ public class UserManagementControllerUTest extends AbstractControllerUTest {
 
     @Test
     public void getUsersByDisplayName() throws Exception {
-        // TODO
+        List<UserDTO> userDTOs = Arrays.asList(userDTO);
+
+        when(userManagementService.findUsersByDisplayName("displayName")).thenReturn(userDTOs);
+
+        ResultActions result = mockMvc.perform(get("/api/users/display_name/{displayName}", "displayName"))
+                .andExpect(status().isOk());
+
+        verify(userManagementService, times(1)).findUsersByDisplayName("displayName");
+        JSONAssert.assertEquals(mapper.writeValueAsString(userDTOs), result.andReturn().getResponse().getContentAsString(), false);
     }
 
     @Test
