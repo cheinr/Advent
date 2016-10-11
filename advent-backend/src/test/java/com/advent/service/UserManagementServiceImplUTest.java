@@ -59,7 +59,9 @@ public class UserManagementServiceImplUTest extends AbstractServiceUTest {
 
     @Test
     public void deleteUserById() throws Exception {
-        // TODO
+        userManagementService.deleteUserById(1L);
+
+        verify(userRepo, times(1)).delete(1L);
     }
 
     @Test
@@ -88,7 +90,17 @@ public class UserManagementServiceImplUTest extends AbstractServiceUTest {
 
     @Test
     public void findAllUserByDisplayName() throws Exception {
-        // TODO
+        List<User> users = Arrays.asList(user);
+        List<UserDTO> userDTOs = Arrays.asList(userDTO);
+
+        when(userRepo.findAllByDisplayName("displayName")).thenReturn(users);
+        when(userFactory.userToUserDTO(user)).thenReturn(userDTO);
+
+        List<UserDTO> returnedUserDTOs = userManagementService.findUsersByDisplayName("displayName");
+
+        verify(userRepo, times(1)).findAllByDisplayName("displayName");
+        verify(userFactory, times(1)).userToUserDTO(any(User.class));
+        assertEquals(userDTOs, returnedUserDTOs);
     }
 
     @Test
