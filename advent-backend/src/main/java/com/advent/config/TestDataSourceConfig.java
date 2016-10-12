@@ -12,7 +12,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
 @Configuration
-@Profile("default")
+@Profile("test")
 public class TestDataSourceConfig {
 
     /**

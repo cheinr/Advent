@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import EventCreate from './../components/EventCreate.js';
-import Map from './../components/Map.js';
 import axios from 'axios';
 
 export default class EventCreateContainer extends Component {
@@ -69,8 +68,6 @@ export default class EventCreateContainer extends Component {
                 submitForm={this.submitForm}
                 values={this.state}
             />
-
-            <Map/>
         </div>
         )
     }
