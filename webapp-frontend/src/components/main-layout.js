@@ -5,13 +5,15 @@ import Header from './header';
 const MainLayout = React.createClass({
     render: function() {
         return (
-            <div id="header" className="clearfix">
+            <div id="header" className="clearfix container-fluid">
                 <header></header>
                 <aside>
                     <Header />
                 </aside>
                 <main>
-                    {this.props.children}
+                    <div className="container-fluid">
+                        {this.props.children}
+                    </div>
                 </main>
             </div>
         )
