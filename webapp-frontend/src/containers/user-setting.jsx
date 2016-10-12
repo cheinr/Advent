@@ -17,7 +17,7 @@ export default class UserSetting extends React.Component {
       .then((response) => {
         console.log(`response data: ${response.data}`);
         this.setState({
-          username: response.data.username,
+          displayName: response.data.displayName,
           description: response.data.description,
         });
       })
@@ -37,7 +37,7 @@ export default class UserSetting extends React.Component {
             </a>
           </div>
           <div className="col-xs-6">
-            <EntryField fieldName="Display Name" placeholder={this.state.username} />
+            <EntryField fieldName="Display Name" placeholder={this.state.displayName} />
           </div>
         </div>
         <div>
