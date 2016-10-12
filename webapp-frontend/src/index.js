@@ -43,6 +43,8 @@ ReactDom.render(
             <Route path="/" component={App}  onEnter={requireAuth}/>
             <Route path="/main" component={Home} onEnter={requireAuth}/>
             <Route path="/schedule/addevent" component={ScheduleAddEvent}/>
+            <Route path="/event/create" component={EventCreateContainer}/>
+            <Route path="/event/list" component={EventListContainer}/>
         </Route>
     </Router>
-, document.querySelector('.container'));
+, document.querySelector('#container'));
