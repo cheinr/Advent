@@ -47,12 +47,13 @@ public class UserManagementServiceImpl implements UserManagementService {
 
     GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(transport, jsonFactory)
             .setAudience(Arrays.asList(CLIENT_ID))
-            .setIssuer("https://accounts.google.com")
+            .setIssuer("accounts.google.com")
             .build();
 
     public UserDTO handleGToken(HttpServletRequest request)  {
         String idTokenString = request.getHeader("google-id-token"); //TODO - get token from request
 
+        System.out.println(idTokenString);
         GoogleIdToken idToken = null;
         try {
             idToken = verifier.verify(idTokenString);
@@ -61,7 +62,7 @@ public class UserManagementServiceImpl implements UserManagementService {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        System.out.println(idToken);
         if(idToken != null) {
             Payload payload = idToken.getPayload();
 
@@ -82,20 +83,29 @@ public class UserManagementServiceImpl implements UserManagementService {
             // Use or store profile information
             // ...
 
-            //Query for user.
+            //Query for user:
             UserDTO userDTO = findUserByEmail(email);
 
-            if(user == null) {
+            if(userDTO == null) {
                 //create user
                 User user = new User();
+                user.setId((long) 0);
+                user.setEmail(email);
+                user.setDisplayName(name);
+                user.setPictureFilename(pictureUrl); //TODO - change this method name
+                user.setDescription(locale); //probably not what we want.
+                user.setUsername(givenName); //we could parse out the user's netid from their email
+                //TODO - set more attributes
+
+                userDTO = userFactory.userToUserDTO(user);
 
             }
 
-            //return userDTO?
             return userDTO;
         } else {
-            return null;
+            System.out.println("invalid ID Token");
             //TODO - handle invalid tokens.
+            return null; //this should work
         }
     }
 
