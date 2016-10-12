@@ -87,9 +87,10 @@ public class UserManagementServiceImpl implements UserManagementService {
             UserDTO userDTO = findUserByEmail(email);
 
             if(userDTO == null) {
+                System.out.println("We have no record of " + name + " let's create one.");
                 //create user
                 User user = new User();
-                user.setId((long) 0);
+                //user.setId((long) 0);
                 user.setEmail(email);
                 user.setDisplayName(name);
                 user.setPictureFilename(pictureUrl); //TODO - change this method name
@@ -97,8 +98,9 @@ public class UserManagementServiceImpl implements UserManagementService {
                 user.setUsername(givenName); //we could parse out the user's netid from their email
                 //TODO - set more attributes
 
+                //TODO - save userDTO
                 userDTO = userFactory.userToUserDTO(user);
-
+                //saveUser(userDTO);
             }
 
             return userDTO;
@@ -119,18 +121,21 @@ public class UserManagementServiceImpl implements UserManagementService {
     @Override
     public UserDTO findUser(Long id) {
         User user = userRepo.findOne(id);
+        if(user == null) return null;
         return userFactory.userToUserDTO(user);
     }
 
     @Override
     public UserDTO findUserByUsername(String username) {
         User user = userRepo.findByUsername(username);
+        if(user == null) return null;
         return userFactory.userToUserDTO(user);
     }
 
     @Override
     public UserDTO findUserByEmail(String email) {
         User user = userRepo.findByEmail(email);
+        if(user == null) return null;
         return userFactory.userToUserDTO(user);
     }
 
