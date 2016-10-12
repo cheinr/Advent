@@ -2,10 +2,10 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import { Router, Route, Link, browserHistory, IndexRoute } from 'react-router';
 
-import MainLayout from './containers/main-layout';
-import App from './components/app';
-import Home from './components/home';
-import UserSetting from './containers/user-setting';
+import MainLayout from './containers/MainLayout';
+import App from './components/App';
+import Home from './components/Home';
+import UserSetting from './containers/UserSetting';
 
 ReactDom.render(
   <Router history={browserHistory}>

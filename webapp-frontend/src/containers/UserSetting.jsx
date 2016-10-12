@@ -1,8 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 
-import TextBox from '../components/text-box';
-import EntryField from '../components/entry-field';
+import TextBox from '../components/TextBox';
+import EntryField from '../components/EntryField';
 
 export default class UserSetting extends React.Component {
   constructor(props) {
@@ -31,12 +31,11 @@ export default class UserSetting extends React.Component {
         <div className="row pull-down">
           <div className="col-xs-3">
             <a href="#" className="thumbnail no-margin-bottom">
-              {/* A simple placeholder until we host our own */}
               {/* TODO - The users picture will come from their google account */}
               <img src="http://xacatolicos.com/app/images/avatar/icon-user.png" alt="..." />
             </a>
           </div>
-          <div className="col-xs-6">
+          <div className="col-xs-9">
             <EntryField fieldName="Display Name" placeholder={this.state.displayName} />
           </div>
         </div>
@@ -45,6 +44,7 @@ export default class UserSetting extends React.Component {
         </div>
         <div>
           {/* TODO Save button */}
+          {/* Should get action for it passed down into it (on click) */}
         </div>
       </div>
     );

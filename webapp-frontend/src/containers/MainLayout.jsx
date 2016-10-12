@@ -1,13 +1,13 @@
 import React from 'react';
 
-import NavBar from '../components/navbar';
-import SidebarTopRight from './sidebar-top-right';
-import SidebarBottomRight from './sidebar-bottom-right';
+import Navbar from '../components/Navbar';
+import SidebarTopRight from './SidebarTopRight';
+import SidebarBottomRight from './SidebarBottomRight';
 
 export default function MainLayout(props) {
   return (
     <div>
-      <NavBar />
+      <Navbar />
       <div className="col-xs-9">
         <div className="container">
           <div>

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import MainFeed from './main-feed';
+import MainFeed from './MainFeed';
 
 export default function Home(props) {
   return (
