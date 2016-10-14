@@ -7,19 +7,25 @@ import SignOut from './sign-out';
 
 
 const Header = React.createClass({
-  render: function() {
-    return (
-      <div id="header" className="clearfix">
-      <ul className="headerBar">
-      <li className="headerLink"><Link to="/">Advent</Link></li>
-      <li className="headerLink"><Link to="/main">Main</Link></li>
-      <li className="headerLink">
-        <SignOut/>
-      </li>
-      </ul>
-      </div>
-    )
-  }
+    render: function() {
+        return (
+            <div id="header" className="clearfix">
+                <nav className="navbar navbar-inverse navbar-fixed-top">
+                    <div className="container-fluid">
+                        <div className="navbar-header">
+                            <Link className="navbar-brand" to="/">Advent</Link>
+                        </div>
+                        <ul className="nav navbar-nav">
+                            <li><Link to="/main">Main</Link></li>
+                        </ul>
+                        <ul className="nav navbar-nav">
+                          <li><SignOut/></li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        )
+    }
 });
 
 export default Header;

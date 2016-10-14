@@ -21,3 +21,12 @@
 .headerLink a:hover {
     background-color: #111;
 }
+
+body {
+    padding-top: 50px;
+}
+
+#areaMap {
+    height: 400px;
+    width: 100%;
+}
