@@ -13,9 +13,9 @@ public class User {
     private String displayName;
     private String email;
     // TODO dszopa 9/27/16 - Decide on how we want to manage passwords
-    private String password;
+    // private String password;
     private String description;
-    private String pictureFilename;
+    private String profilePicUrl;
     // TODO dszopa 9/25/16 - Add List of groups the user is in (groups need to be made first)
     // TODO dszopa 9/25/16 - Add List of chats the user is in (chats need to be made first)
 
@@ -58,7 +58,7 @@ public class User {
         this.email = email;
     }
 
-    @JsonIgnore
+  /*  @JsonIgnore
     @Column(name = "password", nullable = false)
     public String getPassword() {
         return password;
@@ -66,7 +66,7 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
-    }
+    }*/
 
     @Column(name = "description")
     public String getDescription() {
@@ -78,12 +78,12 @@ public class User {
     }
 
     @Column(name = "picture_filename")
-    public String getPictureFilename() {
-        return pictureFilename;
+    public String getProfilePicUrl() {
+        return profilePicUrl;
     }
 
-    public void setPictureFilename(String pictureFilename) {
-        this.pictureFilename = pictureFilename;
+    public void setProfilePicUrl(String pictureFilename) {
+        this.profilePicUrl = pictureFilename;
     }
 
     @Override
@@ -97,9 +97,9 @@ public class User {
         if (!username.equals(user.username)) return false;
         if (!displayName.equals(user.displayName)) return false;
         if (!email.equals(user.email)) return false;
-        if (!password.equals(user.password)) return false;
+       // if (!password.equals(user.password)) return false;
         if (description != null ? !description.equals(user.description) : user.description != null) return false;
-        return pictureFilename != null ? pictureFilename.equals(user.pictureFilename) : user.pictureFilename == null;
+        return profilePicUrl != null ? profilePicUrl.equals(user.profilePicUrl) : user.profilePicUrl == null;
 
     }
 
@@ -110,9 +110,9 @@ public class User {
                 ", username='" + username + '\'' +
                 ", displayName='" + displayName + '\'' +
                 ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
+           //     ", password='" + password + '\'' +
                 ", description='" + description + '\'' +
-                ", pictureFilename='" + pictureFilename + '\'' +
+                ", pictureFilename='" + profilePicUrl + '\'' +
                 '}';
     }
 }

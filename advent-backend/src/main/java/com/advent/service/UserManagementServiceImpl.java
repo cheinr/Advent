@@ -30,7 +30,7 @@ public class UserManagementServiceImpl implements UserManagementService {
 
     private JsonFactory jsonFactory = new JacksonFactory();
     private NetHttpTransport transport = new NetHttpTransport();
-    private String CLIENT_ID = "833501818150-94qfhnk1c77cqt73ak0asil9hpqudpl8.apps.googleusercontent.com";
+    private final String CLIENT_ID = "833501818150-94qfhnk1c77cqt73ak0asil9hpqudpl8.apps.googleusercontent.com";
 
     @Autowired
     private UserRepo userRepo;
@@ -93,13 +93,20 @@ public class UserManagementServiceImpl implements UserManagementService {
                 //user.setId((long) 0);
                 user.setEmail(email);
                 user.setDisplayName(name);
-                user.setPictureFilename(pictureUrl); //TODO - change this method name
+                user.setProfilePicUrl(pictureUrl); //TODO - change this method name
                 user.setDescription(locale); //probably not what we want.
                 user.setUsername(givenName); //we could parse out the user's netid from their email
                 //TODO - set more attributes
 
                 //TODO - save userDTO
                 userDTO = userFactory.userToUserDTO(user);
+
+                System.out.println(userDTO.getEmail());
+                System.out.println(userDTO.getId());
+              //  System.out.println(userDTO.);
+                System.out.println();
+
+
                 //saveUser(userDTO);
             }
 

@@ -1,3 +1,5 @@
+
+
 package com.advent.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +19,16 @@ public class DataSourceConfig {
     @Autowired
     private DataSource dataSource;
 
-    /**
+
+
+/**
      * Creates a manager for entities that will create tables in the database for the specified entity in the
      * transaction if there are no tables for the entity currently in the database.
      * @return
      *  EntityManagerFactory that does the above.
      */
+
+
     @Bean
     public EntityManagerFactory entityManagerFactory() {
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
@@ -37,3 +43,5 @@ public class DataSourceConfig {
         return factory.getObject();
     }
 }
+
+

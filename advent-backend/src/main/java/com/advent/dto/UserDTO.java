@@ -42,13 +42,17 @@ public class UserDTO {
         this.email = email;
     }
 
-    public String getPassword() {
+    /*
+     String getPassword() {
+
         return password;
     }
+
 
     public void setPassword(String password) {
         this.password = password;
     }
+    */
 
     public String getDescription() {
         return description;
@@ -58,11 +62,11 @@ public class UserDTO {
         this.description = description;
     }
 
-    public String getPictureFilename() {
+    public String getProfilePicUrl() {
         return pictureFilename;
     }
 
-    public void setPictureFilename(String pictureFilename) {
+    public void setProfilePicUrl(String pictureFilename) {
         this.pictureFilename = pictureFilename;
     }
 
