@@ -22,6 +22,15 @@
     background-color: #111;
 }
 
+body {
+    padding-top: 50px;
+}
+
+#areaMap {
+    height: 400px;
+    width: 100%;
+}
+
 .pull-down {
     display: flex;
     align-items: flex-end;

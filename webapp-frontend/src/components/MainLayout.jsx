@@ -8,16 +8,18 @@ export default function MainLayout(props) {
   return (
     <div>
       <Navbar />
-      <div className="col-xs-9">
-        <div className="container">
-          <div>
+      <div className="container-fluid">
+        <div className="col-xs-9">
+          <div className="container">
+            <div>
               {props.children}
+            </div>
           </div>
         </div>
-      </div>
-      <div className="col-xs-3">
-        <SidebarTopRight />
-        <SidebarBottomRight />
+        <div className="col-xs-3">
+          <SidebarTopRight />
+          <SidebarBottomRight />
+        </div>
       </div>
     </div>
   );

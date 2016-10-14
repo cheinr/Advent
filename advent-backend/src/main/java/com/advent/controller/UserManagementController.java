@@ -2,6 +2,7 @@ package com.advent.controller;
 
 import com.advent.dto.UserDTO;
 import com.advent.service.UserManagementService;
+import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +15,10 @@ public class UserManagementController {
     @Autowired
     private UserManagementService userManagementService;
 
-    // TODO this method needs user testing to see if it overwrites or creates a new
+    @RequestMapping(value = "/users/authGToken", method = RequestMethod.POST)
+    public UserDTO handleGToken(HttpServletRequest request) { return userManagementService.handleGToken(request);}
+
+    //TODO dszopa 9/27/16 - These probably all want to return response bodies
     @RequestMapping(value = "/users/create", method = RequestMethod.POST)
     public UserDTO saveUser(@RequestBody UserDTO userDTO) {
         return userManagementService.saveUser(userDTO);
