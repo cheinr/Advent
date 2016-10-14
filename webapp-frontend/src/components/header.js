@@ -18,6 +18,9 @@ const Header = React.createClass({
                         <ul className="nav navbar-nav">
                             <li><Link to="/main">Main</Link></li>
                         </ul>
+                        <ul className="nav navbar-nav">
+                          <li><SignOut/></li>
+                        </ul>
                     </div>
                 </nav>
             </div>
