@@ -2,9 +2,10 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import { Router, Route, Link, browserHistory } from 'react-router';
 
-import MainLayout from './components/main-layout';
+import MainLayout from './components/MainLayout';
 import App from './components/App';
 import Home from './components/Home';
+import UserSetting from './containers/UserSetting';
 import EventCreateContainer from './containers/EventCreateContainer';
 import EventListContainer from './containers/EventListContainer';
 
@@ -27,7 +28,7 @@ function requireAuth(nextState, replace) {
 // this onEnter function is used to prevent logged in users from visiting
 // the login route.
 function requireNoAuth(nextState, replace) {
-  if(auth.loggedIn()) {
+  if (auth.loggedIn()) {
     replace({
       pathname: '/main',
       state: { nextPathname: nextState.location.pathname },
@@ -39,12 +40,13 @@ function requireNoAuth(nextState, replace) {
 ReactDom.render(
   <Router history={browserHistory}>
     <Route path="/login" component={SignIn} onEnter={requireNoAuth} />
-    <Route component={MainLayout}>
-      <Route path="/" component={App} onEnter={requireAuth} />
-      <Route path="/main" component={Home} onEnter={requireAuth} />
+    <Route component={MainLayout} onEnter={requireAuth}>
+      <Route path="/" component={App} />
+      <Route path="/main" component={Home} />
+      <Route path="/user/edit/:userId" component={UserSetting} />
       <Route path="/schedule/addevent" component={ScheduleAddEvent} />
       <Route path="/event/create" component={EventCreateContainer} />
       <Route path="/event/list" component={EventListContainer} />
     </Route>
   </Router>
-, document.querySelector('#container'));
+, document.querySelector('.content'));

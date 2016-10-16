@@ -3,14 +3,17 @@ import { Link } from 'react-router';
 
 export default function Navbar(props) {
   return (
-    <nav className="navbar navbar-default">
-      <div className="container-fluid">
-        <div className="navbar-header">
-          <a className="navbar-brand" href="#">
-            <img alt="Brand" src="..." />
-          </a>
+    <div>
+      <nav className="navbar navbar-inverse navbar-static-top">
+        <div className="container-fluid">
+          <div className="navbar-header">
+            <Link className="navbar-brand" to="/">Advent</Link>
+          </div>
+          <ul className="nav navbar-nav">
+            <li><Link to="/main">Main</Link></li>
+          </ul>
         </div>
-      </div>
-    </nav>
+      </nav>
+    </div>
   );
 }
