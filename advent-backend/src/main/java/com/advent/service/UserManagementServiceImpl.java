@@ -80,7 +80,6 @@ public class UserManagementServiceImpl implements UserManagementService {
             String givenName = (String) payload.get("given_name");
 
 
-            System.out.println("User " + name + " has been authenticated.");
             System.out.println(payload);
             // Use or store profile information
             // ...
@@ -89,7 +88,7 @@ public class UserManagementServiceImpl implements UserManagementService {
             UserDTO userDTO = findUserByEmail(email);
 
             if(userDTO == null) {
-                System.out.println("We have no record of " + name + " let's create one.");
+                System.out.println("Creating user: " + name);
                 //create user
                 User user = new User();
                 user.setEmail(email);
@@ -99,20 +98,19 @@ public class UserManagementServiceImpl implements UserManagementService {
                 user.setDescription("");
                 user.setFullName(name);
 
-                //TODO - save userDTO
                 userDTO = userFactory.userToUserDTO(user);
 
                 System.out.println(userDTO.getEmail());
                 System.out.println(userDTO.getId());
 
-
-                //saveUser(userDTO);
+                saveUser(userDTO);
             }
 
             return userDTO;
         } else {
             System.out.println("invalid ID Token");
             //TODO - handle invalid tokens.
+            //TODO chein 10/17/16 - We need to somehow let the user know that something is wrong.
             return null; //this should work
         }
     }

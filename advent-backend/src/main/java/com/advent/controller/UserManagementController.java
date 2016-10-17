@@ -15,7 +15,8 @@ public class UserManagementController {
     @Autowired
     private UserManagementService userManagementService;
 
-    @RequestMapping(value = "/users/authGToken", method = RequestMethod.POST)
+    //authenticates user or creates a new one if needed.
+    @RequestMapping(value = "/users/login", method = RequestMethod.POST)
     @ResponseBody
     public UserDTO handleGToken(HttpServletRequest request) { return userManagementService.handleGToken(request);}
 
