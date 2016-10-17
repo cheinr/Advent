@@ -96,16 +96,14 @@ public class UserManagementServiceImpl implements UserManagementService {
                 //I like the idea of setting the display name to the user's netid
                 user.setDisplayName(email.substring(0, email.indexOf('@')));
                 user.setProfilePicUrl(pictureUrl);
-                user.setDescription(""); //probably not what we want.
-                user.setFullname(name); //we could parse out the user's netid from their email
+                user.setDescription("");
+                user.setFullName(name);
 
                 //TODO - save userDTO
                 userDTO = userFactory.userToUserDTO(user);
 
                 System.out.println(userDTO.getEmail());
                 System.out.println(userDTO.getId());
-              //  System.out.println(userDTO.);
-                System.out.println();
 
 
                 //saveUser(userDTO);
@@ -134,8 +132,8 @@ public class UserManagementServiceImpl implements UserManagementService {
     }
 
     @Override
-    public UserDTO findUserByUsername(String username) {
-        User user = userRepo.findByUsername(username);
+    public UserDTO findUserByFullName(String fullName) {
+        User user = userRepo.findByFullName(fullName);
         if(user == null) return null;
         return userFactory.userToUserDTO(user);
     }

@@ -15,7 +15,7 @@ public interface UserManagementService {
 
     UserDTO findUser(Long id);
 
-    UserDTO findUserByUsername(String username);
+    UserDTO findUserByFullName(String fullName);
 
     UserDTO findUserByEmail(String Email);
 

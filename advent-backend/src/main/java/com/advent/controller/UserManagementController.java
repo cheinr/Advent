@@ -35,9 +35,9 @@ public class UserManagementController {
         return userManagementService.findUser(userId);
     }
 
-    @RequestMapping(value = "/users/username/{username}", method = RequestMethod.GET)
-    public UserDTO getUserByUsername(@PathVariable("username") String username) {
-        return userManagementService.findUserByUsername(username);
+    @RequestMapping(value = "/users/username/{full_name}", method = RequestMethod.GET)
+    public UserDTO getUserByFullName(@PathVariable("full_name") String full_name) {
+        return userManagementService.findUserByFullName(full_name);
     }
 
     @RequestMapping(value = "/users/email/{email}", method = RequestMethod.GET)

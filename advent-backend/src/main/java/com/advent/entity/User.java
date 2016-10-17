@@ -29,13 +29,11 @@ public class User {
         this.id = id;
     }
 
-    @Column(name = "fullname", nullable = false)
-    public String getFullName() {
-        return fullName;
-    }
+    @Column(name = "full_name", nullable = false)
+    public String getFullName() { return fullName; }
 
-    public void setFullname(String username) {
-        this.fullName = username;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     @Column(name = "display_name", nullable = false)
@@ -65,7 +63,7 @@ public class User {
         this.description = description;
     }
 
-    @Column(name = "picture_filename")
+    @Column(name = "profile_pic_url")
     public String getProfilePicUrl() {
         return profilePicUrl;
     }
@@ -85,7 +83,6 @@ public class User {
         if (!fullName.equals(user.fullName)) return false;
         if (!displayName.equals(user.displayName)) return false;
         if (!email.equals(user.email)) return false;
-       // if (!password.equals(user.password)) return false;
         if (description != null ? !description.equals(user.description) : user.description != null) return false;
         return profilePicUrl != null ? profilePicUrl.equals(user.profilePicUrl) : user.profilePicUrl == null;
 
@@ -95,10 +92,9 @@ public class User {
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", username='" + fullName + '\'' +
+                ", fullName='" + fullName + '\'' +
                 ", displayName='" + displayName + '\'' +
                 ", email='" + email + '\'' +
-           //     ", password='" + password + '\'' +
                 ", description='" + description + '\'' +
                 ", pictureFilename='" + profilePicUrl + '\'' +
                 '}';
