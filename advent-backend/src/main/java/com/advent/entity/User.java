@@ -9,11 +9,9 @@ import javax.persistence.*;
 public class User {
 
     private Long id;
-    private String username;
+    private String fullName;
     private String displayName;
     private String email;
-    // TODO dszopa 9/27/16 - Decide on how we want to manage passwords
-    // private String password;
     private String description;
     private String profilePicUrl;
     // TODO dszopa 9/25/16 - Add List of groups the user is in (groups need to be made first)
@@ -31,13 +29,13 @@ public class User {
         this.id = id;
     }
 
-    @Column(name = "username", nullable = false)
-    public String getUsername() {
-        return username;
+    @Column(name = "fullname", nullable = false)
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setFullname(String username) {
+        this.fullName = username;
     }
 
     @Column(name = "display_name", nullable = false)
@@ -57,16 +55,6 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
-
-  /*  @JsonIgnore
-    @Column(name = "password", nullable = false)
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }*/
 
     @Column(name = "description")
     public String getDescription() {
@@ -94,7 +82,7 @@ public class User {
         User user = (User) o;
 
         if (id != null ? !id.equals(user.id) : user.id != null) return false;
-        if (!username.equals(user.username)) return false;
+        if (!fullName.equals(user.fullName)) return false;
         if (!displayName.equals(user.displayName)) return false;
         if (!email.equals(user.email)) return false;
        // if (!password.equals(user.password)) return false;
@@ -107,7 +95,7 @@ public class User {
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", username='" + username + '\'' +
+                ", username='" + fullName + '\'' +
                 ", displayName='" + displayName + '\'' +
                 ", email='" + email + '\'' +
            //     ", password='" + password + '\'' +

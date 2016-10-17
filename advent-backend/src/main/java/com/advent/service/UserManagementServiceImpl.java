@@ -79,7 +79,9 @@ public class UserManagementServiceImpl implements UserManagementService {
             String familyName = (String) payload.get("family_name");
             String givenName = (String) payload.get("given_name");
 
+
             System.out.println("User " + name + " has been authenticated.");
+            System.out.println(payload);
             // Use or store profile information
             // ...
 
@@ -90,13 +92,12 @@ public class UserManagementServiceImpl implements UserManagementService {
                 System.out.println("We have no record of " + name + " let's create one.");
                 //create user
                 User user = new User();
-                //user.setId((long) 0);
                 user.setEmail(email);
-                user.setDisplayName(name);
-                user.setProfilePicUrl(pictureUrl); //TODO - change this method name
-                user.setDescription(locale); //probably not what we want.
-                user.setUsername(givenName); //we could parse out the user's netid from their email
-                //TODO - set more attributes
+                //I like the idea of setting the display name to the user's netid
+                user.setDisplayName(email.substring(0, email.indexOf('@')));
+                user.setProfilePicUrl(pictureUrl);
+                user.setDescription(""); //probably not what we want.
+                user.setFullname(name); //we could parse out the user's netid from their email
 
                 //TODO - save userDTO
                 userDTO = userFactory.userToUserDTO(user);
