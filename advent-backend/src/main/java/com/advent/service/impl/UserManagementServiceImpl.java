@@ -108,7 +108,6 @@ public class UserManagementServiceImpl implements UserManagementService {
         }
     }
 
-    // TODO dszopa 9/27/16 - Add delete user by Id
     @Override
     public void deleteUser(UserDTO userDTO) {
         userRepo.delete(userDTO.getId());

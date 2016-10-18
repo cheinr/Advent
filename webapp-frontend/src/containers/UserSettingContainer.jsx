@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, browserHistory } from 'react-router';
+import { browserHistory } from 'react-router';
 import axios from 'axios';
 import Alert from '../components/feedback/Alert';
 import Error from '../components/feedback/Error';
@@ -50,7 +50,7 @@ export default class UserSettingContainer extends React.Component {
   }
 
   submitForm() {
-    const url = '/api/users/create';
+    const url = '/api/users/save';
     const data = {
       id: this.state.id,
       displayName: this.state.displayName,

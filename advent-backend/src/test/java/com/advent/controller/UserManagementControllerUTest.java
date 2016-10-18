@@ -48,7 +48,7 @@ public class UserManagementControllerUTest extends AbstractControllerUTest {
 
         when(userManagementService.saveUser(any(UserDTO.class))).thenReturn(userDTO);
 
-        ResultActions result = mockMvc.perform(post("/api/users/create")
+        ResultActions result = mockMvc.perform(post("/api/users/save")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(userDTOJson))
                 .andExpect(status().isOk());

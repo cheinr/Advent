@@ -48,7 +48,6 @@ public class UserDTO {
         this.pictureUrl = pictureUrl;
     }
 
-    // TODO regenerate this
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
