@@ -51,6 +51,7 @@ export default class ViewUserContainer extends React.Component {
             <ReactMarkdown source={this.state.description} />
           </Panel>
         </div>
+        {/* TODO dszopa 10/18/16 - Display groups too */}
       </div>
     );
   }
