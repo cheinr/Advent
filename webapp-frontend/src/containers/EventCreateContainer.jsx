@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import EventCreate from '../components/EventCreate.jsx';
+import EventCreate from '../components/EventCreate';
 import axios from 'axios';
 
 export default class EventCreateContainer extends Component {
