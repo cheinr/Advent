@@ -48,7 +48,7 @@ export default class ViewUserContainer extends React.Component {
         </div>
         <div className="row">
           <Panel title="Description">
-            <ReactMarkdown source={this.state.description} />
+            <ReactMarkdown escapeHtml source={this.state.description} />
           </Panel>
         </div>
         {/* TODO dszopa 10/18/16 - Display groups too */}
