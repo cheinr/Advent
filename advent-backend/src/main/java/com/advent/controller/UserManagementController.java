@@ -18,7 +18,6 @@ public class UserManagementController {
     @RequestMapping(value = "/users/authGToken", method = RequestMethod.POST)
     public UserDTO handleGToken(HttpServletRequest request) { return userManagementService.handleGToken(request);}
 
-    //TODO dszopa 9/27/16 - These probably all want to return response bodies
     @RequestMapping(value = "/users/create", method = RequestMethod.POST)
     public UserDTO saveUser(@RequestBody UserDTO userDTO) {
         return userManagementService.saveUser(userDTO);

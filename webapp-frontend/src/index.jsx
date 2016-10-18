@@ -5,7 +5,7 @@ import { Router, Route, Link, browserHistory } from 'react-router';
 import MainLayout from './components/MainLayout';
 import App from './components/App';
 import Home from './components/Home';
-import UserSetting from './containers/UserSetting';
+import UserSettingContainer from './containers/UserSettingContainer';
 import EventCreateContainer from './containers/EventCreateContainer';
 import EventListContainer from './containers/EventListContainer';
 
@@ -43,7 +43,7 @@ ReactDom.render(
     <Route component={MainLayout} onEnter={requireAuth}>
       <Route path="/" component={App} />
       <Route path="/main" component={Home} />
-      <Route path="/user/edit/:userId" component={UserSetting} />
+      <Route path="/user/edit/:userId" component={UserSettingContainer} />
       <Route path="/schedule/addevent" component={ScheduleAddEvent} />
       <Route path="/event/create" component={EventCreateContainer} />
       <Route path="/event/list" component={EventListContainer} />

@@ -1,10 +1,12 @@
 import React from 'react';
 import { Link, browserHistory } from 'react-router';
 import axios from 'axios';
+import Alert from '../components/feedback/Alert';
+import Error from '../components/feedback/Error';
 import TextBox from '../components/input/TextBox';
 import BasicInputField from '../components/input/BasicInputField';
 
-export default class UserSetting extends React.Component {
+export default class UserSettingContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -12,25 +14,30 @@ export default class UserSetting extends React.Component {
       displayName: '',
       email: '',
       description: '',
-      pictureUrl: 'http://xacatolicos.com/app/images/avatar/icon-user.png',
+      pictureUrl: '',
     };
     this.displayNameChange = this.displayNameChange.bind(this);
     this.descriptionChange = this.descriptionChange.bind(this);
     this.submitForm = this.submitForm.bind(this);
-    this.goBack = this.goBack.bind(this);
   }
 
   componentWillMount() {
     axios.get(`/api/users/id/${this.props.params.userId}`)
       .then((response) => {
-        console.log(`response data: ${response.data}`);
         this.setState({
+          id: response.data.id,
           displayName: response.data.displayName,
+          email: response.data.email,
           description: response.data.description,
+          pictureUrl: response.data.pictureUrl,
         });
       })
       .catch((error) => {
         console.log(error);
+        this.setState({
+          showErrors: true,
+          errorMessage: 'There was an error receiving your profile from the server',
+        });
       });
   }
 
@@ -46,7 +53,7 @@ export default class UserSetting extends React.Component {
     const url = '/api/users/create';
     const data = {
       id: this.state.id,
-      displayName: this.state.name,
+      displayName: this.state.displayName,
       email: this.state.email,
       description: this.state.description,
       pictureUrl: this.state.pictureUrl,
@@ -54,27 +61,31 @@ export default class UserSetting extends React.Component {
 
     axios.post(url, data)
       .then((response) => {
-        console.log(response.data);
-        browserHistory.goBack();
+        this.setState({
+          showResults: true,
+          showErrors: false,
+        });
       })
       .catch((error) => {
         console.log(error);
+        this.setState({
+          showResults: false,
+          showErrors: true,
+          errorMessage: 'There was an error updating your profile',
+        });
       });
-  }
-
-  goBack() {
-    browserHistory.goBack();
   }
 
   render() {
     return (
       <div>
+        {this.state.showResults ? <Alert>Your profile has been updated!</Alert> : null}
+        {this.state.showErrors ? <Error>{this.state.errorMessage}</Error> : null}
         <div className="row pull-down">
           <div className="col-xs-3">
-            {/* Ideally you click this and a modal to pick a url for your picture comes up */}
-            <Link to="/user/:userId" className="thumbnail">
+            <a href={this.state.pictureUrl} className="thumbnail">
               <img src={this.state.pictureUrl} alt="Account" />
-            </Link>
+            </a>
           </div>
           <div className="col-xs-9">
             <BasicInputField
@@ -98,7 +109,7 @@ export default class UserSetting extends React.Component {
         <div className="row">
           <div className="col-xs-4 col-xs-offset-5">
             <button type="button" className="btn btn-primary" onClick={this.submitForm}>Save</button>
-            <button type="button" className="btn btn-default" onClick={this.goBack}>Cancel</button>
+            <button type="button" className="btn btn-default" onClick={browserHistory.goBack}>Cancel</button>
           </div>
         </div>
       </div>

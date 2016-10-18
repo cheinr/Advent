@@ -10,7 +10,7 @@ public class User {
     private String displayName;
     private String email;
     private String description;
-    private String pictureFilename;
+    private String pictureUrl;
     // TODO dszopa 9/25/16 - Add List of groups the user is in (groups need to be made first)
     // TODO dszopa 9/25/16 - Add List of chats the user is in (chats need to be made first)
 
@@ -53,13 +53,13 @@ public class User {
         this.description = description;
     }
 
-    @Column(name = "picture_filename")
-    public String getPictureFilename() {
-        return pictureFilename;
+    @Column(name = "picture_url")
+    public String getPictureUrl() {
+        return pictureUrl;
     }
 
-    public void setPictureFilename(String pictureFilename) {
-        this.pictureFilename = pictureFilename;
+    public void setPictureUrl(String pictureUrl) {
+        this.pictureUrl = pictureUrl;
     }
 
     @Override
@@ -73,7 +73,7 @@ public class User {
         if (!displayName.equals(user.displayName)) return false;
         if (!email.equals(user.email)) return false;
         if (description != null ? !description.equals(user.description) : user.description != null) return false;
-        return pictureFilename != null ? pictureFilename.equals(user.pictureFilename) : user.pictureFilename == null;
+        return pictureUrl != null ? pictureUrl.equals(user.pictureUrl) : user.pictureUrl == null;
 
     }
 
@@ -84,7 +84,7 @@ public class User {
                 ", displayName='" + displayName + '\'' +
                 ", email='" + email + '\'' +
                 ", description='" + description + '\'' +
-                ", pictureFilename='" + pictureFilename + '\'' +
+                ", pictureUrl='" + pictureUrl + '\'' +
                 '}';
     }
 }

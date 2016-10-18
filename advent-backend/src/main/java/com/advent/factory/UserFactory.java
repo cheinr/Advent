@@ -20,7 +20,7 @@ public class UserFactory {
         userDTO.setEmail(user.getEmail());
         userDTO.setDisplayName(user.getDisplayName());
         userDTO.setDescription(user.getDescription());
-        userDTO.setPictureFilename(user.getPictureFilename());
+        userDTO.setPictureUrl(user.getPictureUrl());
 
         return userDTO;
     }
@@ -32,7 +32,7 @@ public class UserFactory {
         user.setEmail(userDTO.getEmail());
         user.setDisplayName(userDTO.getDisplayName());
         user.setDescription(userDTO.getDescription());
-        user.setPictureFilename(userDTO.getPictureFilename());
+        user.setPictureUrl(userDTO.getPictureUrl());
 
         return user;
     }

@@ -20,14 +20,14 @@ public class UserFactoryUTest extends AbstractFactoryUTest {
         user.setEmail("email");
         user.setDisplayName("displayName");
         user.setDescription("description");
-        user.setPictureFilename("picture.jpg");
+        user.setPictureUrl("picture.jpg");
 
         UserDTO expectedUserDTO = new UserDTO();
         expectedUserDTO.setId(1L);
         expectedUserDTO.setEmail("email");
         expectedUserDTO.setDisplayName("displayName");
         expectedUserDTO.setDescription("description");
-        expectedUserDTO.setPictureFilename("picture.jpg");
+        expectedUserDTO.setPictureUrl("picture.jpg");
 
         UserDTO returnedUserDTO = userFactory.userToUserDTO(user);
 
@@ -41,14 +41,14 @@ public class UserFactoryUTest extends AbstractFactoryUTest {
         userDTO.setEmail("email");
         userDTO.setDisplayName("displayName");
         userDTO.setDescription("description");
-        userDTO.setPictureFilename("picture.jpg");
+        userDTO.setPictureUrl("picture.jpg");
 
         User expectedUser = new User();
         expectedUser.setId(1L);
         expectedUser.setEmail("email");
         expectedUser.setDisplayName("displayName");
         expectedUser.setDescription("description");
-        expectedUser.setPictureFilename("picture.jpg");
+        expectedUser.setPictureUrl("picture.jpg");
 
         User returnedUser = userFactory.userDTOToUser(userDTO);
 

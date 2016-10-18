@@ -5,7 +5,11 @@ import com.advent.entity.User;
 import com.advent.factory.UserFactory;
 import com.advent.repo.UserRepo;
 import com.advent.service.UserManagementService;
+import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
+import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken.Payload;
+import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
 import com.google.api.client.http.javanet.NetHttpTransport;
+import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +22,6 @@ import java.util.Arrays;
 import java.util.List;
 
 //TODO - add libraries to project.
-import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
-import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken.Payload;
-import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
-
-import com.google.api.client.json.JsonFactory;
 
 
 @Service
@@ -93,9 +92,8 @@ public class UserManagementServiceImpl implements UserManagementService {
                 user.setId((long) 0);
                 user.setEmail(email);
                 user.setDisplayName(name);
-                user.setPictureFilename(pictureUrl); //TODO - change this method name
+                user.setPictureUrl(pictureUrl);
                 user.setDescription(locale); //probably not what we want.
-                user.setUsername(givenName); //we could parse out the user's netid from their email
                 //TODO - set more attributes
 
                 userDTO = userFactory.userToUserDTO(user);
