@@ -1,5 +1,8 @@
 import React from 'react';
 import axios from 'axios';
+import Panel from '../components/display/Panel';
+import Thumbnail from '../components/display/Thumbnail';
+import PageHeader from '../components/display/PageHeader';
 
 export default class ViewUserContainer extends React.Component {
   constructor(props) {
@@ -36,26 +39,15 @@ export default class ViewUserContainer extends React.Component {
         {this.state.showErrors ? <Error>{this.state.errorMessage}</Error> : null}
         <div className="row pull-down">
           <div className="col-xs-3">
-            <a href={this.state.pictureUrl} className="thumbnail">
-              <img src={this.state.pictureUrl} alt="User" />
-            </a>
+            <Thumbnail pictureUrl={this.state.pictureUrl} altText="User" />
           </div>
           <div className="col-xs-9">
-            <div className="page-header">
-              <h1>{this.state.displayName}</h1>
-            </div>
+            <PageHeader title={this.state.displayName} />
           </div>
         </div>
         <div className="row">
-          <div className="panel panel-default">
-            <div className="panel-heading">
-              <h3 className="panel-title">Description</h3>
-            </div>
-            <div className="panel-body">
-              {/* TODO dszopa 10/18/16 - Add markdown support for the description */}
-              {this.state.description}
-            </div>
-          </div>
+          {/* TODO dszopa 10/18/16 - Add Markdown support for description */}
+          <Panel title="Description">{this.state.description}</Panel>
         </div>
       </div>
     );
