@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import ReactMarkdown from 'react-markdown';
 import Panel from '../components/display/Panel';
 import Thumbnail from '../components/display/Thumbnail';
 import PageHeader from '../components/display/PageHeader';
@@ -46,8 +47,9 @@ export default class ViewUserContainer extends React.Component {
           </div>
         </div>
         <div className="row">
-          {/* TODO dszopa 10/18/16 - Add Markdown support for description */}
-          <Panel title="Description">{this.state.description}</Panel>
+          <Panel title="Description">
+            <ReactMarkdown source={this.state.description} />
+          </Panel>
         </div>
       </div>
     );
