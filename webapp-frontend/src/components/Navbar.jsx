@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
+import SignOut from './sign-out';
 
 export default function Navbar(props) {
   return (
@@ -11,6 +12,9 @@ export default function Navbar(props) {
           </div>
           <ul className="nav navbar-nav">
             <li><Link to="/main">Main</Link></li>
+          </ul>
+          <ul className="nav navbar-nav">
+            <li><SignOut /></li>
           </ul>
         </div>
       </nav>
