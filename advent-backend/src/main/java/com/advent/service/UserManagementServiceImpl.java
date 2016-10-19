@@ -51,6 +51,7 @@ public class UserManagementServiceImpl implements UserManagementService {
             .build();
 
     public UserDTO handleGToken(HttpServletRequest request)  {
+        long before = System.currentTimeMillis();
         String idTokenString = request.getHeader("google-id-token"); //TODO - get token from request
 
         System.out.println(idTokenString);
@@ -103,9 +104,9 @@ public class UserManagementServiceImpl implements UserManagementService {
                 System.out.println(userDTO.getEmail());
                 System.out.println(userDTO.getId());
 
-                saveUser(userDTO);
+                userDTO = saveUser(userDTO);
             }
-
+            System.out.println("time = " + (System.currentTimeMillis() - before));
             return userDTO;
         } else {
             System.out.println("invalid ID Token");

@@ -18,7 +18,7 @@ public class UserFactoryUTest extends AbstractFactoryUTest {
         User user = new User();
         user.setId(1L);
         user.setEmail("email");
-        user.setUsername("username");
+        user.setFullName("fullname");
        // user.setPassword("password");
         user.setDisplayName("displayName");
         user.setDescription("description");
@@ -27,7 +27,7 @@ public class UserFactoryUTest extends AbstractFactoryUTest {
         UserDTO expectedUserDTO = new UserDTO();
         expectedUserDTO.setId(1L);
         expectedUserDTO.setEmail("email");
-        expectedUserDTO.setUsername("username");
+        expectedUserDTO.setFullName("fullname");
        // expectedUserDTO.setPassword("password");
         expectedUserDTO.setDisplayName("displayName");
         expectedUserDTO.setDescription("description");
@@ -43,7 +43,7 @@ public class UserFactoryUTest extends AbstractFactoryUTest {
         UserDTO userDTO = new UserDTO();
         userDTO.setId(1L);
         userDTO.setEmail("email");
-        userDTO.setUsername("username");
+        userDTO.setFullName("fullname");
       //  userDTO.setPassword("password");
         userDTO.setDisplayName("displayName");
         userDTO.setDescription("description");
@@ -52,7 +52,7 @@ public class UserFactoryUTest extends AbstractFactoryUTest {
         User expectedUser = new User();
         expectedUser.setId(1L);
         expectedUser.setEmail("email");
-        expectedUser.setUsername("username");
+        expectedUser.setFullName("fullname");
       //  expectedUser.setPassword("password");
         expectedUser.setDisplayName("displayName");
         expectedUser.setDescription("description");
