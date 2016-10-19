@@ -4,10 +4,7 @@ import com.advent.dto.EventDTO;
 import com.advent.entity.Event;
 import com.advent.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,6 +25,11 @@ public class EventController {
     @RequestMapping(value = "/event/list", method = RequestMethod.POST)
     public List<EventDTO> getAllEvents() {
         return eventService.getAllEvents();
+    }
+
+    @RequestMapping(value = "/event/{id}", method = RequestMethod.GET)
+    public EventDTO getEventById(@PathVariable Long id) {
+        return eventService.getEventById(id);
     }
 }
 

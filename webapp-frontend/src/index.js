@@ -7,6 +7,7 @@ import App from './components/app';
 import Home from './components/home';
 import EventCreateContainer from './containers/EventCreateContainer';
 import EventListContainer from './containers/EventListContainer';
+import EventInfoContainer from './containers/EventInfoContainer';
 
 
 import ScheduleAddEvent from './components/schedule-add-event';
@@ -45,6 +46,8 @@ ReactDom.render(
             <Route path="/schedule/addevent" component={ScheduleAddEvent}/>
             <Route path="/event/create" component={EventCreateContainer}/>
             <Route path="/event/list" component={EventListContainer}/>
+
+            <Route path="/event/:eventId" component={EventInfoContainer}/>
         </Route>
     </Router>
 , document.querySelector('#container'));

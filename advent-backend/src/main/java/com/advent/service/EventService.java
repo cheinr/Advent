@@ -26,4 +26,7 @@ public class EventService {
         return eventConverter.eventsToEventDTOs(eventRepo.findAll());
     }
 
+    public EventDTO getEventById(Long id) {
+        return eventConverter.eventToEventDTO(eventRepo.findOne(id));
+    }
 }
