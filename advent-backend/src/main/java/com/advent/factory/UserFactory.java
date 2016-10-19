@@ -18,11 +18,9 @@ public class UserFactory {
 
         userDTO.setId(user.getId());
         userDTO.setEmail(user.getEmail());
-        userDTO.setUsername(user.getUsername());
-        userDTO.setPassword(user.getPassword());
         userDTO.setDisplayName(user.getDisplayName());
         userDTO.setDescription(user.getDescription());
-        userDTO.setPictureFilename(user.getPictureFilename());
+        userDTO.setPictureUrl(user.getPictureUrl());
 
         return userDTO;
     }
@@ -32,11 +30,9 @@ public class UserFactory {
 
         user.setId(userDTO.getId());
         user.setEmail(userDTO.getEmail());
-        user.setUsername(userDTO.getUsername());
-        user.setPassword(userDTO.getPassword());
         user.setDisplayName(userDTO.getDisplayName());
         user.setDescription(userDTO.getDescription());
-        user.setPictureFilename(userDTO.getPictureFilename());
+        user.setPictureUrl(userDTO.getPictureUrl());
 
         return user;
     }

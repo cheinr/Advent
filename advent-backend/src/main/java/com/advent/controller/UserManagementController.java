@@ -1,7 +1,7 @@
 package com.advent.controller;
 
 import com.advent.dto.UserDTO;
-import com.advent.service.interfaces.UserManagementService;
+import com.advent.service.UserManagementService;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,9 +18,8 @@ public class UserManagementController {
     @RequestMapping(value = "/users/authGToken", method = RequestMethod.POST)
     public UserDTO handleGToken(HttpServletRequest request) { return userManagementService.handleGToken(request);}
 
-    //TODO dszopa 9/27/16 - These probably all want to return response bodies
-    @RequestMapping(value = "/users/create", method = RequestMethod.POST)
-    public UserDTO createUser(@RequestBody UserDTO userDTO) {
+    @RequestMapping(value = "/users/save", method = RequestMethod.POST)
+    public UserDTO saveUser(@RequestBody UserDTO userDTO) {
         return userManagementService.saveUser(userDTO);
     }
 
@@ -29,19 +28,24 @@ public class UserManagementController {
         userManagementService.deleteUser(userDTO);
     }
 
+    @RequestMapping(value = "/users/delete/id/{userId}", method = RequestMethod.POST)
+    public void deleteUserById(@PathVariable Long userId) {
+        userManagementService.deleteUserById(userId);
+    }
+
     @RequestMapping(value = "/users/id/{userId}", method = RequestMethod.GET)
-    public UserDTO getUser(@PathVariable("userId") Long userId) {
+    public UserDTO getUser(@PathVariable Long userId) {
         return userManagementService.findUser(userId);
     }
 
-    @RequestMapping(value = "/users/username/{username}", method = RequestMethod.GET)
-    public UserDTO getUserByUsername(@PathVariable("username") String username) {
-        return userManagementService.findUserByUsername(username);
+    @RequestMapping(value = "/users/email/{email}", method = RequestMethod.GET)
+    public UserDTO getUserByEmail(@PathVariable String email) {
+        return userManagementService.findUserByEmail(email);
     }
 
-    @RequestMapping(value = "/users/email/{email}", method = RequestMethod.GET)
-    public UserDTO getUserByEmail(@PathVariable("email") String email) {
-        return userManagementService.findUserByEmail(email);
+    @RequestMapping(value = "/users/display_name/{displayName}", method = RequestMethod.GET)
+    public List<UserDTO> getUsersByDisplayName(@PathVariable String displayName) {
+        return userManagementService.findUsersByDisplayName(displayName);
     }
 
     @RequestMapping(value = "/users", method = RequestMethod.GET)

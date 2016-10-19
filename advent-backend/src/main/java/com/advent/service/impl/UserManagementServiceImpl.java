@@ -1,11 +1,15 @@
-package com.advent.service;
+package com.advent.service.impl;
 
 import com.advent.dto.UserDTO;
 import com.advent.entity.User;
 import com.advent.factory.UserFactory;
 import com.advent.repo.UserRepo;
-import com.advent.service.interfaces.UserManagementService;
+import com.advent.service.UserManagementService;
+import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
+import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken.Payload;
+import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
 import com.google.api.client.http.javanet.NetHttpTransport;
+import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +22,6 @@ import java.util.Arrays;
 import java.util.List;
 
 //TODO - add libraries to project.
-import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
-import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken.Payload;
-import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
-
-import com.google.api.client.json.JsonFactory;
 
 
 @Service
@@ -38,6 +37,11 @@ public class UserManagementServiceImpl implements UserManagementService {
     @Autowired
     private UserFactory userFactory;
 
+    GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(transport, jsonFactory)
+            .setAudience(Arrays.asList(CLIENT_ID))
+            .setIssuer("accounts.google.com")
+            .build();
+
     @Override
     public UserDTO saveUser(UserDTO userDTO) {
         User user = userFactory.userDTOToUser(userDTO);
@@ -45,11 +49,7 @@ public class UserManagementServiceImpl implements UserManagementService {
         return userDTO;
     }
 
-    GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(transport, jsonFactory)
-            .setAudience(Arrays.asList(CLIENT_ID))
-            .setIssuer("accounts.google.com")
-            .build();
-
+    @Override
     public UserDTO handleGToken(HttpServletRequest request)  {
         String idTokenString = request.getHeader("google-id-token"); //TODO - get token from request
 
@@ -92,9 +92,8 @@ public class UserManagementServiceImpl implements UserManagementService {
                 user.setId((long) 0);
                 user.setEmail(email);
                 user.setDisplayName(name);
-                user.setPictureFilename(pictureUrl); //TODO - change this method name
+                user.setPictureUrl(pictureUrl);
                 user.setDescription(locale); //probably not what we want.
-                user.setUsername(givenName); //we could parse out the user's netid from their email
                 //TODO - set more attributes
 
                 userDTO = userFactory.userToUserDTO(user);
@@ -109,11 +108,14 @@ public class UserManagementServiceImpl implements UserManagementService {
         }
     }
 
-
-    // TODO dszopa 9/27/16 - Add delete user by Id
     @Override
     public void deleteUser(UserDTO userDTO) {
         userRepo.delete(userDTO.getId());
+    }
+
+    @Override
+    public void deleteUserById(Long id) {
+        userRepo.delete(id);
     }
 
     @Override
@@ -123,15 +125,21 @@ public class UserManagementServiceImpl implements UserManagementService {
     }
 
     @Override
-    public UserDTO findUserByUsername(String username) {
-        User user = userRepo.findByUsername(username);
+    public UserDTO findUserByEmail(String email) {
+        User user = userRepo.findByEmail(email);
         return userFactory.userToUserDTO(user);
     }
 
     @Override
-    public UserDTO findUserByEmail(String email) {
-        User user = userRepo.findByEmail(email);
-        return userFactory.userToUserDTO(user);
+    public List<UserDTO> findUsersByDisplayName(String displayName) {
+        List<User> users = userRepo.findAllByDisplayName(displayName);
+        List<UserDTO> userDTOs = new ArrayList<>();
+
+        users.forEach(user ->
+            userDTOs.add(userFactory.userToUserDTO(user))
+        );
+
+        return userDTOs;
     }
 
     @Override
