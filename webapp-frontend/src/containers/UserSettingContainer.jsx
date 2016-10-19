@@ -4,6 +4,7 @@ import axios from 'axios';
 import Alert from '../components/feedback/Alert';
 import Error from '../components/feedback/Error';
 import TextBox from '../components/input/TextBox';
+import Thumbnail from '../components/display/Thumbnail';
 import BasicInputField from '../components/input/BasicInputField';
 
 export default class UserSettingContainer extends React.Component {
@@ -83,9 +84,7 @@ export default class UserSettingContainer extends React.Component {
         {this.state.showErrors ? <Error>{this.state.errorMessage}</Error> : null}
         <div className="row pull-down">
           <div className="col-xs-3">
-            <a href={this.state.pictureUrl} className="thumbnail">
-              <img src={this.state.pictureUrl} alt="Account" />
-            </a>
+            <Thumbnail pictureUrl={this.state.pictureUrl} altText="User" />
           </div>
           <div className="col-xs-9">
             <BasicInputField

@@ -6,13 +6,11 @@ import MainLayout from './components/MainLayout';
 import App from './components/App';
 import Home from './components/Home';
 import UserSettingContainer from './containers/UserSettingContainer';
+import ViewUserContainer from './containers/ViewUserContainer';
 import EventCreateContainer from './containers/EventCreateContainer';
 import EventListContainer from './containers/EventListContainer';
-
-
 import ScheduleAddEvent from './components/schedule-add-event';
 import SignIn from './components/sign-in';
-
 import auth from './auth';
 
 
@@ -43,6 +41,7 @@ ReactDom.render(
     <Route component={MainLayout} onEnter={requireAuth}>
       <Route path="/" component={App} />
       <Route path="/main" component={Home} />
+      <Route path="/user/:userId" component={ViewUserContainer} />
       <Route path="/user/edit/:userId" component={UserSettingContainer} />
       <Route path="/schedule/addevent" component={ScheduleAddEvent} />
       <Route path="/event/create" component={EventCreateContainer} />
