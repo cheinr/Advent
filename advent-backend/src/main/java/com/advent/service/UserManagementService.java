@@ -1,4 +1,4 @@
-package com.advent.service.interfaces;
+package com.advent.service;
 
 import com.advent.dto.UserDTO;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
@@ -13,11 +13,13 @@ public interface UserManagementService {
 
     void deleteUser(UserDTO userDTO);
 
+    void deleteUserById(Long id);
+
     UserDTO findUser(Long id);
 
-    UserDTO findUserByUsername(String username);
-
     UserDTO findUserByEmail(String Email);
+
+    List<UserDTO> findUsersByDisplayName(String displayName);
 
     UserDTO handleGToken(HttpServletRequest request);
 
