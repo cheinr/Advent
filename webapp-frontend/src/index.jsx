@@ -9,6 +9,7 @@ import UserSettingContainer from './containers/UserSettingContainer';
 import ViewUserContainer from './containers/ViewUserContainer';
 import EventCreateContainer from './containers/EventCreateContainer';
 import EventListContainer from './containers/EventListContainer';
+import EventInfoContainer from './containers/EventInfoContainer';
 import ScheduleAddEvent from './components/schedule-add-event';
 import SignIn from './components/sign-in';
 import auth from './auth';
@@ -46,6 +47,7 @@ ReactDom.render(
       <Route path="/schedule/addevent" component={ScheduleAddEvent} />
       <Route path="/event/create" component={EventCreateContainer} />
       <Route path="/event/list" component={EventListContainer} />
+      <Route path="/event/:eventId" component={EventInfoContainer}/>
     </Route>
   </Router>
 , document.querySelector('.content'));
