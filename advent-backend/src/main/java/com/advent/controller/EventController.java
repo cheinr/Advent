@@ -3,6 +3,8 @@ package com.advent.controller;
 import com.advent.dto.EventDTO;
 import com.advent.entity.Event;
 import com.advent.service.EventService;
+import com.advent.service.UserManagementService;
+import com.advent.service.impl.UserManagementServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +16,8 @@ public class EventController {
 
     @Autowired
     private EventService eventService;
+    @Autowired
+    private UserManagementService userManagementService;
 
     //TODO clai add group id when that is implemented
     @RequestMapping(value = "/event/create", method = RequestMethod.POST)

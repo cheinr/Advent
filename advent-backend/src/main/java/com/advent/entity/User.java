@@ -1,6 +1,7 @@
 package com.advent.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "user")
@@ -13,6 +14,7 @@ public class User {
     private String pictureUrl;
     // TODO dszopa 9/25/16 - Add List of groups the user is in (groups need to be made first)
     // TODO dszopa 9/25/16 - Add List of chats the user is in (chats need to be made first)
+    private List<Event> eventsGoing;
 
     @Id
     @Column(name = "id", unique = true, nullable = false, length = 20)
@@ -60,6 +62,17 @@ public class User {
 
     public void setPictureUrl(String pictureUrl) {
         this.pictureUrl = pictureUrl;
+    }
+
+    @Column(name = "eventsGoing")
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "user_event", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "event_id", referencedColumnName = "id"))
+    public List<Event> getEventsGoing() {
+        return eventsGoing;
+    }
+
+    public void setEventsGoing(List<Event> eventsGoing) {
+        this.eventsGoing = eventsGoing;
     }
 
     @Override

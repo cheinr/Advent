@@ -29,7 +29,8 @@ public class Event {
 
     @Transient
     private String group;
-    @Transient
+//    @Transient
+    @ManyToMany(mappedBy = "eventsGoing")
     private List<User> usersGoing;
 
     public Long getId() {
