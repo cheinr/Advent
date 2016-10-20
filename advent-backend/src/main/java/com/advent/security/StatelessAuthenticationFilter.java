@@ -13,7 +13,7 @@ import java.io.IOException;
 
 /**
  * Created by colin on 10/19/16.
- * Filter I'm working on from a tutorial.
+ * Filter that uses our TokenAuthenticationService
  */
 public class StatelessAuthenticationFilter extends GenericFilterBean {
     private final TokenAuthenticationService authenticationService;

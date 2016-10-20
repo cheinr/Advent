@@ -50,6 +50,7 @@ public class UserManagementServiceImpl implements UserManagementService {
             .setIssuer("accounts.google.com")
             .build();
 
+    //TODO chein - this is a pretty bad method name, and the method probably does too much. (needs cleaned)
     public UserDTO handleGToken(HttpServletRequest request)  {
         long before = System.currentTimeMillis();
         String idTokenString = request.getHeader("google-id-token"); //TODO - get token from request
@@ -81,7 +82,7 @@ public class UserManagementServiceImpl implements UserManagementService {
             String givenName = (String) payload.get("given_name");
 
 
-            System.out.println(payload);
+            // System.out.println(payload);
             // Use or store profile information
             // ...
 
@@ -139,7 +140,6 @@ public class UserManagementServiceImpl implements UserManagementService {
 
     @Override
     public UserDTO findUserByEmail(String email) {
-        System.out.println("Querying for user with email: " + email);
         User user = userRepo.findByEmail(email);
         if(user == null) return null;
         return userFactory.userToUserDTO(user);

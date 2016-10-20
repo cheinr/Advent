@@ -23,9 +23,9 @@ import java.util.Arrays;
 @Component
 public class TokenHandler {
 
+    //This is our client_id that google assigned (Colin) in the api console.
     private final String CLIENT_ID = "833501818150-94qfhnk1c77cqt73ak0asil9hpqudpl8.apps.googleusercontent.com";
 
-    @Autowired
     private UserManagementService userService;
 
     private JsonFactory jsonFactory = new JacksonFactory();
@@ -36,12 +36,12 @@ public class TokenHandler {
             .setIssuer("accounts.google.com")
             .build();
 
-    @Autowired
+
     public TokenHandler(UserManagementService userService) {
         this.userService = userService;
     }
 
-    //this will send the token to google who will return all the information
+    //this will send the token to google who will return a payload that contains user information.
     public UserDTO parseUserFromToken(String idTokenString) {
         GoogleIdToken idToken = null;
         try {

@@ -15,18 +15,17 @@ import javax.servlet.http.HttpServletResponse;
  * Created by colin on 10/19/16.
  * more stuff from tutorial.
  */
-@Component
 public class TokenAuthenticationService {
 
+    //The header in the request that contains the google-id token.
     private static final String AUTH_HEADER_NAME = "Authorization";
 
     @Autowired
     private TokenHandler tokenHandler;
 
-    public TokenAuthenticationService(String secret, UserManagementService userService) {
+    public TokenAuthenticationService(UserManagementService userService) {
         tokenHandler = new TokenHandler(userService);
     }
-
 
     public Authentication getAuthentication(HttpServletRequest request) {
         final String token = request.getHeader(AUTH_HEADER_NAME);

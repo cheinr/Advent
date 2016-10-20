@@ -33,7 +33,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     public SpringSecurityConfig() {
         super(true);
         this.userService = new UserManagementServiceImpl();
-        tokenAuthenticationService = new TokenAuthenticationService("secret key", userService);
+        tokenAuthenticationService = new TokenAuthenticationService(userService);
     }
 
     @Override
