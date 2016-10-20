@@ -4,6 +4,7 @@ import com.advent.security.StatelessAuthenticationFilter;
 import com.advent.security.TokenAuthenticationService;
 import com.advent.service.UserManagementServiceImpl;
 import com.advent.service.interfaces.UserManagementService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
@@ -22,7 +23,11 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
-    private final UserManagementServiceImpl userService; //Change to UserManagementServiceImpl
+
+    @Autowired
+    private final UserManagementServiceImpl userService;
+
+    @Autowired
     private final TokenAuthenticationService tokenAuthenticationService;
 
     public SpringSecurityConfig() {
@@ -33,22 +38,23 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        System.out.println("handling security config.");
         http
-                /*.exceptionHandling().and()
+                .exceptionHandling().and()
                 .anonymous().and()
                 .servletApi().and()
-                .headers().cacheControl().and()*/
+                // .headers().cacheControl().and()*/
                 .authorizeRequests()
 
                 // Allow anonymous logins
-                .antMatchers("/auth/**").permitAll()
+                .antMatchers("/api/auth/**").permitAll()
 
                 // All other request need to be authenticated
                 .anyRequest().authenticated().and()
 
                 // Custom Token based authentication based on the header previously given to the client
                 .addFilterBefore(new StatelessAuthenticationFilter(tokenAuthenticationService),
-                        UsernamePasswordAuthenticationFilter.class);
+                           UsernamePasswordAuthenticationFilter.class);
     }
 
     @Override

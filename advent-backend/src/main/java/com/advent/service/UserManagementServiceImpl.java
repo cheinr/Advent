@@ -139,6 +139,7 @@ public class UserManagementServiceImpl implements UserManagementService {
 
     @Override
     public UserDTO findUserByEmail(String email) {
+        System.out.println("Querying for user with email: " + email);
         User user = userRepo.findByEmail(email);
         if(user == null) return null;
         return userFactory.userToUserDTO(user);

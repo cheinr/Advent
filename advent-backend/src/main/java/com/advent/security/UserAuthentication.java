@@ -1,5 +1,6 @@
 package com.advent.security;
 
+import com.advent.dto.UserDTO;
 import com.advent.entity.User;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -11,11 +12,11 @@ import java.util.Collection;
  */
 public class UserAuthentication implements Authentication {
 
-    private final User user;
+    private final UserDTO userDTO;
     private boolean authenticated = true;
 
-    public UserAuthentication(User user) {
-        this.user = user;
+    public UserAuthentication(UserDTO userDTO) {
+        this.userDTO = userDTO;
     }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -30,15 +31,15 @@ public class UserAuthentication implements Authentication {
     }
 
     @Override
-    public Object getDetails() {
-        return user;
+    public UserDTO getDetails() {
+        return userDTO;
     }
 
     @Override
     //I have no idea what principal is supposed to be...
     //but in the tutorial they returned username
     public Object getPrincipal() {
-        return user.getDisplayName();
+        return userDTO.getDisplayName();
     }
 
     @Override
@@ -53,6 +54,6 @@ public class UserAuthentication implements Authentication {
 
     @Override
     public String getName() {
-        return user.getFullName();
+        return userDTO.getFullName();
     }
 }

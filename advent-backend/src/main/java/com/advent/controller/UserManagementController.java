@@ -16,7 +16,7 @@ public class UserManagementController {
     private UserManagementService userManagementService;
 
     //authenticates user or creates a new one if needed.
-    @RequestMapping(value = "/users/login", method = RequestMethod.POST)
+    @RequestMapping(value = "/auth/signup", method = RequestMethod.POST)
     @ResponseBody
     public UserDTO handleGToken(HttpServletRequest request) { return userManagementService.handleGToken(request);}
 
