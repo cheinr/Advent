@@ -41,8 +41,7 @@ public class TokenHandler {
         this.userService = userService;
     }
 
-    //this will send the token to google who will return a payload that contains user information.
-    public UserDTO parseUserFromToken(String idTokenString) {
+    private String parseUserEmailFromToken(String idTokenString) {
         GoogleIdToken idToken = null;
         try {
             idToken = verifier.verify(idTokenString);
@@ -54,19 +53,16 @@ public class TokenHandler {
         System.out.println(idToken);
         if (idToken != null) {
             GoogleIdToken.Payload payload = idToken.getPayload();
-
-            // Print user identifier
-            String userId = payload.getSubject();
-            System.out.println("User ID: " + userId);
-
-            // Get profile information from payload
-            String email = payload.getEmail();
-
-            //Query for user:
-            UserDTO userDTO = userService.findUserByEmail(email);
-
-            return userDTO;
+            return payload.getEmail();
+        } else {
+            return null;
         }
-        return null;
+    }
+
+    //this will send the token to google who will return a UserDTO
+    public UserDTO parseUserFromToken(String idTokenString) {
+        String userEmail = parseUserEmailFromToken(idTokenString);
+        if (userEmail == null) return null;
+        return userService.findUserByEmail(userEmail);
     }
 }

@@ -16,9 +16,8 @@ public class UserManagementController {
     private UserManagementService userManagementService;
 
     //authenticates user or creates a new one if needed.
-    @RequestMapping(value = "/auth/signup", method = RequestMethod.POST)
-    @ResponseBody
-    public UserDTO handleGToken(HttpServletRequest request) { return userManagementService.handleGToken(request);}
+    @RequestMapping(value = "/auth/register", method = RequestMethod.POST)
+    public UserDTO registerUser(HttpServletRequest request) { return userManagementService.registerUser(request);}
 
     //TODO dszopa 9/27/16 - These probably all want to return response bodies
     @RequestMapping(value = "/users/create", method = RequestMethod.POST)

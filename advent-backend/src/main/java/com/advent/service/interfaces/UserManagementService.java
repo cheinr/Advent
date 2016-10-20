@@ -19,7 +19,7 @@ public interface UserManagementService {
 
     UserDTO findUserByEmail(String Email);
 
-    UserDTO handleGToken(HttpServletRequest request);
+    UserDTO registerUser(HttpServletRequest request);
 
     List<UserDTO> findAllUsers();
 }

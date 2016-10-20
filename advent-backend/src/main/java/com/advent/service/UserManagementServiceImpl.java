@@ -32,6 +32,11 @@ public class UserManagementServiceImpl implements UserManagementService {
     private NetHttpTransport transport = new NetHttpTransport();
     private final String CLIENT_ID = "833501818150-94qfhnk1c77cqt73ak0asil9hpqudpl8.apps.googleusercontent.com";
 
+    GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(transport, jsonFactory)
+            .setAudience(Arrays.asList(CLIENT_ID))
+            .setIssuer("accounts.google.com")
+            .build();
+
     @Autowired
     private UserRepo userRepo;
 
@@ -45,13 +50,9 @@ public class UserManagementServiceImpl implements UserManagementService {
         return userDTO;
     }
 
-    GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(transport, jsonFactory)
-            .setAudience(Arrays.asList(CLIENT_ID))
-            .setIssuer("accounts.google.com")
-            .build();
 
-    //TODO chein - this is a pretty bad method name, and the method probably does too much. (needs cleaned)
-    public UserDTO handleGToken(HttpServletRequest request)  {
+
+    public UserDTO registerUser(HttpServletRequest request)  {
         long before = System.currentTimeMillis();
         String idTokenString = request.getHeader("google-id-token"); //TODO - get token from request
 
@@ -74,37 +75,22 @@ public class UserManagementServiceImpl implements UserManagementService {
 
             // Get profile information from payload
             String email = payload.getEmail();
-            boolean emailVerified = Boolean.valueOf(payload.getEmailVerified());
-            String name = (String) payload.get("name");
-            String pictureUrl = (String) payload.get("picture");
-            String locale = (String) payload.get("locale");
-            String familyName = (String) payload.get("family_name");
-            String givenName = (String) payload.get("given_name");
-
-
-            // System.out.println(payload);
-            // Use or store profile information
-            // ...
 
             //Query for user:
             UserDTO userDTO = findUserByEmail(email);
 
             if(userDTO == null) {
-                System.out.println("Creating user: " + name);
+                System.out.println("Creating user: " + payload.get("name"));
                 //create user
                 User user = new User();
                 user.setEmail(email);
                 //I like the idea of setting the display name to the user's netid
                 user.setDisplayName(email.substring(0, email.indexOf('@')));
-                user.setProfilePicUrl(pictureUrl);
+                user.setProfilePicUrl((String) payload.get("picture"));
                 user.setDescription("");
-                user.setFullName(name);
+                user.setFullName((String) payload.get("name"));
 
                 userDTO = userFactory.userToUserDTO(user);
-
-                System.out.println(userDTO.getEmail());
-                System.out.println(userDTO.getId());
-
                 userDTO = saveUser(userDTO);
             }
             System.out.println("time = " + (System.currentTimeMillis() - before));
