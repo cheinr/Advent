@@ -69,15 +69,15 @@ public class UserManagementServiceImplUTest extends AbstractServiceUTest {
     }
 
     @Test
-    public void findUserByUsername() throws Exception {
-        /*when(userRepo.findByUsername("username")).thenReturn(user);
+    public void findUserByFullName() throws Exception {
+        when(userRepo.findByFullName("username")).thenReturn(user);
         when(userFactory.userToUserDTO(user)).thenReturn(userDTO);
 
-        UserDTO returnedUserDTO = userManagementService.findUserByUsername("username");
+        UserDTO returnedUserDTO = userManagementService.findUserByFullName("username");
 
-        verify(userRepo, times(1)).findByUsername("username");
+        verify(userRepo, times(1)).findByFullName("username");
         verify(userFactory, times(1)).userToUserDTO(user);
-        assertEquals(userDTO, returnedUserDTO);*/
+        assertEquals(userDTO, returnedUserDTO);
     }
 
     @Test
