@@ -9,6 +9,7 @@ import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -54,9 +55,13 @@ public class UserManagementServiceImpl implements UserManagementService {
 
     public UserDTO registerUser(HttpServletRequest request)  {
         long before = System.currentTimeMillis();
-        String idTokenString = request.getHeader("google-id-token"); //TODO - get token from request
-
-        System.out.println(idTokenString);
+        String idTokenString = request.getHeader("google-id-token");
+        java.util.Enumeration<String> h = request.getHeaderNames();
+        while (h.hasMoreElements()) {
+            System.out.println(h.nextElement());
+        }
+        System.out.println("Headers: " + request.getHeaderNames().nextElement());
+        System.out.println("Token: " + idTokenString);
         GoogleIdToken idToken = null;
         try {
             idToken = verifier.verify(idTokenString);
