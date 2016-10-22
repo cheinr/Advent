@@ -18,18 +18,22 @@ public class UserFactoryUTest extends AbstractFactoryUTest {
         User user = new User();
         user.setId(1L);
         user.setEmail("email");
+
         user.setFullName("fullname");
         user.setDisplayName("displayName");
         user.setDescription("description");
-        user.setProfilePicUrl("picture.jpg");
+        user.setPictureUrl("picture.jpg");
+
 
         UserDTO expectedUserDTO = new UserDTO();
         expectedUserDTO.setId(1L);
         expectedUserDTO.setEmail("email");
+
         expectedUserDTO.setFullName("fullname");
         expectedUserDTO.setDisplayName("displayName");
         expectedUserDTO.setDescription("description");
-        expectedUserDTO.setProfilePicUrl("picture.jpg");
+        expectedUserDTO.setPictureUrl("picture.jpg");
+
 
         UserDTO returnedUserDTO = userFactory.userToUserDTO(user);
 
@@ -41,18 +45,22 @@ public class UserFactoryUTest extends AbstractFactoryUTest {
         UserDTO userDTO = new UserDTO();
         userDTO.setId(1L);
         userDTO.setEmail("email");
+
         userDTO.setFullName("fullname");
         userDTO.setDisplayName("displayName");
         userDTO.setDescription("description");
-        userDTO.setProfilePicUrl("picture.jpg");
+        userDTO.setPictureUrl("picture.jpg");
+
 
         User expectedUser = new User();
         expectedUser.setId(1L);
         expectedUser.setEmail("email");
+
         expectedUser.setFullName("fullname");
         expectedUser.setDisplayName("displayName");
         expectedUser.setDescription("description");
-        expectedUser.setProfilePicUrl("picture.jpg");
+        expectedUser.setPictureUrl("picture.jpg");
+
 
         User returnedUser = userFactory.userDTOToUser(userDTO);
 

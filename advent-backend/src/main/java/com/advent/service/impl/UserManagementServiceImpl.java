@@ -1,11 +1,15 @@
-package com.advent.service;
+package com.advent.service.impl;
 
 import com.advent.dto.UserDTO;
 import com.advent.entity.User;
 import com.advent.factory.UserFactory;
 import com.advent.repo.UserRepo;
-import com.advent.service.interfaces.UserManagementService;
+import com.advent.service.UserManagementService;
+import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
+import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken.Payload;
+import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
 import com.google.api.client.http.javanet.NetHttpTransport;
+import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +23,6 @@ import java.util.Arrays;
 import java.util.List;
 
 //TODO - add libraries to project.
-import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
-import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken.Payload;
-import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
-
-import com.google.api.client.json.JsonFactory;
 
 
 @Service
@@ -44,13 +43,13 @@ public class UserManagementServiceImpl implements UserManagementService {
     @Autowired
     private UserFactory userFactory;
 
+
     @Override
     public UserDTO saveUser(UserDTO userDTO) {
         User user = userFactory.userDTOToUser(userDTO);
         userRepo.save(user);
         return userDTO;
     }
-
 
 
     public UserDTO registerUser(HttpServletRequest request)  {
@@ -91,7 +90,7 @@ public class UserManagementServiceImpl implements UserManagementService {
                 user.setEmail(email);
                 //I like the idea of setting the display name to the user's netid
                 user.setDisplayName(email.substring(0, email.indexOf('@')));
-                user.setProfilePicUrl((String) payload.get("picture"));
+                user.setPictureUrl((String) payload.get("picture"));
                 user.setDescription("");
                 user.setFullName((String) payload.get("name"));
 
@@ -108,19 +107,11 @@ public class UserManagementServiceImpl implements UserManagementService {
         }
     }
 
-
-    // TODO dszopa 9/27/16 - Add delete user by Id
     @Override
     public void deleteUser(UserDTO userDTO) {
         userRepo.delete(userDTO.getId());
     }
 
-    @Override
-    public UserDTO findUser(Long id) {
-        User user = userRepo.findOne(id);
-        if(user == null) return null;
-        return userFactory.userToUserDTO(user);
-    }
 
     @Override
     public UserDTO findUserByFullName(String fullName) {
@@ -129,11 +120,33 @@ public class UserManagementServiceImpl implements UserManagementService {
         return userFactory.userToUserDTO(user);
     }
 
+    public void deleteUserById(Long id) {
+        userRepo.delete(id);
+    }
+
+    @Override
+    public UserDTO findUser(Long id) {
+        User user = userRepo.findOne(id);
+        return userFactory.userToUserDTO(user);
+    }
+
     @Override
     public UserDTO findUserByEmail(String email) {
         User user = userRepo.findByEmail(email);
         if(user == null) return null;
         return userFactory.userToUserDTO(user);
+    }
+
+    @Override
+    public List<UserDTO> findUsersByDisplayName(String displayName) {
+        List<User> users = userRepo.findAllByDisplayName(displayName);
+        List<UserDTO> userDTOs = new ArrayList<>();
+
+        users.forEach(user ->
+            userDTOs.add(userFactory.userToUserDTO(user))
+        );
+
+        return userDTOs;
     }
 
     @Override

@@ -7,7 +7,7 @@ public class UserDTO {
     private String fullName;
     private String email;
     private String description;
-    private String pictureFilename;
+    private String pictureUrl;
 
     public Long getId() {
         return id;
@@ -49,15 +49,14 @@ public class UserDTO {
         this.description = description;
     }
 
-    public String getProfilePicUrl() {
-        return pictureFilename;
+    public String getPictureUrl() {
+        return pictureUrl;
     }
 
-    public void setProfilePicUrl(String pictureFilename) {
-        this.pictureFilename = pictureFilename;
+    public void setPictureUrl(String pictureUrl) {
+        this.pictureUrl = pictureUrl;
     }
 
-    // TODO regenerate this
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -70,7 +69,7 @@ public class UserDTO {
         if (!displayName.equals(userDTO.displayName)) return false;
         if (!email.equals(userDTO.email)) return false;
         if (description != null ? !description.equals(userDTO.description) : userDTO.description != null) return false;
-        return pictureFilename != null ? pictureFilename.equals(userDTO.pictureFilename) : userDTO.pictureFilename == null;
+        return pictureUrl != null ? pictureUrl.equals(userDTO.pictureUrl) : userDTO.pictureUrl == null;
 
     }
 
@@ -81,7 +80,7 @@ public class UserDTO {
         result = 31 * result + displayName.hashCode();
         result = 31 * result + email.hashCode();
         result = 31 * result + (description != null ? description.hashCode() : 0);
-        result = 31 * result + (pictureFilename != null ? pictureFilename.hashCode() : 0);
+        result = 31 * result + (pictureUrl != null ? pictureUrl.hashCode() : 0);
         return result;
     }
 
@@ -93,7 +92,7 @@ public class UserDTO {
                 ", displayName='" + displayName + '\'' +
                 ", email='" + email + '\'' +
                 ", description='" + description + '\'' +
-                ", pictureFilename=" + pictureFilename +
+                ", pictureUrl=" + pictureUrl +
                 '}';
     }
 }

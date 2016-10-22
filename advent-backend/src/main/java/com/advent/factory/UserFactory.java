@@ -25,7 +25,8 @@ public class UserFactory {
         userDTO.setFullName(user.getFullName());
         userDTO.setDisplayName(user.getDisplayName());
         userDTO.setDescription(user.getDescription());
-        userDTO.setProfilePicUrl(user.getProfilePicUrl());
+        userDTO.setPictureUrl(user.getPictureUrl());
+
 
         return userDTO;
     }
@@ -38,7 +39,7 @@ public class UserFactory {
         user.setFullName(userDTO.getFullName());
         user.setDisplayName(userDTO.getDisplayName());
         user.setDescription(userDTO.getDescription());
-        user.setProfilePicUrl(userDTO.getProfilePicUrl());
+        user.setPictureUrl(userDTO.getPictureUrl());
 
         return user;
     }

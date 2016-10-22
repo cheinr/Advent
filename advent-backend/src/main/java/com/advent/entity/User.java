@@ -1,7 +1,5 @@
 package com.advent.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 
 @Entity
@@ -13,7 +11,8 @@ public class User {
     private String displayName;
     private String email;
     private String description;
-    private String profilePicUrl;
+    private String pictureUrl;
+
     // TODO dszopa 9/25/16 - Add List of groups the user is in (groups need to be made first)
     // TODO dszopa 9/25/16 - Add List of chats the user is in (chats need to be made first)
 
@@ -35,6 +34,7 @@ public class User {
     public void setFullName(String fullName) {
         this.fullName = fullName;
     }
+
 
     @Column(name = "display_name", nullable = false)
     public String getDisplayName() {
@@ -63,13 +63,14 @@ public class User {
         this.description = description;
     }
 
-    @Column(name = "profile_pic_url")
-    public String getProfilePicUrl() {
-        return profilePicUrl;
+
+    @Column(name = "picture_url")
+    public String getPictureUrl() {
+        return pictureUrl;
     }
 
-    public void setProfilePicUrl(String pictureFilename) {
-        this.profilePicUrl = pictureFilename;
+    public void setPictureUrl(String pictureUrl) {
+        this.pictureUrl = pictureUrl;
     }
 
     @Override
@@ -84,8 +85,7 @@ public class User {
         if (!displayName.equals(user.displayName)) return false;
         if (!email.equals(user.email)) return false;
         if (description != null ? !description.equals(user.description) : user.description != null) return false;
-        return profilePicUrl != null ? profilePicUrl.equals(user.profilePicUrl) : user.profilePicUrl == null;
-
+        return pictureUrl != null ? pictureUrl.equals(user.pictureUrl) : user.pictureUrl == null;
     }
 
     @Override
@@ -96,7 +96,7 @@ public class User {
                 ", displayName='" + displayName + '\'' +
                 ", email='" + email + '\'' +
                 ", description='" + description + '\'' +
-                ", pictureFilename='" + profilePicUrl + '\'' +
+                ", pictureFilename='" + pictureUrl + '\'' +
                 '}';
     }
 }

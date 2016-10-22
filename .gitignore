@@ -260,3 +260,6 @@ tmp/
 .idea
 out
 gen
+
+# Webapp-frontend
+bundle.js
