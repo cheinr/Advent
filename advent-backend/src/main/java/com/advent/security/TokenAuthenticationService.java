@@ -1,15 +1,11 @@
 package com.advent.security;
 
 import com.advent.dto.UserDTO;
-import com.advent.entity.User;
-import com.advent.service.UserManagementServiceImpl;
-import com.advent.service.interfaces.UserManagementService;
+import com.advent.service.UserManagementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 /**
  * Created by colin on 10/19/16.

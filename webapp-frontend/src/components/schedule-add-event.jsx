@@ -8,10 +8,10 @@ var ScheduleAddEvent = React.createClass({
         <h1>Add Event</h1>
 
         <input type="text" placeholder="name"/>
-        <br/>
-        <br/>
+        <br />
+        <br />
         <input type="text" placeholder="mm/dd/yy"/>
-        <br/>
+        <br />
         <br/>
         <input type="text" placeholder="when"/>
         <b> to </b>
