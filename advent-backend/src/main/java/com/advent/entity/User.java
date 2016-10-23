@@ -1,6 +1,8 @@
 package com.advent.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "user")
@@ -11,8 +13,13 @@ public class User {
     private String email;
     private String description;
     private String pictureUrl;
+    private List<Notification> notifications;
     // TODO dszopa 9/25/16 - Add List of groups the user is in (groups need to be made first)
     // TODO dszopa 9/25/16 - Add List of chats the user is in (chats need to be made first)
+
+    public User() {
+        notifications = new ArrayList<>();
+    }
 
     @Id
     @Column(name = "id", unique = true, nullable = false, length = 20)
@@ -60,6 +67,15 @@ public class User {
 
     public void setPictureUrl(String pictureUrl) {
         this.pictureUrl = pictureUrl;
+    }
+
+    @OneToMany(mappedBy = "user")
+    public List<Notification> getNotifications() {
+        return notifications;
+    }
+
+    public void setNotifications(List<Notification> notifications) {
+        this.notifications = notifications;
     }
 
     @Override
