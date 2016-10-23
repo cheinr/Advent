@@ -3,6 +3,7 @@ package com.advent.entity;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "event")
@@ -24,6 +25,8 @@ public class Event {
     private String location;
     @Column(name = "is_private")
     private Boolean isPrivate;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "event")
+    private Set<UserEventMapping> userEventMappings;
 
     // Temporarily Transient group should relate to groups
 
@@ -102,5 +105,13 @@ public class Event {
 
     public void setGroup(String group) {
         this.group = group;
+    }
+
+    public Set<UserEventMapping> getUserEventMappings() {
+        return userEventMappings;
+    }
+
+    public void setUserEventMappings(Set<UserEventMapping> userEventMappings) {
+        this.userEventMappings = userEventMappings;
     }
 }
