@@ -9,8 +9,8 @@ import javax.persistence.*;
 @Table(name = "group")
 public class Group {
     private Long id;
-    private String groupname;
-    private String grouppicture;
+    private String groupName;
+    private String groupPicture;
     private String tags;
     private String leaders;
     private String description;
@@ -27,22 +27,22 @@ public class Group {
         this.id = id;
     }
 
-    @Column(name = "groupname", nullable = false)
-    public String getGroupname() {
-        return groupname;
+    @Column(name = "group_name", nullable = false)
+    public String getGroupName() {
+        return groupName;
     }
 
-    public void setGroupname(String groupname) {
-        this.groupname = groupname;
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
     }
 
     @Column(name = "group_picture", nullable = false)
-    public String getGrouppicture() {
-        return grouppicture;
+    public String getGroupPicture() {
+        return groupPicture;
     }
 
-    public void setGrouppicture(String grouppicture) {
-        this.grouppicture = grouppicture;
+    public void setGroupPicture(String groupPicture) {
+        this.groupPicture = groupPicture;
     }
 
     @Column(name = "tags", nullable = false)
@@ -76,8 +76,8 @@ public class Group {
     public String toString() {
         return "Group{" +
                 "id=" + id +
-                ", groupname='" + groupname + '\'' +
-                ", grouppicture='" + grouppicture + '\'' +
+                ", groupName='" + groupName + '\'' +
+                ", groupPicture='" + groupPicture + '\'' +
                 ", tags='" + tags + '\'' +
                 ", leaders='" + leaders + '\'' +
                 ", description='" + description + '\'' +
@@ -92,8 +92,8 @@ public class Group {
         Group group = (Group) o;
 
         if (!id.equals(group.id)) return false;
-        if (!groupname.equals(group.groupname)) return false;
-        if (!grouppicture.equals(group.grouppicture)) return false;
+        if (!groupName.equals(group.groupName)) return false;
+        if (!groupPicture.equals(group.groupPicture)) return false;
         if (!tags.equals(group.tags)) return false;
         if (!leaders.equals(group.leaders)) return false;
         return description.equals(group.description);
