@@ -12,7 +12,6 @@ public class User {
     private String email;
     private String description;
     private String pictureUrl;
-
     // TODO dszopa 9/25/16 - Add List of groups the user is in (groups need to be made first)
     // TODO dszopa 9/25/16 - Add List of chats the user is in (chats need to be made first)
 
@@ -62,7 +61,6 @@ public class User {
     public void setDescription(String description) {
         this.description = description;
     }
-
 
     @Column(name = "picture_url")
     public String getPictureUrl() {

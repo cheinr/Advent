@@ -5,7 +5,12 @@
   "main": "server.js",
   "author": "clai",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "test": "mocha --compilers js:babel-core/register test/**/*.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://git.linux.iastate.edu/309Fall2016/LA-03-Advent"
   },
   "repository": {
     "type": "git",
@@ -13,16 +18,22 @@
   },
   "devDependencies": {
     "babel-cli": "^6.16.0",
+    "babel-core": "^6.17.0",
     "babel-preset-es2015": "^6.16.0",
+    "chai": "^3.5.0",
+    "enzyme": "^2.5.1",
     "eslint": "^3.7.0",
     "eslint-config-airbnb": "^12.0.0",
     "eslint-plugin-import": "^1.16.0",
     "eslint-plugin-json": "^1.2.0",
     "eslint-plugin-jsx-a11y": "^2.2.2",
-    "eslint-plugin-react": "^6.3.0"
+    "eslint-plugin-react": "^6.3.0",
+    "mocha": "^3.1.2",
+    "react-addons-test-utils": "^15.3.2"
   },
   "dependencies": {
     "axios": "^0.14.0",
+    "babel": "^6.5.2",
     "babel-core": "^6.14.0",
     "babel-loader": "^6.2.5",
     "babel-preset-es2015": "^6.14.0",
