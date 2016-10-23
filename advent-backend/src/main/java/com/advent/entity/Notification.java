@@ -12,6 +12,7 @@ public class Notification {
     private String message;
     private String link;
     private NotificationType notificationType;
+    private Boolean isRead;
     private User user;
 
     @Id
@@ -42,6 +43,16 @@ public class Notification {
 
     public void setLink(String link) {
         this.link = link;
+    }
+
+    @Column(name = "is_read")
+    // TODO dszopa 10/23/16 - Create converter & update sql insert
+    public Boolean getIsRead() {
+        return isRead;
+    }
+
+    public void setIsRead(Boolean isRead) {
+        this.isRead = isRead;
     }
 
     @Column(name = "notification_type")
