@@ -29,4 +29,8 @@ public class EventService {
     public EventDTO getEventById(Long id) {
         return eventConverter.eventToEventDTO(eventRepo.findOne(id));
     }
+
+    public List<EventDTO> getEventByGroup(Long groupId) {
+        return eventConverter.eventsToEventDTOs(eventRepo.findByKeyGroup(groupId));
+    }
 }
