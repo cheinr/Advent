@@ -3,7 +3,7 @@ package com.advent.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "user_event_mapping")
+@Table(name = "event_response")
 public class EventResponse {
 
     private Long id;

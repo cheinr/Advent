@@ -2,6 +2,8 @@ package com.advent.entity;
 
 import javax.persistence.*;
 
+@Entity
+@Table(name = "user_group")
 public class UserGroup {
 
     private Long id;
