@@ -1,6 +1,7 @@
 package com.advent.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "user")
@@ -11,6 +12,8 @@ public class User {
     private String email;
     private String description;
     private String pictureUrl;
+    private List<EventResponse> eventResponses;
+    private List<UserGroup> userGroups;
     // TODO dszopa 9/25/16 - Add List of groups the user is in (groups need to be made first)
     // TODO dszopa 9/25/16 - Add List of chats the user is in (chats need to be made first)
 
@@ -60,6 +63,24 @@ public class User {
 
     public void setPictureUrl(String pictureUrl) {
         this.pictureUrl = pictureUrl;
+    }
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    public List<EventResponse> getEventResponses() {
+        return eventResponses;
+    }
+
+    public void setEventResponses(List<EventResponse> eventResponses) {
+        this.eventResponses = eventResponses;
+    }
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    public List<UserGroup> getUserGroups() {
+        return userGroups;
+    }
+
+    public void setUserGroups(List<UserGroup> userGroups) {
+        this.userGroups = userGroups;
     }
 
     @Override

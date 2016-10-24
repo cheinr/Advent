@@ -54,5 +54,14 @@ INSERT INTO user (id, display_name, email, description, picture_url) VALUES
  Quo *amantem*, cum aut hunc vel clausaeque, exiguus inclinavit stant; liceat.
  Conpellat retractat. Aut cuspide stipite; ille ora Labros posse suae nefas?',
    'http://xacatolicos.com/app/images/avatar/icon-user.png');
-CREATE TABLE event (id bigint NOT NULL AUTO_INCREMENT, name varchar(255) not null, description varchar(255) not null,
+CREATE TABLE event (id bigint NOT NULL IDENTITY(1,1), name varchar(255) not null, description varchar(255) not null,
                     start_date date, end_date date, location varchar(255), is_private INTEGER);
+
+CREATE TABLE group_table (id bigint NOT NULL IDENTITY(1,1), group_name varchar(255),
+                    group_picture varchar(255), tags varchar(255), description varchar(255));
+
+CREATE TABLE calendar (id bigint NOT NULL IDENTITY(1,1), link varchar(255) not null);
+
+CREATE TABLE event_response (id bigint NOT NULL IDENTITY(1,1), user_id bigint not null, event_id bigint not null, response varchar(255));
+
+CREATE TABLE user_group (id bigint NOT NULL IDENTITY(1,1), user_id bigint not null, group_id bigint not null, role varchar(255));

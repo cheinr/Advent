@@ -1,5 +1,6 @@
 package com.advent.dto;
 
+import com.advent.entity.Group;
 import com.advent.entity.User;
 
 import java.util.Date;
@@ -17,7 +18,7 @@ public class EventDTO {
     private String location;
     private Boolean isPrivate;
     // todo clai when groups are implemented
-    private String group;
+    private Group group;
     private List<User> usersGoing;
 
     public Long getId() {
@@ -84,11 +85,11 @@ public class EventDTO {
         isPrivate = aPrivate;
     }
 
-    public String getGroup() {
+    public Group getGroup() {
         return group;
     }
 
-    public void setGroup(String group) {
+    public void setGroup(Group group) {
         this.group = group;
     }
 }
