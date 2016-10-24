@@ -27,11 +27,12 @@ public class Event {
     private Boolean isPrivate;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "event")
     private List<EventResponse> eventResponses;
+    @ManyToOne
+    @JoinColumn(name = "group_id", nullable = false)
+    private Group group;
 
     // Temporarily Transient group should relate to groups
 
-    @Transient
-    private String group;
     @Transient
     private List<User> usersGoing;
 
@@ -99,11 +100,11 @@ public class Event {
         isPrivate = aPrivate;
     }
 
-    public String getGroup() {
+    public Group getGroup() {
         return group;
     }
 
-    public void setGroup(String group) {
+    public void setGroup(Group group) {
         this.group = group;
     }
 

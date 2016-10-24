@@ -3,6 +3,7 @@ package com.advent.entity;
 
 
 import javax.persistence.*;
+import java.util.List;
 
 
 @Entity
@@ -12,8 +13,9 @@ public class Group {
     private String groupName;
     private String groupPicture;
     private String tags;
-    private String leaders;
     private String description;
+    private List<Event> events;
+    private List<UserGroup> userGroups;
 
     @Id
     @Column(name = "id", unique = true, nullable = false, length = 20)
@@ -54,15 +56,6 @@ public class Group {
         this.tags = tags;
     }
 
-    @Column(name = "leaders", nullable = false)
-    public String getLeaders() {
-        return leaders;
-    }
-
-    public void setLeaders(String leaders) {
-        this.leaders = leaders;
-    }
-
     @Column(name = "description", nullable = false)
     public String getDescription() {
         return description;
@@ -72,6 +65,24 @@ public class Group {
         this.description = description;
     }
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "group")
+    public List<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(List<Event> events) {
+        this.events = events;
+    }
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "group")
+    public List<UserGroup> getUserGroups() {
+        return userGroups;
+    }
+
+    public void setUserGroups(List<UserGroup> userGroups) {
+        this.userGroups = userGroups;
+    }
+
     @Override
     public String toString() {
         return "Group{" +
@@ -79,7 +90,6 @@ public class Group {
                 ", groupName='" + groupName + '\'' +
                 ", groupPicture='" + groupPicture + '\'' +
                 ", tags='" + tags + '\'' +
-                ", leaders='" + leaders + '\'' +
                 ", description='" + description + '\'' +
                 '}';
     }
@@ -95,7 +105,6 @@ public class Group {
         if (!groupName.equals(group.groupName)) return false;
         if (!groupPicture.equals(group.groupPicture)) return false;
         if (!tags.equals(group.tags)) return false;
-        if (!leaders.equals(group.leaders)) return false;
         return description.equals(group.description);
 
     }

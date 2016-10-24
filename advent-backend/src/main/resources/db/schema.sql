@@ -57,6 +57,9 @@ INSERT INTO user (id, display_name, email, description, picture_url) VALUES
 CREATE TABLE event (id bigint NOT NULL IDENTITY(1,1), name varchar(255) not null, description varchar(255) not null,
                     start_date date, end_date date, location varchar(255), is_private INTEGER);
 
+CREATE TABLE user (id bigint NOT NULL IDENTITY(1,1));
+
+
 CREATE TABLE calendar (id bigint NOT NULL AUTO_INCREMENT, link varchar(255) not null);
 
 CREATE TABLE user_event_mapping (id bigint NOT NULL AUTO_INCREMENT, user_id bigint not null, event_id bigint not null, response varchar(255));

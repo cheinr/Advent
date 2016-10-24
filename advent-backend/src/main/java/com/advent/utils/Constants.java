@@ -8,4 +8,7 @@ public class Constants {
     public final static String EVENT_GOING = "going";
     public final static String EVENT_MAYBE = "maybe";
     public final static String EVENT_INVITED = "invited";
+
+    public final static String GROUP_MODERATOR = "moderator";
+    public final static String GROUP_MEMBER = "member";
 }
