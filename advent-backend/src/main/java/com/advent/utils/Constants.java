@@ -11,4 +11,5 @@ public class Constants {
 
     public final static String GROUP_MODERATOR = "moderator";
     public final static String GROUP_MEMBER = "member";
+    public final static String GROUP_OWNER = "owner";
 }
