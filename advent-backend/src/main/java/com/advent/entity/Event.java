@@ -9,6 +9,7 @@ import java.util.List;
 public class Event {
 
     @Id
+    @Column(name = "id", unique = true, nullable = false, length = 20)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
     @SequenceGenerator(name = "generator", sequenceName = "event_seq", allocationSize = 1)
     private Long id;
@@ -24,13 +25,15 @@ public class Event {
     private String location;
     @Column(name = "is_private")
     private Boolean isPrivate;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "event")
+    private List<EventResponse> eventResponses;
+    @ManyToOne
+    @JoinColumn(name = "group_id", nullable = false)
+    private Group group;
 
     // Temporarily Transient group should relate to groups
 
     @Transient
-    private String group;
-//    @Transient
-    @ManyToMany(mappedBy = "eventsGoing")
     private List<User> usersGoing;
 
     public Long getId() {
@@ -97,11 +100,19 @@ public class Event {
         isPrivate = aPrivate;
     }
 
-    public String getGroup() {
+    public Group getGroup() {
         return group;
     }
 
-    public void setGroup(String group) {
+    public void setGroup(Group group) {
         this.group = group;
+    }
+
+    public List<EventResponse> getEventResponses() {
+        return eventResponses;
+    }
+
+    public void setEventResponses(List<EventResponse> eventResponses) {
+        this.eventResponses = eventResponses;
     }
 }
