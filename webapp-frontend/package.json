@@ -12,10 +12,6 @@
     "type": "git",
     "url": "git+https://git.linux.iastate.edu/309Fall2016/LA-03-Advent"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://git.linux.iastate.edu/309Fall2016/LA-03-Advent"
-  },
   "devDependencies": {
     "babel-cli": "^6.16.0",
     "babel-core": "^6.17.0",
