@@ -7,6 +7,7 @@ import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -24,22 +25,18 @@ public class TokenHandler {
     //This is our client_id that google assigned (Colin) in the api console.
     private final String CLIENT_ID = "833501818150-94qfhnk1c77cqt73ak0asil9hpqudpl8.apps.googleusercontent.com";
 
+    @Autowired
     private UserManagementService userService;
 
     private JsonFactory jsonFactory = new JacksonFactory();
     private NetHttpTransport transport = new NetHttpTransport();
 
-    GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(transport, jsonFactory)
-            .setAudience(Arrays.asList(CLIENT_ID))
-            .setIssuer("accounts.google.com")
-            .build();
-
-
-    public TokenHandler(UserManagementService userService) {
-        this.userService = userService;
-    }
-
     private String parseUserEmailFromToken(String idTokenString) {
+        GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(transport, jsonFactory)
+                .setAudience(Arrays.asList(CLIENT_ID))
+                .setIssuer("accounts.google.com")
+                .build();
+
         GoogleIdToken idToken = null;
         try {
             idToken = verifier.verify(idTokenString);

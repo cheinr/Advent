@@ -13,7 +13,6 @@ import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -24,18 +23,12 @@ import java.util.List;
 
 //TODO - add libraries to project.
 
-
 @Service
 public class UserManagementServiceImpl implements UserManagementService {
 
     private JsonFactory jsonFactory = new JacksonFactory();
     private NetHttpTransport transport = new NetHttpTransport();
     private final String CLIENT_ID = "833501818150-94qfhnk1c77cqt73ak0asil9hpqudpl8.apps.googleusercontent.com";
-
-    GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(transport, jsonFactory)
-            .setAudience(Arrays.asList(CLIENT_ID))
-            .setIssuer("accounts.google.com")
-            .build();
 
     @Autowired
     private UserRepo userRepo;
@@ -53,6 +46,11 @@ public class UserManagementServiceImpl implements UserManagementService {
 
 
     public UserDTO registerUser(HttpServletRequest request)  {
+        GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(transport, jsonFactory)
+                .setAudience(Arrays.asList(CLIENT_ID))
+                .setIssuer("accounts.google.com")
+                .build();
+
         long before = System.currentTimeMillis();
         String idTokenString = request.getHeader("google-id-token");
         java.util.Enumeration<String> h = request.getHeaderNames();

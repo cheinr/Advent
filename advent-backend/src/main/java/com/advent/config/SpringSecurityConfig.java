@@ -2,7 +2,6 @@ package com.advent.config;
 
 import com.advent.security.StatelessAuthenticationFilter;
 import com.advent.security.TokenAuthenticationService;
-import com.advent.service.impl.UserManagementServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,15 +22,10 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private final UserManagementServiceImpl userService;
-
-    @Autowired
-    private final TokenAuthenticationService tokenAuthenticationService;
+    private TokenAuthenticationService tokenAuthenticationService;
 
     public SpringSecurityConfig() {
         super(true);
-        this.userService = new UserManagementServiceImpl();
-        tokenAuthenticationService = new TokenAuthenticationService(userService);
     }
 
     @Override
@@ -65,14 +59,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
-
-    /*
-    @Bean
-    @Override
-    public UserManagementServiceImpl userDetailsService() {
-        return this.userService;
-    }
-    */
 
     @Bean
     public TokenAuthenticationService tokenAuthenticationService() {

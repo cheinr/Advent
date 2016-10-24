@@ -1,7 +1,6 @@
 package com.advent.security;
 
 import com.advent.dto.UserDTO;
-import com.advent.service.UserManagementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 
@@ -18,10 +17,6 @@ public class TokenAuthenticationService {
 
     @Autowired
     private TokenHandler tokenHandler;
-
-    public TokenAuthenticationService(UserManagementService userService) {
-        tokenHandler = new TokenHandler(userService);
-    }
 
     public Authentication getAuthentication(HttpServletRequest request) {
         final String token = request.getHeader(AUTH_HEADER_NAME);
