@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "user_event_mapping")
-public class UserEventMapping {
+public class EventResponse {
 
     private Long id;
     private User user;
@@ -14,7 +14,7 @@ public class UserEventMapping {
     @Id
     @Column(name = "id", unique = true, nullable = false, length = 20)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
-    @SequenceGenerator(name = "generator", sequenceName = "user_event_seq", allocationSize = 1)
+    @SequenceGenerator(name = "generator", sequenceName = "event_response_seq", allocationSize = 1)
     public Long getId() {
         return id;
     }
@@ -24,7 +24,7 @@ public class UserEventMapping {
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(name = "user_id", nullable = false, insertable = false, updatable = false)
     public User getUser() {
         return user;
     }
@@ -33,8 +33,8 @@ public class UserEventMapping {
         this.user = user;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id", nullable = false, insertable = false, updatable = false)
+    @ManyToOne
+    @JoinColumn(name = "event_id", nullable = false)
     public Event getEvent() {
         return event;
     }

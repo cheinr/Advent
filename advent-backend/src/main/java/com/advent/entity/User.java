@@ -1,7 +1,7 @@
 package com.advent.entity;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name = "user")
@@ -12,7 +12,7 @@ public class User {
     private String email;
     private String description;
     private String pictureUrl;
-    private Set<UserEventMapping> userEventMappings;
+    private List<EventResponse> eventResponses;
     // TODO dszopa 9/25/16 - Add List of groups the user is in (groups need to be made first)
     // TODO dszopa 9/25/16 - Add List of chats the user is in (chats need to be made first)
 
@@ -64,13 +64,13 @@ public class User {
         this.pictureUrl = pictureUrl;
     }
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "event")
-    public Set<UserEventMapping> getUserEventMappings() {
-        return userEventMappings;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    public List<EventResponse> getEventResponses() {
+        return eventResponses;
     }
 
-    public void setUserEventMappings(Set<UserEventMapping> userEventMappings) {
-        this.userEventMappings = userEventMappings;
+    public void setEventResponses(List<EventResponse> eventResponses) {
+        this.eventResponses = eventResponses;
     }
 
     @Override

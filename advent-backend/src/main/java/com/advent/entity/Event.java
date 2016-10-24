@@ -3,13 +3,13 @@ package com.advent.entity;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "event")
 public class Event {
 
     @Id
+    @Column(name = "id", unique = true, nullable = false, length = 20)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
     @SequenceGenerator(name = "generator", sequenceName = "event_seq", allocationSize = 1)
     private Long id;
@@ -26,7 +26,7 @@ public class Event {
     @Column(name = "is_private")
     private Boolean isPrivate;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "event")
-    private Set<UserEventMapping> userEventMappings;
+    private List<EventResponse> eventResponses;
 
     // Temporarily Transient group should relate to groups
 
@@ -107,11 +107,11 @@ public class Event {
         this.group = group;
     }
 
-    public Set<UserEventMapping> getUserEventMappings() {
-        return userEventMappings;
+    public List<EventResponse> getEventResponses() {
+        return eventResponses;
     }
 
-    public void setUserEventMappings(Set<UserEventMapping> userEventMappings) {
-        this.userEventMappings = userEventMappings;
+    public void setEventResponses(List<EventResponse> eventResponses) {
+        this.eventResponses = eventResponses;
     }
 }
