@@ -13,6 +13,4 @@ public class Calendar {
 
     @Column(name = "link", nullable = false)
     private String link;
-
-
 }
