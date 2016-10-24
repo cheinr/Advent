@@ -1,8 +1,8 @@
-CREATE TABLE user (id INT NOT NULL IDENTITY(1,1), full_name varchar(255) NOT NULL, display_name varchar(255) NOT NULL,
+CREATE TABLE user (id INT NOT NULL IDENTITY(1,1), display_name varchar(255) NOT NULL,
                     email varchar(255) NOT NULL, description TEXT NOT NULL, picture_url varchar(255) NOT NULL);
 
-INSERT INTO user (id, full_name, display_name, email, description, picture_url) VALUES
-  (1000, 'userName1', 'displayName1', 'email@address.com',
+INSERT INTO user (id, display_name, email, description, picture_url) VALUES
+  (1000, 'displayName1', 'email@address.com',
    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nec quam non velit aliquet varius et et magna. Sed condimentum, lacus nec sagittis posuere, lacus velit rhoncus diam, vitae blandit lectus neque nec arcu. Curabitur convallis luctus augue. Sed commodo sollicitudin aliquam. Donec at tristique enim, ut ornare quam. Sed at gravida massa. Sed sed dignissim dui. Curabitur a tortor sit amet risus consequat viverra. Cras cursus et massa a ultrices. Suspendisse vitae augue id arcu fringilla varius. Maecenas convallis metus leo, id mattis purus faucibus vitae. Nam posuere ultrices ex a ullamcorper. Nam mi massa, fermentum nec elit a, mattis luctus urna. Nam ut blandit sem, non efficitur odio. Curabitur nisl magna, luctus et tellus sed, egestas mattis mi.',
    'http://xacatolicos.com/app/images/avatar/icon-user.png'),
   (1001, 'userName2', 'displayName2', 'email@email.iedu',

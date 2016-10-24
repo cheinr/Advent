@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 
 @Entity
-@Table(name = "group")
+@Table(name = "group_table")
 public class Group {
     private Long id;
     private String groupName;

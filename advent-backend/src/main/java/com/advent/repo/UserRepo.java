@@ -11,9 +11,6 @@ import java.util.List;
 @Repository
 public interface UserRepo extends JpaRepository<User, Long> {
 
-    @Query("select u from User u where u.fullName = :fullName")
-    User findByFullName(@Param("fullName") String fullName);
-
     @Query("select u from User u where u.email = :email")
     User findByEmail(@Param("email") String email);
 

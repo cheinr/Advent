@@ -54,6 +54,6 @@ public class UserAuthentication implements Authentication {
 
     @Override
     public String getName() {
-        return userDTO.getFullName();
+        return userDTO.getDisplayName();
     }
 }

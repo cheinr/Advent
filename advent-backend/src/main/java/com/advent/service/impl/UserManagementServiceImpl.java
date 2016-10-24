@@ -86,11 +86,9 @@ public class UserManagementServiceImpl implements UserManagementService {
                 //create user
                 User user = new User();
                 user.setEmail(email);
-                //I like the idea of setting the display name to the user's netid
-                user.setDisplayName(email.substring(0, email.indexOf('@')));
+                user.setDisplayName((String) payload.get("name"));
                 user.setPictureUrl((String) payload.get("picture"));
                 user.setDescription("");
-                user.setFullName((String) payload.get("name"));
 
                 userDTO = userFactory.userToUserDTO(user);
                 userDTO = saveUser(userDTO);
@@ -111,12 +109,6 @@ public class UserManagementServiceImpl implements UserManagementService {
     }
 
 
-    @Override
-    public UserDTO findUserByFullName(String fullName) {
-        User user = userRepo.findByFullName(fullName);
-        if(user == null) return null;
-        return userFactory.userToUserDTO(user);
-    }
 
     public void deleteUserById(Long id) {
         userRepo.delete(id);

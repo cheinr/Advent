@@ -4,7 +4,6 @@ public class UserDTO {
 
     private Long id;
     private String displayName;
-    private String fullName;
     private String email;
     private String description;
     private String pictureUrl;
@@ -15,14 +14,6 @@ public class UserDTO {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
     }
 
     public String getDisplayName() {
@@ -65,7 +56,6 @@ public class UserDTO {
         UserDTO userDTO = (UserDTO) o;
 
         if (!id.equals(userDTO.id)) return false;
-        if (!fullName.equals(userDTO.fullName)) return false;
         if (!displayName.equals(userDTO.displayName)) return false;
         if (!email.equals(userDTO.email)) return false;
         if (description != null ? !description.equals(userDTO.description) : userDTO.description != null) return false;
@@ -76,7 +66,6 @@ public class UserDTO {
     @Override
     public int hashCode() {
         int result = id.hashCode();
-        result = 31 * result + fullName.hashCode();
         result = 31 * result + displayName.hashCode();
         result = 31 * result + email.hashCode();
         result = 31 * result + (description != null ? description.hashCode() : 0);
@@ -88,7 +77,6 @@ public class UserDTO {
     public String toString() {
         return "UserDTO{" +
                 "id=" + id +
-                ", fullName='" + fullName + '\'' +
                 ", displayName='" + displayName + '\'' +
                 ", email='" + email + '\'' +
                 ", description='" + description + '\'' +

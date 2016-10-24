@@ -15,7 +15,6 @@ public interface UserManagementService {
 
     void deleteUserById(Long id);
 
-    UserDTO findUserByFullName(String fullName);
     UserDTO registerUser(HttpServletRequest request);
     UserDTO findUser(Long id);
     UserDTO findUserByEmail(String Email);

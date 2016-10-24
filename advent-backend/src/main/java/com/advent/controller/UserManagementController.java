@@ -33,11 +33,7 @@ public class UserManagementController {
     public void deleteUserById(@PathVariable Long userId) {
         userManagementService.deleteUserById(userId);
     }
-
-    @RequestMapping(value = "/users/username/{full_name}", method = RequestMethod.GET)
-    public UserDTO getUserByFullName(@PathVariable("full_name") String full_name) {
-        return userManagementService.findUserByFullName(full_name);
-    }
+    
 
     @RequestMapping(value = "/users/id/{userId}", method = RequestMethod.GET)
     public UserDTO getUser(@PathVariable Long userId) {
