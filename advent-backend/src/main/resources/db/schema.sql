@@ -79,4 +79,4 @@ CREATE TABLE user_group (id bigint NOT NULL IDENTITY(1,1), user_id bigint not nu
 CREATE TABLE notification (id BIGINT NOT NULL IDENTITY(1,1), message VARCHAR(255), link VARCHAR(255), notification_type VARCHAR(255),
                            is_read INT, user_id BIGINT);
 INSERT INTO notification (id, message, link, notification_type, is_read, user_id) VALUES
-  (1000, 'Sample Message', 'https://google.com', 'MESSAGE', 0, 1);
+  (1000, 'Sample Message', 'https://google.com', 'MESSAGE', 0, 1000);
