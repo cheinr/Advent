@@ -17,7 +17,6 @@ public class User {
     private List<UserGroup> userGroups;
     private List<Group> joinedGroups;
     private List<Notification> notifications;
-    // TODO dszopa 9/25/16 - Add List of groups the user is in (groups need to be made first)
     // TODO dszopa 9/25/16 - Add List of chats the user is in (chats need to be made first)
 
     public User() {
