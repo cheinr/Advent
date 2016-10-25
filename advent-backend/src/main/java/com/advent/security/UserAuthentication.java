@@ -36,10 +36,9 @@ public class UserAuthentication implements Authentication {
     }
 
     @Override
-    //I have no idea what principal is supposed to be...
-    //but in the tutorial they returned username
+    
     public Object getPrincipal() {
-        return userDTO.getDisplayName();
+        return userDTO.getId();
     }
 
     @Override
