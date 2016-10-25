@@ -64,7 +64,7 @@ CREATE TABLE event (id bigint NOT NULL IDENTITY(1,1), name varchar(255) not null
                     group_id BIGINT
 );
 
-CREATE TABLE group_table (id bigint NOT NULL IDENTITY(1,1), group_name varchar(255), group_picture varchar(255),
+CREATE TABLE group_table (id bigint NOT NULL IDENTITY(1,1), group_name varchar(255), group_picture_url varchar(255),
                           tags varchar(255), description varchar(255), event_id BIGINT, user_group_id BIGINT,
                           user_id BIGINT);
 
