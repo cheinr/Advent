@@ -9,13 +9,15 @@ import java.util.List;
 @Entity
 @Table(name = "group_table")
 public class Group {
+
     private Long id;
     private String groupName;
-    private String groupPicture;
+    private String groupPictureUrl;
     private String tags;
     private String description;
     private List<Event> events;
     private List<UserGroup> userGroups;
+    private List<User> groupMembers;
 
     @Id
     @Column(name = "id", unique = true, nullable = false, length = 20)
@@ -38,13 +40,13 @@ public class Group {
         this.groupName = groupName;
     }
 
-    @Column(name = "group_picture", nullable = false)
-    public String getGroupPicture() {
-        return groupPicture;
+    @Column(name = "group_picture_url", nullable = false)
+    public String getGroupPictureUrl() {
+        return groupPictureUrl;
     }
 
-    public void setGroupPicture(String groupPicture) {
-        this.groupPicture = groupPicture;
+    public void setGroupPictureUrl(String groupPictureUrl) {
+        this.groupPictureUrl = groupPictureUrl;
     }
 
     @Column(name = "tags", nullable = false)
@@ -83,12 +85,24 @@ public class Group {
         this.userGroups = userGroups;
     }
 
+    @ManyToMany
+    @JoinTable(name = "group_members",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "group_id", referencedColumnName = "id"))
+    public List<User> getGroupMembers() {
+        return groupMembers;
+    }
+
+    public void setGroupMembers(List<User> groupMembers) {
+        this.groupMembers = groupMembers;
+    }
+
     @Override
     public String toString() {
         return "Group{" +
                 "id=" + id +
                 ", groupName='" + groupName + '\'' +
-                ", groupPicture='" + groupPicture + '\'' +
+                ", groupPictureUrl='" + groupPictureUrl + '\'' +
                 ", tags='" + tags + '\'' +
                 ", description='" + description + '\'' +
                 '}';
@@ -103,10 +117,9 @@ public class Group {
 
         if (!id.equals(group.id)) return false;
         if (!groupName.equals(group.groupName)) return false;
-        if (!groupPicture.equals(group.groupPicture)) return false;
+        if (!groupPictureUrl.equals(group.groupPictureUrl)) return false;
         if (!tags.equals(group.tags)) return false;
         return description.equals(group.description);
-
     }
 
 }
