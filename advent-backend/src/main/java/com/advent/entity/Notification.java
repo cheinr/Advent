@@ -1,6 +1,7 @@
 package com.advent.entity;
 
 import com.advent.converter.BooleanConverter;
+import com.advent.converter.NotificationTypeConverter;
 import com.advent.utils.NotificationType;
 
 import javax.persistence.*;
@@ -57,7 +58,7 @@ public class Notification {
     }
 
     @Column(name = "notification_type")
-//    @Convert // TODO dszopa 10/23/16 - Create converter & update sql insert
+    @Convert(converter = NotificationTypeConverter.class)
     public NotificationType getNotificationType() {
         return notificationType;
     }
