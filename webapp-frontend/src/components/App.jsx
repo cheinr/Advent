@@ -1,9 +1,10 @@
 import React from 'react';
+import GroupChat from './group-chat';
 
 export default function App(props) {
   return (
     <div className="Test">
-      This is a page
+      <GroupChat groupName="TestGroup" />
     </div>
   );
 }
