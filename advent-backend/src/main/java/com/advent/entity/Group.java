@@ -38,7 +38,7 @@ public class Group {
         this.groupName = groupName;
     }
 
-    @Column(name = "group_picture", nullable = false)
+    @Column(name = "group_picture")
     public String getGroupPicture() {
         return groupPicture;
     }
@@ -47,7 +47,7 @@ public class Group {
         this.groupPicture = groupPicture;
     }
 
-    @Column(name = "tags", nullable = false)
+    @Column(name = "tags")
     public String getTags() {
         return tags;
     }
@@ -56,7 +56,7 @@ public class Group {
         this.tags = tags;
     }
 
-    @Column(name = "description", nullable = false)
+    @Column(name = "description")
     public String getDescription() {
         return description;
     }

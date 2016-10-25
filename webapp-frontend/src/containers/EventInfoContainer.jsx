@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactDom from 'react-dom';
-import EventInfo from './../components/EventInfo.js';
+import EventInfo from '../components/EventInfo.jsx';
 import axios from 'axios';
 
 export default class EventInfoContainer extends Component {
