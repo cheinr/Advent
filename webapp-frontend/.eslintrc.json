@@ -18,6 +18,7 @@
   "rules": {
     "linebreak-style": "off",
     "max-len": "off",
+    "react/prop-types": "warn",
     "no-const-assign": "warn",
     "no-this-before-super": "warn",
     "no-undef": "warn",
