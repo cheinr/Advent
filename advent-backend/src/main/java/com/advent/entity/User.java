@@ -14,7 +14,7 @@ public class User {
     private String pictureUrl;
     private List<EventResponse> eventResponses;
     private List<UserGroup> userGroups;
-    // TODO dszopa 9/25/16 - Add List of groups the user is in (groups need to be made first)
+    private List<Group> joinedGroups;
     // TODO dszopa 9/25/16 - Add List of chats the user is in (chats need to be made first)
 
     @Id
@@ -28,6 +28,7 @@ public class User {
     public void setId(Long id) {
         this.id = id;
     }
+
 
     @Column(name = "display_name", nullable = false)
     public String getDisplayName() {
@@ -83,6 +84,18 @@ public class User {
         this.userGroups = userGroups;
     }
 
+    @ManyToMany
+    @JoinTable(name = "joined_groups",
+            joinColumns = @JoinColumn(name = "group_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"))
+    public List<Group> getJoinedGroups() {
+        return joinedGroups;
+    }
+
+    public void setJoinedGroups(List<Group> joinedGroups) {
+        this.joinedGroups = joinedGroups;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -95,7 +108,6 @@ public class User {
         if (!email.equals(user.email)) return false;
         if (description != null ? !description.equals(user.description) : user.description != null) return false;
         return pictureUrl != null ? pictureUrl.equals(user.pictureUrl) : user.pictureUrl == null;
-
     }
 
     @Override
@@ -105,7 +117,7 @@ public class User {
                 ", displayName='" + displayName + '\'' +
                 ", email='" + email + '\'' +
                 ", description='" + description + '\'' +
-                ", pictureUrl='" + pictureUrl + '\'' +
+                ", pictureFilename='" + pictureUrl + '\'' +
                 '}';
     }
 }

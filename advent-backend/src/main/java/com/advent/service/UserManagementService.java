@@ -15,13 +15,10 @@ public interface UserManagementService {
 
     void deleteUserById(Long id);
 
+    UserDTO registerUser(HttpServletRequest request);
     UserDTO findUser(Long id);
-
     UserDTO findUserByEmail(String Email);
 
     List<UserDTO> findUsersByDisplayName(String displayName);
-
-    UserDTO handleGToken(HttpServletRequest request);
-
     List<UserDTO> findAllUsers();
 }
