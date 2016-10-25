@@ -1,6 +1,7 @@
 package com.advent.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "user")
@@ -11,7 +12,9 @@ public class User {
     private String email;
     private String description;
     private String pictureUrl;
-    // TODO dszopa 9/25/16 - Add List of groups the user is in (groups need to be made first)
+    private List<EventResponse> eventResponses;
+    private List<UserGroup> userGroups;
+    private List<Group> joinedGroups;
     // TODO dszopa 9/25/16 - Add List of chats the user is in (chats need to be made first)
 
     @Id
@@ -61,6 +64,36 @@ public class User {
 
     public void setPictureUrl(String pictureUrl) {
         this.pictureUrl = pictureUrl;
+    }
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    public List<EventResponse> getEventResponses() {
+        return eventResponses;
+    }
+
+    public void setEventResponses(List<EventResponse> eventResponses) {
+        this.eventResponses = eventResponses;
+    }
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    public List<UserGroup> getUserGroups() {
+        return userGroups;
+    }
+
+    public void setUserGroups(List<UserGroup> userGroups) {
+        this.userGroups = userGroups;
+    }
+
+    @ManyToMany
+    @JoinTable(name = "joined_groups",
+            joinColumns = @JoinColumn(name = "group_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"))
+    public List<Group> getJoinedGroups() {
+        return joinedGroups;
+    }
+
+    public void setJoinedGroups(List<Group> joinedGroups) {
+        this.joinedGroups = joinedGroups;
     }
 
     @Override
