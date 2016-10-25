@@ -14,6 +14,10 @@ public class UserFactory {
     }
 
     public UserDTO userToUserDTO(User user) {
+        if(user == null) {
+            System.out.println("for some reason user is null.");
+            return null;
+        }
         UserDTO userDTO = new UserDTO();
 
         userDTO.setId(user.getId());
@@ -21,6 +25,7 @@ public class UserFactory {
         userDTO.setDisplayName(user.getDisplayName());
         userDTO.setDescription(user.getDescription());
         userDTO.setPictureUrl(user.getPictureUrl());
+
 
         return userDTO;
     }

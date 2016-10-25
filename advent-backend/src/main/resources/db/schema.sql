@@ -1,3 +1,4 @@
+
 CREATE TABLE user (id INT NOT NULL IDENTITY(1,1), display_name VARCHAR(255) NOT NULL, email VARCHAR(255) NOT NULL,
                    description TEXT NOT NULL, picture_url VARCHAR(255), group_id BIGINT, user_group_id BIGINT,
                    event_response_id BIGINT);

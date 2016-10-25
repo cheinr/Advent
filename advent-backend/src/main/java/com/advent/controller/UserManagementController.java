@@ -15,8 +15,9 @@ public class UserManagementController {
     @Autowired
     private UserManagementService userManagementService;
 
-    @RequestMapping(value = "/users/authGToken", method = RequestMethod.POST)
-    public UserDTO handleGToken(HttpServletRequest request) { return userManagementService.handleGToken(request);}
+    //authenticates user or creates a new one if needed.
+    @RequestMapping(value = "/auth/register", method = RequestMethod.POST)
+    public UserDTO registerUser(HttpServletRequest request) { return userManagementService.registerUser(request);}
 
     @RequestMapping(value = "/users/save", method = RequestMethod.POST)
     public UserDTO saveUser(@RequestBody UserDTO userDTO) {
@@ -32,6 +33,7 @@ public class UserManagementController {
     public void deleteUserById(@PathVariable Long userId) {
         userManagementService.deleteUserById(userId);
     }
+    
 
     @RequestMapping(value = "/users/id/{userId}", method = RequestMethod.GET)
     public UserDTO getUser(@PathVariable Long userId) {

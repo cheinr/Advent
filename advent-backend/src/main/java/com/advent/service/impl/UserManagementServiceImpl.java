@@ -23,13 +23,12 @@ import java.util.List;
 
 //TODO - add libraries to project.
 
-
 @Service
 public class UserManagementServiceImpl implements UserManagementService {
 
     private JsonFactory jsonFactory = new JacksonFactory();
     private NetHttpTransport transport = new NetHttpTransport();
-    private String CLIENT_ID = "833501818150-94qfhnk1c77cqt73ak0asil9hpqudpl8.apps.googleusercontent.com";
+    private final String CLIENT_ID = "833501818150-94qfhnk1c77cqt73ak0asil9hpqudpl8.apps.googleusercontent.com";
 
     @Autowired
     private UserRepo userRepo;
@@ -37,10 +36,6 @@ public class UserManagementServiceImpl implements UserManagementService {
     @Autowired
     private UserFactory userFactory;
 
-    GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(transport, jsonFactory)
-            .setAudience(Arrays.asList(CLIENT_ID))
-            .setIssuer("accounts.google.com")
-            .build();
 
     @Override
     public UserDTO saveUser(UserDTO userDTO) {
@@ -49,11 +44,21 @@ public class UserManagementServiceImpl implements UserManagementService {
         return userDTO;
     }
 
-    @Override
-    public UserDTO handleGToken(HttpServletRequest request)  {
-        String idTokenString = request.getHeader("google-id-token"); //TODO - get token from request
 
-        System.out.println(idTokenString);
+    public UserDTO registerUser(HttpServletRequest request)  {
+        GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(transport, jsonFactory)
+                .setAudience(Arrays.asList(CLIENT_ID))
+                .setIssuer("accounts.google.com")
+                .build();
+
+        long before = System.currentTimeMillis();
+        String idTokenString = request.getHeader("google-id-token");
+        java.util.Enumeration<String> h = request.getHeaderNames();
+        while (h.hasMoreElements()) {
+            System.out.println(h.nextElement());
+        }
+        System.out.println("Headers: " + request.getHeaderNames().nextElement());
+        System.out.println("Token: " + idTokenString);
         GoogleIdToken idToken = null;
         try {
             idToken = verifier.verify(idTokenString);
@@ -72,38 +77,28 @@ public class UserManagementServiceImpl implements UserManagementService {
 
             // Get profile information from payload
             String email = payload.getEmail();
-            boolean emailVerified = Boolean.valueOf(payload.getEmailVerified());
-            String name = (String) payload.get("name");
-            String pictureUrl = (String) payload.get("picture");
-            String locale = (String) payload.get("locale");
-            String familyName = (String) payload.get("family_name");
-            String givenName = (String) payload.get("given_name");
-
-            System.out.println("User " + name + " has been authenticated.");
-            // Use or store profile information
-            // ...
 
             //Query for user:
             UserDTO userDTO = findUserByEmail(email);
 
             if(userDTO == null) {
+                System.out.println("Creating user: " + payload.get("name"));
                 //create user
                 User user = new User();
-                user.setId((long) 0);
                 user.setEmail(email);
-                user.setDisplayName(name);
-                user.setPictureUrl(pictureUrl);
-                user.setDescription(locale); //probably not what we want.
-                //TODO - set more attributes
+                user.setDisplayName((String) payload.get("name"));
+                user.setPictureUrl((String) payload.get("picture"));
+                user.setDescription("");
 
                 userDTO = userFactory.userToUserDTO(user);
-
+                userDTO = saveUser(userDTO);
             }
-
+            System.out.println("time = " + (System.currentTimeMillis() - before));
             return userDTO;
         } else {
             System.out.println("invalid ID Token");
             //TODO - handle invalid tokens.
+            //TODO chein 10/17/16 - We need to somehow let the user know that something is wrong.
             return null; //this should work
         }
     }
@@ -113,7 +108,8 @@ public class UserManagementServiceImpl implements UserManagementService {
         userRepo.delete(userDTO.getId());
     }
 
-    @Override
+
+
     public void deleteUserById(Long id) {
         userRepo.delete(id);
     }
@@ -127,6 +123,7 @@ public class UserManagementServiceImpl implements UserManagementService {
     @Override
     public UserDTO findUserByEmail(String email) {
         User user = userRepo.findByEmail(email);
+        if(user == null) return null;
         return userFactory.userToUserDTO(user);
     }
 

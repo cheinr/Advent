@@ -29,6 +29,7 @@ public class User {
         this.id = id;
     }
 
+
     @Column(name = "display_name", nullable = false)
     public String getDisplayName() {
         return displayName;
@@ -107,7 +108,6 @@ public class User {
         if (!email.equals(user.email)) return false;
         if (description != null ? !description.equals(user.description) : user.description != null) return false;
         return pictureUrl != null ? pictureUrl.equals(user.pictureUrl) : user.pictureUrl == null;
-
     }
 
     @Override
@@ -117,7 +117,7 @@ public class User {
                 ", displayName='" + displayName + '\'' +
                 ", email='" + email + '\'' +
                 ", description='" + description + '\'' +
-                ", pictureUrl='" + pictureUrl + '\'' +
+                ", pictureFilename='" + pictureUrl + '\'' +
                 '}';
     }
 }
