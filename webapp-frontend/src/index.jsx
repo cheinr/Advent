@@ -28,7 +28,7 @@ function requireAuth(nextState, replace) {
 function requireNoAuth(nextState, replace) {
   if (auth.loggedIn()) {
     replace({
-      pathname: '/main',
+      pathname: '/',
       state: { nextPathname: nextState.location.pathname },
     });
   }
