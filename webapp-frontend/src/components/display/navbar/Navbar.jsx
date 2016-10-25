@@ -23,9 +23,6 @@ export default function Navbar(props) {
             <li><Link to="/main">Main</Link></li>
             <li><SignOut /></li>
           </NavbarNav>
-          <ul className="nav navbar-nav">
-            <li><SignOut /></li>
-          </ul>
           <NavbarRight>
             <li><a href="#">My Profile</a></li>
             <NavbarNotification link="#" notifications={testNotifications} />
