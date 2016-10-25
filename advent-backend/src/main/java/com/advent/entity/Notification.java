@@ -1,5 +1,6 @@
 package com.advent.entity;
 
+import com.advent.converter.BooleanConverter;
 import com.advent.utils.NotificationType;
 
 import javax.persistence.*;
@@ -46,7 +47,7 @@ public class Notification {
     }
 
     @Column(name = "is_read")
-    // TODO dszopa 10/23/16 - Create converter & update sql insert
+    @Convert(converter = BooleanConverter.class)
     public Boolean getIsRead() {
         return isRead;
     }
