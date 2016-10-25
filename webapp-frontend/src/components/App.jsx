@@ -1,5 +1,5 @@
 import React from 'react';
-import GroupChat from './group-chat';
+import GroupChat from './chats/group-chat';
 
 export default function App(props) {
   return (
