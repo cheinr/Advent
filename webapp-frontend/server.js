@@ -16,18 +16,19 @@ var date = new Date();
 var dateString = "";
 io.on('connection', function(socket) {
     socket.on('join-room', function(room) {
-	console.log("Client joining room: " + room);
-	socket.join(room);
-	
-	socket.on('chat message', function(data) {
-	    data.id = i++;
-	    dateString = date.getMonth() + "/" + date.getDay() + "/" + date.getYear();
-	    data.date = dateString;
-	    io.to(room).emit('chat message', data);
-	});
-	
-    });    
+	     console.log("Client joining room: " + room);
+	      socket.join(room);
+    });
+    
+    socket.on('chat message', function(data) {
+        console.log("sending message to room: " + data.groupId)
+        data.id = i++;
+        dateString = date.getMonth() + "/" + date.getDay() + "/" + date.getYear();
+        data.date = dateString;
+        io.to(data.groupId).emit('chat message', data);
+    });
 });
+
 
 
 // Proxy for where requests to /api go
