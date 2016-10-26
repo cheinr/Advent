@@ -9,15 +9,14 @@ export default class ChatMessageSender extends React.Component {
 
   handleSend() {
     this.props.onSend(this.refs.messageInput.value);
+    this.refs.messageInput.value = "";
   }
 
   render() {
     return (
-      <div>
-         <form className="form-inline">
+      <div className="form-inline">
            <input type="text" ref="messageInput" className="form-control" />
-           <button type="button" className="btn btn-default" onClick={this.handleSend}>Send</button>
-         </form>
+           <button type="button" className="btn btn-default form-inline" onClick={this.handleSend}>Send</button>
       </div>
     );
   }
