@@ -35,3 +35,8 @@
 .no-margin-bottom {
     margin-bottom: 0 !important;
 }
+
+.half-vertical {
+    top: 50%;
+    position: fixed;
+}

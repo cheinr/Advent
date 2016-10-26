@@ -17,8 +17,12 @@ export default function MainLayout(props) {
           </div>
         </div>
         <div className="col-xs-3">
-          <SidebarTopRight />
-          <SidebarBottomRight />
+          <div className="row">
+            <SidebarTopRight />
+          </div>
+          <div className="row half-vertical">
+            <SidebarBottomRight />
+          </div>
         </div>
       </div>
     </div>
