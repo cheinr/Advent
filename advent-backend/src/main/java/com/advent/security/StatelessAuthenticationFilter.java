@@ -1,5 +1,6 @@
 package com.advent.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.GenericFilterBean;
@@ -16,6 +17,7 @@ import java.io.IOException;
  * Filter that uses our TokenAuthenticationService
  */
 public class StatelessAuthenticationFilter extends GenericFilterBean {
+    @Autowired
     private final TokenAuthenticationService authenticationService;
 
     public StatelessAuthenticationFilter(TokenAuthenticationService authenticationService) {

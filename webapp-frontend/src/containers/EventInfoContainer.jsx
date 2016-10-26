@@ -26,8 +26,12 @@ export default class EventInfoContainer extends Component {
 
     getEvent() {
         const url = `http://localhost:3000/api/event/${this.props.params.eventId}`;
-
-        axios.get(url)
+        const headers = {'Authorization': localStorage.token};
+        axios({
+            method: 'get',
+            url: url,
+            headers: headers
+        })
             .then(response => {
                 console.log(response.data);
                 this.setState({

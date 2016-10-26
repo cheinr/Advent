@@ -27,10 +27,10 @@ export default class EventCreateContainer extends Component {
         this.setState({description: e.target.value});
     }
     startChange(e) {
-        this.setState({start_date: e.target.value});
+        this.setState({start_date: e});
     }
     endChange(e) {
-        this.setState({end_date: e.target.value});
+        this.setState({end_date: e});
     }
     locChange(e) {
         this.setState({location: e.target.value});
@@ -42,12 +42,16 @@ export default class EventCreateContainer extends Component {
 
             name: this.state.name,
             description: this.state.description,
-            startDate: this.state.start_date,
-            endDate: this.state.end_date,
+            startDate: this.state.start_date != "" ? this.state.start_date.format('YYYY-MM-DD HH:mm:ss') : undefined,
+            endDate: this.state.end_date != "" ? this.state.end_date.format('YYYY-MM-DD HH:mm:ss') : undefined,
             location: this.state.location
         };
-
-        axios.post(url, data)
+    console.log(localStorage.token);
+        axios({method: 'post',
+                headers: {'Authorization': localStorage.token},
+                url: url,
+                data: data}
+            )
             .then(response => {
                 console.log(response.data);
             })

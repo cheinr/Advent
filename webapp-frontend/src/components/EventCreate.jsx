@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDatetime from 'react-datetime';
 
 export default class EventCreate extends Component {
     componentDidMount() {
@@ -11,6 +12,7 @@ export default class EventCreate extends Component {
                 <h1>Create Event</h1>
 
                 <form>
+                    <ReactDatetime />
                     <div className="form-group">
                         <label htmlFor="name">Name</label>
                         <input type="text" className="form-control" id="name"
@@ -25,13 +27,13 @@ export default class EventCreate extends Component {
                     </div>
                     <div className="form-group">
                         <label htmlFor="start_date">Start Date and Time</label>
-                        <input type="text" className="form-control" id="start_date"
+                        <ReactDatetime id="start_date"
                                onChange={this.props.startChange}
                                value={this.props.values.start_date}/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="end_date">End Date and Time (optional)</label>
-                        <input type="text" className="form-control" id="end_date"
+                        <ReactDatetime id="end_date"
                                onChange={this.props.endChange}
                                value={this.props.values.end_date}/>
                     </div>
