@@ -2,9 +2,13 @@ import React from 'react';
 
 
 export default class ChatMessageSender extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleSend = this.handleSend.bind(this);
+  }
 
   handleSend() {
-    this.props.handleMessageSend(this.refs.messageInput.value);
+    this.props.onSend(this.refs.messageInput.value);
   }
 
   render() {
