@@ -22,9 +22,11 @@ export default class ChatMessageSender extends React.Component {
 
   render() {
     return (
-      <div>
-
-      <input id="messageInput" type="text" ref="messageInput" className="form-control" onKeyPress={this.handleKeyPress.bind(this)} />
+      <div className="input-group">
+        <input id="messageInput" ref="messageInput" type="text" className="form-control" onKeyPress={this.handleKeyPress.bind(this)}/>
+        <span className="input-group-btn">
+          <button className="btn btn-secondary" type="button" onClick={this.handleSend}>Send</button>
+        </span>
       </div>
     );
 

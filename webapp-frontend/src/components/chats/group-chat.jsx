@@ -13,9 +13,7 @@ export default class GroupChat extends React.Component {
   constructor(props) {
     super(props);
     this.socket = this.connect(this.props.group.id);
-    this.state = {messages: [
-      {senderName: "Colin", message: "Hello Chat!", date: "10/23/95", id: 1000 },
-      {senderName: "Ryan", message: "This is a message", date: "10/23/95", id: 1001}]};
+    this.state = {messages: []};
     }
 
     componentDidMount() {

@@ -25,8 +25,8 @@ var GROUP2 = {
 }
 var USER = {
     id: 0,
-    displayName: "Ryan",
-    email: "ryan@iastate.edu",
+    displayName: "Fred",
+    email: "chein@iastate.edu",
     description: "a;sldkjga;sdlk",
     pictureUrl: "asdagdsg"
 }
