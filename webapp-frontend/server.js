@@ -12,18 +12,21 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
 var i = 0;
-var date = new Date();
-var dateString = "";
 io.on('connection', function(socket) {
     socket.on('join-room', function(room) {
-	     console.log("Client joining room: " + room);
-	      socket.join(room);
+	console.log("Client joining room: " + room);
+	socket.join(room);
     });
     
     socket.on('chat message', function(data) {
+	var date = new Date();
+	var dateString = "";
+	
         console.log("sending message to room: " + data.groupId)
         data.id = i++;
-        dateString = date.getMonth() + "/" + date.getDay() + "/" + date.getYear();
+        dateString = date.getHours() % 12 + ":" + date.getMinutes();
+	dateString += (date.getHours() > 12 ? "pm" : "am");
+	dateString += " CDT";
         data.date = dateString;
         io.to(data.groupId).emit('chat message', data);
     });

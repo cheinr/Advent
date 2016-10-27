@@ -7,17 +7,26 @@ export default class ChatMessageSender extends React.Component {
     this.handleSend = this.handleSend.bind(this);
   }
 
-  handleSend() {
-    this.props.onSend(this.refs.messageInput.value);
-    this.refs.messageInput.value = "";
-  }
+    handleSend() {
+	if(this.refs.messageInput.value !== "") {
+	    this.props.onSend(this.refs.messageInput.value);
+	    this.refs.messageInput.value = "";
+	}
+    }
+
+    handleKeyPress(e) {
+	if(e.key === 'Enter') {
+	    this.handleSend();
+	}
+    }
 
   render() {
     return (
-      <div className="form-inline">
-           <input type="text" ref="messageInput" className="form-control" />
-           <button type="button" className="btn btn-default form-inline" onClick={this.handleSend}>Send</button>
+      <div>
+
+      <input id="messageInput" type="text" ref="messageInput" className="form-control" onKeyPress={this.handleKeyPress.bind(this)} />
       </div>
     );
+
   }
 }

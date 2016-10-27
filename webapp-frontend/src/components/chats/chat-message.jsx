@@ -6,8 +6,9 @@ export default class ChatMessage extends React.Component {
     return (
       <div className="chat-message">
          <b>{this.props.message.senderName}: </b>
-         <p>{this.props.message.message}</p>
-         <p>{this.props.message.date}</p>
+         <p style={{display: "inline"}}>{this.props.message.message}</p>
+         <br/>
+         <small>sent at: {this.props.message.date}</small>
       </div>
     );
   }
