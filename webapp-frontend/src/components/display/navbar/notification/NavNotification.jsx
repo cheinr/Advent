@@ -1,8 +1,9 @@
 import React from 'react';
-import NavbarDropdown from './NavbarDropdown';
-import Notification from '../Notification';
+import NavbarDropdown from '../NavDropdown';
+import Notification from '../../Notification';
 
 export default function NavbarNotification(props) {
+  // TODO dszopa 10/27/16 - Remove after creation of notification
   // TODO dszopa 10/26/16 - Make this component useful
   return (
     <NavbarDropdown>
