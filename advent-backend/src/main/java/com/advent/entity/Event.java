@@ -18,8 +18,10 @@ public class Event {
     @Column(name = "description")
     private String description;
     @Column(name = "start_date")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date startDate;
     @Column(name = "end_date")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date endDate;
     @Column(name = "location")
     private String location;

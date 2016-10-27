@@ -12,7 +12,6 @@ export default class EventCreate extends Component {
                 <h1>Create Event</h1>
 
                 <form>
-                    <ReactDatetime />
                     <div className="form-group">
                         <label htmlFor="name">Name</label>
                         <input type="text" className="form-control" id="name"

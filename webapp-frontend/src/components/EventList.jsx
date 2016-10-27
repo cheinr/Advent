@@ -10,6 +10,8 @@ export default class EventList extends Component {
                     <tr>
                         <th>Name</th>
                         <th>Description</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -19,6 +21,8 @@ export default class EventList extends Component {
                                 <tr>
                                     <td>{event.name}</td>
                                     <td>{event.description}</td>
+                                    <td>{event.startDate}</td>
+                                    <td>{event.endDate}</td>
                                 </tr>
                             )
                         })

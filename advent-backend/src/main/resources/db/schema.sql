@@ -61,7 +61,7 @@ INSERT INTO user (id, display_name, email, description, picture_url, group_id, u
    1
   );
 CREATE TABLE event (id bigint NOT NULL IDENTITY(1,1), name varchar(255) not null, description varchar(255) not null,
-                    start_date date, end_date date, location varchar(255), is_private INTEGER, event_response_id BIGINT,
+                    start_date TIMESTAMP, end_date TIMESTAMP, location varchar(255), is_private INTEGER, event_response_id BIGINT,
                     group_id BIGINT
 );
 

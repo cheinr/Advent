@@ -35,3 +35,12 @@
 .no-margin-bottom {
     margin-bottom: 0 !important;
 }
+
+.rbc-calendar {
+    flex: 1;
+    min-height: 400px;
+}
+
+.calendar-container{
+    height: 500px;
+}
