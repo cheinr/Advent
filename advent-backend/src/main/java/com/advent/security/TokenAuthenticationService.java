@@ -3,6 +3,7 @@ package com.advent.security;
 import com.advent.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
  * Created by colin on 10/19/16.
  * more stuff from tutorial.
  */
+@Component
 public class TokenAuthenticationService {
 
     //The header in the request that contains the google-id token.

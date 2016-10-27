@@ -40,8 +40,8 @@ public class UserManagementServiceImpl implements UserManagementService {
     @Override
     public UserDTO saveUser(UserDTO userDTO) {
         User user = userFactory.userDTOToUser(userDTO);
-        userRepo.save(user);
-        return userDTO;
+        User returnedUser = userRepo.save(user);
+        return userFactory.userToUserDTO(returnedUser);
     }
 
 

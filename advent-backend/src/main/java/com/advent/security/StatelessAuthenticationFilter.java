@@ -1,7 +1,9 @@
 package com.advent.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Component;
 import org.springframework.web.filter.GenericFilterBean;
 
 import javax.servlet.FilterChain;
@@ -15,8 +17,11 @@ import java.io.IOException;
  * Created by colin on 10/19/16.
  * Filter that uses our TokenAuthenticationService
  */
+@Component
 public class StatelessAuthenticationFilter extends GenericFilterBean {
-    private final TokenAuthenticationService authenticationService;
+
+    @Autowired
+    private TokenAuthenticationService authenticationService;
 
     public StatelessAuthenticationFilter(TokenAuthenticationService authenticationService) {
         this.authenticationService = authenticationService;

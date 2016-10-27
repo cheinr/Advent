@@ -22,7 +22,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private TokenAuthenticationService tokenAuthenticationService;
+    private StatelessAuthenticationFilter statelessAuthenticationFilter;
 
     public SpringSecurityConfig() {
         super(true);
@@ -45,7 +45,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated().and()
 
                 // Custom Token based authentication based on the header previously given to the client
-                .addFilterBefore(new StatelessAuthenticationFilter(tokenAuthenticationService),
+                .addFilterBefore(statelessAuthenticationFilter,
                            UsernamePasswordAuthenticationFilter.class);
     }
 
@@ -58,11 +58,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
-    }
-
-    @Bean
-    public TokenAuthenticationService tokenAuthenticationService() {
-        return tokenAuthenticationService;
     }
 }
 

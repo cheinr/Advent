@@ -20,6 +20,7 @@ module.exports = {
       headers: {"google-id-token": id_token}
     }).then(function(response) { //success
       console.log(response);
+      localStorage.user = JSON.stringify(response.data);
     })
     .catch(function (error) {
       console.log(error);
@@ -40,6 +41,7 @@ module.exports = {
 
   logout(auth2, cb) {
     delete localStorage.token;
+    delete localStorage.user;
     auth2.signOut().then(function () {
       if (cb) cb();
     });
