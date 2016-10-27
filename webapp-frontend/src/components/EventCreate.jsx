@@ -31,12 +31,11 @@ export default class EventCreate extends Component {
                                value={this.props.values.start_date}/>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="end_date">End Date and Time (optional)</label>
+                        <label htmlFor="end_date">End Date and Time</label>
                         <ReactDatetime id="end_date"
                                onChange={this.props.endChange}
                                value={this.props.values.end_date}/>
                     </div>
-                    {/* todo the dates should use a date time picker*/}
                     <div className="form-group">
                         <label htmlFor="location">Location</label>
                         <input type="text" className="form-control" id="location"
