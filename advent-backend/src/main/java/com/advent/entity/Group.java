@@ -17,7 +17,7 @@ public class Group {
     private String description;
     private List<Event> events;
     private List<UserGroup> userGroups;
-    private List<User> groupMembers;
+    private List<Announcement> announcements;
 
     @Id
     @Column(name = "id", unique = true, nullable = false, length = 20)
@@ -85,16 +85,13 @@ public class Group {
         this.userGroups = userGroups;
     }
 
-    @ManyToMany
-    @JoinTable(name = "group_members",
-            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "group_id", referencedColumnName = "id"))
-    public List<User> getGroupMembers() {
-        return groupMembers;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "group")
+    public List<Announcement> getAnnouncements() {
+        return announcements;
     }
 
-    public void setGroupMembers(List<User> groupMembers) {
-        this.groupMembers = groupMembers;
+    public void setAnnouncements(List<Announcement> announcements) {
+        this.announcements = announcements;
     }
 
     @Override
