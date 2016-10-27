@@ -10,6 +10,7 @@ import NavNotificationDropdown from '../components/display/navbar/notification/N
 import NavCollapsible from '../components/display/navbar/NavCollapsible';
 import NavNotificationFooter from '../components/display/navbar/notification/NavNotificationFooter';
 import DropdownToolbar from '../components/display/DropdownToolbar';
+import NavPreferences from '../components/display/navbar/NavPreferences';
 import NavLink from '../components/display/navbar/NavLink';
 
 const testNotifications = [
@@ -48,8 +49,16 @@ const testNotifications = [
 export default class extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      notifications: [],
+    };
     this.viewAll = this.viewAll.bind(this);
     this.markAllAsRead = this.markAllAsRead.bind(this);
+    this.getNotifications = this.getNotifications.bind(this);
+  }
+
+  getNotifications() {
+    // Get the last 5 notifications for the user
   }
 
   // TOOD dszopa 10/27/16 - Implement these
@@ -79,10 +88,8 @@ export default class extends React.Component {
             <NavCollapsible>
               <NavNav>
                 <NavLink link="/main" name="Main" />
-                <li><SignOut /></li>
               </NavNav>
               <NavRight>
-                <NavLink link="/users/1" name="My Profile" />
                 <NavNav>
                   <NavNotificationDropdown>
                     <NavNotificationPanel numNotifications={testNotifications.length} />
@@ -93,6 +100,7 @@ export default class extends React.Component {
                     </NavDropdownContainer>
                   </NavNotificationDropdown>
                 </NavNav>
+                <NavPreferences />
               </NavRight>
             </NavCollapsible>
           </div>
