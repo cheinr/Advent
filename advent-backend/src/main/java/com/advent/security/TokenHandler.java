@@ -47,7 +47,6 @@ public class TokenHandler {
             e.printStackTrace();
             return null;
         } catch (IllegalArgumentException e) {
-            e.printStackTrace();
             return null;
         }
         System.out.println(idToken);
