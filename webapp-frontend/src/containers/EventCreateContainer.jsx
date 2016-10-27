@@ -38,7 +38,6 @@ export default class EventCreateContainer extends Component {
         this.setState({location: e.target.value});
     }
     privateChange(e) {
-        console.log(e.target.checked);
         this.setState({isPrivate: e.target.checked});
     }
 
