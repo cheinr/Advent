@@ -42,8 +42,13 @@ public class TokenHandler {
             idToken = verifier.verify(idTokenString);
         } catch (GeneralSecurityException e) {
             e.printStackTrace();
+            return null;
         } catch (IOException e) {
             e.printStackTrace();
+            return null;
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+            return null;
         }
         System.out.println(idToken);
         if (idToken != null) {

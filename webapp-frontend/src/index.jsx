@@ -14,20 +14,19 @@ import SignIn from './components/sign-in';
 import auth from './auth';
 import axios from 'axios';
 
-//Send auth token with each request
-axios.defaults.headers.common["Authorization"] = auth.getToken();
 //If Server sends back Unauthorized error code, sign out the user.
 axios.interceptors.response.use(function (response) {
     return response;
 }, function (error) {
-    if(error.response.status === 401) {
-	auth.logout();
-	replace({
-	    pathname: '/login',
-	    state: { nextPathname: nextState.location.pathname },
+    if(error.response.status === 403) {
+	console.log("users id token is invalid");
+	var auth2 = gapi.auth2.getAuthInstance();
+	auth.logout(auth2, function() {
+	    window.location.replace("");    
 	});
-    }
-});
+    } 
+    return error;
+}.bind(this));
 
 
 function requireAuth(nextState, replace) {
