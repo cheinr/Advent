@@ -6,8 +6,10 @@ import ChatMessageSender from './chat-message-sender';
 
 
 /*
-*   State variables : messages
-*   Prop variables : groupName, groupID - might just pass in group
+*   To use this just pass in the logged in user object and 
+*   a group object as they come from the backend.
+*  
+*   Ex: <GroupChat user={<UserObject>} group={<GroupObject>}
 */
 export default class GroupChat extends React.Component {
   constructor(props) {
@@ -27,7 +29,6 @@ export default class GroupChat extends React.Component {
     }
 
     handleMessageSend(message) {
-      //var socket = this.connect(0);
       //data to send
       var data = {senderName: this.props.user.displayName, message: message,
         groupId: this.props.group.id};
