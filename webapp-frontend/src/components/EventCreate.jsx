@@ -43,7 +43,10 @@ export default class EventCreate extends Component {
                                value={this.props.values.location}/>
                     </div>
                     <div className="checkbox">
-                        <label><input type="checkbox"/> Checkbox Test</label>
+                        <label>
+                            <input type="checkbox"
+                                   onChange={this.props.privateChange}
+                                   value={this.props.values.isPrivate}/> Private Event</label>
                     </div>
                     <button type="button" className="btn btn-default" onClick={this.props.submitForm}>Submit</button>
                 </form>

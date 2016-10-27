@@ -10,13 +10,15 @@ export default class EventCreateContainer extends Component {
             description: "",
             start_date: "",
             end_date: "",
-            location: ""
+            location: "",
+            isPrivate: false
         };
         this.nameChange = this.nameChange.bind(this);
         this.descChange = this.descChange.bind(this);
         this.startChange = this.startChange.bind(this);
         this.endChange = this.endChange.bind(this);
         this.locChange = this.locChange.bind(this);
+        this.privateChange = this.privateChange.bind(this);
         this.submitForm = this.submitForm.bind(this);
     }
 
@@ -35,6 +37,10 @@ export default class EventCreateContainer extends Component {
     locChange(e) {
         this.setState({location: e.target.value});
     }
+    privateChange(e) {
+        console.log(e.target.checked);
+        this.setState({isPrivate: e.target.checked});
+    }
 
     submitForm() {
         const url = "http://localhost:3000/api/event/create/";
@@ -44,9 +50,9 @@ export default class EventCreateContainer extends Component {
             description: this.state.description,
             startDate: this.state.start_date != "" ? this.state.start_date.format('YYYY-MM-DD HH:mm:ss') : undefined,
             endDate: this.state.end_date != "" ? this.state.end_date.format('YYYY-MM-DD HH:mm:ss') : undefined,
-            location: this.state.location
+            location: this.state.location,
+            isPrivate: this.state.isPrivate
         };
-    console.log(localStorage.token);
         axios({method: 'post',
                 headers: {'Authorization': localStorage.token},
                 url: url,
@@ -69,6 +75,7 @@ export default class EventCreateContainer extends Component {
                 startChange={this.startChange}
                 endChange={this.endChange}
                 locChange={this.locChange}
+                privateChange={this.privateChange}
                 submitForm={this.submitForm}
                 values={this.state}
             />
