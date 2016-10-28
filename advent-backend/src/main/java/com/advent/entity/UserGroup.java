@@ -34,7 +34,7 @@ public class UserGroup {
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "group_id", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(name = "group_table_id", nullable = false, insertable = false, updatable = false)
     public Group getGroup() {
         return group;
     }
