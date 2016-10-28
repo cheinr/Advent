@@ -14,6 +14,8 @@ import ScheduleAddEvent from './components/schedule-add-event';
 import SignIn from './components/sign-in';
 import auth from './auth';
 import EventCalendarContainer from './containers/EventCalendarContainer';
+import GroupCreateContainer from './containers/GroupCreateContainer';
+import GroupInfoContainer from './containers/GroupInfoContainer';
 
 
 function requireAuth(nextState, replace) {
@@ -50,6 +52,8 @@ ReactDom.render(
       <Route path="/event/list" component={EventListContainer} />
       <Route path="/event/calendar" component={EventCalendarContainer}/>
       <Route path="/event/:eventId" component={EventInfoContainer}/>
+      <Route path="/group/create"  component={GroupCreateContainer}/>
+      <Route path="/group/:groupId"  component={GroupInfoContainer}/>
     </Route>
   </Router>
 , document.querySelector('.content'));

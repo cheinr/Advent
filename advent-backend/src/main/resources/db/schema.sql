@@ -73,5 +73,5 @@ CREATE TABLE event_response (id bigint NOT NULL IDENTITY(1,1), user_id bigint no
 CREATE TABLE user_group (id bigint NOT NULL IDENTITY(1,1), user_id bigint not null, group_id bigint not null, role varchar(255));
 
 CREATE TABLE announcement (id BIGINT NOT NULL IDENTITY(1,1), title VARCHAR(255), content VARCHAR(255), group_id BIGINT);
-INSERT INTO announcement (id, title, content, group_id) VALUES
-  (1000, 'Generic Title', 'Here is some content', 1000);
+-- INSERT INTO announcement (id, title, content, group_id) VALUES
+--   (1000, 'Generic Title', 'Here is some content', 1000);
