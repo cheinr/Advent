@@ -50,8 +50,12 @@ export default class EventCreateContainer extends Component {
             startDate: this.state.start_date != "" ? this.state.start_date.format('YYYY-MM-DD HH:mm:ss') : undefined,
             endDate: this.state.end_date != "" ? this.state.end_date.format('YYYY-MM-DD HH:mm:ss') : undefined,
             location: this.state.location,
+            group: {
+                id: this.props.params.groupId
+            },
             isPrivate: this.state.isPrivate
         };
+        console.log(data);
         axios({method: 'post',
                 headers: {'Authorization': localStorage.token},
                 url: url,

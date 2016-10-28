@@ -18,7 +18,6 @@ public class EventDTO {
     private String endDate;
     private String location;
     private Boolean isPrivate;
-    // todo clai when groups are implemented
     private Group group;
     private List<UserGroup> userGroups;
 

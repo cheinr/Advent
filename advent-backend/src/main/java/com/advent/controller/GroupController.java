@@ -1,5 +1,6 @@
 package com.advent.controller;
 
+import com.advent.dto.GroupDTO;
 import com.advent.entity.Group;
 import com.advent.service.GroupService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,8 @@ public class GroupController {
 
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public Group getGroupById(@PathVariable Long id) {
-        return groupService.getGroup(id);
+    public GroupDTO getGroupById(@PathVariable Long id) {
+        GroupDTO group =groupService.getGroup(id);
+        return group;
     }
 }

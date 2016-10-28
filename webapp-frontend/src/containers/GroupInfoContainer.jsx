@@ -8,13 +8,16 @@ export default class GroupInfoContainer extends Component {
         this.state = {
             id: '',
             name: '',
-            description: ''
+            description: '',
+            events: []
         };
         this.getGroup = this.getGroup.bind(this);
+        this.getGroupEvents = this.getGroupEvents.bind(this);
     }
 
     componentDidMount() {
         this.getGroup();
+        this.getGroupEvents();
     }
 
     getGroup() {
@@ -38,10 +41,30 @@ export default class GroupInfoContainer extends Component {
             });
     };
 
+    getGroupEvents() {
+        const url = `http://localhost:3000/api/event/group/${this.props.params.groupId}`;
+        const headers = {'Authorization': localStorage.token};
+        axios({
+            method: 'get',
+            url: url,
+            headers: headers
+        })
+            .then(response => {
+                console.log(response.data);
+                this.setState({
+                    events: response.data
+                });
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }
+
     render() {
         console.log(this.state);
         return <GroupInfo
             group={this.state}
+            groupId={this.props.params.groupId}
         />
     }
 }

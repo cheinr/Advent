@@ -36,7 +36,7 @@ public class EventController {
         return eventService.getEventById(id);
     }
 
-    @RequestMapping(value = "/event/{groupId}/")
+    @RequestMapping(value = "/event/group/{groupId}")
     public List<EventDTO> getEventByGroup(@PathVariable Long groupId) {
         return eventService.getEventByGroup(groupId);
     }
