@@ -61,6 +61,7 @@ CREATE TABLE user_group (
 
 CREATE TABLE notification (
   id BIGINT PRIMARY KEY NOT NULL,
+  header VARCHAR(255),
   message VARCHAR(255),
   link VARCHAR(255),
   notification_type VARCHAR(255),
@@ -129,4 +130,4 @@ INSERT INTO group_table VALUES (1, 'groupName', 'groupPictureUrl', 'tags', 'desc
 
 INSERT INTO announcement VALUES (1, 'title', 'content', 1);
 
-INSERT INTO notification VALUES (1, 'Sample Message', 'https://google.com', 'MESSAGE', 0, 1000);
+INSERT INTO notification VALUES (1, 'Sample Header', 'Sample Message', 'https://google.com', 'MESSAGE', 0, 1000);

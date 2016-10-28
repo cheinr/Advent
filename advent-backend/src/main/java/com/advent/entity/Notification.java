@@ -11,6 +11,7 @@ import javax.persistence.*;
 public class Notification {
 
     private Long id;
+    private String header;
     private String message;
     private String link;
     private NotificationType notificationType;
@@ -27,6 +28,15 @@ public class Notification {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    @Column(name = "header")
+    public String getHeader() {
+        return header;
+    }
+
+    public void setHeader(String header) {
+        this.header = header;
     }
 
     @Column(name = "message")
@@ -47,16 +57,6 @@ public class Notification {
         this.link = link;
     }
 
-    @Column(name = "is_read")
-    @Convert(converter = BooleanConverter.class)
-    public Boolean getIsRead() {
-        return isRead;
-    }
-
-    public void setIsRead(Boolean isRead) {
-        this.isRead = isRead;
-    }
-
     @Column(name = "notification_type")
     @Convert(converter = NotificationTypeConverter.class)
     public NotificationType getNotificationType() {
@@ -75,5 +75,56 @@ public class Notification {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    @Column(name = "is_read")
+    @Convert(converter = BooleanConverter.class)
+    public Boolean getRead() {
+        return isRead;
+    }
+
+    public void setRead(Boolean read) {
+        isRead = read;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Notification that = (Notification) o;
+
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
+        if (header != null ? !header.equals(that.header) : that.header != null) return false;
+        if (message != null ? !message.equals(that.message) : that.message != null) return false;
+        if (link != null ? !link.equals(that.link) : that.link != null) return false;
+        if (notificationType != that.notificationType) return false;
+        if (isRead != null ? !isRead.equals(that.isRead) : that.isRead != null) return false;
+        return user != null ? user.equals(that.user) : that.user == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (header != null ? header.hashCode() : 0);
+        result = 31 * result + (message != null ? message.hashCode() : 0);
+        result = 31 * result + (link != null ? link.hashCode() : 0);
+        result = 31 * result + (notificationType != null ? notificationType.hashCode() : 0);
+        result = 31 * result + (isRead != null ? isRead.hashCode() : 0);
+        result = 31 * result + (user != null ? user.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Notification{" +
+                "id=" + id +
+                ", header='" + header + '\'' +
+                ", message='" + message + '\'' +
+                ", link='" + link + '\'' +
+                ", notificationType=" + notificationType +
+                ", isRead=" + isRead +
+                ", user=" + user +
+                '}';
     }
 }
