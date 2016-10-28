@@ -1,11 +1,78 @@
+CREATE TABLE calendar (
+  id BIGINT PRIMARY KEY NOT NULL,
+  link VARCHAR(255) NOT NULL
+);
 
-CREATE TABLE user (id INT NOT NULL IDENTITY(1,1), display_name VARCHAR(255) NOT NULL, email VARCHAR(255) NOT NULL,
-                   description TEXT NOT NULL, picture_url VARCHAR(255), group_id BIGINT, user_group_id BIGINT,
-                   event_response_id BIGINT, notification_id BIGINT);
-INSERT INTO user (id, display_name, email, description, picture_url, group_id, user_group_id, event_response_id, notification_id) VALUES
+CREATE TABLE group_table
+(
+  id BIGINT PRIMARY KEY NOT NULL,
+  group_name VARCHAR(255),
+  group_picture_url VARCHAR(255),
+  tags VARCHAR(255),
+  description VARCHAR(255)
+);
+
+CREATE TABLE user (
+  id BIGINT PRIMARY KEY NOT NULL,
+  display_name VARCHAR(255) NOT NULL,
+  email VARCHAR(255) NOT NULL,
+  description TEXT NOT NULL,
+  picture_url VARCHAR(255)
+);
+
+CREATE TABLE announcement
+(
+  id BIGINT PRIMARY KEY NOT NULL,
+  title VARCHAR(255),
+  content VARCHAR(255),
+  group_table_id BIGINT,
+  FOREIGN KEY (group_table_id) REFERENCES group_table(id) ON UPDATE NO ACTION
+);
+
+CREATE TABLE event (
+  id BIGINT PRIMARY KEY NOT NULL,
+  name VARCHAR(255) NOT NULL,
+  description VARCHAR(255) NOT NULL,
+  start_date DATE,
+  end_date DATE,
+  location VARCHAR(255),
+  is_private INTEGER,
+  group_table_id BIGINT,
+  FOREIGN KEY (group_table_id) REFERENCES group_table(id)
+);
+
+CREATE TABLE event_response (
+  id BIGINT PRIMARY KEY NOT NULL,
+  user_id BIGINT NOT NULL,
+  event_id BIGINT NOT NULL,
+  response VARCHAR(255),
+  FOREIGN KEY (user_id) REFERENCES user(id),
+  FOREIGN KEY  (event_id) REFERENCES event(id)
+);
+
+CREATE TABLE user_group (
+  id BIGINT PRIMARY KEY NOT NULL,
+  user_id BIGINT NOT NULL,
+  group_table_id BIGINT NOT NULL,
+  role VARCHAR(255),
+  FOREIGN KEY (user_id) REFERENCES user(id),
+  FOREIGN KEY (group_table_id) REFERENCES group_table(id)
+);
+
+CREATE TABLE notification (
+  id BIGINT PRIMARY KEY NOT NULL,
+  message VARCHAR(255),
+  link VARCHAR(255),
+  notification_type VARCHAR(255),
+  is_read INT,
+  user_id BIGINT,
+  FOREIGN KEY (user_id) REFERENCES user(id)
+);
+
+INSERT INTO user (id, display_name, email, description, picture_url) VALUES
   (1000, 'displayName1', 'email@address.com',
    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nec quam non velit aliquet varius et et magna. Sed condimentum, lacus nec sagittis posuere, lacus velit rhoncus diam, vitae blandit lectus neque nec arcu. Curabitur convallis luctus augue. Sed commodo sollicitudin aliquam. Donec at tristique enim, ut ornare quam. Sed at gravida massa. Sed sed dignissim dui. Curabitur a tortor sit amet risus consequat viverra. Cras cursus et massa a ultrices. Suspendisse vitae augue id arcu fringilla varius. Maecenas convallis metus leo, id mattis purus faucibus vitae. Nam posuere ultrices ex a ullamcorper. Nam mi massa, fermentum nec elit a, mattis luctus urna. Nam ut blandit sem, non efficitur odio. Curabitur nisl magna, luctus et tellus sed, egestas mattis mi.',
-   'http://xacatolicos.com/app/images/avatar/icon-user.png', 2, 2, 2, 2),
+   'http://xacatolicos.com/app/images/avatar/icon-user.png'),
   (1001, 'displayName2', 'email@email.iedu',
    '# Guttura tum hanc summoque illa
 
@@ -55,28 +122,11 @@ INSERT INTO user (id, display_name, email, description, picture_url, group_id, u
 
  Quo *amantem*, cum aut hunc vel clausaeque, exiguus inclinavit stant; liceat.
  Conpellat retractat. Aut cuspide stipite; ille ora Labros posse suae nefas?',
-   'http://xacatolicos.com/app/images/avatar/icon-user.png',
-   1,
-   1,
-   1,
-   1
+   'http://xacatolicos.com/app/images/avatar/icon-user.png'
   );
-CREATE TABLE event (id bigint NOT NULL IDENTITY(1,1), name varchar(255) not null, description varchar(255) not null,
-                    start_date date, end_date date, location varchar(255), is_private INTEGER, event_response_id BIGINT,
-                    group_id BIGINT
-);
 
-CREATE TABLE group_table (id bigint NOT NULL IDENTITY(1,1), group_name varchar(255), group_picture_url varchar(255),
-                          tags varchar(255), description varchar(255), event_id BIGINT, user_group_id BIGINT,
-                          user_id BIGINT);
+INSERT INTO group_table VALUES (1, 'groupName', 'groupPictureUrl', 'tags', 'description');
 
-CREATE TABLE calendar (id bigint NOT NULL IDENTITY(1,1), link varchar(255) not null);
+INSERT INTO announcement VALUES (1, 'title', 'content', 1);
 
-CREATE TABLE event_response (id bigint NOT NULL IDENTITY(1,1), user_id bigint not null, event_id bigint not null, response varchar(255));
-
-CREATE TABLE user_group (id bigint NOT NULL IDENTITY(1,1), user_id bigint not null, group_id bigint not null, role varchar(255));
-
-CREATE TABLE notification (id BIGINT NOT NULL IDENTITY(1,1), message VARCHAR(255), link VARCHAR(255), notification_type VARCHAR(255),
-                           is_read INT, user_id BIGINT);
-INSERT INTO notification (id, message, link, notification_type, is_read, user_id) VALUES
-  (1000, 'Sample Message', 'https://google.com', 'MESSAGE', 0, 1000);
+INSERT INTO notification VALUES (1, 'Sample Message', 'https://google.com', 'MESSAGE', 0, 1000);
