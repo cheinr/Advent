@@ -41,6 +41,7 @@ module.exports = {
 
   logout(auth2, cb) {
     delete localStorage.token;
+    axios.defaults.headers.common["Authorization"] = null;
     auth2.signOut().then(function () {
       if (cb) cb();
     });

@@ -19,12 +19,12 @@ axios.interceptors.response.use(function (response) {
     return response;
 }, function (error) {
     if(error.response.status === 403) {
-	console.log("users id token is invalid");
+	console.log("user's id token is invalid");
 	var auth2 = gapi.auth2.getAuthInstance();
 	auth.logout(auth2, function() {
 	    window.location.replace("");    
 	});
-    } 
+    }
     return error;
 }.bind(this));
 
