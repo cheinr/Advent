@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class GroupController {
 
     @Autowired
-    private GroupService groupService;
+    private GroupService GroupService;
 
     @RequestMapping("/group")
     public Group getGroupInfo() {
@@ -21,7 +21,9 @@ public class GroupController {
 
     //creates new Group
     @RequestMapping(value = "/group/new", method = RequestMethod.POST)
-    public GroupDTO newGroup(HttpServletRequest request) {return GroupService.newGroup(request);}
+    public GroupDTO newGroup(@RequestBody GroupDTO groupDTO) {
+        return GroupService.newGroup(groupDTO);
+    }
 
     @RequestMapping(value = "/group/edit", method = RequestMethod.POST)
     public GroupDTO editGroup(@RequestBody GroupDTO groupDTO) {
@@ -37,5 +39,12 @@ public class GroupController {
     public GroupDTO addTag(@RequestBody GroupDTO groupDTO) {
         return GroupService.addTag(groupDTO);
     }
+
+    @RequestMapping(value = "/group/list", method = RequestMethod.POST)
+    public List<Group> getGroups() {
+        return GroupService.getGroups();
+    }
+
+
 
 }
