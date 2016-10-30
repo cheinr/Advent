@@ -37,8 +37,20 @@ public class NotificationService {
         return notificationFactory.notificationToNotificationDTO(notification);
     }
 
+    public List<NotificationDTO> markAllNotificationsForUserAsRead(Long userId) {
+        List<Notification> notifications = notificationRepo.getAllNotificationsForUser(userId);
+        notifications.forEach(notification ->
+            notification.setRead(true));
+
+        List<NotificationDTO> notificationDTOs = new ArrayList<>();
+        notifications.forEach(notification ->
+            notificationDTOs.add(notificationFactory.notificationToNotificationDTO(notification)));
+
+        return notificationDTOs;
+    }
+
     public List<NotificationDTO> getAllNotifications(Long userId) {
-        List<Notification> notifications = notificationRepo.findAllForUser(userId);
+        List<Notification> notifications = notificationRepo.getAllNotificationsForUser(userId);
         List<NotificationDTO> notificationDTOs = new ArrayList<>();
 
         notifications.forEach(notification ->
@@ -47,18 +59,8 @@ public class NotificationService {
         return notificationDTOs;
     }
 
-    public List<NotificationDTO> getFirstFiveUnreadNotifications(Long userId) {
-        List<Notification> notifications = notificationRepo.getFirstFiveUnreadNotifications(Long userId);
-        List<NotificationDTO> notificationDTOs = new ArrayList<>();
-
-        notifications.forEach(notification ->
-                notificationDTOs.add(notificationFactory.notificationToNotificationDTO(notification)));
-
-        return notificationDTOs;
-    }
-
     public List<NotificationDTO> getAllUnreadNotifications(Long userId) {
-        List<Notification> notifications = notificationRepo.getAllUnreadNotifications(Long userId);
+        List<Notification> notifications = notificationRepo.getAllUnreadNotifications(userId);
         List<NotificationDTO> notificationDTOs = new ArrayList<>();
 
         notifications.forEach(notification ->
