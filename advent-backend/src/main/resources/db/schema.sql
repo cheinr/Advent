@@ -116,7 +116,7 @@ INSERT INTO user (id, display_name, email, description, picture_url) VALUES
   );
 CREATE TABLE event (id bigint NOT NULL IDENTITY(1,1), name varchar(255) not null, description varchar(255) not null,
                     start_date TIMESTAMP, end_date TIMESTAMP, location varchar(255), is_private INTEGER, event_response_id BIGINT,
-                    group_id BIGINT
+                    group_table_id BIGINT
 );
 
 INSERT INTO group_table VALUES (1, 'groupName', 'groupPictureUrl', 'tags', 'description');
