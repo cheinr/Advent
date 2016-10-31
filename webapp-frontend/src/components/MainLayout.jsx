@@ -14,7 +14,6 @@ export default function MainLayout(props) {
             <div>
               {props.children}
             </div>
-          </div>
         </div>
         <div className="col-xs-3">
           <SidebarTopRight />
