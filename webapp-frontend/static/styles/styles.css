@@ -41,3 +41,29 @@
   background-color: #f2f2f2;
   overflow-y: scroll;
 }
+
+.sign-in-page {
+    background-image: url("../FallCentralCampusOily.jpg");
+    background-size: cover;
+    height: 100vh;
+}
+
+.sign-in-center {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    position: fixed;
+    align-item: center;
+    justify-content: center;
+    padding: 35vh 0;
+}
+
+.sign-in-button {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    position: fixed;
+    align-item: center;
+    justify-content: center;
+    padding: 100px 0;
+}
