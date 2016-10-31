@@ -11,7 +11,6 @@ import EventCreateContainer from './containers/EventCreateContainer';
 import EventListContainer from './containers/EventListContainer';
 import EventInfoContainer from './containers/EventInfoContainer';
 import ScheduleAddEvent from './components/schedule-add-event';
-import EventCalendarContainer from './containers/EventCalendarContainer';
 import GroupCreateContainer from './containers/GroupCreateContainer';
 import GroupInfoContainer from './containers/GroupInfoContainer';
 import SignIn from './components/sign-in';
