@@ -115,9 +115,9 @@ INSERT INTO user (id, display_name, email, description, picture_url) VALUES
    'http://xacatolicos.com/app/images/avatar/icon-user.png'
   );
 
-INSERT INTO group_table VALUES (1, 'groupName', 'groupPictureUrl', 'tags', 'description');
+INSERT INTO group_table VALUES (1000, 'groupName', 'groupPictureUrl', 'tags', 'description');
 
-INSERT INTO announcement VALUES (1, 'title', 'content', 1);
+INSERT INTO announcement VALUES (1000, 'title', 'content', 1000);
 
 -- INSERT INTO announcement (id, title, content, group_id) VALUES
 --   (1000, 'Generic Title', 'Here is some content', 1000);

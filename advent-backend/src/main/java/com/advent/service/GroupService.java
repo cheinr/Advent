@@ -19,7 +19,6 @@ public class GroupService {
 
     public GroupDTO getGroup(Long groupId) {
         Group group = groupRepo.findOne(groupId);
-        group.getEvents().size();
         return groupConverter.groupToGroupDTO(group);
     }
 

@@ -18,6 +18,9 @@ import java.util.List;
 public class GroupConverter {
 
     public GroupDTO groupToGroupDTO(Group group) {
+        if (group == null) {
+            return null;
+        }
         GroupDTO groupDTO = new GroupDTO();
 
         groupDTO.setId(group.getId());
