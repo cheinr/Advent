@@ -28,7 +28,7 @@ module.exports = {
     //store the token
     //we will use this token to authenticate with our backend
       localStorage.token = id_token;
-      axios.defaults.headers.common["Authorization"] = id_token;
+      axios.defaults.headers.common["Authorization"] = localStorage.token;
 
     if(cb) cb();
 
