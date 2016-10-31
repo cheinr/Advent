@@ -86,7 +86,7 @@ public class User {
 
     @ManyToMany
     @JoinTable(name = "joined_groups",
-            joinColumns = @JoinColumn(name = "group_id", referencedColumnName = "id"),
+            joinColumns = @JoinColumn(name = "group_table_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"))
     public List<Group> getJoinedGroups() {
         return joinedGroups;
