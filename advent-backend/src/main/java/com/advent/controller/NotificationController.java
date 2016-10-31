@@ -24,7 +24,7 @@ public class NotificationController {
         return notificationService.markNotificationAsRead(notificationId);
     }
 
-    @RequestMapping(value = "notifications/mark-read/all/{userId}", method = RequestMethod.POST)
+    @RequestMapping(value = "notification/mark-read/all/{userId}", method = RequestMethod.POST)
     public List<NotificationDTO> markAllNotificationsForUserAsRead(@PathVariable Long userId) {
         return notificationService.markAllNotificationsForUserAsRead(userId);
     }

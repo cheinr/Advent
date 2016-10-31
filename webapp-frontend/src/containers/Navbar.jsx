@@ -1,9 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router';
-import SignOut from '../components/sign-out';
+import axios from 'axios';
 import NavRight from '../components/display/navbar/NavRight';
 import NavHeader from '../components/display/navbar/NavHeader';
-import NavNav from '../components/display/navbar/NavNav';import NavDropdownContainer from '../components/display/navbar/NavDropdownContainer';
+import NavNav from '../components/display/navbar/NavNav';
+import NavDropdownContainer from '../components/display/navbar/NavDropdownContainer';
 import NavNotificationPanel from '../components/display/navbar/notification/NavNotificationPanel';
 import NavNotifications from '../components/display/navbar/notification/NavNotifications';
 import NavNotificationDropdown from '../components/display/navbar/notification/NavNotificationDropdown';
@@ -12,39 +13,6 @@ import NavNotificationFooter from '../components/display/navbar/notification/Nav
 import DropdownToolbar from '../components/display/DropdownToolbar';
 import NavPreferences from '../components/display/navbar/NavPreferences';
 import NavLink from '../components/display/navbar/NavLink';
-
-const testNotifications = [
-  { id: 1,
-    header: 'New message from User',
-    message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    link: 'https://google.com',
-    notificationType: 'MESSAGE',
-  },
-  { id: 2,
-    header: 'new message from User',
-    message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    link: 'https://google.com',
-    notificationType: 'MESSAGE',
-  },
-  { id: 3,
-    header: 'new message from User',
-    message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    link: 'https://google.com',
-    notificationType: 'MESSAGE',
-  },
-  { id: 4,
-    header: 'new message from User',
-    message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    link: 'https://google.com',
-    notificationType: 'MESSAGE',
-  },
-  { id: 5,
-    header: 'new message from User',
-    message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    link: 'https://google.com',
-    notificationType: 'MESSAGE',
-  },
-];
 
 export default class extends React.Component {
   constructor(props) {
@@ -57,17 +25,53 @@ export default class extends React.Component {
     this.getNotifications = this.getNotifications.bind(this);
   }
 
-  getNotifications() {
-    // Get the last 5 notifications for the user
+  componentWillMount() {
+    this.getNotifications();
   }
 
-  // TOOD dszopa 10/27/16 - Implement these
+
+  getNotifications() {
+    // Get the last 5 notifications for the user
+    const url = '/api/notification/unread/user-id/' + JSON.parse(localStorage.user).id;
+    const headers = { Authorization: localStorage.token };
+
+    axios({ method: 'get', headers, url })
+      .then((response) => {
+        this.setState( {notifications: response.data });
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
   viewAll() {
     // Axios request to get all notifications, then manipulate state with the notifications
+    const url = '/api/notification/all/user-id/' + JSON.parse(localStorage.user).id;
+    const headers = { Authorization: localStorage.token };
+
+    axios({ method: 'get', headers, url })
+      .then((response) => {
+        this.setState({ notifications: response.data });
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   markAllAsRead() {
     // Axios post to mark all as read, then manipulate state
+    const url = '/api/notification/mark-read/all/' + JSON.parse(localStorage.user).id;
+    const headers = { Authorization: localStorage.token };
+
+    axios({ method: 'post', headers, url })
+      .then((response) => {
+        this.getNotifications();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   render() {
@@ -92,11 +96,11 @@ export default class extends React.Component {
               <NavRight>
                 <NavNav>
                   <NavNotificationDropdown>
-                    <NavNotificationPanel numNotifications={testNotifications.length} />
+                    <NavNotificationPanel numNotifications={this.state.notifications.length} />
                     <NavDropdownContainer className="dropdown-position-bottomright">
-                      <DropdownToolbar onClick={this.markAllAsRead} numNotifications={testNotifications.length} />
-                      <NavNotifications notifications={testNotifications} />
-                      <NavNotificationFooter onClick={this.viewAll} />
+                      <DropdownToolbar clickEvent={this.markAllAsRead} numNotifications={this.state.notifications.length} />
+                      <NavNotifications notifications={this.state.notifications} />
+                      <NavNotificationFooter clickEvent={this.viewAll} />
                     </NavDropdownContainer>
                   </NavNotificationDropdown>
                 </NavNav>

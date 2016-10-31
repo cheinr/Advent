@@ -131,3 +131,4 @@ INSERT INTO group_table VALUES (1, 'groupName', 'groupPictureUrl', 'tags', 'desc
 INSERT INTO announcement VALUES (1, 'title', 'content', 1);
 
 INSERT INTO notification VALUES (1, 'Sample Header', 'Sample Message', 'https://google.com', 'MESSAGE', 0, 1000);
+INSERT INTO notification VALUES (2, 'Sample Header', 'Sample Message', 'https://google.com', 'MESSAGE', 1, 1000);
