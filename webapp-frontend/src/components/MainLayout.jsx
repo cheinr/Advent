@@ -10,6 +10,7 @@ export default function MainLayout(props) {
       <Navbar />
       <div className="container-fluid">
         <div className="col-xs-9">
+          <div>
             <div>
               {props.children}
             </div>

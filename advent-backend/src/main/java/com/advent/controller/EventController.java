@@ -3,11 +3,10 @@ package com.advent.controller;
 import com.advent.dto.EventDTO;
 import com.advent.entity.Event;
 import com.advent.service.EventService;
+import com.advent.service.UserManagementService;
+import com.advent.service.impl.UserManagementServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,6 +16,8 @@ public class EventController {
 
     @Autowired
     private EventService eventService;
+    @Autowired
+    private UserManagementService userManagementService;
 
     //TODO clai add group id when that is implemented
     @RequestMapping(value = "/event/create", method = RequestMethod.POST)
@@ -28,6 +29,16 @@ public class EventController {
     @RequestMapping(value = "/event/list", method = RequestMethod.POST)
     public List<EventDTO> getAllEvents() {
         return eventService.getAllEvents();
+    }
+
+    @RequestMapping(value = "/event/{id}", method = RequestMethod.GET)
+    public EventDTO getEventById(@PathVariable Long id) {
+        return eventService.getEventById(id);
+    }
+
+    @RequestMapping(value = "/event/{groupId}/")
+    public List<EventDTO> getEventByGroup(@PathVariable Long groupId) {
+        return eventService.getEventByGroup(groupId);
     }
 }
 

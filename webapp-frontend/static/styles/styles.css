@@ -67,3 +67,13 @@
     justify-content: center;
     padding: 100px 0;
 }
+
+
+.rbc-calendar {
+    flex: 1;
+    min-height: 400px;
+}
+
+.calendar-container{
+    height: 500px;
+}

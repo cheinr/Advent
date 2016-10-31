@@ -17,7 +17,9 @@ public class UserManagementController {
 
     //authenticates user or creates a new one if needed.
     @RequestMapping(value = "/auth/register", method = RequestMethod.POST)
-    public UserDTO registerUser(HttpServletRequest request) { return userManagementService.registerUser(request);}
+    public UserDTO registerUser(HttpServletRequest request) {
+        return userManagementService.registerUser(request);
+    }
 
     @RequestMapping(value = "/users/save", method = RequestMethod.POST)
     public UserDTO saveUser(@RequestBody UserDTO userDTO) {
