@@ -14,10 +14,11 @@ export default function MainLayout(props) {
             <div>
               {props.children}
             </div>
-        </div>
-        <div className="col-xs-3">
-          <SidebarTopRight />
-          <SidebarBottomRight />
+          </div>
+          <div className="col-xs-3">
+            <SidebarTopRight />
+            <SidebarBottomRight />
+          </div>
         </div>
       </div>
     </div>
