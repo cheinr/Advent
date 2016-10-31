@@ -59,11 +59,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
-
-    @Bean
-    public TokenAuthenticationService tokenAuthenticationService() {
-        return tokenAuthenticationService;
-    }
 }
 
 

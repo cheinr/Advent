@@ -12,6 +12,10 @@ import EventListContainer from './containers/EventListContainer';
 import ScheduleAddEvent from './components/schedule-add-event';
 import SignIn from './components/sign-in';
 import auth from './auth';
+import axios from 'axios';
+
+
+
 
 
 function requireAuth(nextState, replace) {
@@ -20,6 +24,22 @@ function requireAuth(nextState, replace) {
       pathname: '/login',
       state: { nextPathname: nextState.location.pathname },
     });
+  } else {
+    axios.defaults.headers.common["Authorization"] = auth.getToken();
+    
+    //If Server sends back Unauthorized error code, sign out the user.
+    axios.interceptors.response.use(function (response) {
+        return response;
+    }, function (error) {
+        if(error.response.status === 403) {
+    	console.log("user's id token is invalid");
+    	var auth2 = gapi.auth2.getAuthInstance();
+    	auth.logout(auth2, function() {
+    	    window.location.replace("");
+    	});
+        }
+        return error;
+    }.bind(this));
   }
 }
 

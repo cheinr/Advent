@@ -40,12 +40,10 @@ public class TokenHandler {
         GoogleIdToken idToken = null;
         try {
             idToken = verifier.verify(idTokenString);
-        } catch (GeneralSecurityException e) {
+        } catch (GeneralSecurityException|IOException|IllegalArgumentException e) {
             e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+            return null;
         }
-        System.out.println(idToken);
         if (idToken != null) {
             GoogleIdToken.Payload payload = idToken.getPayload();
             return payload.getEmail();
