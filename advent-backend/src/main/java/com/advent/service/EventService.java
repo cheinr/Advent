@@ -4,6 +4,7 @@ import com.advent.dto.EventDTO;
 import com.advent.entity.Event;
 import com.advent.factory.EventConverter;
 import com.advent.repo.EventRepo;
+import com.advent.repo.GroupRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,9 +16,12 @@ public class EventService {
     @Autowired
     private EventRepo eventRepo;
     @Autowired
+    private GroupRepo groupRepo;
+    @Autowired
     private EventConverter eventConverter;
 
     public EventDTO createEvent(EventDTO eventDTO) {
+        eventDTO.setGroup(groupRepo.findOne(eventDTO.getGroup().getId()));
         Event event = eventRepo.save(eventConverter.eventDTOtoEvent(eventDTO));
         return eventConverter.eventToEventDTO(event);
     }
