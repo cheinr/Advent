@@ -24,6 +24,9 @@ export default class GroupInfo extends Component {
                       to={`/event/create/${this.props.groupId}`}>
                     Create Event
                 </Link>
+                <button className="btn btn-default" onClick={this.props.joinGroup}>
+                    Join Group
+                </button>
             </div>
         );
     }

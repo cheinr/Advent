@@ -13,6 +13,7 @@ export default class GroupInfoContainer extends Component {
         };
         this.getGroup = this.getGroup.bind(this);
         this.getGroupEvents = this.getGroupEvents.bind(this);
+        this.joinGroup = this.joinGroup.bind(this);
     }
 
     componentDidMount() {
@@ -60,11 +61,30 @@ export default class GroupInfoContainer extends Component {
             });
     }
 
+    joinGroup() {
+        const role = "member";
+        // TODO use user id
+        const url = `http://localhost:3000/api/join/user/${1}/group/${this.props.params.groupId}/role/${role}`;
+        const headers = {'Authorization': localStorage.token};
+        axios({
+            method: 'post',
+            url: url,
+            headers: headers
+        })
+            .then(response => {
+                console.log(response.data);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }
+
     render() {
         console.log(this.state);
         return <GroupInfo
             group={this.state}
             groupId={this.props.params.groupId}
+            joinGroup={this.joinGroup}
         />
     }
 }
