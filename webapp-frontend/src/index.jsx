@@ -11,6 +11,9 @@ import EventCreateContainer from './containers/EventCreateContainer';
 import EventListContainer from './containers/EventListContainer';
 import EventInfoContainer from './containers/EventInfoContainer';
 import ScheduleAddEvent from './components/schedule-add-event';
+import EventCalendarContainer from './containers/EventCalendarContainer';
+import GroupCreateContainer from './containers/GroupCreateContainer';
+import GroupInfoContainer from './containers/GroupInfoContainer';
 import SignIn from './components/sign-in';
 import auth from './auth';
 import EventCalendarContainer from './containers/EventCalendarContainer';
@@ -66,10 +69,12 @@ ReactDom.render(
       <Route path="/user/:userId" component={ViewUserContainer} />
       <Route path="/user/edit/:userId" component={UserSettingContainer} />
       <Route path="/schedule/addevent" component={ScheduleAddEvent} />
-      <Route path="/event/create" component={EventCreateContainer} />
+      <Route path="/event/create/:groupId" component={EventCreateContainer} />
       <Route path="/event/list" component={EventListContainer} />
       <Route path="/event/calendar" component={EventCalendarContainer}/>
       <Route path="/event/:eventId" component={EventInfoContainer}/>
+      <Route path="/group/create"  component={GroupCreateContainer}/>
+      <Route path="/group/:groupId"  component={GroupInfoContainer}/>
     </Route>
   </Router>
 , document.querySelector('.content'));

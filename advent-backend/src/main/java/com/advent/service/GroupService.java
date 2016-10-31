@@ -1,6 +1,8 @@
 package com.advent.service;
 
+import com.advent.dto.GroupDTO;
 import com.advent.entity.Group;
+import com.advent.factory.GroupConverter;
 import com.advent.repo.GroupRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,9 +14,13 @@ public class GroupService {
 
     @Autowired
     private GroupRepo groupRepo;
+    @Autowired
+    private GroupConverter groupConverter;
 
-    public Group getGroup(Long groupId) {
-        return groupRepo.findOne(groupId);
+    public GroupDTO getGroup(Long groupId) {
+        Group group = groupRepo.findOne(groupId);
+        group.getEvents().size();
+        return groupConverter.groupToGroupDTO(group);
     }
 
     public Group saveGroup(Group group) {

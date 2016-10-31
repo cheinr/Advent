@@ -118,3 +118,4 @@ INSERT INTO user (id, display_name, email, description, picture_url) VALUES
 INSERT INTO group_table VALUES (1, 'groupName', 'groupPictureUrl', 'tags', 'description');
 
 INSERT INTO announcement VALUES (1, 'title', 'content', 1);
+
