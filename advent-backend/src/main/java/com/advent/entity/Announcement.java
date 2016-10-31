@@ -42,7 +42,7 @@ public class Announcement {
     }
 
     @ManyToOne
-    @JoinColumn(name = "group_id", nullable = false)
+    @JoinColumn(name = "group_table_id", nullable = false)
     public Group getGroup() {
         return group;
     }
