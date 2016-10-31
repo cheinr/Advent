@@ -39,12 +39,13 @@ public class NotificationService {
 
     public List<NotificationDTO> markAllNotificationsForUserAsRead(Long userId) {
         List<Notification> notifications = notificationRepo.getAllNotificationsForUser(userId);
-        notifications.forEach(notification ->
-            notification.setRead(true));
-
         List<NotificationDTO> notificationDTOs = new ArrayList<>();
-        notifications.forEach(notification ->
-            notificationDTOs.add(notificationFactory.notificationToNotificationDTO(notification)));
+
+        for(Notification notification : notifications) {
+            notification.setRead(true);
+            notificationRepo.save(notification);
+            notificationDTOs.add(notificationFactory.notificationToNotificationDTO(notification));
+        }
 
         return notificationDTOs;
     }

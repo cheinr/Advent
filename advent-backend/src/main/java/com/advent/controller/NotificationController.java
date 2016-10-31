@@ -34,7 +34,7 @@ public class NotificationController {
         return notificationService.getAllUnreadNotifications(userId);
     }
 
-    @RequestMapping(value = "/notification/all/user-id/{userId}", method = RequestMethod.POST)
+    @RequestMapping(value = "/notification/all/user-id/{userId}", method = RequestMethod.GET)
     public List<NotificationDTO> getAllNotificationsForUser(@PathVariable Long userId) {
         return notificationService.getAllNotifications(userId);
     }
