@@ -19,10 +19,13 @@ export default class EventListContainer extends Component {
   getEvents() {
     const url = 'http://localhost:3000/api/event/list/';
 
-    axios.post(url)
+    axios({method: 'post',
+        headers: {'Authorization': localStorage.token},
+        url: url}
+      )
       .then((response) => {
         console.log(response.data);
-        this.setState({ events: JSON.stringify(response.data) });
+        this.setState({ events: response.data });
       })
       .catch((error) => {
         console.log(error);

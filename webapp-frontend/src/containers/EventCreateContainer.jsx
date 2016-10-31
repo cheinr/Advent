@@ -10,13 +10,15 @@ export default class EventCreateContainer extends Component {
             description: "",
             start_date: "",
             end_date: "",
-            location: ""
+            location: "",
+            isPrivate: false
         };
         this.nameChange = this.nameChange.bind(this);
         this.descChange = this.descChange.bind(this);
         this.startChange = this.startChange.bind(this);
         this.endChange = this.endChange.bind(this);
         this.locChange = this.locChange.bind(this);
+        this.privateChange = this.privateChange.bind(this);
         this.submitForm = this.submitForm.bind(this);
     }
 
@@ -27,13 +29,16 @@ export default class EventCreateContainer extends Component {
         this.setState({description: e.target.value});
     }
     startChange(e) {
-        this.setState({start_date: e.target.value});
+        this.setState({start_date: e});
     }
     endChange(e) {
-        this.setState({end_date: e.target.value});
+        this.setState({end_date: e});
     }
     locChange(e) {
         this.setState({location: e.target.value});
+    }
+    privateChange(e) {
+        this.setState({isPrivate: e.target.checked});
     }
 
     submitForm() {
@@ -42,12 +47,16 @@ export default class EventCreateContainer extends Component {
 
             name: this.state.name,
             description: this.state.description,
-            startDate: this.state.start_date,
-            endDate: this.state.end_date,
-            location: this.state.location
+            startDate: this.state.start_date != "" ? this.state.start_date.format('YYYY-MM-DD HH:mm:ss') : undefined,
+            endDate: this.state.end_date != "" ? this.state.end_date.format('YYYY-MM-DD HH:mm:ss') : undefined,
+            location: this.state.location,
+            isPrivate: this.state.isPrivate
         };
-
-        axios.post(url, data)
+        axios({method: 'post',
+                headers: {'Authorization': localStorage.token},
+                url: url,
+                data: data}
+            )
             .then(response => {
                 console.log(response.data);
             })
@@ -65,6 +74,7 @@ export default class EventCreateContainer extends Component {
                 startChange={this.startChange}
                 endChange={this.endChange}
                 locChange={this.locChange}
+                privateChange={this.privateChange}
                 submitForm={this.submitForm}
                 values={this.state}
             />

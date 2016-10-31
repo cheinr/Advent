@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDatetime from 'react-datetime';
 
 export default class EventCreate extends Component {
     componentDidMount() {
@@ -25,17 +26,16 @@ export default class EventCreate extends Component {
                     </div>
                     <div className="form-group">
                         <label htmlFor="start_date">Start Date and Time</label>
-                        <input type="text" className="form-control" id="start_date"
+                        <ReactDatetime id="start_date"
                                onChange={this.props.startChange}
                                value={this.props.values.start_date}/>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="end_date">End Date and Time (optional)</label>
-                        <input type="text" className="form-control" id="end_date"
+                        <label htmlFor="end_date">End Date and Time</label>
+                        <ReactDatetime id="end_date"
                                onChange={this.props.endChange}
                                value={this.props.values.end_date}/>
                     </div>
-                    {/* todo the dates should use a date time picker*/}
                     <div className="form-group">
                         <label htmlFor="location">Location</label>
                         <input type="text" className="form-control" id="location"
@@ -43,7 +43,10 @@ export default class EventCreate extends Component {
                                value={this.props.values.location}/>
                     </div>
                     <div className="checkbox">
-                        <label><input type="checkbox"/> Checkbox Test</label>
+                        <label>
+                            <input type="checkbox"
+                                   onChange={this.props.privateChange}
+                                   value={this.props.values.isPrivate}/> Private Event</label>
                     </div>
                     <button type="button" className="btn btn-default" onClick={this.props.submitForm}>Submit</button>
                 </form>

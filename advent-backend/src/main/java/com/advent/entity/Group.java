@@ -40,7 +40,7 @@ public class Group {
         this.groupName = groupName;
     }
 
-    @Column(name = "group_picture_url", nullable = false)
+    @Column(name = "group_picture_url")
     public String getGroupPictureUrl() {
         return groupPictureUrl;
     }
@@ -49,7 +49,7 @@ public class Group {
         this.groupPictureUrl = groupPictureUrl;
     }
 
-    @Column(name = "tags", nullable = false)
+    @Column(name = "tags")
     public String getTags() {
         return tags;
     }
@@ -58,7 +58,7 @@ public class Group {
         this.tags = tags;
     }
 
-    @Column(name = "description", nullable = false)
+    @Column(name = "description")
     public String getDescription() {
         return description;
     }

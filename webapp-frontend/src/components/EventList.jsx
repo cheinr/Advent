@@ -5,11 +5,30 @@ export default class EventList extends Component {
 
     render() {
         return (
-            <div>
-                <h1>This is a temporary page to show the events and the database saving</h1>
-                <br/>
-                {this.props.events}
-            </div>
+            <table className="table table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                        this.props.events.map(function(event) {
+                            return (
+                                <tr>
+                                    <td>{event.name}</td>
+                                    <td>{event.description}</td>
+                                    <td>{event.startDate}</td>
+                                    <td>{event.endDate}</td>
+                                </tr>
+                            )
+                        })
+                    }
+                </tbody>
+            </table>
         );
     }
 }
