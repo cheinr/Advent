@@ -16,7 +16,12 @@ import GroupCreateContainer from './containers/GroupCreateContainer';
 import GroupInfoContainer from './containers/GroupInfoContainer';
 import SignIn from './components/sign-in';
 import auth from './auth';
+import EventCalendarContainer from './containers/EventCalendarContainer';
 import axios from 'axios';
+
+
+
+
 
 function requireAuth(nextState, replace) {
   if (!auth.loggedIn()) {
