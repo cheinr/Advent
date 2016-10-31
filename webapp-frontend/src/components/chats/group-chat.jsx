@@ -9,7 +9,7 @@ import ChatMessageSender from './chat-message-sender';
 *   To use this just pass in the logged in user object and 
 *   a group object as they come from the backend.
 *  
-*   Ex: <GroupChat user={<UserObject>} group={<GroupObject>}
+*   Ex: <GroupChat user={<UserObject>} group={<GroupObject>} />
 */
 export default class GroupChat extends React.Component {
   constructor(props) {
