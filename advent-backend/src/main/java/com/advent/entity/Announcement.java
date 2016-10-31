@@ -9,7 +9,7 @@ public class Announcement {
     private Long id;
     private String title;
     private String content;
-    // TODO dszopa 10/23/16 - Make sure to add a relationship between groups & announcements
+    private Group group;
 
     @Id
     @Column(name = "id", unique = true, nullable = false, length = 20)
@@ -39,6 +39,16 @@ public class Announcement {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "group_table_id", nullable = false)
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
     }
 
     @Override
