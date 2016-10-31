@@ -22,7 +22,7 @@ export default class GroupCreateContainer extends Component {
     }
 
     submitForm() {
-        const url = "http://localhost:3000/api/group/create/";
+        const url = "http://localhost:3000/api/group/new/";
         const data = {
 
             groupName: this.state.name,
