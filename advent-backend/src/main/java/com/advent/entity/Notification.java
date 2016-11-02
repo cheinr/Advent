@@ -3,6 +3,7 @@ package com.advent.entity;
 import com.advent.converter.BooleanConverter;
 import com.advent.converter.NotificationTypeConverter;
 import com.advent.utils.NotificationType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 
@@ -69,6 +70,7 @@ public class Notification {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
+    @JsonIgnore
     public User getUser() {
         return user;
     }

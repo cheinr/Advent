@@ -21,15 +21,15 @@ public class GroupController {
     }
 
     //creates new Group
-//    @RequestMapping(value = "/group/new", method = RequestMethod.POST)
-//    public GroupDTO newGroup(@RequestBody GroupDTO groupDTO) {
-//        return groupService.saveGroup(groupDTO);
-//    }
-//
-//    @RequestMapping(value = "/group/edit", method = RequestMethod.POST)
-//    public GroupDTO editGroup(@RequestBody GroupDTO groupDTO) {
-//        return groupService.saveGroup(groupDTO);
-//    }
+    @RequestMapping(value = "/group/new", method = RequestMethod.POST)
+    public Group newGroup(@RequestBody Group group) {
+        return groupService.saveGroup(group);
+    }
+
+    @RequestMapping(value = "/group/edit", method = RequestMethod.POST)
+    public Group editGroup(@RequestBody Group group) {
+        return groupService.saveGroup(group);
+    }
 
     @RequestMapping(value = "/group/members/{groupId}", method = RequestMethod.GET)
     public GroupDTO getMembers(@PathVariable Long groupId) {
