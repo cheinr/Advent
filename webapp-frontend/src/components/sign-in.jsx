@@ -35,13 +35,13 @@ const SignIn = withRouter(React.createClass({ //withRouter gives this component 
 
 	return (
 	    <div className="sign-in-page">
-	<div className="sign-in-center">
-	<h1 className="">Advent</h1>
-	<div className="sign-in-button" id="signin2"></div>
+		<div className="sign-in-container">
+		    <h1 >Advent</h1>
+		    <div className="sign-in-button" id="signin2"></div>
+		</div>
 	    </div>
-	</div>
-    );
-  }
+	);
+    }
 }));
 
 export default SignIn;
