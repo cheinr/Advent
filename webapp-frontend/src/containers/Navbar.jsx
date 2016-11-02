@@ -29,16 +29,16 @@ export default class extends React.Component {
     this.getNotifications();
   }
 
-
   getNotifications() {
-    // Get the last 5 notifications for the user
-    const url = '/api/notification/unread/user-id/' + JSON.parse(localStorage.user).id;
+    const url = `/api/notification/unread/user-id/${localStorage.id}`;
     const headers = { Authorization: localStorage.token };
+    console.log(headers);
+    console.log(url);
 
     axios({ method: 'get', headers, url })
       .then((response) => {
-        this.setState( {notifications: response.data });
         console.log(response.data);
+        this.setState({ notifications: response.data });
       })
       .catch((error) => {
         console.log(error);
@@ -47,7 +47,7 @@ export default class extends React.Component {
 
   viewAll() {
     // Axios request to get all notifications, then manipulate state with the notifications
-    const url = '/api/notification/all/user-id/' + JSON.parse(localStorage.user).id;
+    const url = `/api/notification/all/user-id/${localStorage.id}`;
     const headers = { Authorization: localStorage.token };
 
     axios({ method: 'get', headers, url })
@@ -62,7 +62,7 @@ export default class extends React.Component {
 
   markAllAsRead() {
     // Axios post to mark all as read, then manipulate state
-    const url = '/api/notification/mark-read/all/' + JSON.parse(localStorage.user).id;
+    const url = `/api/notification/mark-read/all/${localStorage.id}`;
     const headers = { Authorization: localStorage.token };
 
     axios({ method: 'post', headers, url })

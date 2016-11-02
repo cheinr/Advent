@@ -8,7 +8,7 @@ export default function NavPreferences(props) {
     <NavDropdown>
       <a className="dropdown-toggle glyphicon glyphicon glyphicon-lock" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" aria-hidden="true" />
       <ul className="dropdown-menu">
-        <li><Link to={'/user/edit/' + JSON.parse(localStorage.user).id}>My Profile</Link></li>
+        <li><Link to={`/user/edit/${localStorage.id}`}>My Profile</Link></li>
         <li><SignOut /></li>
       </ul>
     </NavDropdown>
