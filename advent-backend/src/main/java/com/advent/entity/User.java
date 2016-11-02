@@ -3,6 +3,7 @@ package com.advent.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -17,7 +18,12 @@ public class User {
     private List<EventResponse> eventResponses;
     private List<UserGroup> userGroups;
     private List<Group> joinedGroups;
+    private List<Notification> notifications;
     // TODO dszopa 9/25/16 - Add List of chats the user is in (chats need to be made first)
+
+    public User() {
+        notifications = new ArrayList<>();
+    }
 
     @Id
     @Column(name = "id", unique = true, nullable = false, length = 20)
@@ -30,7 +36,6 @@ public class User {
     public void setId(Long id) {
         this.id = id;
     }
-
 
     @Column(name = "display_name", nullable = false)
     public String getDisplayName() {
@@ -101,6 +106,15 @@ public class User {
         this.joinedGroups = joinedGroups;
     }
 
+    @OneToMany(mappedBy = "user")
+    public List<Notification> getNotifications() {
+        return notifications;
+    }
+
+    public void setNotifications(List<Notification> notifications) {
+        this.notifications = notifications;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -122,7 +136,7 @@ public class User {
                 ", displayName='" + displayName + '\'' +
                 ", email='" + email + '\'' +
                 ", description='" + description + '\'' +
-                ", pictureFilename='" + pictureUrl + '\'' +
+                ", pictureUrl='" + pictureUrl + '\'' +
                 '}';
     }
 }

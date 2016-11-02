@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Navbar from '../components/Navbar';
+import Navbar from '../containers/Navbar';
 import SidebarTopRight from './SidebarTopRight';
 import SidebarBottomRight from './SidebarBottomRight';
 
@@ -15,10 +15,10 @@ export default function MainLayout(props) {
               {props.children}
             </div>
           </div>
-        </div>
-        <div className="col-xs-3">
-          <SidebarTopRight />
-          <SidebarBottomRight />
+          <div className="col-xs-3">
+            <SidebarTopRight />
+            <SidebarBottomRight />
+          </div>
         </div>
       </div>
     </div>

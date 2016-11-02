@@ -40,8 +40,8 @@ public class UserManagementServiceImpl implements UserManagementService {
     @Override
     public UserDTO saveUser(UserDTO userDTO) {
         User user = userFactory.userDTOToUser(userDTO);
-        userRepo.save(user);
-        return userDTO;
+        User returnedUser = userRepo.save(user);
+        return userFactory.userToUserDTO(returnedUser);
     }
 
 
@@ -51,14 +51,7 @@ public class UserManagementServiceImpl implements UserManagementService {
                 .setIssuer("accounts.google.com")
                 .build();
 
-        long before = System.currentTimeMillis();
         String idTokenString = request.getHeader("google-id-token");
-        java.util.Enumeration<String> h = request.getHeaderNames();
-        while (h.hasMoreElements()) {
-            System.out.println(h.nextElement());
-        }
-        System.out.println("Headers: " + request.getHeaderNames().nextElement());
-        System.out.println("Token: " + idTokenString);
         GoogleIdToken idToken = null;
         try {
             idToken = verifier.verify(idTokenString);
@@ -73,7 +66,6 @@ public class UserManagementServiceImpl implements UserManagementService {
 
             // Print user identifier
             String userId = payload.getSubject();
-            System.out.println("User ID: " + userId);
 
             // Get profile information from payload
             String email = payload.getEmail();
@@ -93,7 +85,6 @@ public class UserManagementServiceImpl implements UserManagementService {
                 userDTO = userFactory.userToUserDTO(user);
                 userDTO = saveUser(userDTO);
             }
-            System.out.println("time = " + (System.currentTimeMillis() - before));
             return userDTO;
         } else {
             System.out.println("invalid ID Token");
