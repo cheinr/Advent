@@ -36,6 +36,11 @@
     margin-bottom: 0 !important;
 }
 
+.half-vertical {
+    top: 50%;
+    position: fixed;
+}
+
 .chat-box {
   height: 500px;
   background-color: #f2f2f2;

@@ -40,10 +40,13 @@ public class UserManagementServiceImplUTest extends AbstractServiceUTest {
     @Test
     public void saveUser() throws Exception {
         when(userFactory.userDTOToUser(userDTO)).thenReturn(user);
+        when(userRepo.save(user)).thenReturn(user);
+        when(userFactory.userToUserDTO(user)).thenReturn(userDTO);
 
         UserDTO returnedUserDTO = userManagementService.saveUser(userDTO);
 
         verify(userFactory, times(1)).userDTOToUser(userDTO);
+        verify(userFactory, times(1)).userToUserDTO(user);
         verify(userRepo, times(1)).save(user);
         assertEquals(userDTO, returnedUserDTO);
     }

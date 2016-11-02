@@ -59,6 +59,17 @@ CREATE TABLE user_group (
   FOREIGN KEY (group_table_id) REFERENCES group_table(id)
 );
 
+CREATE TABLE notification (
+  id BIGINT PRIMARY KEY NOT NULL,
+  header VARCHAR(255),
+  message VARCHAR(255),
+  link VARCHAR(255),
+  notification_type VARCHAR(255),
+  is_read INT,
+  user_id BIGINT,
+  FOREIGN KEY (user_id) REFERENCES user(id)
+);
+
 INSERT INTO user (id, display_name, email, description, picture_url) VALUES
   (1000, 'displayName1', 'email@address.com',
    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nec quam non velit aliquet varius et et magna. Sed condimentum, lacus nec sagittis posuere, lacus velit rhoncus diam, vitae blandit lectus neque nec arcu. Curabitur convallis luctus augue. Sed commodo sollicitudin aliquam. Donec at tristique enim, ut ornare quam. Sed at gravida massa. Sed sed dignissim dui. Curabitur a tortor sit amet risus consequat viverra. Cras cursus et massa a ultrices. Suspendisse vitae augue id arcu fringilla varius. Maecenas convallis metus leo, id mattis purus faucibus vitae. Nam posuere ultrices ex a ullamcorper. Nam mi massa, fermentum nec elit a, mattis luctus urna. Nam ut blandit sem, non efficitur odio. Curabitur nisl magna, luctus et tellus sed, egestas mattis mi.',
@@ -119,3 +130,5 @@ INSERT INTO group_table VALUES (1, 'groupName', 'groupPictureUrl', 'tags', 'desc
 
 INSERT INTO announcement VALUES (1, 'title', 'content', 1);
 
+INSERT INTO notification VALUES (1, 'Sample Header', 'Sample Message', 'https://google.com', 'MESSAGE', 0, 1000);
+INSERT INTO notification VALUES (2, 'Sample Header', 'Sample Message', 'https://google.com', 'MESSAGE', 1, 1000);

@@ -16,6 +16,10 @@
     "sourceType": "module"
   },
   "rules": {
+    "linebreak-style": "off",
+    "max-len": "off",
+    "prefer-template": "warn",
+    "react/prop-types": "warn",
     "no-const-assign": "warn",
     "no-this-before-super": "warn",
     "no-undef": "warn",
