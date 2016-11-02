@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import EventList from '../components/EventList';
+import UserList from '../components/UserList';
 
 export default class GroupInfo extends Component {
     componentDidMount() {
@@ -19,6 +20,10 @@ export default class GroupInfo extends Component {
                 <div className="form-group">
                     <div>Upcoming Events:</div>
                     <EventList events={this.props.group.events}/>
+                </div>
+                <div className="form-group">
+                    <div>Users:</div>
+                    <UserList users={this.props.group.users}/>
                 </div>
                 <Link className="btn btn-default" role="button"
                       to={`/event/create/${this.props.groupId}`}>
