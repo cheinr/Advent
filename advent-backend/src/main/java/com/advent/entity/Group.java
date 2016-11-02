@@ -2,6 +2,8 @@ package com.advent.entity;
 
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -15,8 +17,11 @@ public class Group {
     private String groupPictureUrl;
     private String tags;
     private String description;
+    @JsonIgnore
     private List<Event> events;
+    @JsonIgnore
     private List<UserGroup> userGroups;
+    @JsonIgnore
     private List<Announcement> announcements;
 
     @Id

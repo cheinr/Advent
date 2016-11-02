@@ -1,5 +1,7 @@
 package com.advent.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -28,9 +30,11 @@ public class Event {
     @Column(name = "is_private")
     private Boolean isPrivate;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "event")
+    @JsonIgnore
     private List<EventResponse> eventResponses;
     @ManyToOne
     @JoinColumn(name = "group_table_id", nullable = false)
+    @JsonIgnore
     private Group group;
 
     // Temporarily Transient group should relate to groups

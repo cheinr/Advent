@@ -1,5 +1,7 @@
 package com.advent.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -72,6 +74,7 @@ public class User {
     }
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    @JsonIgnore
     public List<EventResponse> getEventResponses() {
         return eventResponses;
     }
@@ -81,6 +84,7 @@ public class User {
     }
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    @JsonIgnore
     public List<UserGroup> getUserGroups() {
         return userGroups;
     }
@@ -90,6 +94,7 @@ public class User {
     }
 
     @ManyToMany
+    @JsonIgnore
     @JoinTable(name = "joined_groups",
             joinColumns = @JoinColumn(name = "group_table_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"))
