@@ -126,9 +126,12 @@ INSERT INTO user (id, display_name, email, description, picture_url) VALUES
    'http://xacatolicos.com/app/images/avatar/icon-user.png'
   );
 
-INSERT INTO group_table VALUES (1, 'groupName', 'groupPictureUrl', 'tags', 'description');
+INSERT INTO group_table VALUES (1000, 'groupName', 'groupPictureUrl', 'tags', 'description');
 
-INSERT INTO announcement VALUES (1, 'title', 'content', 1);
+INSERT INTO user_group (id, user_id, group_table_id, role) VALUES
+  (1000, 1000, 1000, 'AmazingRole');
 
-INSERT INTO notification VALUES (1, 'Sample Header', 'Sample Message', 'https://google.com', 'MESSAGE', 0, 1000);
-INSERT INTO notification VALUES (2, 'Sample Header', 'Sample Message', 'https://google.com', 'MESSAGE', 1, 1000);
+INSERT INTO announcement VALUES (1000, 'Sample Title', 'Sample Content', 1000);
+
+INSERT INTO notification VALUES (1000, 'Sample Header', 'Sample Message', 'https://google.com', 'MESSAGE', 0, 1000);
+INSERT INTO notification VALUES (1001, 'Sample Header', 'Sample Message', 'https://google.com', 'MESSAGE', 1, 1000);
