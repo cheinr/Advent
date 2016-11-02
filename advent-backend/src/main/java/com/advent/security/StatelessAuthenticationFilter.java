@@ -21,7 +21,7 @@ import java.io.IOException;
 public class StatelessAuthenticationFilter extends GenericFilterBean {
 
     @Autowired
-    private final TokenAuthenticationService authenticationService;
+    private TokenAuthenticationService authenticationService;
 
     public StatelessAuthenticationFilter(TokenAuthenticationService authenticationService) {
         this.authenticationService = authenticationService;

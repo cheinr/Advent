@@ -16,10 +16,11 @@ module.exports = {
     */
     axios({
       method: 'post',
-      url: 'api/auth/register',
+      url: '/api/auth/register',
       headers: {"google-id-token": id_token}
     }).then(function(response) { //success
-	console.log(response);
+      console.log(response);
+      localStorage.id = response.data.id;
     })
     .catch(function (error) {
       console.log(error);
@@ -41,6 +42,7 @@ module.exports = {
 
   logout(auth2, cb) {
     delete localStorage.token;
+    delete localStorage.id;
     axios.defaults.headers.common["Authorization"] = null;
     auth2.signOut().then(function () {
       if (cb) cb();

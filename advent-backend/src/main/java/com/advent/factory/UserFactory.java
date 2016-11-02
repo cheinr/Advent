@@ -15,7 +15,6 @@ public class UserFactory {
 
     public UserDTO userToUserDTO(User user) {
         if(user == null) {
-            System.out.println("for some reason user is null.");
             return null;
         }
         UserDTO userDTO = new UserDTO();
