@@ -15,7 +15,6 @@ public class User {
     private String pictureUrl;
     private List<EventResponse> eventResponses;
     private List<UserGroup> userGroups;
-    private List<Group> joinedGroups;
     private List<Notification> notifications;
     // TODO dszopa 9/25/16 - Add List of chats the user is in (chats need to be made first)
 
@@ -87,18 +86,6 @@ public class User {
 
     public void setUserGroups(List<UserGroup> userGroups) {
         this.userGroups = userGroups;
-    }
-
-    @ManyToMany
-    @JoinTable(name = "joined_groups",
-            joinColumns = @JoinColumn(name = "group_table_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"))
-    public List<Group> getJoinedGroups() {
-        return joinedGroups;
-    }
-
-    public void setJoinedGroups(List<Group> joinedGroups) {
-        this.joinedGroups = joinedGroups;
     }
 
     @OneToMany(mappedBy = "user")
