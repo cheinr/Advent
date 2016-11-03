@@ -13,6 +13,7 @@ import EventInfoContainer from './containers/EventInfoContainer';
 import ScheduleAddEvent from './components/schedule-add-event';
 import GroupCreateContainer from './containers/GroupCreateContainer';
 import GroupInfoContainer from './containers/GroupInfoContainer';
+import GroupChatContainer from './containers/GroupChatContainer';
 import SignIn from './components/sign-in';
 import auth from './auth';
 import EventCalendarContainer from './containers/EventCalendarContainer';
@@ -74,6 +75,7 @@ ReactDom.render(
       <Route path="/event/:eventId" component={EventInfoContainer} />
       <Route path="/group/create" component={GroupCreateContainer} />
       <Route path="/group/:groupId" component={GroupInfoContainer} />
+      <Route path="/chat/group/:groupId" component={GroupChatContainer} />
     </Route>
   </Router>
 , document.querySelector('.content'));

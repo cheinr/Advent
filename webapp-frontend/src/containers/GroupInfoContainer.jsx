@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import GroupInfo from '../components/GroupInfo.jsx';
+import GroupChat from '../components/chats/group-chat.jsx';
 import axios from 'axios';
 
 export default class GroupInfoContainer extends Component {
@@ -22,11 +23,10 @@ export default class GroupInfoContainer extends Component {
 
     getGroup() {
         const url = `http://localhost:3000/api/group/${this.props.params.groupId}`;
-        const headers = {'Authorization': localStorage.token};
+
         axios({
             method: 'get',
             url: url,
-            headers: headers
         })
             .then(response => {
                 console.log(response.data);
@@ -65,10 +65,14 @@ export default class GroupInfoContainer extends Component {
 
     render() {
         console.log(this.state);
-        return <GroupInfo
-            group={this.state}
-            groupId={this.props.params.groupId}
-            joinGroup={this.joinGroup}
-        />
+        return (
+	    <div>
+	    <GroupInfo group={this.state}
+	    groupId={this.props.params.groupId}
+	    joinGroup={this.joinGroup}
+	    />
+	    <GroupChat group={this.state} user={{id: 1, displayName: "Colin"}}/>
+	    </div>
+	)
     }
 }

@@ -43,11 +43,11 @@ export default class GroupChat extends React.Component {
       render() {
 
         return (
-          <div>
-          <h3>{this.props.group.groupName} Chat</h3>
-          <ChatMessageContainer messages={this.state.messages} />
-          <ChatMessageSender onSend={this.handleMessageSend.bind(this)} />
-          </div>
+            <div>
+		<h3>{this.props.group.name} Chat</h3>
+		<ChatMessageContainer messages={this.state.messages} />
+		<ChatMessageSender onSend={this.handleMessageSend.bind(this)} />
+            </div>
         );
       }
     }
