@@ -6,6 +6,7 @@ const SearchBar = withRouter(React.createClass( {
 	console.log(this.refs.searchInput.value);
 	this.props.router.replace(`/search/${this.refs.searchInput.value}`);
     },
+    
     handleKeyPress: function(e) {
 	if(e.key === "Enter") {
 	    this.onSearchSubmit();

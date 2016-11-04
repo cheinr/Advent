@@ -1,13 +1,24 @@
 import React from 'react';
-
+import axios from 'axios';
 //TODO - rename to SearchResultsContainer
 export default class SearchContainer extends React.Component {
 
     constructor(props) {
 	super(props);
 	this.state = {
-	    loading: true
+	    loading: true,
+	    groups: []
 	}
+    }
+
+    componentDidMount() {
+	axios.get(`/api/group/query/${this.props.params.query}`).then((resp)=>{
+	    console.log(resp);
+	    this.setState({groups: resp.data});
+	    console.log(this.state.groups);
+	}).catch( (err) => {
+
+	});
     }
 
     render() {
