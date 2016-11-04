@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import io from 'socket.io-client';
 import axios from 'axios';
+import withRouter from 'react-router';
 
 import ChatMessageContainer from '../components/chats/chat-message-container';
 import ChatMessageSender from '../components/chats/chat-message-sender';
@@ -14,7 +15,10 @@ import ChatMessageSender from '../components/chats/chat-message-sender';
 export default class GroupChatContainer extends React.Component {
     constructor(props) {
 	super(props);
-	this.state = {messages: []};
+	this.state = {messages: [] };
+	this.socket = null;
+	this.connect = this.connect.bind(this);
+
     }
 
     componentDidMount() {
@@ -26,7 +30,7 @@ export default class GroupChatContainer extends React.Component {
 	    console.log(resp);
 	    if(resp.data != "") {
 		this.setState( {groupName: resp.data.groupName});
-		this.socket = this.connect(this.props.params.groupId);
+v		this.socket = this.connect(this.props.params.groupId);
 		this.socket.on('chat message', function(msg) {
 		    var messages = this.state.messages;
 		    messages.push(msg);
@@ -47,6 +51,7 @@ export default class GroupChatContainer extends React.Component {
 
     handleMessageSend(message) {
 	//data to send
+	//TODO - get actual user name
 	var data = {senderName: "Colin", message: message,
 		    groupId: this.props.params.groupId};
         this.socket.emit('chat message', data);
@@ -67,3 +72,6 @@ export default class GroupChatContainer extends React.Component {
         );
     }
 }
+
+
+
