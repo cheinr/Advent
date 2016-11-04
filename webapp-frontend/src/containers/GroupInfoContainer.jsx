@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router';
 import GroupInfo from '../components/GroupInfo.jsx';
-import GroupChat from '../components/chats/group-chat.jsx';
 import axios from 'axios';
 
 export default class GroupInfoContainer extends Component {
