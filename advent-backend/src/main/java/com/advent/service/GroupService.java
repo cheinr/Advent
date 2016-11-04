@@ -29,4 +29,7 @@ public class GroupService {
     public List<Group> getAllGroups() {
         return groupRepo.findAll();
     }
+
+    public List<Group> searchForGroups(String nameQuery) { return groupRepo.searchByGroupName(nameQuery);
+    }
 }
