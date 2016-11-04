@@ -14,13 +14,11 @@ import ScheduleAddEvent from './components/schedule-add-event';
 import GroupCreateContainer from './containers/GroupCreateContainer';
 import GroupInfoContainer from './containers/GroupInfoContainer';
 import GroupChatContainer from './containers/GroupChatContainer';
+import SearchContainer from './containers/SearchContainer';
 import SignIn from './components/sign-in';
 import auth from './auth';
 import EventCalendarContainer from './containers/EventCalendarContainer';
 import axios from 'axios';
-
-
-
 
 
 function requireAuth(nextState, replace) {
@@ -62,7 +60,7 @@ function requireNoAuth(nextState, replace) {
 
 ReactDom.render(
   <Router history={browserHistory}>
-    <Route path="/login" component={SignIn} onEnter={requireNoAuth} />
+      <Route path="/login" component={SignIn} onEnter={requireNoAuth} />
     <Route component={MainLayout} onEnter={requireAuth}>
       <Route path="/" component={App} />
       <Route path="/main" component={Home} />
@@ -76,6 +74,7 @@ ReactDom.render(
       <Route path="/group/create" component={GroupCreateContainer} />
       <Route path="/group/:groupId" component={GroupInfoContainer} />
       <Route path="/chat/group/:groupId" component={GroupChatContainer} />
+      <Route path="/search/:query" component={SearchContainer} />
     </Route>
   </Router>
 , document.querySelector('.content'));

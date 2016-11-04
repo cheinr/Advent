@@ -13,6 +13,7 @@ import NavNotificationFooter from '../components/display/navbar/notification/Nav
 import DropdownToolbar from '../components/display/DropdownToolbar';
 import NavPreferences from '../components/display/navbar/NavPreferences';
 import NavLink from '../components/display/navbar/NavLink';
+import SearchBar from '../components/search-bar';
 
 export default class extends React.Component {
   constructor(props) {
@@ -74,6 +75,10 @@ export default class extends React.Component {
       });
   }
 
+    onSearchSubmit() {
+	this.props.router.replace("/search?:query");
+    }
+
   render() {
     return (
       <div>
@@ -93,6 +98,12 @@ export default class extends React.Component {
               <NavNav>
                 <NavLink link="/main" name="Main" />
               </NavNav>
+
+
+	      <SearchBar />
+
+
+	      
               <NavRight>
                 <NavNav>
                   <NavNotificationDropdown>
