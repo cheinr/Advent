@@ -19,7 +19,7 @@ import auth from './auth';
 import EventCalendarContainer from './containers/EventCalendarContainer';
 import axios from 'axios';
 
-
+import {withRouter} from 'react-router';
 
 
 
@@ -75,7 +75,7 @@ ReactDom.render(
       <Route path="/event/:eventId" component={EventInfoContainer} />
       <Route path="/group/create" component={GroupCreateContainer} />
       <Route path="/group/:groupId" component={GroupInfoContainer} />
-      <Route path="/chat/group/:groupId" component={GroupChatContainer} />
+      <Route path="/chat/group/:groupId" component={withRouter(GroupChatContainer)} />
     </Route>
   </Router>
 , document.querySelector('.content'));
