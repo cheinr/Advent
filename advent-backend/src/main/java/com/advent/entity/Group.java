@@ -17,8 +17,11 @@ public class Group {
     private String groupPictureUrl;
     private String tags;
     private String description;
+    @JsonIgnore
     private List<Event> events;
+    @JsonIgnore
     private List<UserGroup> userGroups;
+    @JsonIgnore
     private List<Announcement> announcements;
 
     @Id

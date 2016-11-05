@@ -9,15 +9,15 @@ export default class GroupInfoContainer extends Component {
             id: '',
             name: '',
             description: '',
-            events: []
+            events: [],
+            users: []
         };
         this.getGroup = this.getGroup.bind(this);
-        this.getGroupEvents = this.getGroupEvents.bind(this);
+        this.joinGroup = this.joinGroup.bind(this);
     }
 
     componentDidMount() {
         this.getGroup();
-        this.getGroupEvents();
     }
 
     getGroup() {
@@ -33,7 +33,9 @@ export default class GroupInfoContainer extends Component {
                 this.setState({
                     id: response.data.id,
                     name: response.data.groupName,
-                    description: response.data.description
+                    description: response.data.description,
+                    events: response.data.events,
+                    users: response.data.userGroups
                 });
             })
             .catch(error => {
@@ -41,19 +43,20 @@ export default class GroupInfoContainer extends Component {
             });
     };
 
-    getGroupEvents() {
-        const url = `http://localhost:3000/api/event/group/${this.props.params.groupId}`;
+    joinGroup() {
+        const role = "member";
+        // TODO use user id
+        const url = `http://localhost:3000/api/join/user/${1000}/group/${this.props.params.groupId}/role/${role}`;
         const headers = {'Authorization': localStorage.token};
         axios({
-            method: 'get',
+            method: 'post',
             url: url,
             headers: headers
         })
             .then(response => {
-                console.log(response.data);
-                this.setState({
-                    events: response.data
-                });
+                const users = this.state.users;
+                users.push(response.data);
+                this.setState({users: users})
             })
             .catch(error => {
                 console.log(error);
@@ -65,6 +68,7 @@ export default class GroupInfoContainer extends Component {
         return <GroupInfo
             group={this.state}
             groupId={this.props.params.groupId}
+            joinGroup={this.joinGroup}
         />
     }
 }

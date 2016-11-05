@@ -2,6 +2,8 @@ package com.advent.factory;
 
 import com.advent.dto.GroupDTO;
 import com.advent.entity.Group;
+import com.advent.repo.UserRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -14,6 +16,9 @@ import java.util.List;
 public class GroupConverter {
 
     public GroupDTO groupToGroupDTO(Group group) {
+        if (group == null) {
+            return null;
+        }
         GroupDTO groupDTO = new GroupDTO();
 
         groupDTO.setId(group.getId());
@@ -32,10 +37,10 @@ public class GroupConverter {
         return group;
     }
 
-    public List<GroupDTO> groupToGroupDTO(List<Group> events) {
+    public List<GroupDTO> groupToGroupDTO(List<Group> groups) {
         List<GroupDTO> groupDTOs = new ArrayList<>();
-        for (Group event : events) {
-            groupDTOs.add(groupToGroupDTO(event));
+        for (Group group : groups) {
+            groupDTOs.add(groupToGroupDTO(group));
         }
         return groupDTOs;
     }
