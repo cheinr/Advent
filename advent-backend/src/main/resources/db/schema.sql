@@ -126,7 +126,9 @@ INSERT INTO user (id, display_name, email, description, picture_url) VALUES
    'http://xacatolicos.com/app/images/avatar/icon-user.png'
   );
 
-INSERT INTO group_table VALUES (1000, 'groupName', 'groupPictureUrl', 'tags', 'description');
+INSERT INTO group_table VALUES
+ (1000, 'groupName', 'groupPictureUrl', 'tags', 'description'),
+ (1001, 'groupName1', 'https://upload.wikimedia.org/wikipedia/en/3/30/Cy_walking%2C_Iowa_State_athletics.png', 'tags', 'description');
 
 INSERT INTO announcement VALUES (1000, 'title', 'content', 1000);
 

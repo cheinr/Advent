@@ -47,7 +47,7 @@ public class GroupController {
     }
 
     @RequestMapping(value = "/group/query/{query}", method = RequestMethod.GET)
-    public List<Group> searchForGroups(@PathVariable String query) { return groupService.searchForGroups(query); }
+    public List<Group> searchForGroups(@PathVariable String query) { return groupService.searchForGroupsByName(query); }
 
     @RequestMapping(value = "/group/{id}", method = RequestMethod.GET)
     public GroupDTO getGroupById(@PathVariable Long id) {

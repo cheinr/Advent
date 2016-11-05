@@ -145,6 +145,19 @@ public class UserManagementServiceImpl implements UserManagementService {
     }
 
     @Override
+    public List<UserDTO> searchUsersByDisplayName(String query) {
+        String queryString = "%" + query + "%";
+        List<User> users = userRepo.findAllByDisplayName(queryString);
+        List<UserDTO> userDTOs = new ArrayList<>();
+
+        users.forEach(user ->
+                userDTOs.add(userFactory.userToUserDTO(user))
+        );
+
+        return userDTOs;
+    }
+
+    @Override
     public UserDTO getLoggedInUser() {
         UserDTO currentUser = null;
 
