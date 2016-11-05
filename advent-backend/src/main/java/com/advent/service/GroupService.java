@@ -30,6 +30,6 @@ public class GroupService {
         return groupRepo.findAll();
     }
 
-    public List<Group> searchForGroupsByName(String nameQuery) { return groupRepo.searchByGroupName("%" + nameQuery + "%");
+    public List<Group> searchForGroupsByName(String nameQuery) { return groupRepo.searchByGroupName("%" + nameQuery.toUpperCase() + "%");
     }
 }

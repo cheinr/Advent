@@ -146,8 +146,8 @@ public class UserManagementServiceImpl implements UserManagementService {
 
     @Override
     public List<UserDTO> searchUsersByDisplayName(String query) {
-        String queryString = "%" + query + "%";
-        List<User> users = userRepo.findAllByDisplayName(queryString);
+        String queryString = "%" + query.toUpperCase() + "%";
+        List<User> users = userRepo.searchByDisplayName(queryString);
         List<UserDTO> userDTOs = new ArrayList<>();
 
         users.forEach(user ->
