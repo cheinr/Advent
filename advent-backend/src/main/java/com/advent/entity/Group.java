@@ -2,6 +2,8 @@ package com.advent.entity;
 
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -67,6 +69,7 @@ public class Group {
         this.description = description;
     }
 
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "group")
     public List<Event> getEvents() {
         return events;
@@ -76,6 +79,7 @@ public class Group {
         this.events = events;
     }
 
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "group")
     public List<UserGroup> getUserGroups() {
         return userGroups;
@@ -85,6 +89,7 @@ public class Group {
         this.userGroups = userGroups;
     }
 
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "group")
     public List<Announcement> getAnnouncements() {
         return announcements;

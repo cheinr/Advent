@@ -2,7 +2,7 @@ package com.advent.service;
 
 import com.advent.dto.AnnouncementDTO;
 import com.advent.entity.Announcement;
-import com.advent.factory.AnnouncementConverter;
+import com.advent.factory.AnnouncementFactory;
 import com.advent.repo.AnnouncementRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,11 +17,11 @@ public class AnnouncementService {
     private AnnouncementRepo announcementRepo;
 
     @Autowired
-    private AnnouncementConverter announcementConverter;
+    private AnnouncementFactory announcementFactory;
 
     public AnnouncementDTO createAnnouncement(AnnouncementDTO announcementDTO) {
-        Announcement announcement = announcementRepo.save(announcementConverter.announcementDTOToAnnouncement(announcementDTO));
-        return announcementConverter.announcementToAnnouncementDTO(announcement);
+        Announcement announcement = announcementRepo.save(announcementFactory.announcementDTOToAnnouncement(announcementDTO));
+        return announcementFactory.announcementToAnnouncementDTO(announcement);
     }
 
     public AnnouncementDTO deleteAnnouncement(AnnouncementDTO announcementDTO) {
@@ -40,7 +40,7 @@ public class AnnouncementService {
         List<AnnouncementDTO> announcementDTOs = new ArrayList<>();
 
         announcements.forEach(announcement ->
-            announcementDTOs.add(announcementConverter.announcementToAnnouncementDTO(announcement))
+            announcementDTOs.add(announcementFactory.announcementToAnnouncementDTO(announcement))
         );
 
         return announcementDTOs;
@@ -51,7 +51,7 @@ public class AnnouncementService {
         List<AnnouncementDTO> announcementDTOs = new ArrayList<>();
 
         announcements.forEach(announcement ->
-            announcementDTOs.add(announcementConverter.announcementToAnnouncementDTO(announcement))
+            announcementDTOs.add(announcementFactory.announcementToAnnouncementDTO(announcement))
         );
 
         return announcementDTOs;

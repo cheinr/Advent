@@ -25,6 +25,7 @@ CREATE TABLE announcement
   id BIGINT PRIMARY KEY NOT NULL,
   title VARCHAR(255),
   content VARCHAR(255),
+  date DATE,
   group_table_id BIGINT,
   FOREIGN KEY (group_table_id) REFERENCES group_table(id) ON UPDATE NO ACTION
 );
@@ -131,7 +132,21 @@ INSERT INTO group_table VALUES (1000, 'groupName', 'groupPictureUrl', 'tags', 'd
 INSERT INTO user_group (id, user_id, group_table_id, role) VALUES
   (1000, 1000, 1000, 'AmazingRole');
 
-INSERT INTO announcement VALUES (1000, 'Sample Title', 'Sample Content', 1000);
+INSERT INTO announcement VALUES (1000, 'Sample Title0', 'Sample Content0', '2008-11-11', 1000);
+INSERT INTO announcement VALUES (1001, 'Sample Title1', 'Sample Content1', '2008-11-12', 1000);
+INSERT INTO announcement VALUES (1002, 'Sample Title2', 'Sample Content2', '2008-11-13', 1000);
+INSERT INTO announcement VALUES (1003, 'Sample Title3', 'Sample Content3', '2008-11-14', 1000);
+INSERT INTO announcement VALUES (1004, 'Sample Title4', 'Sample Content4', '2008-11-15', 1000);
+INSERT INTO announcement VALUES (1005, 'Sample Title5', 'Sample Content5', '2008-11-16', 1000);
+INSERT INTO announcement VALUES (1006, 'Sample Title6', 'Sample Content6', '2008-11-17', 1000);
+INSERT INTO announcement VALUES (1007, 'Sample Title7', 'Sample Content7', '2008-11-18', 1000);
+INSERT INTO announcement VALUES (1008, 'Sample Title8', 'Sample Content8', '2008-11-19', 1000);
+INSERT INTO announcement VALUES (1009, 'Sample Title9', 'Sample Content9', '2008-11-20', 1000);
+INSERT INTO announcement VALUES (1010, 'Sample Title10', 'Sample Content10', '2008-11-21', 1000);
+INSERT INTO announcement VALUES (1011, 'Sample Title11', 'Sample Content11', '2008-11-22', 1000);
+INSERT INTO announcement VALUES (1012, 'Sample Title12', 'Sample Content12', '2008-11-23', 1000);
+INSERT INTO announcement VALUES (1013, 'Sample Title13', 'Sample Content13', '2008-11-24', 1000);
+INSERT INTO announcement VALUES (1014, 'Sample Title14', 'Sample Content14', '2008-11-25', 1000);
 
 INSERT INTO notification VALUES (1000, 'Sample Header', 'Sample Message', 'https://google.com', 'MESSAGE', 0, 1000);
 INSERT INTO notification VALUES (1001, 'Sample Header', 'Sample Message', 'https://google.com', 'MESSAGE', 1, 1000);

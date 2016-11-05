@@ -30,6 +30,8 @@ module.exports = {
     //we will use this token to authenticate with our backend
       localStorage.token = id_token;
       axios.defaults.headers.common["Authorization"] = localStorage.token;
+      // TOOD dszopa 11/6/16 - Remove after signin is fixed. Used for getting token for test postman requests
+      console.log(id_token);
 
     if(cb) cb();
 

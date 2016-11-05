@@ -11,11 +11,9 @@ import java.util.List;
 @Repository
 public interface AnnouncementRepo extends JpaRepository<Announcement, Long> {
 
-    // TODO dszopa 11/1/16 - implement this
-    @Query("")
+    @Query("select a from Announcement a inner join a.group.userGroups u where u.user.id = :userId ORDER BY a.date DESC")
     List<Announcement> findHomepageAnnouncementsForUser(@Param("userId") Long userId);
 
-    // TODO dszopa 11/1/16 - implement this
-    @Query("")
+    @Query("select a from Announcement a where a.group.id = :groupId ORDER BY a.date DESC")
     List<Announcement> findAllAnnouncementsByGroup(@Param("groupId") Long groupId);
 }

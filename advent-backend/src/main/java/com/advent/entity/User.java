@@ -1,5 +1,7 @@
 package com.advent.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +18,6 @@ public class User {
     private List<EventResponse> eventResponses;
     private List<UserGroup> userGroups;
     private List<Notification> notifications;
-    // TODO dszopa 9/25/16 - Add List of chats the user is in (chats need to be made first)
 
     public User() {
         notifications = new ArrayList<>();
@@ -70,6 +71,7 @@ public class User {
         this.pictureUrl = pictureUrl;
     }
 
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     public List<EventResponse> getEventResponses() {
         return eventResponses;
@@ -79,6 +81,7 @@ public class User {
         this.eventResponses = eventResponses;
     }
 
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     public List<UserGroup> getUserGroups() {
         return userGroups;
@@ -88,6 +91,7 @@ public class User {
         this.userGroups = userGroups;
     }
 
+    @JsonIgnore
     @OneToMany(mappedBy = "user")
     public List<Notification> getNotifications() {
         return notifications;

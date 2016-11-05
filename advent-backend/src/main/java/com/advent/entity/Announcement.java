@@ -1,6 +1,7 @@
 package com.advent.entity;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "announcement")
@@ -9,6 +10,7 @@ public class Announcement {
     private Long id;
     private String title;
     private String content;
+    private Date date;
     private Group group;
 
     @Id
@@ -41,6 +43,15 @@ public class Announcement {
         this.content = content;
     }
 
+    @Column(name = "date")
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
     @ManyToOne
     @JoinColumn(name = "group_table_id", nullable = false)
     public Group getGroup() {
@@ -53,22 +64,16 @@ public class Announcement {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
         Announcement that = (Announcement) o;
 
-        if (id != null ? !id.equals(that.id) : that.id != null) {
-            return false;
-        }
-        if (title != null ? !title.equals(that.title) : that.title != null) {
-            return false;
-        }
-        return content != null ? content.equals(that.content) : that.content == null;
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
+        if (title != null ? !title.equals(that.title) : that.title != null) return false;
+        if (content != null ? !content.equals(that.content) : that.content != null) return false;
+        if (date != null ? !date.equals(that.date) : that.date != null) return false;
+        return group != null ? group.equals(that.group) : that.group == null;
 
     }
 
@@ -77,6 +82,8 @@ public class Announcement {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (title != null ? title.hashCode() : 0);
         result = 31 * result + (content != null ? content.hashCode() : 0);
+        result = 31 * result + (date != null ? date.hashCode() : 0);
+        result = 31 * result + (group != null ? group.hashCode() : 0);
         return result;
     }
 
@@ -86,6 +93,8 @@ public class Announcement {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
+                ", date=" + date +
+                ", group=" + group +
                 '}';
     }
 }
