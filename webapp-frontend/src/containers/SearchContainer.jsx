@@ -10,26 +10,51 @@ export default class SearchContainer extends React.Component {
 	super(props);
 	this.state = {
 	    loading: true,
-	    groups: []
+	    groups: [],
+	    users: [],
+	    no_users: false,
+	    no_groups: false
 	}
     }
 
     componentDidMount() {
-	
-	var url = `/api/group/query/${this.props.params.query}`;
+
+	var query = this.props.params.query;
+	if(query === " ") query = "%";
+	var url = `/api/group/query/${query}`;
 	axios.get(url).then( (resp) => {
-	    console.log(resp);
-	    this.setState({groups: resp.data, loading: false});
-	    console.log("groups" + this.state.groups);
+	    if(resp.data.length != 0) {
+		this.setState({groups: resp.data, loading: false});
+		console.log("groups" + this.state.groups);
+	    } else {
+		this.setState({no_groups: true});
+	    }
 	}).catch( function(error) {
 	  console.log("error: " + error);
 	});
 
+	url = `/api/users/query/${query}`;
+	axios.get(url).then( (resp) => {
+	    if(resp.data.length != 0) {
+		this.setState({users: resp.data, loading: false});
+	    } else {
+		this.setState({no_users: true});
+	    }
+	}).catch( function(error) {
+	    console.log("error: " + error);
+	});
     }
 
     render() {
-	
-	if(this.state.loading === true) {
+
+
+	if (this.state.no_users && this.state.no_groups ){
+	    return (
+		<div>
+		    <p>No results found for {this.props.params.query}. =[</p>
+		</div>
+	    );
+	} else if(this.state.loading === true) {
 	    return (
 		<div>
 		    <i className="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
@@ -38,7 +63,10 @@ export default class SearchContainer extends React.Component {
 	    );
 	} else {
 	    return (
-		<SearchResults groups={this.state.groups} />
+		<SearchResults
+		groups={this.state.groups}
+		users={this.state.users}
+		/>
 	    );
 	}
     }

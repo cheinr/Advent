@@ -3,8 +3,9 @@ import {withRouter} from 'react-router';
 const SearchBar = withRouter(React.createClass( {
 
     onSearchSubmit: function() {
-	console.log(this.refs.searchInput.value);
-	this.props.router.replace(`/search/${this.refs.searchInput.value}`);
+	var query = this.refs.searchInput.value;
+	if(query === "") query = " ";
+	this.props.router.replace(`/search/${query}`);
     },
     
     handleKeyPress: function(e) {
