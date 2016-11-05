@@ -37,8 +37,8 @@ export default class SearchContainer extends React.Component {
 
     queryBackend(queryString) {
 	var query = queryString;
-	if(query === " ") query = "%";
-	var url = `/api/group/query/${query}`;
+	if(query === undefined) query = "";
+	var url = `/api/group/query?groupName=${query}`;
 	axios.get(url).then( (resp) => {
 	    if(resp.data.length != 0) {
 		this.setState({groups: resp.data, loading: false});
@@ -49,7 +49,7 @@ export default class SearchContainer extends React.Component {
 	    console.log("error: " + error);
 	});
 
-	url = `/api/users/query/${query}`;
+	url = `/api/users/query?displayName=${query}`;
 	axios.get(url).then( (resp) => {
 	    if(resp.data.length != 0) {
 		this.setState({users: resp.data, loading: false});

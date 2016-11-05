@@ -74,7 +74,7 @@ ReactDom.render(
       <Route path="/group/create" component={GroupCreateContainer} />
       <Route path="/group/:groupId" component={GroupInfoContainer} />
       <Route path="/chat/group/:groupId" component={GroupChatContainer} />
-      <Route path="/search/:query" component={SearchContainer} />
+      <Route path="/search(/:query)" component={SearchContainer} />
     </Route>
   </Router>
 , document.querySelector('.content'));

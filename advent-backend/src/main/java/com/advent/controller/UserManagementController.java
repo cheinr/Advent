@@ -57,8 +57,8 @@ public class UserManagementController {
         return userManagementService.findUsersByDisplayName(displayName);
     }
 
-    @RequestMapping(value = "/users/query/{displayName}", method = RequestMethod.GET)
-    public List<UserDTO> searchUsersByDisplayName(@PathVariable String displayName) {
+    @RequestMapping(value = "/users/query", method = RequestMethod.GET)
+    public List<UserDTO> searchUsersByDisplayName(@RequestParam(required = false, defaultValue = "", value="displayName") String displayName) {
         return userManagementService.searchUsersByDisplayName(displayName);
     }
 
