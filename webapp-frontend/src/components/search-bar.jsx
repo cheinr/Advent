@@ -16,7 +16,7 @@ const SearchBar = withRouter(React.createClass( {
     
     render: function() {
 	return (
-	    <div className="col-sm-6 col-md-6">
+	    <div className="col-sm-6 col-md-6 search-bar">
 		<div className="input-group">
 		    <input type="text" id="searchInput" ref="searchInput" className="form-control" placeholder="search..." onKeyPress={this.handleKeyPress}></input>
 		    <div className="input-group-btn">

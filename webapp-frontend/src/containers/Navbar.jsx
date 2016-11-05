@@ -98,11 +98,8 @@ export default class extends React.Component {
               <NavNav>
                 <NavLink link="/main" name="Main" />
               </NavNav>
-
-
-	      <SearchBar />
-
-
+	    
+	    <SearchBar />
 	      
               <NavRight>
                 <NavNav>
