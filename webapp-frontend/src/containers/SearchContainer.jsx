@@ -18,19 +18,35 @@ export default class SearchContainer extends React.Component {
     }
 
     componentDidMount() {
+	this.queryBackend(this.props.params.query);
+    }
 
-	var query = this.props.params.query;
+    componentWillReceiveProps(nextProps) {
+	console.log("new props: " + nextProps.params.query);
+	if(nextProps.params.query !== this.props.params.query) {
+	    this.setState({
+		loading: true,
+		groups: [],
+		users: [],
+		no_users: false,
+		no_groups: false
+	    });
+	    this.queryBackend(nextProps.params.query);
+	}
+    }
+
+    queryBackend(queryString) {
+	var query = queryString;
 	if(query === " ") query = "%";
 	var url = `/api/group/query/${query}`;
 	axios.get(url).then( (resp) => {
 	    if(resp.data.length != 0) {
 		this.setState({groups: resp.data, loading: false});
-		console.log("groups" + this.state.groups);
 	    } else {
 		this.setState({no_groups: true});
 	    }
 	}).catch( function(error) {
-	  console.log("error: " + error);
+	    console.log("error: " + error);
 	});
 
 	url = `/api/users/query/${query}`;
@@ -44,9 +60,8 @@ export default class SearchContainer extends React.Component {
 	    console.log("error: " + error);
 	});
     }
-
+    
     render() {
-
 
 	if (this.state.no_users && this.state.no_groups ){
 	    return (
