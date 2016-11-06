@@ -46,7 +46,7 @@ export default class GroupInfoContainer extends Component {
     joinGroup() {
         const role = "member";
         // TODO use user id
-        const url = `http://localhost:3000/api/join/user/${1000}/group/${this.props.params.groupId}/role/${role}`;
+        const url = `http://localhost:3000/api/join/user/${this.props.user.id}/group/${this.props.params.groupId}/role/${role}`;
         const headers = {'Authorization': localStorage.token};
         axios({
             method: 'post',

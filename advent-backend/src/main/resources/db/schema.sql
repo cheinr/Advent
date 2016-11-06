@@ -7,7 +7,7 @@ CREATE TABLE group_table
 (
   id BIGINT PRIMARY KEY NOT NULL,
   group_name VARCHAR(255),
-  group_picture_url VARCHAR(255),
+  group_picture_url TEXT,
   tags VARCHAR(255),
   description VARCHAR(255)
 );
@@ -25,7 +25,7 @@ CREATE TABLE announcement
   id BIGINT PRIMARY KEY NOT NULL,
   title VARCHAR(255),
   content VARCHAR(255),
-  date DATE,
+  date TIMESTAMP,
   group_table_id BIGINT,
   FOREIGN KEY (group_table_id) REFERENCES group_table(id) ON UPDATE NO ACTION
 );
@@ -72,7 +72,7 @@ CREATE TABLE notification (
 );
 
 INSERT INTO user (id, display_name, email, description, picture_url) VALUES
-  (1000, 'displayName1', 'email@address.com',
+  (1000, 'displayName1', 'szopanator@gmail.com',
    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nec quam non velit aliquet varius et et magna. Sed condimentum, lacus nec sagittis posuere, lacus velit rhoncus diam, vitae blandit lectus neque nec arcu. Curabitur convallis luctus augue. Sed commodo sollicitudin aliquam. Donec at tristique enim, ut ornare quam. Sed at gravida massa. Sed sed dignissim dui. Curabitur a tortor sit amet risus consequat viverra. Cras cursus et massa a ultrices. Suspendisse vitae augue id arcu fringilla varius. Maecenas convallis metus leo, id mattis purus faucibus vitae. Nam posuere ultrices ex a ullamcorper. Nam mi massa, fermentum nec elit a, mattis luctus urna. Nam ut blandit sem, non efficitur odio. Curabitur nisl magna, luctus et tellus sed, egestas mattis mi.',
    'http://xacatolicos.com/app/images/avatar/icon-user.png'),
   (1001, 'displayName2', 'email@email.iedu',
@@ -127,12 +127,13 @@ INSERT INTO user (id, display_name, email, description, picture_url) VALUES
    'http://xacatolicos.com/app/images/avatar/icon-user.png'
   );
 
-INSERT INTO group_table VALUES (1000, 'groupName', 'groupPictureUrl', 'tags', 'description');
+INSERT INTO group_table VALUES (1000, 'groupName', 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+PCEtLQpTb3VyY2UgVVJMOiBob2xkZXIuanMvNjR4NjQKQ3JlYXRlZCB3aXRoIEhvbGRlci5qcyAyLjYuMC4KTGVhcm4gbW9yZSBhdCBodHRwOi8vaG9sZGVyanMuY29tCihjKSAyMDEyLTIwMTUgSXZhbiBNYWxvcGluc2t5IC0gaHR0cDovL2ltc2t5LmNvCi0tPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbI2hvbGRlcl8xNTgzNjk1OTQxOSB0ZXh0IHsgZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQgfSBdXT48L3N0eWxlPjwvZGVmcz48ZyBpZD0iaG9sZGVyXzE1ODM2OTU5NDE5Ij48cmVjdCB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiNFRUVFRUUiLz48Zz48dGV4dCB4PSIxMi45NTgzMzM5NjkxMTYyMTEiIHk9IjM2LjY1Ij42NHg2NDwvdGV4dD48L2c+PC9nPjwvc3ZnPg==',
+                                'tags', 'description');
 
 INSERT INTO user_group (id, user_id, group_table_id, role) VALUES
   (1000, 1000, 1000, 'AmazingRole');
 
-INSERT INTO announcement VALUES (1000, 'Sample Title0', 'Sample Content0', '2008-11-11', 1000);
+INSERT INTO announcement VALUES (1000, 'Sample Title0', 'Sample Content0', '2012-09-17 18:47:52.69', 1000);
 INSERT INTO announcement VALUES (1001, 'Sample Title1', 'Sample Content1', '2008-11-12', 1000);
 INSERT INTO announcement VALUES (1002, 'Sample Title2', 'Sample Content2', '2008-11-13', 1000);
 INSERT INTO announcement VALUES (1003, 'Sample Title3', 'Sample Content3', '2008-11-14', 1000);

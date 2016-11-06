@@ -12,6 +12,7 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
 var i = 0;
+
 io.on('connection', function(socket) {
     socket.on('join-room', function(room) {
 	console.log("Client joining room: " + room);
@@ -20,14 +21,21 @@ io.on('connection', function(socket) {
     
     socket.on('chat message', function(data) {
 	var date = new Date();
-	var dateString = "";
+	var hours = date.getHours() % 12;
+	var minutes = date.getMinutes();
+	
+	if(minutes < 10) minutes = '0' + minutes;
+	if(hours == 0) hours = 12;
+	
+	var timeString = hours + ':' + minutes;
+	timeString += (date.getHours() > 12 ? "pm" : "am");
+	timeString += " CDT";
 	
         console.log("sending message to room: " + data.groupId)
         data.id = i++;
-        dateString = date.getHours() % 12 + ":" + date.getMinutes();
-	dateString += (date.getHours() > 12 ? "pm" : "am");
-	dateString += " CDT";
-        data.date = dateString;
+
+
+        data.date = timeString;
         io.to(data.groupId).emit('chat message', data);
     });
 });
