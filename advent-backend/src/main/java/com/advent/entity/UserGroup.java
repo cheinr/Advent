@@ -1,5 +1,7 @@
 package com.advent.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -25,6 +27,7 @@ public class UserGroup {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", nullable = false)
+    @JsonIgnore
     public User getUser() {
         return user;
     }
@@ -35,6 +38,7 @@ public class UserGroup {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "group_table_id", nullable = false)
+    @JsonIgnore
     public Group getGroup() {
         return group;
     }

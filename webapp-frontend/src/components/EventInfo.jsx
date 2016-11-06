@@ -18,6 +18,16 @@ export default class EventInfo extends Component {
                     <div>Group: {this.props.event.group}</div>
                     <div>Users Going: {this.props.event.userGoing}</div>
                     <div>Private: {this.props.event.private}</div>
+
+                    <button className="btn btn-default" onClick={this.props.joinGroup}>
+                        Going
+                    </button>
+                    <button className="btn btn-default" onClick={this.props.joinGroup}>
+                        Maybe
+                    </button>
+                    <button className="btn btn-default" onClick={this.props.joinGroup}>
+                        Not Going
+                    </button>
                 </div>
             </div>
         );

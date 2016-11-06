@@ -2,6 +2,7 @@ package com.advent.controller;
 
 import com.advent.dto.EventDTO;
 import com.advent.entity.Event;
+import com.advent.entity.EventResponse;
 import com.advent.service.EventService;
 import com.advent.service.UserManagementService;
 import com.advent.service.impl.UserManagementServiceImpl;
@@ -39,6 +40,11 @@ public class EventController {
     @RequestMapping(value = "/event/group/{groupId}")
     public List<EventDTO> getEventByGroup(@PathVariable Long groupId) {
         return eventService.getEventByGroup(groupId);
+    }
+
+    @RequestMapping(value = "/event/respond/")
+    public EventResponse respondToEvent(Long eventId, String response) {
+        return eventService.saveEventResponse(userManagementService.getLoggedInUser().getId(), eventId, response);
     }
 }
 

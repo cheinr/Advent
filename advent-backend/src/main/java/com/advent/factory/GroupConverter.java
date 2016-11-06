@@ -24,6 +24,9 @@ public class GroupConverter {
         groupDTO.setId(group.getId());
         groupDTO.setGroupName(group.getGroupName());
         groupDTO.setDescription(group.getDescription());
+        groupDTO.setEvents(group.getEvents());
+        groupDTO.setUserGroups(group.getUserGroups());
+        groupDTO.setAnnouncements(group.getAnnouncements());
         return groupDTO;
     }
 

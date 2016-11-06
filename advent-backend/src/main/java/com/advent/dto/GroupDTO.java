@@ -1,8 +1,11 @@
 package com.advent.dto;
 
-/**
- * Created by clai on 10/28/16.
- */
+import com.advent.entity.Announcement;
+import com.advent.entity.Event;
+import com.advent.entity.UserGroup;
+
+import java.util.List;
+
 public class GroupDTO {
 
     private Long id;
@@ -10,6 +13,9 @@ public class GroupDTO {
     private String groupPictureUrl;
     private String tags;
     private String description;
+    private List<Event> events;
+    private List<UserGroup> userGroups;
+    private List<Announcement> announcements;
 
     public Long getId() {
         return id;
@@ -49,5 +55,29 @@ public class GroupDTO {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public List<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(List<Event> events) {
+        this.events = events;
+    }
+
+    public List<UserGroup> getUserGroups() {
+        return userGroups;
+    }
+
+    public void setUserGroups(List<UserGroup> userGroups) {
+        this.userGroups = userGroups;
+    }
+
+    public List<Announcement> getAnnouncements() {
+        return announcements;
+    }
+
+    public void setAnnouncements(List<Announcement> announcements) {
+        this.announcements = announcements;
     }
 }

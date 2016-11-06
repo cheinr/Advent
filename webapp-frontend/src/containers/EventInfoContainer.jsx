@@ -51,6 +51,25 @@ export default class EventInfoContainer extends Component {
             });
     };
 
+    respondToEvent(response) {
+        const url = `http://localhost:3000/api/event/respond`;
+        const data = {
+            eventId: this.props.params.eventId,
+            response: response
+        }
+        axios({
+            method: 'post',
+            url: url,
+            data: data
+        })
+            .then(response => {
+                console.log(response.data);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }
+
     render() {
         return <EventInfo
             event={this.state}

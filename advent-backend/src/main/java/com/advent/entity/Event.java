@@ -37,11 +37,6 @@ public class Event {
     @JsonIgnore
     private Group group;
 
-    // Temporarily Transient group should relate to groups
-
-    @Transient
-    private List<User> usersGoing;
-
     public Long getId() {
         return id;
     }
@@ -88,14 +83,6 @@ public class Event {
 
     public void setLocation(String location) {
         this.location = location;
-    }
-
-    public List<User> getUsersGoing() {
-        return usersGoing;
-    }
-
-    public void setUsersGoing(List<User> usersGoing) {
-        this.usersGoing = usersGoing;
     }
 
     public Boolean getPrivate() {
