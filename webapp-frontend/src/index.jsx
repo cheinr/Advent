@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import { Router, Route, Link, browserHistory, withRouter } from 'react-router';
+import axios from 'axios';
 
 import MainLayout from './components/MainLayout';
 import HomeContainer from './containers/HomeContainer';
@@ -17,7 +18,6 @@ import SearchResultsContainer from './containers/SearchResultsContainer';
 import SignIn from './components/sign-in';
 import auth from './auth';
 import EventCalendarContainer from './containers/EventCalendarContainer';
-import axios from 'axios';
 
 function requireAuth(nextState, replace) {
   if (!auth.loggedIn()) {
