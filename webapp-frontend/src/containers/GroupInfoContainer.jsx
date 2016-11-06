@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router';
 import GroupInfo from '../components/GroupInfo.jsx';
 import axios from 'axios';
 
@@ -22,11 +23,10 @@ export default class GroupInfoContainer extends Component {
 
     getGroup() {
         const url = `http://localhost:3000/api/group/${this.props.params.groupId}`;
-        const headers = {'Authorization': localStorage.token};
+
         axios({
             method: 'get',
             url: url,
-            headers: headers
         })
             .then(response => {
                 console.log(response.data);
@@ -46,7 +46,7 @@ export default class GroupInfoContainer extends Component {
     joinGroup() {
         const role = "member";
         // TODO use user id
-        const url = `http://localhost:3000/api/join/user/${1000}/group/${this.props.params.groupId}/role/${role}`;
+        const url = `http://localhost:3000/api/join/user/${this.props.user.id}/group/${this.props.params.groupId}/role/${role}`;
         const headers = {'Authorization': localStorage.token};
         axios({
             method: 'post',
@@ -65,10 +65,13 @@ export default class GroupInfoContainer extends Component {
 
     render() {
         console.log(this.state);
-        return <GroupInfo
-            group={this.state}
-            groupId={this.props.params.groupId}
-            joinGroup={this.joinGroup}
-        />
+        return (
+	    <div>
+	    <GroupInfo group={this.state}
+	    groupId={this.props.params.groupId}
+	    joinGroup={this.joinGroup}
+	    />
+	    </div>
+	)
     }
 }

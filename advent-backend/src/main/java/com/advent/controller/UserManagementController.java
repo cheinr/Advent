@@ -21,6 +21,11 @@ public class UserManagementController {
         return userManagementService.registerUser(request);
     }
 
+    @RequestMapping(value= "/users/current", method = RequestMethod.GET)
+    public UserDTO getLoggedInUser() {
+        return userManagementService.getLoggedInUser();
+    }
+
     @RequestMapping(value = "/users/save", method = RequestMethod.POST)
     public UserDTO saveUser(@RequestBody UserDTO userDTO) {
         return userManagementService.saveUser(userDTO);
@@ -50,6 +55,11 @@ public class UserManagementController {
     @RequestMapping(value = "/users/display_name/{displayName}", method = RequestMethod.GET)
     public List<UserDTO> getUsersByDisplayName(@PathVariable String displayName) {
         return userManagementService.findUsersByDisplayName(displayName);
+    }
+
+    @RequestMapping(value = "/users/query", method = RequestMethod.GET)
+    public List<UserDTO> searchUsersByDisplayName(@RequestParam(required = false, defaultValue = "", value="displayName") String displayName) {
+        return userManagementService.searchUsersByDisplayName(displayName);
     }
 
     @RequestMapping(value = "/users", method = RequestMethod.GET)
