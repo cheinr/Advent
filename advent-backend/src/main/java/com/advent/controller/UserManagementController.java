@@ -57,6 +57,11 @@ public class UserManagementController {
         return userManagementService.findUsersByDisplayName(displayName);
     }
 
+    @RequestMapping(value = "/users/query", method = RequestMethod.GET)
+    public List<UserDTO> searchUsersByDisplayName(@RequestParam(required = false, defaultValue = "", value="displayName") String displayName) {
+        return userManagementService.searchUsersByDisplayName(displayName);
+    }
+
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     public List<UserDTO> getAllUsers() {
         return userManagementService.findAllUsers();

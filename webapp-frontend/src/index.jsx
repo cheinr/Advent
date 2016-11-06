@@ -13,6 +13,7 @@ import ScheduleAddEvent from './components/schedule-add-event';
 import GroupCreateContainer from './containers/GroupCreateContainer';
 import GroupInfoContainer from './containers/GroupInfoContainer';
 import GroupChatContainer from './containers/GroupChatContainer';
+import SearchResultsContainer from './containers/SearchResultsContainer';
 import SignIn from './components/sign-in';
 import auth from './auth';
 import EventCalendarContainer from './containers/EventCalendarContainer';
@@ -57,7 +58,7 @@ function requireNoAuth(nextState, replace) {
 
 ReactDom.render(
   <Router history={browserHistory}>
-    <Route path="/login" component={SignIn} onEnter={requireNoAuth} />
+      <Route path="/login" component={SignIn} onEnter={requireNoAuth} />
     <Route component={MainLayout} onEnter={requireAuth}>
       <Route path="/" component={HomeContainer} />
       <Route path="/user/:userId" component={ViewUserContainer} />
@@ -70,6 +71,7 @@ ReactDom.render(
       <Route path="/group/create" component={GroupCreateContainer} />
       <Route path="/group/:groupId" component={GroupInfoContainer} />
       <Route path="/chat/group/:groupId" component={GroupChatContainer} />
+      <Route path="/search(/:query)" component={SearchResultsContainer} />
     </Route>
   </Router>
 , document.querySelector('.content'));

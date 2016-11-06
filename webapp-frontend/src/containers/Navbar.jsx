@@ -13,6 +13,7 @@ import NavNotificationFooter from '../components/display/navbar/notification/Nav
 import DropdownToolbar from '../components/display/DropdownToolbar';
 import NavPreferences from '../components/display/navbar/NavPreferences';
 import NavLink from '../components/display/navbar/NavLink';
+import SearchBar from '../components/search-bar';
 
 // TODO dszopa 11/5/16 - Rename to NavbarContainer
 export default class Navbar extends React.Component {
@@ -75,6 +76,10 @@ export default class Navbar extends React.Component {
       });
   }
 
+    onSearchSubmit() {
+	this.props.router.replace("/search?:query");
+    }
+
   render() {
     return (
       <div>
@@ -95,6 +100,9 @@ export default class Navbar extends React.Component {
                 {/*TODO dszopa 11/5/16 - Figure out what links we want in the navbar if any, this is an example*/}
                 <NavLink link="/schedule/addevent" name="Create Event" />
               </NavNav>
+	    
+	    <SearchBar />
+	      
               <NavRight>
                 <NavNav>
                   <NavNotificationDropdown>
