@@ -14,7 +14,8 @@ import DropdownToolbar from '../components/display/DropdownToolbar';
 import NavPreferences from '../components/display/navbar/NavPreferences';
 import NavLink from '../components/display/navbar/NavLink';
 
-export default class extends React.Component {
+// TODO dszopa 11/5/16 - Rename to NavbarContainer
+export default class Navbar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -91,7 +92,7 @@ export default class extends React.Component {
             {/* TODO dszopa 10/25/16 - Fix the fact that stuff is not getting displayed properly by the collapsible */}
             <NavCollapsible>
               <NavNav>
-                <NavLink link="/main" name="Main" />
+                <NavLink link="/events" name="Events" />
               </NavNav>
               <NavRight>
                 <NavNav>

@@ -11,12 +11,14 @@ export default function MainLayout(props) {
       <div className="container-fluid">
         <div className="col-xs-9">
           <div>
-            <div>
-              {props.children}
-            </div>
+            {props.children}
           </div>
-          <div className="col-xs-3">
+        </div>
+        <div className="col-xs-3">
+          <div className="row">
             <SidebarTopRight />
+          </div>
+          <div className="row half-vertical">
             <SidebarBottomRight />
           </div>
         </div>

@@ -4,6 +4,7 @@ import ReactMarkdown from 'react-markdown';
 import Panel from '../components/display/Panel';
 import Thumbnail from '../components/display/Thumbnail';
 import PageHeader from '../components/display/PageHeader';
+import Error from '../components/feedback/Error';
 
 export default class ViewUserContainer extends React.Component {
   constructor(props) {
