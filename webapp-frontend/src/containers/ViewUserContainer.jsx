@@ -15,9 +15,19 @@ export default class ViewUserContainer extends React.Component {
 	    pictureUrl: '',
 	};
     }
+
+    componentWillReceiveProps(nextProps) {
+	if(nextProps.params.userId !== this.props.params.userId) {
+	    this.getUserInfo(nextProps.params.userId);
+	}
+    }
     
     componentWillMount() {	
-	const url = `/api/users/id/${this.props.params.userId}`;
+	this.getUserInfo(this.props.params.userId);
+    }
+
+    getUserInfo(userId) {
+	const url = `/api/users/id/${userId}`;
 	axios.get(url)
 	     .then((response) => {
 		 this.setState({
@@ -33,6 +43,7 @@ export default class ViewUserContainer extends React.Component {
 		     errorMessage: 'There was an error receiving the user from the server',
 		 });
 	     });
+
     }
 
     render() {
