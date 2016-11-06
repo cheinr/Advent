@@ -3,8 +3,7 @@ import ReactDom from 'react-dom';
 import { Router, Route, Link, browserHistory, withRouter } from 'react-router';
 
 import MainLayout from './components/MainLayout';
-import App from './components/App';
-import Home from './components/Home';
+import HomeContainer from './containers/HomeContainer';
 import UserSettingContainer from './containers/UserSettingContainer';
 import ViewUserContainer from './containers/ViewUserContainer';
 import EventCreateContainer from './containers/EventCreateContainer';
@@ -19,7 +18,6 @@ import SignIn from './components/sign-in';
 import auth from './auth';
 import EventCalendarContainer from './containers/EventCalendarContainer';
 import axios from 'axios';
-
 
 function requireAuth(nextState, replace) {
   if (!auth.loggedIn()) {
@@ -51,7 +49,7 @@ function requireAuth(nextState, replace) {
 function requireNoAuth(nextState, replace) {
   if (auth.loggedIn()) {
     replace({
-      pathname: '/main',
+      pathname: '/',
       state: { nextPathname: nextState.location.pathname },
     });
   }
@@ -62,8 +60,7 @@ ReactDom.render(
   <Router history={browserHistory}>
       <Route path="/login" component={SignIn} onEnter={requireNoAuth} />
     <Route component={MainLayout} onEnter={requireAuth}>
-      <Route path="/" component={App} />
-      <Route path="/main" component={Home} />
+      <Route path="/" component={HomeContainer} />
       <Route path="/user/:userId" component={ViewUserContainer} />
       <Route path="/user/edit/:userId" component={UserSettingContainer} />
       <Route path="/schedule/addevent" component={ScheduleAddEvent} />

@@ -8,7 +8,7 @@ const SignIn = withRouter(React.createClass({ //withRouter gives this component 
   onSignIn: function(googleUser) {
     auth.login(googleUser, () => {
       if(auth.loggedIn()) {
-        return this.props.router.replace('/main');
+        return this.props.router.replace('/');
       }
       console.log("user successfully logged in.");
     });

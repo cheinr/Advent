@@ -41,7 +41,7 @@ dependencies {
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 
-task bootRunTest(type: org.springframework.boot.gradle.run.BootRunTask, dependsOn: 'build') {
+task bootRunTest(type: org.springframework.boot.gradle.run.BootRunTask, dependsOn: 'compileJava') {
     group = 'Application'
     doFirst() {
         main = project.mainClassName
