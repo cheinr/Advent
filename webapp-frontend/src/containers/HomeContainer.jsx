@@ -18,8 +18,8 @@ export default class extends React.Component {
   }
 
   getAnnouncementsForUser() {
-    // const url = `/api/announcement/homepage/user/${localStorage.id}`;
-    const url = '/api/announcement/homepage/user/1000';
+    // TODO dszopa 11/6/16 - Once we fix the sign in backend to user the principal, change this
+    const url = `/api/announcement/homepage/user/${localStorage.id}`;
     const headers = { Authorization: localStorage.token };
     console.log(headers);
     console.log(url);
