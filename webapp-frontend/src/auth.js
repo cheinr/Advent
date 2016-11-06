@@ -17,7 +17,8 @@ module.exports = {
     axios({
       method: 'post',
       url: '/api/auth/register',
-      headers: {"google-id-token": id_token}
+	headers: {"google-id-token": id_token,
+		  "Authorization": id_token}
     }).then(function(response) { //success
       console.log(response);
       localStorage.id = response.data.id;
