@@ -16,6 +16,7 @@ import GroupInfoContainer from './containers/GroupInfoContainer';
 import SignIn from './components/sign-in';
 import auth from './auth';
 import EventCalendarContainer from './containers/EventCalendarContainer';
+import GroupEditContainer from './containers/GroupEditContainer';
 import axios from 'axios';
 
 
@@ -74,6 +75,7 @@ ReactDom.render(
       <Route path="/event/:eventId" component={EventInfoContainer} />
       <Route path="/group/create" component={GroupCreateContainer} />
       <Route path="/group/:groupId" component={GroupInfoContainer} />
+      <Route path="/group/edit/:groupId" component={GroupEditContainer} />
     </Route>
   </Router>
 , document.querySelector('.content'));

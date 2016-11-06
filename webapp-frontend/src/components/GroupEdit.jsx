@@ -7,6 +7,7 @@ export default class GroupEdit extends Component {
 	
 	render(){
 		return (
+
 			<div>
 				<h1>Edit Group</h1>
 				
@@ -23,7 +24,7 @@ export default class GroupEdit extends Component {
 										onChange={this.props.descChange}
 										value={this.props.values.description}/>
 					</div>
-					<button type=""button" className="btn btn-default" onClick={this.props.submitForm}>Submit</button>
+					<button type="button" className="btn btn-default" onClick={this.props.submitForm}>Submit</button>
 				</form>
 			</div>
 		);
