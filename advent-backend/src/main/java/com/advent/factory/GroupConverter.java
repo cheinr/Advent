@@ -5,12 +5,8 @@ import com.advent.entity.Group;
 import com.advent.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -18,9 +14,6 @@ import java.util.List;
  */
 @Component
 public class GroupConverter {
-
-    @Autowired
-    private UserRepo userRepo;
 
     public GroupDTO groupToGroupDTO(Group group) {
         if (group == null) {
@@ -31,9 +24,6 @@ public class GroupConverter {
         groupDTO.setId(group.getId());
         groupDTO.setGroupName(group.getGroupName());
         groupDTO.setDescription(group.getDescription());
-        groupDTO.setEvents(new ArrayList<>(group.getEvents()));
-        groupDTO.setUserGroups(new ArrayList<>(group.getUserGroups()));
-        groupDTO.setAnnouncements(new ArrayList<>(group.getAnnouncements()));
         return groupDTO;
     }
 
@@ -44,9 +34,6 @@ public class GroupConverter {
         group.setId(groupDTO.getId());
         group.setGroupName(groupDTO.getGroupName());
         group.setDescription(groupDTO.getDescription());
-        group.setEvents(groupDTO.getEvents());
-        group.setUserGroups(groupDTO.getUserGroups());
-        group.setAnnouncements(groupDTO.getAnnouncements());
         return group;
     }
 
