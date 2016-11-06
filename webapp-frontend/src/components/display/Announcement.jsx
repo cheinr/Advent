@@ -4,7 +4,7 @@ export default function Announcement(props) {
   return (
     <div className="media">
       <div className="media-left">
-        <a href="#">
+        <a href={props.group.groupPictureUrl}>
           <img className="media-object" src={props.group.groupPictureUrl} alt="group" />
         </a>
       </div>
