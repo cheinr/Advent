@@ -14,11 +14,13 @@ export default function MainLayout(props) {
             {props.children}
           </div>
         </div>
-        <div className="col-xs-3">
+        {/* <div className="col-xs-3 sidebar" > */}
+        <div className="sidebar">
           <div className="row">
             <SidebarTopRight />
           </div>
-          <div className="row half-vertical">
+          {/* <div className="row half-vertical"> */}
+          <div className="row">
             <SidebarBottomRight />
           </div>
         </div>

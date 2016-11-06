@@ -80,3 +80,17 @@
 .calendar-container{
     height: 500px;
 }
+
+body { padding-top: 60px; }
+@media screen and (max-width: 768px) {
+    body { padding-top: 0px; }
+}
+
+.sidebar {
+    width: 26%;
+    height: 200px;
+    position: fixed;
+    right: -1%;
+    top: 200px;
+    border: 1px solid black;
+}
