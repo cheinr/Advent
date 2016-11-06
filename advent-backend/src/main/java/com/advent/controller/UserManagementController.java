@@ -21,6 +21,11 @@ public class UserManagementController {
         return userManagementService.registerUser(request);
     }
 
+    @RequestMapping(value= "/users/current", method = RequestMethod.GET)
+    public UserDTO getLoggedInUser() {
+        return userManagementService.getLoggedInUser();
+    }
+
     @RequestMapping(value = "/users/save", method = RequestMethod.POST)
     public UserDTO saveUser(@RequestBody UserDTO userDTO) {
         return userManagementService.saveUser(userDTO);

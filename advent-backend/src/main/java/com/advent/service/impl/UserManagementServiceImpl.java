@@ -13,6 +13,8 @@ import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -140,5 +142,14 @@ public class UserManagementServiceImpl implements UserManagementService {
         );
 
         return userDTOs;
+    }
+
+    @Override
+    public UserDTO getLoggedInUser() {
+        UserDTO currentUser = null;
+
+        Authentication a = SecurityContextHolder.getContext().getAuthentication();
+        currentUser = (UserDTO) a.getDetails();
+        return currentUser;
     }
 }

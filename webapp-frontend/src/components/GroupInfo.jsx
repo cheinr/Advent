@@ -32,6 +32,11 @@ export default class GroupInfo extends Component {
                 <button className="btn btn-default" onClick={this.props.joinGroup}>
                     Join Group
                 </button>
+		<Link className="btn btn-default"
+		      to={`/chat/group/${this.props.groupId}`}>
+		    Group Chat
+		</Link>
+		
             </div>
         );
     }

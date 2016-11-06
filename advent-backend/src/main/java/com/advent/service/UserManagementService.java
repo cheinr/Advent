@@ -21,4 +21,6 @@ public interface UserManagementService {
 
     List<UserDTO> findUsersByDisplayName(String displayName);
     List<UserDTO> findAllUsers();
+
+    UserDTO getLoggedInUser();
 }
