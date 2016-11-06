@@ -11,9 +11,9 @@ module.exports = {
     var id_token = googleUser.getAuthResponse().id_token;
 
     /*
-    *   Send the token to our backend server, which will check if the user exists,
-    *   and if not create a new one.
-    */
+     *   Send the token to our backend server, which will check if the user exists,
+     *   and if not create a new one.
+     */
     axios({
       method: 'post',
       url: '/api/auth/register',
@@ -21,18 +21,19 @@ module.exports = {
     }).then(function(response) { //success
       console.log(response);
       localStorage.id = response.data.id;
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
 
-    //store the token
-    //we will use this token to authenticate with our backend
+      //store the token
+      //we will use this token to authenticate with our backend
       localStorage.token = id_token;
       axios.defaults.headers.common["Authorization"] = localStorage.token;
+      // TOOD dszopa 11/6/16 - Remove after signin is fixed. Used for getting token for test postman requests
+      console.log(id_token);
 
-    if(cb) cb();
-
+      if(cb) cb();
+    })
+      .catch(function (error) {
+        console.log(error);
+      });
   },
 
 

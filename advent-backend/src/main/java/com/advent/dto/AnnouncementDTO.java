@@ -1,22 +1,15 @@
-package com.advent.entity;
+package com.advent.dto;
 
-import javax.persistence.*;
 import java.util.Date;
 
-@Entity
-@Table(name = "announcement")
-public class Announcement {
+public class AnnouncementDTO {
 
     private Long id;
     private String title;
     private String content;
     private Date date;
-    private Group group;
+    private GroupDTO groupDTO;
 
-    @Id
-    @Column(name = "id", unique = true, nullable = false, length = 20)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
-    @SequenceGenerator(name = "generator", sequenceName = "announcement_seq", allocationSize = 1)
     public Long getId() {
         return id;
     }
@@ -25,7 +18,6 @@ public class Announcement {
         this.id = id;
     }
 
-    @Column(name = "title")
     public String getTitle() {
         return title;
     }
@@ -34,7 +26,6 @@ public class Announcement {
         this.title = title;
     }
 
-    @Column(name = "content")
     public String getContent() {
         return content;
     }
@@ -43,7 +34,6 @@ public class Announcement {
         this.content = content;
     }
 
-    @Column(name = "date")
     public Date getDate() {
         return date;
     }
@@ -52,14 +42,12 @@ public class Announcement {
         this.date = date;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "group_table_id", nullable = false)
-    public Group getGroup() {
-        return group;
+    public GroupDTO getGroupDTO() {
+        return groupDTO;
     }
 
-    public void setGroup(Group group) {
-        this.group = group;
+    public void setGroupDTO(GroupDTO groupDTO) {
+        this.groupDTO = groupDTO;
     }
 
     @Override
@@ -67,13 +55,13 @@ public class Announcement {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Announcement that = (Announcement) o;
+        AnnouncementDTO that = (AnnouncementDTO) o;
 
         if (id != null ? !id.equals(that.id) : that.id != null) return false;
         if (title != null ? !title.equals(that.title) : that.title != null) return false;
         if (content != null ? !content.equals(that.content) : that.content != null) return false;
         if (date != null ? !date.equals(that.date) : that.date != null) return false;
-        return group != null ? group.equals(that.group) : that.group == null;
+        return groupDTO != null ? groupDTO.equals(that.groupDTO) : that.groupDTO == null;
 
     }
 
@@ -83,18 +71,18 @@ public class Announcement {
         result = 31 * result + (title != null ? title.hashCode() : 0);
         result = 31 * result + (content != null ? content.hashCode() : 0);
         result = 31 * result + (date != null ? date.hashCode() : 0);
-        result = 31 * result + (group != null ? group.hashCode() : 0);
+        result = 31 * result + (groupDTO != null ? groupDTO.hashCode() : 0);
         return result;
     }
 
     @Override
     public String toString() {
-        return "Announcement{" +
+        return "AnnouncementDTO{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
                 ", date=" + date +
-                ", group=" + group +
+                ", groupDTO=" + groupDTO +
                 '}';
     }
 }

@@ -17,9 +17,7 @@ public class User {
     private String pictureUrl;
     private List<EventResponse> eventResponses;
     private List<UserGroup> userGroups;
-    private List<Group> joinedGroups;
     private List<Notification> notifications;
-    // TODO dszopa 9/25/16 - Add List of chats the user is in (chats need to be made first)
 
     public User() {
         notifications = new ArrayList<>();
@@ -73,8 +71,8 @@ public class User {
         this.pictureUrl = pictureUrl;
     }
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     public List<EventResponse> getEventResponses() {
         return eventResponses;
     }
@@ -83,8 +81,8 @@ public class User {
         this.eventResponses = eventResponses;
     }
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     public List<UserGroup> getUserGroups() {
         return userGroups;
     }
@@ -93,19 +91,7 @@ public class User {
         this.userGroups = userGroups;
     }
 
-    @ManyToMany
     @JsonIgnore
-    @JoinTable(name = "joined_groups",
-            joinColumns = @JoinColumn(name = "group_table_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"))
-    public List<Group> getJoinedGroups() {
-        return joinedGroups;
-    }
-
-    public void setJoinedGroups(List<Group> joinedGroups) {
-        this.joinedGroups = joinedGroups;
-    }
-
     @OneToMany(mappedBy = "user")
     public List<Notification> getNotifications() {
         return notifications;
