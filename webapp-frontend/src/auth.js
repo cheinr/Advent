@@ -19,19 +19,19 @@ module.exports = {
       url: '/api/auth/register',
       headers: {"google-id-token": id_token}
     }).then(function(response) { //success
-      console.log(response);
-      localStorage.id = response.data.id;
+	console.log(response);
+	localStorage.id = response.data.id;
+	
+	//store the token
+	//we will use this token to authenticate with our backend
+	localStorage.token = id_token;
+	axios.defaults.headers.common["Authorization"] = localStorage.token;
+
+	if(cb) cb();
     })
     .catch(function (error) {
       console.log(error);
     });
-
-    //store the token
-    //we will use this token to authenticate with our backend
-      localStorage.token = id_token;
-      axios.defaults.headers.common["Authorization"] = localStorage.token;
-
-    if(cb) cb();
 
   },
 
