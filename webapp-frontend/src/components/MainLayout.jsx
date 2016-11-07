@@ -30,7 +30,7 @@ export default class MainLayout extends React.Component {
         <div className="container-fluid">
           <div className="col-xs-9">
             <div>
-              {props.children}
+              {children}
             </div>
           </div>
           {/* <div className="col-xs-3 sidebar" > */}
