@@ -18,7 +18,7 @@ export default class UserGroupList extends Component {
                 {
                     this.props.users.map(function(userGroup) {
                         return (
-                            <tr key={userGroup.user.id}>
+                            <tr key={userGroup.id}>
                                 <td>{userGroup.user.displayName}</td>
                                 <td>{userGroup.role}</td>
                                 <td>

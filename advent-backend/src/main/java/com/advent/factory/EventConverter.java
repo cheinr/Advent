@@ -26,6 +26,7 @@ public class EventConverter {
         eventDTO.setStartDate(dateToString(event.getStartDate()));
         eventDTO.setEndDate(dateToString(event.getEndDate()));
         eventDTO.setDescription(event.getDescription());
+        eventDTO.setLocation(event.getLocation());
         eventDTO.setEventResponses(event.getEventResponses());
         eventDTO.setGroup(event.getGroup());
 
@@ -40,6 +41,7 @@ public class EventConverter {
         event.setDescription(eventDTO.getDescription());
         event.setStartDate(stringToDate(eventDTO.getStartDate()));
         event.setEndDate(stringToDate(eventDTO.getEndDate()));
+        event.setLocation(eventDTO.getLocation());
         event.setGroup(eventDTO.getGroup());
 
         return event;
