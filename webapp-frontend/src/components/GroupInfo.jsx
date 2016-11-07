@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import EventList from '../components/EventList';
-import UserList from '../components/UserList';
+import UserGroupList from './UserGroupList';
 
 export default class GroupInfo extends Component {
     componentDidMount() {
@@ -18,12 +18,12 @@ export default class GroupInfo extends Component {
                     <div>Description: {this.props.group.description}</div>
                 </div>
                 <div className="form-group">
-                    <div>Upcoming Events:</div>
+                    <div>Upcoming Events: <Link to={`/group/calendar/${this.props.groupId}`}>(View Group Calendar)</Link></div>
                     <EventList events={this.props.group.events}/>
                 </div>
                 <div className="form-group">
                     <div>Users:</div>
-                    <UserList users={this.props.group.users}/>
+                    <UserGroupList users={this.props.group.users}/>
                 </div>
                 <Link className="btn btn-default" role="button"
                       to={`/event/create/${this.props.groupId}`}>
@@ -32,10 +32,10 @@ export default class GroupInfo extends Component {
                 <button className="btn btn-default" onClick={this.props.joinGroup}>
                     Join Group
                 </button>
-		<Link className="btn btn-default"
-		      to={`/chat/group/${this.props.groupId}`}>
-		    Group Chat
-		</Link>
+                <Link className="btn btn-default"
+                      to={`/chat/group/${this.props.groupId}`}>
+                    Group Chat
+                </Link>
 		
             </div>
         );

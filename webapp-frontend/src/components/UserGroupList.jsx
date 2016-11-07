@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 
 //
-export default class UserList extends Component {
+export default class UserGroupList extends Component {
 
     render() {
         return (
@@ -10,15 +10,19 @@ export default class UserList extends Component {
                 <thead>
                 <tr>
                     <th>Name</th>
+                    <th>Role</th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
                 {
-                    this.props.users.map(function(user) {
+                    this.props.users.map(function(userGroup) {
                         return (
-                            <tr key={user.user.id}>
+                            <tr key={userGroup.user.id}>
+                                <td>{userGroup.user.displayName}</td>
+                                <td>{userGroup.role}</td>
                                 <td>
-                                    <Link to={`/user/${user.user.id}`}>{user.user.displayName}</Link>
+                                    <Link to={`/user/${userGroup.user.id}`}>View User</Link>
                                 </td>
                             </tr>
                         )

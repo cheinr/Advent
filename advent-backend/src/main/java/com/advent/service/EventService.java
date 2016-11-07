@@ -46,9 +46,12 @@ public class EventService {
     }
 
     public EventResponse saveEventResponse(Long userId, Long eventId, String response) {
-        EventResponse eventResponse = new EventResponse();
-        eventResponse.setUser(userRepo.findOne(userId));
-        eventResponse.setEvent(eventRepo.findOne(eventId));
+        EventResponse eventResponse = eventResponseRepo.findByUserIdandEventId(userId, eventId);
+        if (eventResponse == null) {
+            eventResponse = new EventResponse();
+            eventResponse.setUser(userRepo.findOne(userId));
+            eventResponse.setEvent(eventRepo.findOne(eventId));
+        }
         eventResponse.setResponse(response);
         return eventResponseRepo.save(eventResponse);
     }

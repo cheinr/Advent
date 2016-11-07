@@ -66,7 +66,7 @@ ReactDom.render(
       <Route path="/schedule/addevent" component={ScheduleAddEvent} />
       <Route path="/event/create/:groupId" component={EventCreateContainer} />
       <Route path="/event/list" component={EventListContainer} />
-      <Route path="/event/calendar" component={EventCalendarContainer} />
+      <Route path="/group/calendar/:groupId" component={EventCalendarContainer} />
       <Route path="/event/:eventId" component={EventInfoContainer} />
       <Route path="/group/create" component={GroupCreateContainer} />
       <Route path="/group/:groupId" component={GroupInfoContainer} />
