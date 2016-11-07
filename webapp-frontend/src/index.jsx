@@ -51,7 +51,7 @@ function requireAuth(nextState, replace) {
 }
 
 // this onEnter function is used to prevent logged in users from visiting
-// the login route.
+// the login route.npm
 function requireNoAuth(nextState, replace) {
   if (auth.loggedIn()) {
     replace({
