@@ -19,7 +19,6 @@ import SignIn from './components/sign-in';
 import auth from './auth';
 import EventCalendarContainer from './containers/EventCalendarContainer';
 import GroupEditContainer from './containers/GroupEditContainer';
-import axios from 'axios';
 
 
 
