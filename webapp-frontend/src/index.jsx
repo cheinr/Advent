@@ -21,9 +21,6 @@ import EventCalendarContainer from './containers/EventCalendarContainer';
 import GroupEditContainer from './containers/GroupEditContainer';
 
 
-
-
-
 function requireAuth(nextState, replace) {
   if (!auth.loggedIn()) {
     replace({
