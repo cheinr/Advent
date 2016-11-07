@@ -24,7 +24,7 @@ public class GroupConverter {
         groupDTO.setDescription(group.getDescription());
         groupDTO.setGroupPictureUrl(group.getGroupPictureUrl());
         groupDTO.setTags(group.getTags());
-        groupDTO.setEvents(new ArrayList<>(group.getEvents()));
+        groupDTO.setEvents(group.getEvents());
         groupDTO.setUserGroups(group.getUserGroups());
         groupDTO.setAnnouncements(group.getAnnouncements());
         return groupDTO;
@@ -39,7 +39,7 @@ public class GroupConverter {
         group.setDescription(groupDTO.getDescription());
         group.setGroupPictureUrl(groupDTO.getGroupPictureUrl());
         group.setTags(groupDTO.getTags());
-        groupDTO.setEvents(new ArrayList<>(group.getEvents()));
+        groupDTO.setEvents(group.getEvents());
         groupDTO.setUserGroups(group.getUserGroups());
         groupDTO.setAnnouncements(group.getAnnouncements());
         return group;

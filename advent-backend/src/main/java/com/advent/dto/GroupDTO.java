@@ -6,9 +6,6 @@ import com.advent.entity.UserGroup;
 
 import java.util.List;
 
-/**
- * Created by clai on 10/28/16.
- */
 public class GroupDTO {
 
     private Long id;

@@ -35,6 +35,7 @@ export default class GroupCreateContainer extends Component {
         )
             .then(response => {
                 console.log(response.data);
+                this.context.router.push(`/group/${response.data.id}`);
             })
             .catch(error => {
                 console.log(error);
@@ -54,3 +55,7 @@ export default class GroupCreateContainer extends Component {
         )
     }
 }
+
+GroupCreateContainer.contextTypes = {
+    router: React.PropTypes.object.isRequired
+};

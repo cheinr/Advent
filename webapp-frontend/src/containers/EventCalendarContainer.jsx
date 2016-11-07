@@ -12,7 +12,7 @@ export default class EventCalendarContainer extends Component {
     }
 
     componentDidMount() {
-        const url = `http://localhost:3000/api/event/list`;
+        const url = `http://localhost:3000/api/event/group/${this.props.params.groupId}`;
         const headers = {'Authorization': localStorage.token};
 
         axios({method: 'post',
@@ -45,6 +45,7 @@ export default class EventCalendarContainer extends Component {
             <div className="calendar-container">
                 <EventCalendar
                     events={this.state.events}
+                    groupId={this.props.params.groupId}
                 />
             </div>
         )

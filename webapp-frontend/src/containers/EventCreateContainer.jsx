@@ -63,6 +63,7 @@ export default class EventCreateContainer extends Component {
             )
             .then(response => {
                 console.log(response.data);
+                this.context.router.push(`/event/${response.data.id}`);
             })
             .catch(error => {
                 console.log(error);
@@ -86,3 +87,7 @@ export default class EventCreateContainer extends Component {
         )
     }
 }
+
+EventCreateContainer.contextTypes = {
+    router: React.PropTypes.object.isRequired
+};

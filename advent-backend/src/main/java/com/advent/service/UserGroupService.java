@@ -21,7 +21,11 @@ public class UserGroupService {
     private UserGroupRepo userGroupRepo;
 
     public UserGroup joinGroupAsUser(Long userId, Long groupId, String role) {
-        UserGroup userGroup = new UserGroup();
+        UserGroup userGroup = userGroupRepo.findByUserIdAndGroupId(userId, groupId);
+        if (userGroup != null) {
+            return userGroup;
+        }
+        userGroup = new UserGroup();
         userGroup.setUser(userRepo.findOne(userId));
         userGroup.setGroup(groupRepo.findOne(groupId));
         userGroup.setRole(role);
