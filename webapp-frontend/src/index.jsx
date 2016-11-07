@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import { Router, Route, Link, browserHistory } from 'react-router';
+import { Router, Route, Link, browserHistory, withRouter } from 'react-router';
+import axios from 'axios';
 
 import MainLayout from './components/MainLayout';
-import App from './components/App';
-import Home from './components/Home';
+import HomeContainer from './containers/HomeContainer';
 import UserSettingContainer from './containers/UserSettingContainer';
 import ViewUserContainer from './containers/ViewUserContainer';
 import EventCreateContainer from './containers/EventCreateContainer';
@@ -13,6 +13,8 @@ import EventInfoContainer from './containers/EventInfoContainer';
 import ScheduleAddEvent from './components/schedule-add-event';
 import GroupCreateContainer from './containers/GroupCreateContainer';
 import GroupInfoContainer from './containers/GroupInfoContainer';
+import GroupChatContainer from './containers/GroupChatContainer';
+import SearchResultsContainer from './containers/SearchResultsContainer';
 import SignIn from './components/sign-in';
 import auth from './auth';
 import EventCalendarContainer from './containers/EventCalendarContainer';
@@ -53,7 +55,7 @@ function requireAuth(nextState, replace) {
 function requireNoAuth(nextState, replace) {
   if (auth.loggedIn()) {
     replace({
-      pathname: '/main',
+      pathname: '/',
       state: { nextPathname: nextState.location.pathname },
     });
   }
@@ -62,10 +64,9 @@ function requireNoAuth(nextState, replace) {
 
 ReactDom.render(
   <Router history={browserHistory}>
-    <Route path="/login" component={SignIn} onEnter={requireNoAuth} />
+      <Route path="/login" component={SignIn} onEnter={requireNoAuth} />
     <Route component={MainLayout} onEnter={requireAuth}>
-      <Route path="/" component={App} />
-      <Route path="/main" component={Home} />
+      <Route path="/" component={HomeContainer} />
       <Route path="/user/:userId" component={ViewUserContainer} />
       <Route path="/user/edit/:userId" component={UserSettingContainer} />
       <Route path="/schedule/addevent" component={ScheduleAddEvent} />
@@ -75,6 +76,8 @@ ReactDom.render(
       <Route path="/event/:eventId" component={EventInfoContainer} />
       <Route path="/group/create" component={GroupCreateContainer} />
       <Route path="/group/:groupId" component={GroupInfoContainer} />
+      <Route path="/chat/group/:groupId" component={GroupChatContainer} />
+      <Route path="/search(/:query)" component={SearchResultsContainer} />
       <Route path="/group/edit/:groupId" component={GroupEditContainer} />
     </Route>
   </Router>
