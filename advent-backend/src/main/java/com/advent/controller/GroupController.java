@@ -3,6 +3,7 @@ package com.advent.controller;
 import com.advent.dto.GroupDTO;
 import com.advent.entity.Group;
 import com.advent.service.GroupService;
+import com.advent.service.UserGroupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,6 +16,9 @@ public class GroupController {
     @Autowired
     private GroupService groupService;
 
+    @Autowired
+    private UserGroupService userGroupService;
+
     @RequestMapping("/group")
     public Group getGroupInfo() {
         return null;
@@ -23,6 +27,7 @@ public class GroupController {
     //creates new Group
     @RequestMapping(value = "/group/new", method = RequestMethod.POST)
     public Group newGroup(@RequestBody Group group) {
+        userGroupService.joinGroup(group.getId(), "MODERATOR"); //Add the current user as a moderator
         return groupService.saveGroup(group);
     }
 
