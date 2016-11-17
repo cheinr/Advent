@@ -24,22 +24,26 @@ public class UserGroupService {
     @Autowired
     private UserGroupRepo userGroupRepo;
 
-    /*
-    TODO - @chein this should check the security context to make sure the currently logged in user has the
-    right authorities to add the selected user as a moderator.
-     */
+    
     public UserGroup joinGroupAsUser(Long userId, Long groupId, String role) {
-        UserGroup userGroup = new UserGroup();
-        userGroup.setUser(userRepo.findOne(userId));
-        userGroup.setGroup(groupRepo.findOne(groupId));
-        userGroup.setRole(role);
-        return userGroupRepo.save(userGroup);
+
+        Authentication a = SecurityContextHolder.getContext().getAuthentication();
+        UserDTO currentUser = (UserDTO) a.getDetails();
+
+        if(userGroupRepo.getUserGroup(userId, groupId).getRole() == "MODERATOR") {
+            UserGroup userGroup = new UserGroup();
+            userGroup.setUser(userRepo.findOne(userId));
+            userGroup.setGroup(groupRepo.findOne(groupId));
+            userGroup.setRole(role);
+            return userGroupRepo.save(userGroup);
+        }
+        return null;
     }
 
     /**
      * Same as joinGroupAsUser but adds the user in the security context instead.
-     * @param id
-     * @param moderator
+     * @param groupId
+     * @param role
      */
     public UserGroup joinGroup(Long groupId, String role) {
         UserDTO currentUser = null;
