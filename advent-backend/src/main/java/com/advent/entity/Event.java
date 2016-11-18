@@ -1,5 +1,6 @@
 package com.advent.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -21,9 +22,11 @@ public class Event {
     private String description;
     @Column(name = "start_date")
     @Temporal(TemporalType.TIMESTAMP)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date startDate;
     @Column(name = "end_date")
     @Temporal(TemporalType.TIMESTAMP)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date endDate;
     @Column(name = "location")
     private String location;
@@ -36,11 +39,6 @@ public class Event {
     @JoinColumn(name = "group_table_id", nullable = false)
     @JsonIgnore
     private Group group;
-
-    // Temporarily Transient group should relate to groups
-
-    @Transient
-    private List<User> usersGoing;
 
     public Long getId() {
         return id;
@@ -88,14 +86,6 @@ public class Event {
 
     public void setLocation(String location) {
         this.location = location;
-    }
-
-    public List<User> getUsersGoing() {
-        return usersGoing;
-    }
-
-    public void setUsersGoing(List<User> usersGoing) {
-        this.usersGoing = usersGoing;
     }
 
     public Boolean getPrivate() {

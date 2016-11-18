@@ -4,7 +4,6 @@ export default class GroupCreate extends Component {
     componentDidMount() {
 
     }
-
     render() {
         return (
             <div>

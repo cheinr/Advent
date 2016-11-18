@@ -1,7 +1,9 @@
 package com.advent.controller;
 
 import com.advent.dto.EventDTO;
+import com.advent.dto.EventResponseDTO;
 import com.advent.entity.Event;
+import com.advent.entity.EventResponse;
 import com.advent.service.EventService;
 import com.advent.service.UserManagementService;
 import com.advent.service.impl.UserManagementServiceImpl;
@@ -31,7 +33,7 @@ public class EventController {
         return eventService.getAllEvents();
     }
 
-    @RequestMapping(value = "/event/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/event/id/{id}", method = RequestMethod.GET)
     public EventDTO getEventById(@PathVariable Long id) {
         return eventService.getEventById(id);
     }
@@ -39,6 +41,12 @@ public class EventController {
     @RequestMapping(value = "/event/group/{groupId}")
     public List<EventDTO> getEventByGroup(@PathVariable Long groupId) {
         return eventService.getEventByGroup(groupId);
+    }
+
+    @RequestMapping(value = "/event/respond/", method = RequestMethod.POST)
+    public EventResponse respondToEvent(@RequestBody EventResponseDTO eventResponseDTO) {
+        return eventService.saveEventResponse(userManagementService.getLoggedInUser().getId(),
+                eventResponseDTO.getEventId(), eventResponseDTO.getResponse());
     }
 }
 

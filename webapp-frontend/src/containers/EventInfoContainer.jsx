@@ -14,10 +14,11 @@ export default class EventInfoContainer extends Component {
             endDate: '',
             location: '',
             group: '',
-            userGoing: '',
+            eventResponses: [],
             private: ''
         };
         this.getEvent = this.getEvent.bind(this);
+        this.respondToEvent = this.respondToEvent.bind(this);
     }
 
     componentDidMount() {
@@ -25,7 +26,7 @@ export default class EventInfoContainer extends Component {
     }
 
     getEvent() {
-        const url = `http://localhost:3000/api/event/${this.props.params.eventId}`;
+        const url = `http://localhost:3000/api/event/id/${this.props.params.eventId}`;
         const headers = {'Authorization': localStorage.token};
         axios({
             method: 'get',
@@ -42,7 +43,7 @@ export default class EventInfoContainer extends Component {
                     endDate: response.data.endDate,
                     location: response.data.location,
                     group: response.data.group,
-                    userGoing: response.data.userGoing,
+                    eventResponses: response.data.eventResponses,
                     private: response.data.private
                 });
             })
@@ -51,9 +52,29 @@ export default class EventInfoContainer extends Component {
             });
     };
 
+    respondToEvent(response) {
+        const url = `http://localhost:3000/api/event/respond/`;
+        const data = {
+            eventId: this.props.params.eventId,
+            response: response
+        };
+        axios({
+            method: 'post',
+            url: url,
+            data: data
+        })
+            .then(response => {
+                this.getEvent();
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }
+
     render() {
         return <EventInfo
             event={this.state}
+            respondToEvent={(message) => this.respondToEvent(message)}
         />
     }
 }
