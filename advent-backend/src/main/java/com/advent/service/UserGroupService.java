@@ -30,7 +30,7 @@ public class UserGroupService {
         Authentication a = SecurityContextHolder.getContext().getAuthentication();
         UserDTO currentUser = (UserDTO) a.getDetails();
 
-        if(userGroupRepo.getUserGroup(userId, groupId).getRole() == "MODERATOR") {
+        if(userGroupRepo.findByUserIdAndGroupId(userId, groupId).getRole() == "MODERATOR") {
             UserGroup userGroup = new UserGroup();
             userGroup.setUser(userRepo.findOne(userId));
             userGroup.setGroup(groupRepo.findOne(groupId));
@@ -53,6 +53,7 @@ public class UserGroupService {
 
         UserGroup userGroup = new UserGroup();
         userGroup.setUser(userRepo.findOne(currentUser.getId()));
+
         userGroup.setGroup(groupRepo.findOne(groupId));
         userGroup.setRole(role);
         return userGroupRepo.save(userGroup);

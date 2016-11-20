@@ -52,9 +52,7 @@ export default class GroupInfoContainer extends Component {
             url: url,
         })
             .then(response => {
-                const users = this.state.users;
-                users.push(response.data);
-                this.setState({users: users});
+                this.getGroup();
             })
             .catch(error => {
                 console.log(error);

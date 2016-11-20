@@ -35,19 +35,24 @@ export default class EventCalendar extends Component {
 
     render() {
         return (
-            <BigCalendar
-                {...this.props}
-                events={this.props.events}
-                timeslots={2}
-                defaultDate={new Date()}
-                defaultView="agenda"
-                components={{
-                    event: Event,
-                    agenda: {
-                        event: EventAgenda
-                    }
-                }}
-            />
+            <div>
+                <Link to={`/group/${this.props.groupId}`}>Back to Group</Link>
+                <div>
+                    <BigCalendar
+                        {...this.props}
+                        events={this.props.events}
+                        timeslots={2}
+                        defaultDate={new Date()}
+                        defaultView="agenda"
+                        components={{
+                            event: Event,
+                            agenda: {
+                                event: EventAgenda
+                            }
+                        }}
+                    />
+                </div>
+            </div>
         );
     }
 }
