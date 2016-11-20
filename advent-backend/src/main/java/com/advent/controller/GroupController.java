@@ -2,8 +2,11 @@ package com.advent.controller;
 
 import com.advent.dto.GroupDTO;
 import com.advent.entity.Group;
+import com.advent.entity.UserGroup;
+import com.advent.repo.UserGroupRepo;
 import com.advent.service.GroupService;
 import com.advent.service.UserGroupService;
+import com.advent.service.impl.UserManagementServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +21,12 @@ public class GroupController {
 
     @Autowired
     private UserGroupService userGroupService;
+
+    @Autowired
+    private UserManagementServiceImpl userManagementService;
+
+    @Autowired
+    private UserGroupRepo userGroupRepo;
 
     @RequestMapping("/group")
     public Group getGroupInfo() {
@@ -34,6 +43,13 @@ public class GroupController {
 
     @RequestMapping(value = "/group/edit", method = RequestMethod.POST)
     public Group editGroup(@RequestBody Group group) {
+        //make sure logged in user is MODERATOR of group
+        UserGroup userGroup = userGroupRepo.findByUserIdAndGroupId(userManagementService.getLoggedInUser().getId(),
+                group.getId());
+
+        if(userGroup == null || userGroup.getRole() != "MODERATOR") {
+            return null;
+        }
         return groupService.saveGroup(group);
     }
 

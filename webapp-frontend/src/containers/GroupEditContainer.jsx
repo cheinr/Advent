@@ -16,11 +16,12 @@ export default class GroupEditContainer extends Component {
 	}
 
 	componentDidMount() {
-		this.getGroup();
+	    this.getGroup();
+	    
 	}
 
 	getGroup() {
-		const url = `http://localhost:3000/api/group/${this.props.params.groupId}`;
+		const url = `/api/group/${this.props.params.groupId}`;
 		axios({
 			method: 'get',
 			url: url
@@ -36,7 +37,7 @@ export default class GroupEditContainer extends Component {
 			.catch(error => {
 				console.log(error);
 			});
-	};
+	}
 	
 	nameChange(e){
 		this.setState({name: e.target.value});
@@ -47,23 +48,23 @@ export default class GroupEditContainer extends Component {
 	}
 	
 	submitForm() {
-		const url = "http://localhost:3000/api/group/edit/";
+		const url = "/api/group/edit/";
 		const data = {
-            id: this.state.id,
-			groupName: this.state.name,
-			description: this.state.description
+		    id: this.state.id,
+		    groupName: this.state.name,
+		    description: this.state.description
 		};
 		axios({method: 'post',
-					headers: {'Authorization': localStorage.token},
-					url: url,
-					data: data}
+		       
+		       url: url,
+		       data: data}
 		)
-			.then(response => {
-				console.log(response.data)
-			})
-			.catch(error => {
-				console.log(error);
-			});
+		    .then(response => {
+			console.log(response.data)
+		    })
+		    .catch(error => {
+			console.log(error);
+		    });
 	};
 	
 	
