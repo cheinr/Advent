@@ -97,8 +97,8 @@ export default class Navbar extends React.Component {
             {/* TODO dszopa 10/25/16 - Fix the fact that stuff is not getting displayed properly by the collapsible */}
             <NavCollapsible>
               <NavNav>
-                {/* TODO dszopa 11/5/16 - Figure out what links we want in the navbar if any, this is an example */}
-                <NavLink link="/schedule/addevent" name="Create Event" />
+                {/*TODO dszopa 11/5/16 - Figure out what links we want in the navbar if any, this is an example*/}
+                <NavLink link="/group/create" name="Create Group" />
               </NavNav>
 	    
 	    <SearchBar />

@@ -5,6 +5,7 @@ import Panel from '../components/display/Panel';
 import Thumbnail from '../components/display/Thumbnail';
 import PageHeader from '../components/display/PageHeader';
 import Error from '../components/feedback/Error';
+import {Link} from 'react-router';
 
 export default class ViewUserContainer extends React.Component {
     constructor(props) {

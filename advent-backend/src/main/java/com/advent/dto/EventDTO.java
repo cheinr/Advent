@@ -1,5 +1,6 @@
 package com.advent.dto;
 
+import com.advent.entity.EventResponse;
 import com.advent.entity.Group;
 import com.advent.entity.User;
 import com.advent.entity.UserGroup;
@@ -19,7 +20,7 @@ public class EventDTO {
     private String location;
     private Boolean isPrivate;
     private Group group;
-    private List<UserGroup> userGroups;
+    private List<EventResponse> eventResponses;
 
     public Long getId() {
         return id;
@@ -69,12 +70,12 @@ public class EventDTO {
         this.location = location;
     }
 
-    public List<UserGroup> getUserGroups() {
-        return userGroups;
+    public List<EventResponse> getEventResponses() {
+        return eventResponses;
     }
 
-    public void setUserGroups(List<UserGroup> userGroups) {
-        this.userGroups = userGroups;
+    public void setEventResponses(List<EventResponse> eventResponses) {
+        this.eventResponses = eventResponses;
     }
 
     public Boolean getPrivate() {

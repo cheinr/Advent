@@ -18,6 +18,8 @@ import SearchResultsContainer from './containers/SearchResultsContainer';
 import SignIn from './components/sign-in';
 import auth from './auth';
 import EventCalendarContainer from './containers/EventCalendarContainer';
+import GroupEditContainer from './containers/GroupEditContainer';
+
 
 function requireAuth(nextState, replace) {
   if (!auth.loggedIn()) {
@@ -45,7 +47,7 @@ function requireAuth(nextState, replace) {
 }
 
 // this onEnter function is used to prevent logged in users from visiting
-// the login route.
+// the login route.npm
 function requireNoAuth(nextState, replace) {
   if (auth.loggedIn()) {
     replace({
@@ -66,12 +68,13 @@ ReactDom.render(
       <Route path="/schedule/addevent" component={ScheduleAddEvent} />
       <Route path="/event/create/:groupId" component={EventCreateContainer} />
       <Route path="/event/list" component={EventListContainer} />
-      <Route path="/event/calendar" component={EventCalendarContainer} />
+      <Route path="/group/calendar/:groupId" component={EventCalendarContainer} />
       <Route path="/event/:eventId" component={EventInfoContainer} />
       <Route path="/group/create" component={GroupCreateContainer} />
       <Route path="/group/:groupId" component={GroupInfoContainer} />
       <Route path="/chat/group/:groupId" component={GroupChatContainer} />
       <Route path="/search(/:query)" component={SearchResultsContainer} />
+      <Route path="/group/edit/:groupId" component={GroupEditContainer} />
     </Route>
   </Router>
 , document.querySelector('.content'));
