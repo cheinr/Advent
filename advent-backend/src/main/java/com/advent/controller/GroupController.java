@@ -27,8 +27,9 @@ public class GroupController {
     //creates new Group
     @RequestMapping(value = "/group/new", method = RequestMethod.POST)
     public Group newGroup(@RequestBody Group group) {
-        userGroupService.joinGroup(group.getId(), "MODERATOR"); //Add the current user as a moderator
-        return groupService.saveGroup(group);
+        Group g = groupService.saveGroup(group);
+        userGroupService.joinGroup(g.getId(), "MODERATOR"); //Add the current user as a moderator
+        return g;
     }
 
     @RequestMapping(value = "/group/edit", method = RequestMethod.POST)
