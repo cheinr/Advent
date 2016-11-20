@@ -51,6 +51,9 @@ public class UserGroupService {
         Authentication a = SecurityContextHolder.getContext().getAuthentication();
         currentUser = (UserDTO) a.getDetails();
 
+        //return null if this usergroup already exists.
+        if(userGroupRepo.findByUserIdAndGroupId(currentUser.getId(), groupId) != null) return null;
+
         UserGroup userGroup = new UserGroup();
         userGroup.setUser(userRepo.findOne(currentUser.getId()));
 
