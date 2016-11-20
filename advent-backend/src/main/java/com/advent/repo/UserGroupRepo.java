@@ -14,7 +14,7 @@ import java.util.List;
 @Repository
 public interface UserGroupRepo extends JpaRepository<UserGroup, Long> {
 
-    @Query("select u from UserGroup u where u.user.id =:userId and u.group.id = :groupId LIMIT 1")
+    @Query("select u from UserGroup u where u.user.id =:userId and u.group.id = :groupId")
     UserGroup getUserGroup(@Param("userId") Long userId, @Param("groupId") Long groupId);
 
 }

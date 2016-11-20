@@ -24,5 +24,10 @@ public class UserGroupController {
         return userGroupService.joinGroupAsUser(userId, groupId, role);
     }
 
+    @RequestMapping(value = "/join/group/{groupId}", method = RequestMethod.POST)
+    public UserGroup joinGroupAsUser(@PathVariable Long groupId) {
+        return userGroupService.joinGroup(groupId, "MEMBER");
+    }
+
 
 }

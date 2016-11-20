@@ -22,7 +22,7 @@ export default class GroupInfoContainer extends Component {
     }
 
     getGroup() {
-        const url = `http://localhost:3000/api/group/${this.props.params.groupId}`;
+        const url = `/api/group/${this.props.params.groupId}`;
 
         axios({
             method: 'get',
@@ -30,6 +30,7 @@ export default class GroupInfoContainer extends Component {
         })
             .then(response => {
                 console.log(response.data);
+		console.log(response.data.userGroups);
                 this.setState({
                     id: response.data.id,
                     name: response.data.groupName,
@@ -44,19 +45,16 @@ export default class GroupInfoContainer extends Component {
     };
 
     joinGroup() {
-        const role = "member";
-        // TODO use user id
-        const url = `http://localhost:3000/api/join/user/${this.props.user.id}/group/${this.props.params.groupId}/role/${role}`;
-        const headers = {'Authorization': localStorage.token};
+
+        const url = `/api/join/group/${this.props.params.groupId}`;
         axios({
             method: 'post',
             url: url,
-            headers: headers
         })
             .then(response => {
                 const users = this.state.users;
                 users.push(response.data);
-                this.setState({users: users})
+                this.setState({users: users});
             })
             .catch(error => {
                 console.log(error);
@@ -67,10 +65,10 @@ export default class GroupInfoContainer extends Component {
         console.log(this.state);
         return (
 	    <div>
-	    <GroupInfo group={this.state}
-	    groupId={this.props.params.groupId}
-	    joinGroup={this.joinGroup}
-	    />
+		<GroupInfo group={this.state}
+			   groupId={this.props.params.groupId}
+			   joinGroup={this.joinGroup}
+		/>
 	    </div>
 	)
     }
