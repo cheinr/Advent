@@ -17,7 +17,15 @@ export default class GroupEditContainer extends Component {
 
 	componentDidMount() {
 	    this.getGroup();
-	    
+	    axios.get(`/group/${this.props.params.groupId}/members/${this.props.user.id}`)
+		 .then( function(resp) {
+		     if(resp === null || resp.role !== "MODERATOR") {
+			 //redirect
+			 window.location.replace("/");
+		     }
+		 }).catch(function(error) {
+
+		 });
 	}
 
 	getGroup() {

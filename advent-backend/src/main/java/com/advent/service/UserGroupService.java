@@ -61,4 +61,8 @@ public class UserGroupService {
         userGroup.setRole(role);
         return userGroupRepo.save(userGroup);
     }
+
+    public UserGroup getUserGroup(Long userId, Long groupId) {
+        return userGroupRepo.findByUserIdAndGroupId(userId, groupId);
+    }
 }
