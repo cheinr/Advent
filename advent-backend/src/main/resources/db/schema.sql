@@ -127,7 +127,7 @@ INSERT INTO user (id, display_name, email, description, picture_url) VALUES
    'http://xacatolicos.com/app/images/avatar/icon-user.png'
   );
 
-INSERT INTO group_table VALUES (1000, 'groupName', 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+PCEtLQpTb3VyY2UgVVJMOiBob2xkZXIuanMvNjR4NjQKQ3JlYXRlZCB3aXRoIEhvbGRlci5qcyAyLjYuMC4KTGVhcm4gbW9yZSBhdCBodHRwOi8vaG9sZGVyanMuY29tCihjKSAyMDEyLTIwMTUgSXZhbiBNYWxvcGluc2t5IC0gaHR0cDovL2ltc2t5LmNvCi0tPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbI2hvbGRlcl8xNTgzNjk1OTQxOSB0ZXh0IHsgZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQgfSBdXT48L3N0eWxlPjwvZGVmcz48ZyBpZD0iaG9sZGVyXzE1ODM2OTU5NDE5Ij48cmVjdCB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiNFRUVFRUUiLz48Zz48dGV4dCB4PSIxMi45NTgzMzM5NjkxMTYyMTEiIHk9IjM2LjY1Ij42NHg2NDwvdGV4dD48L2c+PC9nPjwvc3ZnPg==',
+INSERT INTO group_table VALUES (1000, 'groupName', 'https://apod.nasa.gov/apod/image/1509/TexasEclipse_Westlake_2642.jpg',
                                 'tags', 'description');
 
 INSERT INTO user_group (id, user_id, group_table_id, role) VALUES
@@ -149,9 +149,11 @@ INSERT INTO announcement VALUES (1012, 'Sample Title12', 'Sample Content12', '20
 INSERT INTO announcement VALUES (1013, 'Sample Title13', 'Sample Content13', '2008-11-24', 1000);
 INSERT INTO announcement VALUES (1014, 'Sample Title14', 'Sample Content14', '2008-11-25', 1000);
 
-INSERT INTO event VALUES (1000, 'Super Awesome Event', 'This event takes place from 1pm-1pm', '2008-11-15', '2008-11-15', 'Coover Hall 1000', 0, 1000);
-INSERT INTO event VALUES (1001, 'Super Awesome Event2', 'This event takes place from 1pm-2pm', '2008-11-16', '2008-11-16', 'Coover Hall 1001', 0, 1000);
-INSERT INTO event VALUES (1002, 'Super Awesome Event3', 'This event takes place from 1pm-3pm', '2008-11-18', '2008-11-18', 'Coover Hall 1011', 0, 1000);
+INSERT INTO event VALUES (1000, 'Super Awesome Event', 'This event takes place from 1pm-1pm', '2028-11-15', '2008-11-15', 'Coover Hall 1000', 0, 1000);
+INSERT INTO event VALUES (1001, 'Super Awesome Event2', 'This event takes place from 1pm-2pm', '2028-11-16', '2008-11-16', 'Coover Hall 1001', 0, 1000);
+INSERT INTO event VALUES (1002, 'Super Awesome Event3', 'This event takes place from 1pm-3pm', '2018-11-18', '2008-11-18', 'Coover Hall 1011', 0, 1000);
+INSERT INTO event VALUES (1003, 'Super Awesome Event4', 'This event takes place from 1pm-3pm', '2031-11-18', '2008-11-18', 'Coover Hall 1011', 0, 1000);
+INSERT INTO event VALUES (1004, 'This Event is in the past', 'This event should not appear', '2001-11-18', '2008-11-18', 'Coover Hall 1011', 0, 1000);
 
 INSERT INTO notification VALUES (1000, 'Sample Header', 'Sample Message', 'https://google.com', 'MESSAGE', 0, 1000);
 INSERT INTO notification VALUES (1001, 'Sample Header', 'Sample Message', 'https://google.com', 'MESSAGE', 1, 1000);
