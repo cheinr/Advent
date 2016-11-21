@@ -19,11 +19,14 @@ function Event({ event }) {
 }
 
 function EventAgenda({ event }) {
+    // todo fix this probably will not work as this is not defined in this scope
     return (
         <span>
             <em>{event.title}</em>
             <p>{ event.desc }</p>
             <Link to={`/event/${event.id}`}>View Event</Link>
+
+            <a onClick={() => this.props.exportToGCal(event)}>View Event</a>
         </span>
     )
 }

@@ -9,6 +9,7 @@ export default class EventCalendarContainer extends Component {
         this.state = {
             events: []
         };
+        this.exportToGCal = this.exportToGCal.bind(this);
     }
 
     componentDidMount() {
@@ -40,12 +41,17 @@ export default class EventCalendarContainer extends Component {
             });
     }
 
+    exportToGCal(event) {
+        // TOOD post to gcal to create event in google calendars
+    }
+
     render() {
         return (
             <div className="calendar-container">
                 <EventCalendar
                     events={this.state.events}
                     groupId={this.props.params.groupId}
+                    exportToGCal={(event) => {this.exportToGCal(event)}}
                 />
             </div>
         )
