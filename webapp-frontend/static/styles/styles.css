@@ -101,11 +101,24 @@
     body { padding-top: 0px; }
 }
 
+.center-text {
+    text-align: center;
+}
+
 .sidebar {
-    width: 26%;
-    height: 200px;
     position: fixed;
-    right: -1%;
-    top: 200px;
-    border: 1px solid black;
+    width: 24.7%;
+    max-width: 24.7%;
+    left: 75%;
+    right: 0%;
+    top: 55px;
+    bottom: 0vh;
+    border-left: 2px solid black;
+    overflow-y: scroll;
+}
+
+.sidebar-row {
+    padding-bottom: 10px;
+    margin-left: 1%;
+    margin-right: 1%;
 }

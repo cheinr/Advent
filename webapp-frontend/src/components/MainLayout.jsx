@@ -20,7 +20,7 @@ export default class MainLayout extends React.Component {
     });
   }
   render() {
-    //this gives children access to user property
+    // this gives children access to user property
     const children = React.cloneElement(this.props.children,
       {user: this.state.user});
 
@@ -33,13 +33,11 @@ export default class MainLayout extends React.Component {
               {children}
             </div>
           </div>
-          {/* <div className="col-xs-3 sidebar" > */}
           <div className="sidebar">
-            <div className="row">
+            <div className="sidebar-row">
               <SidebarTopRight />
             </div>
-            {/* <div className="row half-vertical"> */}
-            <div className="row">
+            <div className="sidebar-row">
               <SidebarBottomRight />
             </div>
           </div>
