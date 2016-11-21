@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import UserList from './UserList';
+import UserList from '../UserList';
 import { Link } from 'react-router';
 
 export default class EventInfo extends Component {
