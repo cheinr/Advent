@@ -25,7 +25,7 @@ export default class MainLayout extends React.Component {
       {user: this.state.user});
 
     return (
-      <div>
+      <div className="padded-top">
         <Navbar />
         <div className="container-fluid">
           <div className="col-xs-9">

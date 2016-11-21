@@ -85,7 +85,10 @@
     height: 500px;
 }
 
-body { padding-top: 60px; }
+.padded-top {
+    padding-top: 60px;
+}
+
 @media screen and (max-width: 768px) {
     body { padding-top: 0px; }
 }
