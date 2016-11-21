@@ -149,5 +149,9 @@ INSERT INTO announcement VALUES (1012, 'Sample Title12', 'Sample Content12', '20
 INSERT INTO announcement VALUES (1013, 'Sample Title13', 'Sample Content13', '2008-11-24', 1000);
 INSERT INTO announcement VALUES (1014, 'Sample Title14', 'Sample Content14', '2008-11-25', 1000);
 
+INSERT INTO event VALUES (1000, 'Super Awesome Event', 'This event takes place from 1pm-1pm', '2008-11-15', '2008-11-15', 'Coover Hall 1000', 0, 1000);
+INSERT INTO event VALUES (1001, 'Super Awesome Event2', 'This event takes place from 1pm-2pm', '2008-11-16', '2008-11-16', 'Coover Hall 1001', 0, 1000);
+INSERT INTO event VALUES (1002, 'Super Awesome Event3', 'This event takes place from 1pm-3pm', '2008-11-18', '2008-11-18', 'Coover Hall 1011', 0, 1000);
+
 INSERT INTO notification VALUES (1000, 'Sample Header', 'Sample Message', 'https://google.com', 'MESSAGE', 0, 1000);
 INSERT INTO notification VALUES (1001, 'Sample Header', 'Sample Message', 'https://google.com', 'MESSAGE', 1, 1000);

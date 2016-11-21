@@ -11,6 +11,7 @@ import com.advent.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -54,5 +55,16 @@ public class EventService {
         }
         eventResponse.setResponse(response);
         return eventResponseRepo.save(eventResponse);
+    }
+
+    public List<EventDTO> getUpcomingEventsForUser(Long userId) {
+        List<Event> upcomingEvents = eventRepo.findUpcomingEventsForUser(userId);
+        List<EventDTO> upcomingEventDTOs = new ArrayList<>();
+
+        for (Event event : upcomingEvents) {
+            upcomingEventDTOs.add(eventConverter.eventToEventDTO(event));
+        }
+
+        return upcomingEventDTOs;
     }
 }
