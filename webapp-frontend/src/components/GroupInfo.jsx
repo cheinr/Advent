@@ -10,22 +10,30 @@ export default class GroupInfo extends Component {
 
     render() {
 	
-	var moderator_buttons = "";
+	var buttons = "";
+	
 	if(this.props.roleWithGroup == "MODERATOR") {
-	    moderator_buttons =
+	    buttons =
 		(<div><Link className="btn btn-default" role="button"
 		      to={`/event/create/${this.props.groupId}`}>
 		    Create Event
 		</Link>
-		<Link className="btn btn-default" role="button"
-                      to={`/group/edit/${this.props.groupId}`}>
-                    Edit Group
-		</Link></div>);
-	}
-
-	var join_button = "";
-	if(this.props.roleWithGroup == null) {
-	    join_button =
+		</div>);
+	} else if(this.props.roleWithGroup == "ADMIN") {
+	    buttons = (
+		<div>
+		    <Link className="btn btn-default" role="button"
+			  to={`/event/create/${this.props.groupId}`}>
+			Create Event
+		    </Link>
+		    <Link className="btn btn-default" role="button"
+			  to={`/group/edit/${this.props.groupId}`}>
+			Edit Group
+		    </Link>
+		</div>
+	    );
+	} else if (this.props.roleWithGroup == null) {
+	    buttons =
 		(<button className="btn btn-default"
 			 onClick={this.props.joinGroup}>
                     Join Group
@@ -49,8 +57,8 @@ export default class GroupInfo extends Component {
                     <UserGroupList users={this.props.group.users}/>
                 </div>
 
-		{moderator_buttons}
-		{join_button}
+
+		{buttons}
 		
 		<Link className="btn btn-default"
                       to={`/chat/group/${this.props.groupId}`}>
