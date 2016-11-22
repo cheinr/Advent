@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-
+import UserGroupRoleChanger from './UserGroupRoleChanger';
 
 
 export default class UserGroupList extends Component {
 
+    changeUserRole(e) {
+	console.log(e);
+    }
+    
     render() {
         return (
             <table className="table table-hover table-bordered">
@@ -24,26 +28,14 @@ export default class UserGroupList extends Component {
                                 <td>
 				    <span>
 					{userGroup.role}
-				    {
-					(this.props.role == "ADMIN") &&
+					{
+					    (this.props.role == "ADMIN") &&
+					(userGroup.role !== "ADMIN") &&
 
-					<div className="form-inline pull-right">
-					    <select className="form-control">
-						<option>
-						    Admin
-						</option>
-						<option>
-						    Moderator
-						</option>
-						<option>
-						    Member
-						</option>
-					    </select>
-					    <button className="btn btn-default">
-					Change Role
-					    </button>
-					</div>
-
+					<UserGroupRoleChanger
+					    usergroup={userGroup}
+					/>
+					
 				    }
 				    </span>
 				</td>
