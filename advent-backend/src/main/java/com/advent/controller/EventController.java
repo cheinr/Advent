@@ -2,11 +2,9 @@ package com.advent.controller;
 
 import com.advent.dto.EventDTO;
 import com.advent.dto.EventResponseDTO;
-import com.advent.entity.Event;
 import com.advent.entity.EventResponse;
 import com.advent.service.EventService;
 import com.advent.service.UserManagementService;
-import com.advent.service.impl.UserManagementServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

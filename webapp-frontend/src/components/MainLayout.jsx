@@ -1,9 +1,7 @@
 import React from 'react';
-
-import Navbar from '../containers/Navbar';
-import SidebarTopRight from './SidebarTopRight';
-import SidebarBottomRight from './SidebarBottomRight';
 import axios from 'axios';
+import Navbar from '../containers/Navbar';
+import UpcomingEventsContainer from '../containers/UpcomingEventsContainer';
 
 export default class MainLayout extends React.Component {
   constructor(props) {
@@ -12,20 +10,21 @@ export default class MainLayout extends React.Component {
   }
 
   componentDidMount() {
-    axios.get("/api/users/current").then( (resp) => {
-      this.setState({user: resp.data});
+    axios.get('/api/users/current').then((resp) => {
+      this.setState({ user: resp.data });
       console.log(resp);
-    }).catch( function(error) {
+    }).catch((error) => {
       console.log(error);
     });
   }
+
   render() {
-    //this gives children access to user property
+    // this gives children access to user property
     const children = React.cloneElement(this.props.children,
-      {user: this.state.user});
+      { user: this.state.user });
 
     return (
-      <div>
+      <div className="padded-top">
         <Navbar />
         <div className="container-fluid">
           <div className="col-xs-9">
@@ -33,13 +32,8 @@ export default class MainLayout extends React.Component {
               {children}
             </div>
           </div>
-          <div className="col-xs-3">
-            <div className="row">
-              <SidebarTopRight />
-            </div>
-            <div className="row half-vertical">
-              <SidebarBottomRight />
-            </div>
+          <div className="sidebar sidebar-well">
+            <UpcomingEventsContainer />
           </div>
         </div>
       </div>
