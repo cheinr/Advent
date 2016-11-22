@@ -97,7 +97,7 @@ export default class Navbar extends React.Component {
             {/* TODO dszopa 10/25/16 - Fix the fact that stuff is not getting displayed properly by the collapsible */}
             <NavCollapsible>
               <NavNav>
-                <NavLink link="/user/groups" name="My Groups" />
+                <NavLink link="/my-groups/" name="My Groups" />
               </NavNav>
               <SearchBar />
               <NavRight>
