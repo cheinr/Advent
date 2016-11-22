@@ -29,7 +29,7 @@ export default class GroupInfoContainer extends Component {
             method: 'get',
             url: url,
         })
-            .then(response => {
+            .then((response) => {
                 console.log(response.data);
 		console.log(response.data.userGroups);
 		var userRole = null;
@@ -37,7 +37,7 @@ export default class GroupInfoContainer extends Component {
 		//check if logged in user is a Moderator of the group
 		for( var i=0; i<response.data.userGroups.length; i++) {
 		    if(response.data.userGroups[i].user.id
-			== this.props.user.id) {
+			=== this.props.user.id) {
 			
 			userRole = response.data.userGroups[i].role;
 		    }
@@ -76,10 +76,11 @@ export default class GroupInfoContainer extends Component {
         console.log(this.state);
         return (
 	    <div>
-		<GroupInfo group={this.state}
-			   groupId={this.props.params.groupId}
-			   joinGroup={this.joinGroup}
-			   roleWithGroup={this.state.roleWithGroup}
+		<GroupInfo
+		    group={this.state}
+		    groupId={this.props.params.groupId}
+		    joinGroup={this.joinGroup}
+		    roleWithGroup={this.state.roleWithGroup}
 		/>
 	    </div>
 	)

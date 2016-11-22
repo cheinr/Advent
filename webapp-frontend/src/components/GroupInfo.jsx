@@ -54,7 +54,7 @@ export default class GroupInfo extends Component {
                 </div>
                 <div className="form-group">
                     <div>Users:</div>
-                    <UserGroupList users={this.props.group.users}/>
+                    <UserGroupList users={this.props.group.users} role={this.props.roleWithGroup}/>
                 </div>
 
 

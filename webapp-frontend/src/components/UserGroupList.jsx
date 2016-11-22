@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 
-//
+
+
 export default class UserGroupList extends Component {
 
     render() {
@@ -20,13 +21,35 @@ export default class UserGroupList extends Component {
                         return (
                             <tr key={userGroup.id}>
                                 <td>{userGroup.user.displayName}</td>
-                                <td>{userGroup.role}</td>
+                                <td>
+				    {userGroup.role}
+				    {
+					(this.props.role == "ADMIN") &&
+					<div>
+					    <select className="form-control">
+						<option>
+						    Admin
+						</option>
+						<option>
+						    Moderator
+						</option>
+						<option>
+						    Member
+						</option>
+					    </select>
+					    <button className="btn btn-default">
+					Change Role
+					    </button>
+					</div>
+				    }
+				</td>
                                 <td>
                                     <Link to={`/user/${userGroup.user.id}`}>View User</Link>
+			
                                 </td>
                             </tr>
                         )
-                    })
+                    }.bind(this))
                 }
                 </tbody>
             </table>
