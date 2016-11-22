@@ -22,10 +22,12 @@ export default class UserGroupList extends Component {
                             <tr key={userGroup.id}>
                                 <td>{userGroup.user.displayName}</td>
                                 <td>
-				    {userGroup.role}
+				    <span>
+					{userGroup.role}
 				    {
 					(this.props.role == "ADMIN") &&
-					<div>
+
+					<div className="form-inline pull-right">
 					    <select className="form-control">
 						<option>
 						    Admin
@@ -41,7 +43,9 @@ export default class UserGroupList extends Component {
 					Change Role
 					    </button>
 					</div>
+
 				    }
+				    </span>
 				</td>
                                 <td>
                                     <Link to={`/user/${userGroup.user.id}`}>View User</Link>
