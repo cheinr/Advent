@@ -6,6 +6,7 @@ import com.advent.entity.EventResponse;
 import com.advent.service.EventService;
 import com.advent.service.UserManagementService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -47,9 +48,9 @@ public class EventController {
                 eventResponseDTO.getEventId(), eventResponseDTO.getResponse());
     }
 
-    @RequestMapping(value = "/event/upcoming/user/{userId}", method = RequestMethod.GET)
-    public List<EventDTO> getUpcomingEventsForUser(@PathVariable Long userId) {
-     return eventService.getUpcomingEventsForUser(userId);
+    @RequestMapping(value = "/event/upcoming/user", method = RequestMethod.GET)
+    public List<EventDTO> getUpcomingEventsForUser(@AuthenticationPrincipal Long userId) {
+        return eventService.getUpcomingEventsForUser(userId);
     }
 }
 

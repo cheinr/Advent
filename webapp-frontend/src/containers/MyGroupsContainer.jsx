@@ -67,7 +67,7 @@ export default class MyGroupsContainer extends React.Component {
                   />
                 );
               }
-              return <div />;
+              return <div key={index} />;
             }
             )}
           </div>
@@ -85,7 +85,7 @@ export default class MyGroupsContainer extends React.Component {
                   />
                 );
               }
-              return <div />;
+              return <div key={index} />;
             }
             )}
           </div>
@@ -103,7 +103,7 @@ export default class MyGroupsContainer extends React.Component {
                   />
                 );
               }
-              return <div />;
+              return <div key={index} />;
             }
             )}
           </div>
