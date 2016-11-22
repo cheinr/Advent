@@ -40,7 +40,7 @@ export default class MyGroupsContainer extends React.Component {
     return (
       <div>
         <div className="row">
-          <div className="col-xs-5"></div>
+          <div className="col-xs-5" />
           <div className="col-xs-7">
             <div className="row">
               <h1 className="pull-left">My Groups</h1>
@@ -55,29 +55,56 @@ export default class MyGroupsContainer extends React.Component {
           {/* TODO dszopa 11/22/16 - Not the most efficient way to get this done but it works */}
           <div className="col-sm-6 col-md-4">
             {this.state.myGroups.map((group, index) => {
-                if (index % 3 === 0) {
-                  return <GroupThumbnail key={index} onClick={() => {this.removeUserFromGroup(group.id, index)}} num={group.id} name={group.groupName} description={group.description} pictureUrl={group.groupPictureUrl} />;
-                }
-                return;
+              if (index % 3 === 0) {
+                return (
+                  <GroupThumbnail
+                    key={index}
+                    onClick={() => { this.removeUserFromGroup(group.id, index); }}
+                    groupId={group.id}
+                    name={group.groupName}
+                    description={group.description}
+                    pictureUrl={group.groupPictureUrl}
+                  />
+                );
               }
+              return <div />;
+            }
             )}
           </div>
           <div className="col-sm-6 col-md-4">
             {this.state.myGroups.map((group, index) => {
-                if (index % 3 === 1) {
-                  return <GroupThumbnail key={index} onClick={() => {this.removeUserFromGroup(group.id, index)}} num={group.id} name={group.groupName} description={group.description} pictureUrl={group.groupPictureUrl} />;
-                }
-                return;
+              if (index % 3 === 1) {
+                return (
+                  <GroupThumbnail
+                    key={index}
+                    onClick={() => { this.removeUserFromGroup(group.id, index); }}
+                    groupId={group.id}
+                    name={group.groupName}
+                    description={group.description}
+                    pictureUrl={group.groupPictureUrl}
+                  />
+                );
               }
+              return <div />;
+            }
             )}
           </div>
           <div className="col-sm-6 col-md-4">
             {this.state.myGroups.map((group, index) => {
-                if (index % 3 === 2) {
-                  return <GroupThumbnail key={index} onClick={() => {this.removeUserFromGroup(group.id, index)}} num={group.id} name={group.groupName} description={group.description} pictureUrl={group.groupPictureUrl} />;
-                }
-                return;
+              if (index % 3 === 2) {
+                return (
+                  <GroupThumbnail
+                    key={index}
+                    onClick={() => { this.removeUserFromGroup(group.id, index); }}
+                    groupId={group.id}
+                    name={group.groupName}
+                    description={group.description}
+                    pictureUrl={group.groupPictureUrl}
+                  />
+                );
               }
+              return <div />;
+            }
             )}
           </div>
         </div>
