@@ -10,10 +10,8 @@ export default class UserGroupRoleChanger extends Component {
     }
     changeUserRole() {
 	console.log(this.refs.newRole.value);
-	axios.post(`/api/usergroup/${this.props.usergroup.id}/role/edit`, {
-	    role: this.refs.newRole.value
-	}).then( (resp) => {
-	    
+	axios.post(`/api/usergroup/${this.props.usergroup.id}/role/set/${this.refs.newRole.value}`, {}).then( (resp) => {
+	    console.log(resp);
 	}).catch( (err) => {
 	    console.log(err);
 	});

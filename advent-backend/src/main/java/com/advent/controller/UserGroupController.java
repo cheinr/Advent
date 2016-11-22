@@ -32,8 +32,8 @@ public class UserGroupController {
         return userGroupService.getUserGroup(userId, groupId);
     }
 
-    @RequestMapping(value = "/usergroup/{userGroupId}/role/edit", method = RequestMethod.POST)
-    public UserGroup changeUserRoleForGroup(@PathVariable Long userGroupId, @RequestBody String newRole) {
+    @RequestMapping(value = "/usergroup/{userGroupId}/role/set/{newRole}", method = RequestMethod.POST)
+    public UserGroup changeUserRoleForGroup(@PathVariable Long userGroupId, @PathVariable String newRole) {
         return userGroupService.changeUserRoleForGroup(userGroupId, newRole);
     }
 }
