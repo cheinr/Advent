@@ -47,7 +47,7 @@ public class GroupController {
         UserGroup userGroup = userGroupRepo.findByUserIdAndGroupId(userManagementService.getLoggedInUser().getId(),
                 group.getId());
 
-        if(userGroup == null || userGroup.getRole() != "ADMIN" && userGroup.getRole() != "OWNER") {
+        if(userGroup == null || !userGroup.getRole().equalsIgnoreCase("ADMIN") && !userGroup.getRole().equalsIgnoreCase("OWNER")) {
             return null;
         }
         return groupService.saveGroup(group);

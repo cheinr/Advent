@@ -78,12 +78,19 @@ public class UserGroupService {
 
 
         //Don't allow admins to change the role of other admins
-        if(userGroup.getRole() == "ADMIN" && currentUserRole != "OWNER")
+        if(userGroup.getRole().equalsIgnoreCase("ADMIN") && !currentUserRole.equalsIgnoreCase("OWNER")) {
             return null;
+        }
 
-        //make sure logged in user is Admin of group.
-        if(currentUserRole != "ADMIN" && currentUserRole != "OWNER")
+        //make sure logged in user is Admin or OWNER of group.
+        if(!currentUserRole.equalsIgnoreCase("ADMIN") && !currentUserRole.equalsIgnoreCase("OWNER")) {
             return null;
+        }
+
+        //Owners are owners for life (For now)
+        if(userGroup.getRole().equalsIgnoreCase("OWNER")) {
+            return null;
+        }
 
         userGroup.setRole(newRole);
         return userGroupRepo.save(userGroup);
