@@ -1,13 +1,11 @@
 package com.advent.controller;
 
 import com.advent.dto.EventDTO;
+import com.advent.dto.UserDTO;
 import com.advent.entity.UserGroup;
 import com.advent.service.UserGroupService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by clai on 10/28/16.
@@ -34,4 +32,8 @@ public class UserGroupController {
         return userGroupService.getUserGroup(userId, groupId);
     }
 
+    @RequestMapping(value = "/usergroup/{userGroupId}/role/edit", method = RequestMethod.POST)
+    public UserGroup changeUserRoleForGroup(@PathVariable Long userGroupId, @RequestBody String newRole) {
+        return userGroupService.changeUserRoleForGroup(userGroupId, newRole);
+    }
 }

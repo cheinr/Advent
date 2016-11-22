@@ -65,4 +65,49 @@ public class UserGroupService {
     public UserGroup getUserGroup(Long userId, Long groupId) {
         return userGroupRepo.findByUserIdAndGroupId(userId, groupId);
     }
+
+    public UserGroup changeUserRoleForGroup(Long userGroupId, String newRole) {
+        UserDTO currentUser = null;
+
+        Authentication a = SecurityContextHolder.getContext().getAuthentication();
+        currentUser = (UserDTO) a.getDetails();
+
+        UserGroup userGroup = userGroupRepo.findOne(userGroupId);
+
+        //Don't allow changing role of admins
+        if(userGroup.getRole() == "ADMIN")
+            return null;
+
+        //make sure logged in user is Admin of group.
+        if(userGroupRepo.findByUserIdAndGroupId(currentUser.getId(), userGroup.getGroup().getId()).getRole() != "ADMIN")
+            return null;
+
+        userGroup.setRole(newRole);
+        return userGroupRepo.save(userGroup);
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
