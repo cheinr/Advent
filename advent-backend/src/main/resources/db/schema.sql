@@ -127,11 +127,16 @@ INSERT INTO user (id, display_name, email, description, picture_url) VALUES
    'http://xacatolicos.com/app/images/avatar/icon-user.png'
   );
 
-INSERT INTO group_table VALUES (1000, 'groupName', 'https://apod.nasa.gov/apod/image/1509/TexasEclipse_Westlake_2642.jpg',
-                                'tags', 'description');
+INSERT INTO group_table VALUES (1000, 'Group 1', 'https://apod.nasa.gov/apod/image/1509/TexasEclipse_Westlake_2642.jpg', 'tags', 'description');
+INSERT INTO group_table VALUES (1001, 'Group 2', 'http://media.istockphoto.com/photos/grey-squirrel-yawning-picture-id473012660?k=6&m=473012660&s=170667a&w=0&h=_3LVLLvzKFXrrmOB9QBKtph2zmgO-nnUdxFfGmTX35w=', 'tags', 'This group has a pretty simple description: we like to look at squirrels.');
+INSERT INTO group_table VALUES (1002, 'Group 3', 'http://kingofwallpapers.com/lion-picture/lion-picture-008.jpg', 'tags', 'This group likes to take pictures of lions!');
+INSERT INTO group_table VALUES (1003, 'Group 4', 'http://i.dailymail.co.uk/i/pix/2015/11/23/11/2EB9334200000578-0-image-m-63_1448278563713.jpg', 'tags', 'Join the bird watching club today!');
 
 INSERT INTO user_group (id, user_id, group_table_id, role) VALUES
-  (1000, 1000, 1000, 'AmazingRole');
+  (1000, 1000, 1000, 'AmazingRole'),
+  (1001, 1000, 1001, 'AmazingRole'),
+  (1002, 1000, 1002, 'AmazingRole'),
+  (1003, 1000, 1003, 'AmazingRole');
 
 INSERT INTO announcement VALUES (1000, 'Sample Title0', 'Sample Content0', '2012-09-17 18:47:52.69', 1000);
 INSERT INTO announcement VALUES (1001, 'Sample Title1', 'Sample Content1', '2008-11-12', 1000);
