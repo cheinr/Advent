@@ -17,19 +17,19 @@ function Event({ event }) {
     </span>
     )
 }
-
-function EventAgenda({ event }) {
-    // todo fix this probably will not work as this is not defined in this scope
-    return (
-        <span>
-            <em>{event.title}</em>
-            <p>{ event.desc }</p>
-            <Link to={`/event/${event.id}`}>View Event</Link>
-
-            <a onClick={() => this.props.exportToGCal(event)}>View Event</a>
-        </span>
-    )
-}
+//
+// function EventAgenda({ event }) {
+//     // todo fix this probably will not work as this is not defined in this scope
+//     return (
+//         <span>
+//             <em>{event.title}</em>
+//             <p>{ event.desc }</p>
+//             <Link to={`/event/${event.id}`}>View Event</Link>
+//
+//             <a onClick={() => this.props.exportToGCal(event)}>View Event</a>
+//         </span>
+//     )
+// }
 
 export default class EventCalendar extends Component {
     componentDidMount() {
@@ -37,6 +37,8 @@ export default class EventCalendar extends Component {
     }
 
     render() {
+        console.log(this.props.Event);
+        console.log(Event);
         return (
             <div>
                 <Link to={`/group/${this.props.groupId}`}>Back to Group</Link>
@@ -48,9 +50,9 @@ export default class EventCalendar extends Component {
                         defaultDate={new Date()}
                         defaultView="agenda"
                         components={{
-                            event: Event,
+                            event: this.props.Event,
                             agenda: {
-                                event: EventAgenda
+                                event: this.props.EventAgenda
                             }
                         }}
                     />

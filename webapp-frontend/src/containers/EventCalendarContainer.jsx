@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import EventCalendar from '../components/EventCalendar';
 import axios from 'axios';
 import moment from 'moment';
+import { Link } from 'react-router';
 
 export default class EventCalendarContainer extends Component {
     constructor() {
@@ -10,6 +11,8 @@ export default class EventCalendarContainer extends Component {
             events: []
         };
         this.exportToGCal = this.exportToGCal.bind(this);
+        this.Event = this.Event.bind(this);
+        this.EventAgenda = this.EventAgenda.bind(this);
     }
 
     componentDidMount() {
@@ -43,6 +46,30 @@ export default class EventCalendarContainer extends Component {
 
     exportToGCal(event) {
         // TOOD post to gcal to create event in google calendars
+        console.log("hit");
+    }
+
+    Event(event) {
+        return (
+            <span>
+                <strong>
+                    {event.title}
+                </strong>
+                {event.desc && (':  ' + event.desc)}
+            </span>
+        )
+    }
+
+    EventAgenda(event) {
+        // todo fix this probably will not work as this is not defined in this scope
+        return (
+            <span>
+                <em>{event.title}</em>
+                <p>{ event.desc }</p>
+                <Link to={`/event/${event.id}`}>View Event</Link>
+                <a onClick={() => this.exportToGCal(event)}>Export to Google Calendar</a>
+            </span>
+        )
     }
 
     render() {
@@ -52,6 +79,8 @@ export default class EventCalendarContainer extends Component {
                     events={this.state.events}
                     groupId={this.props.params.groupId}
                     exportToGCal={(event) => {this.exportToGCal(event)}}
+                    Event={({event}) => {return this.Event(event)}}
+                    EventAgenda={({event}) => {return this.EventAgenda(event)}}
                 />
             </div>
         )
