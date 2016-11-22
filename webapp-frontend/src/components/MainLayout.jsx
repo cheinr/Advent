@@ -12,7 +12,6 @@ export default class MainLayout extends React.Component {
   componentDidMount() {
     axios.get('/api/users/current').then((resp) => {
       this.setState({ user: resp.data });
-      console.log(resp);
     }).catch((error) => {
       console.log(error);
     });
