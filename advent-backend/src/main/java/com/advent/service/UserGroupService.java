@@ -68,18 +68,21 @@ public class UserGroupService {
 
     public UserGroup changeUserRoleForGroup(Long userGroupId, String newRole) {
         UserDTO currentUser = null;
+        String currentUserRole = null;
 
         Authentication a = SecurityContextHolder.getContext().getAuthentication();
         currentUser = (UserDTO) a.getDetails();
 
         UserGroup userGroup = userGroupRepo.findOne(userGroupId);
+        currentUserRole = userGroupRepo.findByUserIdAndGroupId(currentUser.getId(), userGroup.getGroup().getId()).getRole();
 
-        //Don't allow changing role of admins
-        if(userGroup.getRole() == "ADMIN")
+
+        //Don't allow admins to change the role of other admins
+        if(userGroup.getRole() == "ADMIN" && currentUserRole != "OWNER")
             return null;
 
         //make sure logged in user is Admin of group.
-        if(userGroupRepo.findByUserIdAndGroupId(currentUser.getId(), userGroup.getGroup().getId()).getRole() != "ADMIN")
+        if(currentUserRole != "ADMIN" && currentUserRole != "OWNER")
             return null;
 
         userGroup.setRole(newRole);

@@ -37,7 +37,7 @@ public class GroupController {
     @RequestMapping(value = "/group/new", method = RequestMethod.POST)
     public Group newGroup(@RequestBody Group group) {
         Group g = groupService.saveGroup(group);
-        userGroupService.joinGroup(g.getId(), "ADMIN"); //Add the current user as a moderator
+        userGroupService.joinGroup(g.getId(), "OWNER"); //Add the current user as a moderator
         return g;
     }
 
@@ -47,7 +47,7 @@ public class GroupController {
         UserGroup userGroup = userGroupRepo.findByUserIdAndGroupId(userManagementService.getLoggedInUser().getId(),
                 group.getId());
 
-        if(userGroup == null || userGroup.getRole() != "ADMIN") {
+        if(userGroup == null || userGroup.getRole() != "ADMIN" && userGroup.getRole() != "OWNER") {
             return null;
         }
         return groupService.saveGroup(group);

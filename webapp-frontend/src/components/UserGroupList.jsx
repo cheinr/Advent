@@ -29,11 +29,13 @@ export default class UserGroupList extends Component {
 				    <span>
 					{userGroup.role}
 					{
-					    (this.props.role == "ADMIN") &&
-					(userGroup.role !== "ADMIN") &&
+					    ((this.props.role == "OWNER") ||
+					    ((this.props.role == "ADMIN") &&
+					    (userGroup.role !== "ADMIN"))) &&
 
 					<UserGroupRoleChanger
 					    usergroup={userGroup}
+					    role={this.props.role}
 					    updateGroup={this.props.updateGroup}
 					/>
 					
