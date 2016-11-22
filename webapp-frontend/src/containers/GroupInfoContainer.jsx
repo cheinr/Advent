@@ -81,6 +81,7 @@ export default class GroupInfoContainer extends Component {
 		    groupId={this.props.params.groupId}
 		    joinGroup={this.joinGroup}
 		    roleWithGroup={this.state.roleWithGroup}
+		    updateGroup={this.getGroup}
 		/>
 	    </div>
 	)

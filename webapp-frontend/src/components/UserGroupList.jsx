@@ -34,6 +34,7 @@ export default class UserGroupList extends Component {
 
 					<UserGroupRoleChanger
 					    usergroup={userGroup}
+					    updateGroup={this.props.updateGroup}
 					/>
 					
 				    }
