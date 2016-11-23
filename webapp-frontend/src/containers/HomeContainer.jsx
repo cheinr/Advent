@@ -18,7 +18,7 @@ export default class extends React.Component {
   }
 
   getAnnouncementsForUser() {
-    const url = `/api/announcement/homepage/user/${localStorage.id}`;
+    const url = '/api/announcement/homepage/current/user';
 
     axios.get(url)
       .then((response) => {
