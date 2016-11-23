@@ -39,9 +39,11 @@ export default class EventCreateContainer extends Component {
     checkUserAuthorization(user) {
 	var url = `/api/group/${this.props.params.groupId}/members/${user.id}`;
 	axios.get(url).then((resp) => {
-	    if(resp.data.role === null || (resp.data.role !== "ADMIN"
-					&& resp.data.role !== "MODERATOR"
-					&& resp.data.role !== "OWNER")) {
+	    if(resp.data.role === null
+	       || (resp.data.role.toUpperCase() !== "ADMIN"
+		&& resp.data.role.toUpperCase() !== "MODERATOR"
+		&& resp.data.role.toUpperCase() !== "OWNER")) {
+		
 		window.location.replace("/");
 	    } else {
 		this.setState({loading: false});

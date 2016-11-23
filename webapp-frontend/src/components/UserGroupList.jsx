@@ -5,8 +5,17 @@ import UserGroupRoleChanger from './UserGroupRoleChanger';
 
 export default class UserGroupList extends Component {
 
-    changeUserRole(e) {
-	console.log(e);
+    userCanEditRole(userGroup) {
+	if (userGroup.role.toUpperCase() !== "OWNER" &&
+	this.props.role.toUpperCase() == "OWNER") {
+	    return true;
+	} else if((this.props.role.toUpperCase() == "ADMIN") &&
+		  (userGroup.role.toUpperCase() !== "ADMIN") &&
+		  userGroup.role.toUpperCase() !== "OWNER") {
+	    return true;
+	} else {
+	    return false;
+	}
     }
     
     render() {
@@ -30,11 +39,7 @@ export default class UserGroupList extends Component {
 				    <span>
 					{userGroup.role}
 					{
-					    (userGroup.role !== "OWNER") &&
-					     ((this.props.role == "OWNER") ||
-					     ((this.props.role == "ADMIN") &&
-					      (userGroup.role !== "ADMIN"))) &&
-					    
+					    this.userCanEditRole(userGroup) &&
 					    <UserGroupRoleChanger
 						usergroup={userGroup}
 						role={this.props.role}

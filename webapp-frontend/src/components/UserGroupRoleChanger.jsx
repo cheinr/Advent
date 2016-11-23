@@ -41,13 +41,13 @@ export default class UserGroupRoleChanger extends Component {
 		    <div className="pull-right">
 			<div className="form-inline">
 			    <select ref="newRole" className="form-control ">
-				<option value='MEMBER'>
+				<option value='Member'>
 				    Member
 				</option>
-				<option value='MODERATOR'>
+				<option value='Moderator'>
 				    Moderator
 				</option>
-				<option value='ADMIN'>
+				<option value='Admin'>
 				    Admin
 				</option>
 			    </select>
@@ -65,10 +65,10 @@ export default class UserGroupRoleChanger extends Component {
 		    <div className="pull-right">
 			<div className="form-inline">
 			    <select ref="newRole" className="form-control ">
-				<option value='MEMBER'>
+				<option value='Member'>
 				    Member
 				</option>
-				<option value='MODERATOR'>
+				<option value='Moderator'>
 				    Moderator
 				</option>
 			    </select>

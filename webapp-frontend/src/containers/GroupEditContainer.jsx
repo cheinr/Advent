@@ -34,8 +34,8 @@ export default class GroupEditContainer extends Component {
 	var userIsAdmin = false;
 	for( var i=0; i<userGroups.length; i++) {
 	    if(userGroups[i].user.id === user.id
-	       && (userGroups[i].role === "ADMIN"
-	       || userGroups[i].role === "OWNER")) {
+	       && (userGroups[i].role.toUpperCase() === "ADMIN"
+		|| userGroups[i].role.toUpperCase() === "OWNER")) {
 		
 		userIsAdmin = true;
 	    }
@@ -55,7 +55,7 @@ export default class GroupEditContainer extends Component {
 		
 		if(this.props.user !== null) {
 		    if(!this.checkUserIsAdmin(this.props.user,
-					     resp.data.userGroups)) {
+					      resp.data.userGroups)) {
 			//TODO - use router here.
 			    window.location.replace("/");
 		    }
@@ -67,52 +67,52 @@ export default class GroupEditContainer extends Component {
 		    description: resp.data.description,
 		    userGroups: resp.data.userGroups
 		});
-    })
+	    })
 	    .catch(error => {
 		console.log(error);
 	    });
-}
+    }
 
-nameChange(e){
-    this.setState({name: e.target.value});
-}
+    nameChange(e){
+	this.setState({name: e.target.value});
+    }
 
-descChange(e){
-    this.setState({description: e.target.value});
-}
+    descChange(e){
+	this.setState({description: e.target.value});
+    }
 
-submitForm() {
-    const url = "/api/group/edit/";
-    const data = {
-	id: this.state.id,
-	groupName: this.state.name,
-	description: this.state.description
+    submitForm() {
+	const url = "/api/group/edit/";
+	const data = {
+	    id: this.state.id,
+	    groupName: this.state.name,
+	    description: this.state.description
+	};
+	axios({method: 'post',
+	       
+	       url: url,
+	       data: data}
+	)
+	    .then(response => {
+		console.log(response.data)
+	    })
+	    .catch(error => {
+		console.log(error);
+	    });
     };
-    axios({method: 'post',
-	   
-	   url: url,
-	   data: data}
-    )
-	.then(response => {
-	    console.log(response.data)
-	})
-	.catch(error => {
-	    console.log(error);
-	});
-};
 
 
-render(){
-    return(
-	<div>
-	    <GroupEdit
+    render(){
+	return(
+	    <div>
+		<GroupEdit
 nameChange={this.nameChange}
 descChange={this.descChange}
 submitForm={this.submitForm}
 values={this.state}
-/>
-	</div>
-    )
-}
-
+		/>
+	    </div>
+	)
+    }
+    
 }
