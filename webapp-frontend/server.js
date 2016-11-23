@@ -2,6 +2,8 @@ const express = require('express');
 const webpack = require('webpack');
 const config = require('./webpack.config');
 const proxy = require('http-proxy-middleware');
+const favicon = require('serve-favicon');
+const path = require('path');
 
 const app = express();
 const compiler = webpack(config);
@@ -45,6 +47,8 @@ io.on('connection', function(socket) {
 // Proxy for where requests to /api go
 const apiProxy = proxy('http://localhost:8080/api/');
 app.use('/api', apiProxy);
+
+app.use(favicon(path.join(__dirname, 'static', 'favicon.ico')))
 
 app.use(require('webpack-dev-middleware')(compiler, {
     noInfo: true,
