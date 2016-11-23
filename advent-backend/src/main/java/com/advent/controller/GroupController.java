@@ -4,6 +4,7 @@ import com.advent.dto.GroupDTO;
 import com.advent.entity.Group;
 import com.advent.service.GroupService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -51,12 +52,17 @@ public class GroupController {
 
     @RequestMapping(value = "/group/{id}", method = RequestMethod.GET)
     public GroupDTO getGroupById(@PathVariable Long id) {
-        GroupDTO group = groupService.getGroup(id);
-        return group;
+        return groupService.getGroup(id);
     }
 
+    // TODO dszopa 11/23/16 - Probably want to use this for when we update the user page.
     @RequestMapping(value = "/group/user/{userId}", method = RequestMethod.GET)
     public List<GroupDTO> getGroupsForUser(@PathVariable Long userId) {
+        return groupService.getGroupsForUser(userId);
+    }
+
+    @RequestMapping(value = "/group/my-groups", method = RequestMethod.GET)
+    public List<GroupDTO> getGroupsForCurrentUser(@AuthenticationPrincipal Long userId) {
         return groupService.getGroupsForUser(userId);
     }
 }
