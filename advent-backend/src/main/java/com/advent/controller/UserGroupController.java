@@ -1,6 +1,5 @@
 package com.advent.controller;
 
-import com.advent.dto.EventDTO;
 import com.advent.entity.UserGroup;
 import com.advent.service.UserGroupService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,5 +23,9 @@ public class UserGroupController {
         return userGroupService.joinGroupAsUser(userId, groupId, role);
     }
 
+    @RequestMapping(value = "/remove/user/{userId}/group/{groupId}", method = RequestMethod.POST)
+    public void removeUserFromGroup(@PathVariable Long userId, @PathVariable Long groupId) {
+        userGroupService.removeUserFromGroup(userId, groupId);
+    }
 
 }

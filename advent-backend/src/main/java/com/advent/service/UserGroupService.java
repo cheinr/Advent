@@ -31,4 +31,9 @@ public class UserGroupService {
         userGroup.setRole(role);
         return userGroupRepo.save(userGroup);
     }
+
+    public void removeUserFromGroup(Long userId, Long groupId) {
+        UserGroup userGroup = userGroupRepo.findByUserIdAndGroupId(userId, groupId);
+        userGroupRepo.delete(userGroup);
+    }
 }
