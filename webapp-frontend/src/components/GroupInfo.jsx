@@ -18,26 +18,43 @@ export default class GroupInfo extends Component {
 		      to={`/event/create/${this.props.groupId}`}>
 		    Create Event
 		</Link>
+		<Link className="btn btn-success"
+                      to={`/chat/group/${this.props.groupId}`}>
+                    Group Chat
+                </Link>
+
 		</div>);
-	} else if(this.props.roleWithGroup == "ADMIN") {
+	} else if(this.props.roleWithGroup == "ADMIN" || this.props.roleWithGroup == "OWNER") {
 	    buttons = (
 		<div>
-		    <Link className="btn btn-default" role="button"
+		    <Link className="btn btn-primary" role="button"
 			  to={`/event/create/${this.props.groupId}`}>
 			Create Event
 		    </Link>
-		    <Link className="btn btn-default" role="button"
+		    <Link className="btn btn-danger" role="button"
 			  to={`/group/edit/${this.props.groupId}`}>
 			Edit Group
 		    </Link>
+		    <Link className="btn btn-success"
+			  to={`/chat/group/${this.props.groupId}`}>
+			Group Chat
+                    </Link>
+
 		</div>
 	    );
 	} else if (this.props.roleWithGroup == null) {
 	    buttons =
-		(<button className="btn btn-default"
-			 onClick={this.props.joinGroup}>
-                    Join Group
-		</button>);
+		(<div>
+		    <button className="btn btn-default"
+			    onClick={this.props.joinGroup}>
+			Join Group
+		    </button>
+		    <Link className="btn btn-success"
+			  to={`/chat/group/${this.props.groupId}`}>
+			Group Chat
+                    </Link>
+		</div>
+		);
 	}
 	
         return (
@@ -60,10 +77,6 @@ export default class GroupInfo extends Component {
 
 		{buttons}
 		
-		<Link className="btn btn-default"
-                      to={`/chat/group/${this.props.groupId}`}>
-                    Group Chat
-                </Link>
 		
             </div>
         );

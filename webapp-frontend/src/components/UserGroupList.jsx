@@ -10,6 +10,7 @@ export default class UserGroupList extends Component {
     }
     
     render() {
+	console.log(this.props.role);
         return (
             <table className="table table-hover table-bordered">
                 <thead>
@@ -29,17 +30,18 @@ export default class UserGroupList extends Component {
 				    <span>
 					{userGroup.role}
 					{
-					    ((this.props.role == "OWNER") ||
-					    ((this.props.role == "ADMIN") &&
-					    (userGroup.role !== "ADMIN"))) &&
-
-					<UserGroupRoleChanger
-					    usergroup={userGroup}
-					    role={this.props.role}
-					    updateGroup={this.props.updateGroup}
-					/>
-					
-				    }
+					    (userGroup.role !== "OWNER") &&
+					     ((this.props.role == "OWNER") ||
+					     ((this.props.role == "ADMIN") &&
+					      (userGroup.role !== "ADMIN"))) &&
+					    
+					    <UserGroupRoleChanger
+						usergroup={userGroup}
+						role={this.props.role}
+						updateGroup={this.props.updateGroup}
+					    />
+					    
+					}
 				    </span>
 				</td>
                                 <td>

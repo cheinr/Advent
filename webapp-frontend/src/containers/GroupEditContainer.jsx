@@ -34,7 +34,8 @@ export default class GroupEditContainer extends Component {
 	var userIsAdmin = false;
 	for( var i=0; i<userGroups.length; i++) {
 	    if(userGroups[i].user.id === user.id
-	       && userGroups[i].role === "ADMIN") {
+	       && (userGroups[i].role === "ADMIN"
+	       || userGroups[i].role === "OWNER")) {
 		
 		userIsAdmin = true;
 	    }
