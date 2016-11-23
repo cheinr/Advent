@@ -61,7 +61,7 @@ const GroupChatContainer = withRouter(React.createClass( {
     render: function() {
 	if(this.state.loading) {
 	    return (
-		<div>
+		<div className="loading-centered">
 		    <i className="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
 		    <span className="sr-only">Loading...</span>
 		</div>

@@ -31,10 +31,8 @@ public class EventService {
     @Autowired
     private EventConverter eventConverter;
 
-    public EventDTO createEvent(EventDTO eventDTO) {
-        Authentication a = SecurityContextHolder.getContext().getAuthentication();
-        UserDTO currentUser = (UserDTO) a.getDetails();
-        UserGroup userGroup = userGroupRepo.findByUserIdAndGroupId(currentUser.getId(), eventDTO.getGroup().getId());
+    public EventDTO createEvent(EventDTO eventDTO, Long currentUserId) {
+        UserGroup userGroup = userGroupRepo.findByUserIdAndGroupId(currentUserId, eventDTO.getGroup().getId());
 
         //don't allow normal users to create events
         if(!userGroup.getRole().equalsIgnoreCase("ADMIN") && !userGroup.getRole().equalsIgnoreCase("MODERATOR")

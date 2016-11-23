@@ -6,6 +6,7 @@ import com.advent.entity.EventResponse;
 import com.advent.service.EventService;
 import com.advent.service.UserManagementService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,8 +22,8 @@ public class EventController {
 
     //TODO clai add group id when that is implemented
     @RequestMapping(value = "/event/create", method = RequestMethod.POST)
-    public EventDTO createEvent(@RequestBody EventDTO event) {
-        return eventService.createEvent(event);
+    public EventDTO createEvent(@RequestBody EventDTO event, @AuthenticationPrincipal Long userId) {
+        return eventService.createEvent(event, userId);
     }
 
     // Temp

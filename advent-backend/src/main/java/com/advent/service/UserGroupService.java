@@ -24,21 +24,6 @@ public class UserGroupService {
     @Autowired
     private UserGroupRepo userGroupRepo;
 
-    
-    public UserGroup joinGroupAsUser(Long userId, Long groupId, String role) {
-
-        Authentication a = SecurityContextHolder.getContext().getAuthentication();
-        UserDTO currentUser = (UserDTO) a.getDetails();
-
-        if(userGroupRepo.findByUserIdAndGroupId(userId, groupId).getRole() == "MODERATOR") {
-            UserGroup userGroup = new UserGroup();
-            userGroup.setUser(userRepo.findOne(userId));
-            userGroup.setGroup(groupRepo.findOne(groupId));
-            userGroup.setRole(role);
-            return userGroupRepo.save(userGroup);
-        }
-        return null;
-    }
 
     /**
      * Same as joinGroupAsUser but adds the user in the security context instead.

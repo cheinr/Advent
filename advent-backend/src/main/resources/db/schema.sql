@@ -139,7 +139,10 @@ INSERT INTO user_group (id, user_id, group_table_id, role) VALUES
   (1001, 1000, 1001, 'MODERATOR'),
   (1002, 1000, 1002, 'MEMBER'),
   (1003, 1000, 1003, 'ADMIN'),
-  (1004, 1000, 0, 'ADMIN');
+  (1004, 0, 1000, 'ADMIN'),
+  (1005, 0, 1001, 'OWNER'),
+  (1006, 1001, 1000, 'MEMBER'),
+  (1007, 1001, 1001, 'MEMBER');
 
 INSERT INTO announcement VALUES (1000, 'Sample Title0', 'Sample Content0', '2012-09-17 18:47:52.69', 1000);
 INSERT INTO announcement VALUES (1001, 'Sample Title1', 'Sample Content1', '2008-11-12', 1000);

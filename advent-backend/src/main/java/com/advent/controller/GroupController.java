@@ -8,6 +8,7 @@ import com.advent.service.GroupService;
 import com.advent.service.UserGroupService;
 import com.advent.service.impl.UserManagementServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,9 +24,6 @@ public class GroupController {
     private UserGroupService userGroupService;
 
     @Autowired
-    private UserManagementServiceImpl userManagementService;
-
-    @Autowired
     private UserGroupRepo userGroupRepo;
 
     @RequestMapping("/group")
@@ -37,15 +35,14 @@ public class GroupController {
     @RequestMapping(value = "/group/new", method = RequestMethod.POST)
     public Group newGroup(@RequestBody Group group) {
         Group g = groupService.saveGroup(group);
-        userGroupService.joinGroup(g.getId(), "OWNER"); //Add the current user as a moderator
+        userGroupService.joinGroup(g.getId(), "Owner"); //Add the current user as a moderator
         return g;
     }
 
     @RequestMapping(value = "/group/edit", method = RequestMethod.POST)
-    public Group editGroup(@RequestBody Group group) {
+    public Group editGroup(@RequestBody Group group, @AuthenticationPrincipal Long userId) {
         //make sure logged in user is MODERATOR of group
-        UserGroup userGroup = userGroupRepo.findByUserIdAndGroupId(userManagementService.getLoggedInUser().getId(),
-                group.getId());
+        UserGroup userGroup = userGroupRepo.findByUserIdAndGroupId(userId, group.getId());
 
         if(userGroup == null || !userGroup.getRole().equalsIgnoreCase("ADMIN") && !userGroup.getRole().equalsIgnoreCase("OWNER")) {
             return null;

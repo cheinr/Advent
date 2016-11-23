@@ -17,7 +17,7 @@ export default function GroupThumbnail(props) {
         <h3>{props.name}</h3>
         <p>{props.description}</p>
         <p>
-          <Link to={`/group/${props.num}`} className="btn btn-primary" role="button">View Group</Link>
+          <Link to={`/group/${props.groupId}`} className="btn btn-primary" role="button">View Group</Link>
           <button onClick={props.onClick} className="btn btn-danger" role="button">Leave Group</button>
         </p>
       </div>

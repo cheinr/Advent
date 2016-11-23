@@ -15,11 +15,6 @@ public class UserGroupController {
     @Autowired
     private UserGroupService userGroupService;
 
-    @RequestMapping(value = "/join/user/{userId}/group/{groupId}/role/{role}", method = RequestMethod.POST)
-    public UserGroup joinGroupAsUser(@PathVariable Long userId, @PathVariable Long groupId, @PathVariable String role) {
-        return userGroupService.joinGroupAsUser(userId, groupId, role);
-    }
-
     @RequestMapping(value = "/join/group/{groupId}", method = RequestMethod.POST)
     public UserGroup joinGroupAsMember(@PathVariable Long groupId) {
         return userGroupService.joinGroup(groupId, "MEMBER");
