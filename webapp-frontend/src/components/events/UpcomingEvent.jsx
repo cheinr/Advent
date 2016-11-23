@@ -11,7 +11,7 @@ export default function UpcomingEvent(props) {
   return (
     <div className="panel panel-default">
       <div className="panel-heading">
-        <h3 className="panel-title">{props.eventDate}</h3>
+        <h3 className="panel-title">{props.eventDate} in {props.location}</h3>
       </div>
       <div className="panel-body">
         <div className="media">
