@@ -55,6 +55,13 @@ export default class GroupInfo extends Component {
                     </Link>
 		</div>
 		);
+	} else {
+	    buttons = (
+		<Link className="btn btn-success"
+		      to={`/chat/group/${this.props.groupId}`}>
+		    Group Chat
+                </Link>
+	    );
 	}
 	
         return (

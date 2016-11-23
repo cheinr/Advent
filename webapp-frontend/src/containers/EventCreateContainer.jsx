@@ -11,6 +11,7 @@ export default class EventCreateContainer extends Component {
             start_date: "",
             end_date: "",
             location: "",
+	    loading: true,
             isPrivate: false
         };
         this.nameChange = this.nameChange.bind(this);
@@ -22,6 +23,35 @@ export default class EventCreateContainer extends Component {
         this.submitForm = this.submitForm.bind(this);
     }
 
+    componentDidMount() {
+	if(this.props.user !== null) {
+	    this.checkUserAuthorization(this.props.user);
+	}
+    }
+
+    componentWillReceiveProps(newProps) {
+	if( newProps.user !== this.props.user) {
+	    this.checkUserAuthorization(newProps.user);
+	}
+    }
+
+    //checks if the user is authorized to make events for this group
+    checkUserAuthorization(user) {
+	var url = `/api/group/${this.props.params.groupId}/members/${user.id}`;
+	axios.get(url).then((resp) => {
+	    if(resp.data.role === null || (resp.data.role !== "ADMIN"
+					&& resp.data.role !== "MODERATOR"
+					&& resp.data.role !== "OWNER")) {
+		window.location.replace("/");
+	    } else {
+		this.setState({loading: false});
+		console.log(resp.data);
+	    }
+	}).catch(function(error) {
+	    console.log(error);
+	});
+    }
+    
     nameChange(e) {
         this.setState({name: e.target.value});
     }
@@ -42,7 +72,7 @@ export default class EventCreateContainer extends Component {
     }
 
     submitForm() {
-        const url = "http://localhost:3000/api/event/create/";
+        const url = "/api/event/create/";
         const data = {
 
             name: this.state.name,
@@ -57,7 +87,6 @@ export default class EventCreateContainer extends Component {
         };
         console.log(data);
         axios({method: 'post',
-                headers: {'Authorization': localStorage.token},
                 url: url,
                 data: data}
             )
@@ -71,20 +100,29 @@ export default class EventCreateContainer extends Component {
     };
 
     render() {
-        return (
-        <div>
-            <EventCreate
-                nameChange={this.nameChange}
-                descChange={this.descChange}
-                startChange={this.startChange}
-                endChange={this.endChange}
-                locChange={this.locChange}
-                privateChange={this.privateChange}
-                submitForm={this.submitForm}
-                values={this.state}
-            />
-        </div>
-        )
+	if(this.state.loading) {
+	    return(
+		<div>
+		    <i className="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+		    <span className="sr-only">Loading...</span>
+		</div>
+	    );
+	} else {
+            return (
+		<div>
+		    <EventCreate
+			nameChange={this.nameChange}
+			descChange={this.descChange}
+			startChange={this.startChange}
+			endChange={this.endChange}
+			locChange={this.locChange}
+			privateChange={this.privateChange}
+			submitForm={this.submitForm}
+			values={this.state}
+		    />
+		</div>
+            )
+	}
     }
 }
 
