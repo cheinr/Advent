@@ -11,7 +11,7 @@ export default class UpcomingEventsContainer extends React.Component {
   }
 
   componentWillMount() {
-    axios.get('/api/event/upcoming/user')
+    axios.get('/api/event/upcoming/current/user')
       .then((response) => {
         this.setState({ events: response.data });
       })
