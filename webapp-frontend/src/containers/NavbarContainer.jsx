@@ -15,8 +15,7 @@ import NavPreferences from '../components/display/navbar/NavPreferences';
 import NavLink from '../components/display/navbar/NavLink';
 import SearchBar from '../components/search-bar';
 
-// TODO dszopa 11/5/16 - Rename to NavbarContainer
-export default class Navbar extends React.Component {
+export default class NavbarContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -36,7 +35,7 @@ export default class Navbar extends React.Component {
   }
 
   getNotifications() {
-    const url = `/api/notification/unread/user-id/${localStorage.id}`;
+    const url = '/api/notification/unread/current/user';
     axios.get(url)
       .then((response) => {
         this.setState({ notifications: response.data });
@@ -48,7 +47,7 @@ export default class Navbar extends React.Component {
 
   viewAll() {
     // Axios request to get all notifications, then manipulate state with the notifications
-    const url = `/api/notification/all/user-id/${localStorage.id}`;
+    const url = '/api/notification/all/current/user';
     axios.get(url)
       .then((response) => {
         this.setState({ notifications: response.data });
@@ -60,7 +59,7 @@ export default class Navbar extends React.Component {
 
   markAllAsRead() {
     // Axios post to mark all as read, then manipulate state
-    const url = `/api/notification/mark-read/all/${localStorage.id}`;
+    const url = '/api/notification/mark-read/all/current/user';
     axios.post(url)
       .then((response) => {
         this.getNotifications();
