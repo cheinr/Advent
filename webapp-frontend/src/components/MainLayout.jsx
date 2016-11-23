@@ -18,6 +18,7 @@ export default class MainLayout extends React.Component {
   }
 
   render() {
+    // TODO dszopa 11/23/16 - We're gonna want to get rid of this
     // this gives children access to user property
     const children = React.cloneElement(this.props.children,
       { user: this.state.user });
