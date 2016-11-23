@@ -61,18 +61,18 @@ const GroupChatContainer = withRouter(React.createClass( {
   render() {
     if (this.state.loading) {
       return (
-				<div>
-					<i className="fa fa-spinner fa-pulse fa-3x fa-fw" />
-					<span className="sr-only">Loading...</span>
-				</div>
+        <div>
+          <i className="fa fa-spinner fa-pulse fa-3x fa-fw" />
+          <span className="sr-only">Loading...</span>
+        </div>
       );
     } else {
       return (
-				<div>
-					<h3>{this.state.groupName} Chat</h3>
-					<ChatMessageContainer messages={this.state.messages} />
-					<ChatMessageSender onSend={this.handleMessageSend} />
-				</div>
+        <div>
+          <h3>{this.state.groupName} Chat</h3>
+          <ChatMessageContainer messages={this.state.messages} />
+          <ChatMessageSender onSend={this.handleMessageSend} />
+        </div>
       );
     }
   }
