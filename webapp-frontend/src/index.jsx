@@ -7,6 +7,7 @@ import MainLayout from './components/MainLayout';
 import HomeContainer from './containers/HomeContainer';
 import UserSettingContainer from './containers/UserSettingContainer';
 import ViewUserContainer from './containers/ViewUserContainer';
+import MyProfileContainer from './containers/MyProfileContainer';
 import EventCreateContainer from './containers/EventCreateContainer';
 import EventListContainer from './containers/EventListContainer';
 import EventInfoContainer from './containers/EventInfoContainer';
@@ -16,6 +17,7 @@ import GroupInfoContainer from './containers/GroupInfoContainer';
 import GroupChatContainer from './containers/GroupChatContainer';
 import SearchResultsContainer from './containers/SearchResultsContainer';
 import MyGroupsContainer from './containers/MyGroupsContainer';
+import MyProfileSettingsContainer from './containers/MyProfileSettingsContainer';
 import SignIn from './components/sign-in';
 import auth from './auth';
 import EventCalendarContainer from './containers/EventCalendarContainer';
@@ -66,7 +68,9 @@ ReactDom.render(
       <Route path="/" component={HomeContainer} />
       <Route path="/my-groups" component={MyGroupsContainer} />
       <Route path="/user/:userId" component={ViewUserContainer} />
+      <Route path="/user/current/profile" component={MyProfileContainer} />
       <Route path="/user/edit/:userId" component={UserSettingContainer} />
+      <Route path="/user/edit/current/profile" component={MyProfileSettingsContainer} />
       <Route path="/schedule/addevent" component={ScheduleAddEvent} />
       <Route path="/event/create/:groupId" component={EventCreateContainer} />
       <Route path="/event/list" component={EventListContainer} />
