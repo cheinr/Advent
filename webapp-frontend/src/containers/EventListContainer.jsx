@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import EventList from '../components/EventList';
+import EventList from '../components/events/EventList';
 
 export default class EventListContainer extends Component {
   constructor() {

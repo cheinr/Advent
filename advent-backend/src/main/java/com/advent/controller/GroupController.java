@@ -76,4 +76,9 @@ public class GroupController {
         GroupDTO group = groupService.getGroup(id);
         return group;
     }
+
+    @RequestMapping(value = "/group/user/{userId}", method = RequestMethod.GET)
+    public List<GroupDTO> getGroupsForUser(@PathVariable Long userId) {
+        return groupService.getGroupsForUser(userId);
+    }
 }

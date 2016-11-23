@@ -76,14 +76,14 @@ export default class Navbar extends React.Component {
       });
   }
 
-    onSearchSubmit() {
-	this.props.router.replace("/search?:query");
-    }
+  onSearchSubmit() {
+    this.props.router.replace("/search?:query");
+  }
 
   render() {
     return (
       <div>
-        <nav className="navbar navbar-inverse navbar-static-top">
+        <nav className="navbar navbar-inverse navbar-fixed-top">
           <div className="container-fluid">
             <NavHeader>
               <Link className="navbar-brand" to="/">Advent</Link>
@@ -97,12 +97,9 @@ export default class Navbar extends React.Component {
             {/* TODO dszopa 10/25/16 - Fix the fact that stuff is not getting displayed properly by the collapsible */}
             <NavCollapsible>
               <NavNav>
-                {/*TODO dszopa 11/5/16 - Figure out what links we want in the navbar if any, this is an example*/}
-                <NavLink link="/group/create" name="Create Group" />
+                <NavLink link="/my-groups/" name="My Groups" />
               </NavNav>
-	    
-	    <SearchBar />
-	      
+              <SearchBar />
               <NavRight>
                 <NavNav>
                   <NavNotificationDropdown>

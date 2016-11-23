@@ -15,6 +15,7 @@ import GroupCreateContainer from './containers/GroupCreateContainer';
 import GroupInfoContainer from './containers/GroupInfoContainer';
 import GroupChatContainer from './containers/GroupChatContainer';
 import SearchResultsContainer from './containers/SearchResultsContainer';
+import MyGroupsContainer from './containers/MyGroupsContainer';
 import SignIn from './components/sign-in';
 import auth from './auth';
 import EventCalendarContainer from './containers/EventCalendarContainer';
@@ -63,6 +64,7 @@ ReactDom.render(
       <Route path="/login" component={SignIn} onEnter={requireNoAuth} />
     <Route component={MainLayout} onEnter={requireAuth}>
       <Route path="/" component={HomeContainer} />
+      <Route path="/my-groups" component={MyGroupsContainer} />
       <Route path="/user/:userId" component={ViewUserContainer} />
       <Route path="/user/edit/:userId" component={UserSettingContainer} />
       <Route path="/schedule/addevent" component={ScheduleAddEvent} />

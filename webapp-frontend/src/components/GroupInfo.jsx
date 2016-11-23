@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-import EventList from '../components/EventList';
+import EventList from './events/EventList';
 import UserGroupList from './UserGroupList';
 
 export default class GroupInfo extends Component {

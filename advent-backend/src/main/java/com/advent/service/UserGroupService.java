@@ -78,22 +78,27 @@ public class UserGroupService {
 
 
         //Don't allow admins to change the role of other admins
-        if(userGroup.getRole().equalsIgnoreCase("ADMIN") && !currentUserRole.equalsIgnoreCase("OWNER")) {
+        if (userGroup.getRole().equalsIgnoreCase("ADMIN") && !currentUserRole.equalsIgnoreCase("OWNER")) {
             return null;
         }
 
         //make sure logged in user is Admin or OWNER of group.
-        if(!currentUserRole.equalsIgnoreCase("ADMIN") && !currentUserRole.equalsIgnoreCase("OWNER")) {
+        if (!currentUserRole.equalsIgnoreCase("ADMIN") && !currentUserRole.equalsIgnoreCase("OWNER")) {
             return null;
         }
 
         //Owners are owners for life (For now)
-        if(userGroup.getRole().equalsIgnoreCase("OWNER")) {
+        if (userGroup.getRole().equalsIgnoreCase("OWNER")) {
             return null;
         }
 
         userGroup.setRole(newRole);
         return userGroupRepo.save(userGroup);
+    }
+
+    public void removeUserFromGroup(Long userId, Long groupId) {
+        UserGroup userGroup = userGroupRepo.findByUserIdAndGroupId(userId, groupId);
+        userGroupRepo.delete(userGroup);
     }
 }
 
