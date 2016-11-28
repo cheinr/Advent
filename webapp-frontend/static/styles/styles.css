@@ -72,9 +72,12 @@
 .search-bar {
     margin: 10px;
 }
+
 .search-result {
     margin: 15px;
 }
+
+
 
 .rbc-calendar {
     flex: 1;
@@ -87,6 +90,10 @@
 
 .padded-top {
     padding-top: 60px;
+}
+
+.padded-bottom {
+    padding-bottom: 60px;
 }
 
 .white-text {
