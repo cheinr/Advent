@@ -3,6 +3,7 @@ package com.advent.controller;
 import com.advent.entity.UserGroup;
 import com.advent.service.UserGroupService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,4 +29,8 @@ public class UserGroupController {
         userGroupService.removeUserFromGroup(userId, groupId);
     }
 
+    @RequestMapping(value = "/remove/user/current/group/{groupId}", method = RequestMethod.POST)
+    public void removeCurrentUserFromGroup(@AuthenticationPrincipal Long userId, @PathVariable Long groupId) {
+        userGroupService.removeUserFromGroup(userId, groupId);
+    }
 }

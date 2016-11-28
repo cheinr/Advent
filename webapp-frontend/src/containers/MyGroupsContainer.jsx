@@ -13,7 +13,7 @@ export default class MyGroupsContainer extends React.Component {
   }
 
   componentWillMount() {
-    axios.get(`/api/group/user/${localStorage.id}`)
+    axios.get('/api/group/my-groups')
       .then((response) => {
         this.setState({ myGroups: response.data });
       })
@@ -23,7 +23,7 @@ export default class MyGroupsContainer extends React.Component {
   }
 
   removeUserFromGroup(groupId, index) {
-    axios.post(`/api/remove/user/${localStorage.id}/group/${groupId}`)
+    axios.post(`/api/remove/user/current/group/${groupId}`)
       .then((response) => {
         const newMyGroups = this.state.myGroups;
         newMyGroups.splice(index, 1);
@@ -67,7 +67,7 @@ export default class MyGroupsContainer extends React.Component {
                   />
                 );
               }
-              return <div />;
+              return <div key={index} />;
             }
             )}
           </div>
@@ -85,7 +85,7 @@ export default class MyGroupsContainer extends React.Component {
                   />
                 );
               }
-              return <div />;
+              return <div key={index} />;
             }
             )}
           </div>
@@ -103,7 +103,7 @@ export default class MyGroupsContainer extends React.Component {
                   />
                 );
               }
-              return <div />;
+              return <div key={index} />;
             }
             )}
           </div>
