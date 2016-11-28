@@ -20,6 +20,7 @@ import SignIn from './components/sign-in';
 import auth from './auth';
 import EventCalendarContainer from './containers/EventCalendarContainer';
 import GroupEditContainer from './containers/GroupEditContainer';
+import EditEventContainer from './containers/EditEventContainer';
 
 
 function requireAuth(nextState, replace) {
@@ -77,6 +78,7 @@ ReactDom.render(
       <Route path="/chat/group/:groupId" component={GroupChatContainer} />
       <Route path="/search(/:query)" component={SearchResultsContainer} />
       <Route path="/group/edit/:groupId" component={GroupEditContainer} />
+      <Route path="/event/edit/:eventId" component={EditEventContainer} />
     </Route>
   </Router>
 , document.querySelector('.content'));
