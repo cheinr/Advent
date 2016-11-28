@@ -12,13 +12,30 @@ export default class GroupInfoContainer extends Component {
       description: '',
       events: [],
       users: [],
+      isUserInGroup: false,
     };
+
     this.getGroup = this.getGroup.bind(this);
+    this.getIfCurrentUserInGroup = this.getIfCurrentUserInGroup.bind(this);
     this.joinGroup = this.joinGroup.bind(this);
+    this.leaveGroup = this.leaveGroup.bind(this);
   }
 
   componentDidMount() {
     this.getGroup();
+    this.getIfCurrentUserInGroup();
+  }
+
+  getIfCurrentUserInGroup() {
+    axios.get(`/api/membership/current/user/group/${this.props.params.groupId}`)
+      .then((response) => {
+        this.setState({
+          isUserInGroup: response.data,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   getGroup() {
@@ -39,6 +56,18 @@ export default class GroupInfoContainer extends Component {
       });
   }
 
+  leaveGroup() {
+    axios.post(`/api/remove/user/current/group/${this.props.params.groupId}`)
+      .then((response) => {
+        this.setState({
+          isUserInGroup: false,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
   joinGroup() {
     const role = 'member';
     // TODO use user id
@@ -49,6 +78,9 @@ export default class GroupInfoContainer extends Component {
     })
       .then((response) => {
         this.getGroup();
+        this.setState({
+          isUserInGroup: true,
+        });
       })
       .catch((error) => {
         console.log(error);
@@ -62,7 +94,9 @@ export default class GroupInfoContainer extends Component {
         <GroupInfo
           group={this.state}
           groupId={this.props.params.groupId}
+          isInGroup={this.state.isUserInGroup}
           joinGroup={this.joinGroup}
+          leaveGroup={this.leaveGroup}
         />
       </div>
     );
