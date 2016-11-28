@@ -3,6 +3,8 @@ import ReactDom from 'react-dom';
 import EventInfo from '../components/events/EventInfo.jsx';
 import axios from 'axios';
 
+import LocationMap from '../components/LocationMap';
+
 export default class EventInfoContainer extends Component {
     constructor() {
         super();
@@ -26,12 +28,10 @@ export default class EventInfoContainer extends Component {
     }
 
     getEvent() {
-        const url = `http://localhost:3000/api/event/id/${this.props.params.eventId}`;
-        const headers = {'Authorization': localStorage.token};
+        const url = `/api/event/id/${this.props.params.eventId}`;
         axios({
             method: 'get',
             url: url,
-            headers: headers
         })
             .then(response => {
                 console.log(response.data);
@@ -44,6 +44,7 @@ export default class EventInfoContainer extends Component {
                     location: response.data.location,
                     group: response.data.group,
                     eventResponses: response.data.eventResponses,
+		    mapData: true,
                     private: response.data.private
                 });
             })
@@ -53,10 +54,9 @@ export default class EventInfoContainer extends Component {
     };
 
     respondToEvent(response) {
-        const url = `http://localhost:3000/api/event/respond/`;
+        const url = `/api/event/respond/`;
         const data = {
             eventId: this.props.params.eventId,
-            response: response
         };
         axios({
             method: 'post',
@@ -72,9 +72,17 @@ export default class EventInfoContainer extends Component {
     }
 
     render() {
-        return <EventInfo
-            event={this.state}
-            respondToEvent={(message) => this.respondToEvent(message)}
-        />
+	var map = "";
+	if(this.state.mapData) {
+	    map = <LocationMap lat={42.028415} lng={-93.65098} />
+	}
+        return (
+	    <div>
+	    <EventInfo event={this.state}
+	    respondToEvent={(message) => this.respondToEvent(message)}
+            />
+	    {map}
+	    </div>
+	);
     }
 }
