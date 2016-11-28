@@ -51,7 +51,7 @@ export default class EventInfo extends Component {
                     </button>
                 </div>
                 <Link className="btn btn-default" role="button"
-                      to={`/event/edit/${this.props.eventId}`}>
+                      to={`/event/edit/${this.props.id}`}>
                     Edit Event
                 </Link>
             </div>
