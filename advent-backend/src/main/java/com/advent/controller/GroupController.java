@@ -55,7 +55,6 @@ public class GroupController {
         return groupService.getGroup(id);
     }
 
-    // TODO dszopa 11/23/16 - Probably want to use this for when we update the user page.
     @RequestMapping(value = "/group/user/{userId}", method = RequestMethod.GET)
     public List<GroupDTO> getGroupsForUser(@PathVariable Long userId) {
         return groupService.getGroupsForUser(userId);

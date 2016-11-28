@@ -1,16 +1,18 @@
 import React from 'react';
 import axios from 'axios';
+import { Link } from 'react-router';
 import ReactMarkdown from 'react-markdown';
+import DynamicGroupPictureThumbnails from '../components/display/groups/DynamicGroupPictureThumbnails';
 import Panel from '../components/display/Panel';
 import Thumbnail from '../components/display/Thumbnail';
 import PageHeader from '../components/display/PageHeader';
 import Error from '../components/feedback/Error';
-import {Link} from 'react-router';
 
 export default class ViewUserContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      myGroups: [],
       displayName: '',
       description: '',
       pictureUrl: '',
@@ -19,12 +21,25 @@ export default class ViewUserContainer extends React.Component {
 
   componentWillMount() {
     this.getUserInfo(this.props.params.userId);
+    this.getUserGroups(this.props.params.userId);
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.params.userId !== this.props.params.userId) {
       this.getUserInfo(nextProps.params.userId);
+      this.getUserGroups(this.props.params.userId);
     }
+  }
+
+  getUserGroups(userId) {
+    const url = `/api/group/user/${userId}`;
+    axios.get(url)
+      .then((response) => {
+        this.setState({ myGroups: response.data });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   getUserInfo(userId) {
@@ -44,24 +59,9 @@ export default class ViewUserContainer extends React.Component {
           errorMessage: 'There was an error receiving the user from the server',
         });
       });
-
   }
 
   render() {
-    // TODO - this looks really jank
-    var edit_button = "";
-    if(this.props.user != null
-      && this.props.user.id == this.props.params.userId) {
-      edit_button = (
-        <Link to={`/user/edit/${this.props.params.userId}`}>
-          <button type="button" className="btn btn-default">
-            Edit</button>
-        </Link>
-      );
-    } else {
-      edit_button = "";
-    }
-
     return (
       <div>
         {this.state.showErrors ? <Error>{this.state.errorMessage}</Error> : null}
@@ -78,8 +78,15 @@ export default class ViewUserContainer extends React.Component {
             <ReactMarkdown escapeHtml source={this.state.description} />
           </Panel>
         </div>
-        {edit_button}
-        {/* TODO dszopa 10/18/16 - Display groups too */}
+        <DynamicGroupPictureThumbnails groups={this.state.myGroups} />
+        <div className="row bottom-padded">
+          <div className="col-xs-1">
+            <Link to={`/user/edit/${this.props.params.userId}`}>
+              <button type="button" className="btn btn-default">
+                Edit</button>
+            </Link>
+          </div>
+        </div>
       </div>
     );
   }

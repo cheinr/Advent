@@ -12,7 +12,7 @@ const propTypes = {
 export default function GroupThumbnail(props) {
   return (
     <div className="thumbnail">
-      <img src={props.pictureUrl} alt="Group" />
+      <img src={props.pictureUrl} className="black-border" alt="Group" />
       <div className="caption">
         <h3>{props.name}</h3>
         <p>{props.description}</p>

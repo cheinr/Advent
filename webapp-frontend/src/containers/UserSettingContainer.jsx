@@ -5,12 +5,16 @@ import Alert from '../components/feedback/Alert';
 import Error from '../components/feedback/Error';
 import TextBox from '../components/input/TextBox';
 import Thumbnail from '../components/display/Thumbnail';
+import BSLabel from '../components/display/BSLabel';
+import PageBreak from '../components/display/PageBreak';
+import DynamicGroupThumbnails from '../components/display/groups/DynamicGroupThumbnails';
 import BasicInputField from '../components/input/BasicInputField';
 
 export default class UserSettingContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      myGroups: [],
       id: '',
       displayName: '',
       email: '',
@@ -23,6 +27,11 @@ export default class UserSettingContainer extends React.Component {
   }
 
   componentWillMount() {
+    this.getUserInfo();
+    this.getUsersGroups();
+  }
+
+  getUserInfo() {
     axios.get(`/api/users/id/${this.props.params.userId}`)
       .then((response) => {
         this.setState({
@@ -39,6 +48,16 @@ export default class UserSettingContainer extends React.Component {
           showErrors: true,
           errorMessage: 'There was an error receiving your profile from the server',
         });
+      });
+  }
+
+  getUsersGroups() {
+    axios.get(`/api/group/user/${this.props.params.userId}`)
+      .then((response) => {
+        this.setState({ myGroups: response.data });
+      })
+      .catch((error) => {
+        console.log(error);
       });
   }
 
@@ -82,6 +101,7 @@ export default class UserSettingContainer extends React.Component {
       <div>
         {this.state.showResults ? <Alert>Your profile has been updated!</Alert> : null}
         {this.state.showErrors ? <Error>{this.state.errorMessage}</Error> : null}
+        <BSLabel text="Edit Profile" />
         <div className="row pull-down">
           <div className="col-xs-3">
             <Thumbnail pictureUrl={this.state.pictureUrl} altText="User" />
@@ -105,12 +125,15 @@ export default class UserSettingContainer extends React.Component {
             />
           </div>
         </div>
-        <div className="row">
+        <div className="row bottom-padded">
           <div className="col-xs-4 col-xs-offset-5">
             <button type="button" className="btn btn-primary" onClick={this.submitForm}>Save</button>
             <button type="button" className="btn btn-default" onClick={browserHistory.goBack}>Cancel</button>
           </div>
         </div>
+        <PageBreak />
+        <BSLabel text="Edit Groups" />
+        <DynamicGroupThumbnails groups={this.state.myGroups} />
       </div>
     );
   }
