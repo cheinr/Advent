@@ -17,10 +17,13 @@ export default class EventInfoContainer extends Component {
             location: '',
             group: '',
             eventResponses: [],
+	    geocoder: null,
+	    locationValid: false,
             private: ''
         };
         this.getEvent = this.getEvent.bind(this);
         this.respondToEvent = this.respondToEvent.bind(this);
+	this.getLocationCoords = this.getLocationCoords.bind(this);
     }
 
     componentDidMount() {
@@ -44,14 +47,38 @@ export default class EventInfoContainer extends Component {
                     location: response.data.location,
                     group: response.data.group,
                     eventResponses: response.data.eventResponses,
-		    mapData: true,
+		    geocoder: new google.maps.Geocoder(),
                     private: response.data.private
                 });
+		this.getLocationCoords();
             })
             .catch(error => {
                 console.log(error);
             });
     };
+
+    getLocationCoords() {
+	this.state.geocoder.geocode({
+	    'address':this.state.location
+	}, function(results, status) {
+	    if(status === "OK") {
+		this.setState({
+		    locationValid: true,
+		    coords: [
+			results[0].geometry.location.lat(),
+			results[0].geometry.location.lng()
+		    ]
+		});
+		console.log(this.state.coords);
+	    } else {
+		this.setState({
+		    locationValid: false,
+		});
+		console.log(status);
+	    }
+	}.bind(this));	    
+    }
+
 
     respondToEvent(response) {
         const url = `/api/event/respond/`;
@@ -73,8 +100,13 @@ export default class EventInfoContainer extends Component {
 
     render() {
 	var map = "";
-	if(this.state.mapData) {
-	    map = <LocationMap lat={42.028415} lng={-93.65098} />
+	if(this.state.locationValid) {
+	    map = (
+		<LocationMap
+		    lat={this.state.coords[0]}
+		    lng={this.state.coords[1]}
+		/>
+	    );
 	}
         return (
 	    <div>
