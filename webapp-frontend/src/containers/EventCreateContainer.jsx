@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import EventCreate from '../components/events/EventCreate';
+import LocationMap from '../components/LocationMap';
 import axios from 'axios';
 
 export default class EventCreateContainer extends Component {
@@ -12,7 +13,9 @@ export default class EventCreateContainer extends Component {
             end_date: "",
             location: "",
 	    loading: true,
-            isPrivate: false
+            isPrivate: false,
+	    typingTimout: null,
+	    locationValid: false
         };
         this.nameChange = this.nameChange.bind(this);
         this.descChange = this.descChange.bind(this);
@@ -21,6 +24,7 @@ export default class EventCreateContainer extends Component {
         this.locChange = this.locChange.bind(this);
         this.privateChange = this.privateChange.bind(this);
         this.submitForm = this.submitForm.bind(this);
+	this.getLocationCoords = this.getLocationCoords.bind(this);
     }
 
     componentDidMount() {
@@ -46,7 +50,10 @@ export default class EventCreateContainer extends Component {
 		
 		window.location.replace("/");
 	    } else {
-		this.setState({loading: false});
+		this.setState({
+		    loading: false,
+		    geocoder: new google.maps.Geocoder()
+		});
 		console.log(resp.data);
 	    }
 	}).catch(function(error) {
@@ -67,10 +74,36 @@ export default class EventCreateContainer extends Component {
         this.setState({end_date: e});
     }
     locChange(e) {
-        this.setState({location: e.target.value});
+	if(this.state.typingTimeout) clearTimeout(this.state.typingTimeout);
+        this.setState({
+	    location: e.target.value,
+	    typingTimeout: setTimeout(this.getLocationCoords, 1000)
+	});
     }
     privateChange(e) {
         this.setState({isPrivate: e.target.checked});
+    }
+
+    getLocationCoords() {
+	this.state.geocoder.geocode({
+	    'address':this.state.location
+	}, function(results, status) {
+	    if(status === "OK") {
+		this.setState({
+		    locationValid: true,
+		    coords: [
+			results[0].geometry.location.lat(),
+			results[0].geometry.location.lng()
+		    ]
+		});
+		console.log(this.state.coords);
+	    } else {
+		this.setState({
+		    locationValid: false,
+		});
+		console.log(status);
+	    }
+	}.bind(this));	    
     }
 
     submitForm() {
@@ -102,6 +135,13 @@ export default class EventCreateContainer extends Component {
     };
 
     render() {
+	var map = "";
+	if(this.state.locationValid) {
+	    map = (<LocationMap
+		       lat={this.state.coords[0]}
+		       lng={this.state.coords[1]}
+		   />);
+	}
 	if(this.state.loading) {
 	    return(
 		<div>
@@ -121,7 +161,8 @@ export default class EventCreateContainer extends Component {
 			privateChange={this.privateChange}
 			submitForm={this.submitForm}
 			values={this.state}
-		    />
+		/>
+		{map}
 		</div>
             )
 	}
