@@ -20,6 +20,11 @@ public class UserGroupService {
     @Autowired
     private UserGroupRepo userGroupRepo;
 
+    public Boolean isUserInGroup(Long userId, Long groupId) {
+        UserGroup userGroup = userGroupRepo.findByUserIdAndGroupId(userId, groupId);
+        return userGroup != null;
+    }
+
     public UserGroup joinGroupAsUser(Long userId, Long groupId, String role) {
         UserGroup userGroup = userGroupRepo.findByUserIdAndGroupId(userId, groupId);
         if (userGroup != null) {
