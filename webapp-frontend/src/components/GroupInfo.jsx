@@ -2,11 +2,13 @@ import React from 'react';
 import { Link } from 'react-router';
 import EventList from './events/EventList';
 import UserGroupList from './UserGroupList';
+import Thumbnail from '../components/display/Thumbnail';
+import PageHeader from '../components/display/PageHeader';
 
 const propTypes = {
   isInGroup: React.PropTypes.bool,
   group: React.PropTypes.any,
-  groupId: React.PropTypes.number,
+  groupId: React.PropTypes.string,
   joinGroup: React.PropTypes.any,
   leaveGroup: React.PropTypes.any,
 };
@@ -20,18 +22,25 @@ export default function GroupInfo(props) {
 
   return (
     <div>
-      <h1>
-        <div>{props.group.name}</div>
-      </h1>
-      <div className="form-group">
-        <div>Description: {props.group.description}</div>
+      <div className="row pull-down">
+        <div className="col-xs-3">
+          <Thumbnail pictureUrl={props.group.groupPictureUrl} altText="User" />
+        </div>
+        <div className="col-xs-9">
+          <PageHeader title={props.group.name} />
+        </div>
       </div>
       <div className="form-group">
-        <div>Upcoming Events: <Link to={`/group/calendar/${props.groupId}`}>(View Group Calendar)</Link></div>
+        <div><b>Description: </b>{props.group.description}</div>
+      </div>
+      <div className="form-group">
+        <div><b>Upcoming Events: </b><Link to={`/group/calendar/${props.groupId}`}>(View Group Calendar)</Link></div>
         <EventList events={props.group.events} />
       </div>
+      {/*group announcements should go here*/}
+      {/*toggle being able to see users for the group?*/}
       <div className="form-group">
-        <div>Users:</div>
+        <div><b>Users:</b></div>
         <UserGroupList users={props.group.users} />
       </div>
       <Link className="btn btn-default" role="button" to={`/event/create/${props.groupId}`}>

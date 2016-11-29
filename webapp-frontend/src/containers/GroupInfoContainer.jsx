@@ -13,6 +13,7 @@ export default class GroupInfoContainer extends Component {
       events: [],
       users: [],
       isUserInGroup: false,
+      groupPictureUrl: '',
     };
 
     this.getGroup = this.getGroup.bind(this);
@@ -49,6 +50,7 @@ export default class GroupInfoContainer extends Component {
           description: response.data.description,
           events: response.data.events,
           users: response.data.userGroups,
+          groupPictureUrl: response.data.groupPictureUrl,
         });
       })
       .catch((error) => {
