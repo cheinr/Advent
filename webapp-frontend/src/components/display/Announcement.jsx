@@ -10,6 +10,7 @@ export default function Announcement(props) {
       </div>
       <div className="media-body">
         <h4 className="media-heading">{props.title}</h4>
+        {/* TODO dszopa 11/29/16 - this needs to render markdown! */}
         <p className="no-margin-bottom">{props.content}</p>
         <p>
           {/* TODO dszopa 11/21/16 - Might want to change this but pretty low priority */}

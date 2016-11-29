@@ -7,17 +7,21 @@ export default class GroupInfoContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: '',
-      name: '',
-      description: '',
-      events: [],
-      users: [],
+      group: {
+        id: '',
+        name: '',
+        description: '',
+        events: [],
+        users: [],
+        groupPictureUrl: '',
+      },
+      announcements: [],
       isUserInGroup: false,
-      groupPictureUrl: '',
     };
 
     this.getGroup = this.getGroup.bind(this);
     this.getIfCurrentUserInGroup = this.getIfCurrentUserInGroup.bind(this);
+    this.getAnnouncements = this.getAnnouncements.bind(this);
     this.joinGroup = this.joinGroup.bind(this);
     this.leaveGroup = this.leaveGroup.bind(this);
   }
@@ -25,6 +29,19 @@ export default class GroupInfoContainer extends Component {
   componentDidMount() {
     this.getGroup();
     this.getIfCurrentUserInGroup();
+    this.getAnnouncements();
+  }
+
+  getAnnouncements() {
+    axios.get(`/api/announcement/group/${this.props.params.groupId}`)
+      .then((response) => {
+        this.setState({
+          announcements: response.data,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   getIfCurrentUserInGroup() {
@@ -45,12 +62,14 @@ export default class GroupInfoContainer extends Component {
     axios.get(url)
       .then((response) => {
         this.setState({
-          id: response.data.id,
-          name: response.data.groupName,
-          description: response.data.description,
-          events: response.data.events,
-          users: response.data.userGroups,
-          groupPictureUrl: response.data.groupPictureUrl,
+          group: {
+            id: response.data.id,
+            name: response.data.groupName,
+            description: response.data.description,
+            events: response.data.events,
+            users: response.data.userGroups,
+            groupPictureUrl: response.data.groupPictureUrl,
+          },
         });
       })
       .catch((error) => {
@@ -90,15 +109,15 @@ export default class GroupInfoContainer extends Component {
   }
 
   render() {
-    console.log(this.state);
     return (
       <div>
         <GroupInfo
-          group={this.state}
+          group={this.state.group}
           groupId={this.props.params.groupId}
           isInGroup={this.state.isUserInGroup}
           joinGroup={this.joinGroup}
           leaveGroup={this.leaveGroup}
+          announcements={this.state.announcements}
         />
       </div>
     );

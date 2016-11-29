@@ -4,10 +4,12 @@ import EventList from './events/EventList';
 import UserGroupList from './UserGroupList';
 import Thumbnail from '../components/display/Thumbnail';
 import PageHeader from '../components/display/PageHeader';
+import Announcement from '../components/display/Announcement';
 
 const propTypes = {
   isInGroup: React.PropTypes.bool,
   group: React.PropTypes.any,
+  announcements: React.PropTypes.array,
   groupId: React.PropTypes.string,
   joinGroup: React.PropTypes.any,
   leaveGroup: React.PropTypes.any,
@@ -37,8 +39,18 @@ export default function GroupInfo(props) {
         <div><b>Upcoming Events: </b><Link to={`/group/calendar/${props.groupId}`}>(View Group Calendar)</Link></div>
         <EventList events={props.group.events} />
       </div>
-      {/*group announcements should go here*/}
-      {/*toggle being able to see users for the group?*/}
+      <div className="form-group">
+        <b>Announcements:</b>
+        {/* group announcements should go here */}
+        {/* toggle being able to see users for the group? */}
+        {props.announcements.map((announcement, id) =>
+          <div className="panel panel-default">
+            <div className="panel-body">
+              <Announcement key={id} title={announcement.title} content={announcement.content} date={new Date(announcement.date)} group={announcement.groupDTO} />
+            </div>
+          </div>
+        )}
+      </div>
       <div className="form-group">
         <div><b>Users:</b></div>
         <UserGroupList users={props.group.users} />
