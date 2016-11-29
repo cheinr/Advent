@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import Navbar from '../containers/Navbar';
+import NavbarContainer from '../containers/NavbarContainer';
 import UpcomingEventsContainer from '../containers/UpcomingEventsContainer';
 
 export default class MainLayout extends React.Component {
@@ -12,20 +12,20 @@ export default class MainLayout extends React.Component {
   componentDidMount() {
     axios.get('/api/users/current').then((resp) => {
       this.setState({ user: resp.data });
-      console.log(resp);
     }).catch((error) => {
       console.log(error);
     });
   }
 
   render() {
+    // TODO dszopa 11/23/16 - We're gonna want to get rid of this
     // this gives children access to user property
     const children = React.cloneElement(this.props.children,
       { user: this.state.user });
 
     return (
       <div className="padded-top">
-        <Navbar />
+        <NavbarContainer />
         <div className="container-fluid">
           <div className="col-xs-9">
             <div>

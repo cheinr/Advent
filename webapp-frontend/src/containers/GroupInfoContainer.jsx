@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router';
-import GroupInfo from '../components/GroupInfo.jsx';
 import axios from 'axios';
+import { Link } from 'react-router';
+import GroupInfo from '../components/GroupInfo';
 
 export default class GroupInfoContainer extends Component {
     constructor() {
@@ -19,7 +19,7 @@ export default class GroupInfoContainer extends Component {
     }
 
     componentDidMount() {
-        this.getGroup();
+	this.getGroup();
     }
 
     getGroup() {
@@ -82,8 +82,9 @@ export default class GroupInfoContainer extends Component {
 		    joinGroup={this.joinGroup}
 		    roleWithGroup={this.state.roleWithGroup}
 		    updateGroup={this.getGroup}
-		/>
+/>
 	    </div>
 	)
     }
+
 }

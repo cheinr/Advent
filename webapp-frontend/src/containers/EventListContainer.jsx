@@ -17,12 +17,10 @@ export default class EventListContainer extends Component {
   }
 
   getEvents() {
-    const url = 'http://localhost:3000/api/event/list/';
+    const url = '/api/event/list/';
 
-    axios({method: 'post',
-        headers: {'Authorization': localStorage.token},
-        url: url}
-      )
+    // TODO dszopa 11/22/16 - It does not seem right that this is a post
+    axios.post(url)
       .then((response) => {
         console.log(response.data);
         this.setState({ events: response.data });

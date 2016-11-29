@@ -48,9 +48,9 @@ public class EventController {
                 eventResponseDTO.getEventId(), eventResponseDTO.getResponse());
     }
 
-    @RequestMapping(value = "/event/upcoming/user/{userId}", method = RequestMethod.GET)
-    public List<EventDTO> getUpcomingEventsForUser(@PathVariable Long userId) {
-     return eventService.getUpcomingEventsForUser(userId);
+    @RequestMapping(value = "/event/upcoming/current/user", method = RequestMethod.GET)
+    public List<EventDTO> getUpcomingEventsForCurrentUser(@AuthenticationPrincipal Long userId) {
+        return eventService.getUpcomingEventsForUser(userId);
     }
 }
 

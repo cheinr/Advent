@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import EventCreate from '../components/events/EventCreate';
 import axios from 'axios';
+import EventCreate from '../components/events/EventCreate';
 
 export default class EventCreateContainer extends Component {
     constructor() {
@@ -89,9 +89,9 @@ export default class EventCreateContainer extends Component {
         };
         console.log(data);
         axios({method: 'post',
-                url: url,
-                data: data}
-            )
+               url: url,
+               data: data}
+        )
             .then(response => {
                 console.log(response.data);
                 this.context.router.push(`/event/${response.data.id}`);
@@ -99,8 +99,8 @@ export default class EventCreateContainer extends Component {
             .catch(error => {
                 console.log(error);
             });
-    };
 
+    };
     render() {
 	if(this.state.loading) {
 	    return(

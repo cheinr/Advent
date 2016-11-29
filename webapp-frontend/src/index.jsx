@@ -7,6 +7,7 @@ import MainLayout from './components/MainLayout';
 import HomeContainer from './containers/HomeContainer';
 import UserSettingContainer from './containers/UserSettingContainer';
 import ViewUserContainer from './containers/ViewUserContainer';
+import MyProfileContainer from './containers/MyProfileContainer';
 import EventCreateContainer from './containers/EventCreateContainer';
 import EventListContainer from './containers/EventListContainer';
 import EventInfoContainer from './containers/EventInfoContainer';
@@ -16,6 +17,7 @@ import GroupInfoContainer from './containers/GroupInfoContainer';
 import GroupChatContainer from './containers/GroupChatContainer';
 import SearchResultsContainer from './containers/SearchResultsContainer';
 import MyGroupsContainer from './containers/MyGroupsContainer';
+import MyProfileSettingsContainer from './containers/MyProfileSettingsContainer';
 import SignIn from './components/sign-in';
 import auth from './auth';
 import EventCalendarContainer from './containers/EventCalendarContainer';
@@ -30,19 +32,19 @@ function requireAuth(nextState, replace) {
     });
   } else {
     axios.defaults.headers.common["Authorization"] = auth.getToken();
-    
+
     //If Server sends back Unauthorized error code, sign out the user.
     axios.interceptors.response.use(function (response) {
-        return response;
+      return response;
     }, function (error) {
-        if(error.response.status === 403) {
-    	console.log("user's id token is invalid");
-    	var auth2 = gapi.auth2.getAuthInstance();
-    	auth.logout(auth2, function() {
-    	    window.location.replace("");
-    	});
-        }
-        return error;
+      if(error.response.status === 403) {
+        console.log("user's id token is invalid");
+        var auth2 = gapi.auth2.getAuthInstance();
+        auth.logout(auth2, function() {
+          window.location.replace("");
+        });
+      }
+      return error;
     }.bind(this));
   }
 }
@@ -61,12 +63,14 @@ function requireNoAuth(nextState, replace) {
 
 ReactDom.render(
   <Router history={browserHistory}>
-      <Route path="/login" component={SignIn} onEnter={requireNoAuth} />
+    <Route path="/login" component={SignIn} onEnter={requireNoAuth} />
     <Route component={MainLayout} onEnter={requireAuth}>
       <Route path="/" component={HomeContainer} />
       <Route path="/my-groups" component={MyGroupsContainer} />
       <Route path="/user/:userId" component={ViewUserContainer} />
+      <Route path="/user/current/profile" component={MyProfileContainer} />
       <Route path="/user/edit/:userId" component={UserSettingContainer} />
+      <Route path="/user/edit/current/profile" component={MyProfileSettingsContainer} />
       <Route path="/schedule/addevent" component={ScheduleAddEvent} />
       <Route path="/event/create/:groupId" component={EventCreateContainer} />
       <Route path="/event/list" component={EventListContainer} />
@@ -79,4 +83,4 @@ ReactDom.render(
       <Route path="/group/edit/:groupId" component={GroupEditContainer} />
     </Route>
   </Router>
-, document.querySelector('.content'));
+  , document.querySelector('.content'));
