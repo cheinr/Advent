@@ -30,8 +30,6 @@ export default class GroupInfoContainer extends Component {
             url: url,
         })
             .then((response) => {
-                console.log(response.data);
-		console.log(response.data.userGroups);
 		var userRole = null;
 
 		//check if logged in user is a Moderator of the group
@@ -73,7 +71,6 @@ export default class GroupInfoContainer extends Component {
     }
 
     render() {
-        console.log(this.state);
         return (
 	    <div>
 		<GroupInfo
@@ -82,7 +79,7 @@ export default class GroupInfoContainer extends Component {
 		    joinGroup={this.joinGroup}
 		    roleWithGroup={this.state.roleWithGroup}
 		    updateGroup={this.getGroup}
-/>
+		/>
 	    </div>
 	)
     }

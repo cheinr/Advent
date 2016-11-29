@@ -39,4 +39,9 @@ public class UserGroupController {
     public void removeCurrentUserFromGroup(@AuthenticationPrincipal Long userId, @PathVariable Long groupId) {
         userGroupService.removeUserFromGroup(userId, groupId);
     }
+
+    @RequestMapping(value = "/usergroup/{userGroupId}/role/set/{newRole}", method = RequestMethod.POST)
+    public UserGroup changeUserRoleForGroup(@PathVariable Long userGroupId, @PathVariable String newRole) {
+        return userGroupService.changeUserRoleForGroup(userGroupId, newRole);
+    }
 }
