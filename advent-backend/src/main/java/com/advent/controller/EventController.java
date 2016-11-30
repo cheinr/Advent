@@ -22,8 +22,8 @@ public class EventController {
 
     //TODO clai add group id when that is implemented
     @RequestMapping(value = "/event/create", method = RequestMethod.POST)
-    public EventDTO createEvent(@RequestBody EventDTO event) {
-        return eventService.createEvent(event);
+    public EventDTO createEvent(@RequestBody EventDTO event, @AuthenticationPrincipal Long userId) {
+        return eventService.createEvent(event, userId);
     }
 
     // Temp
