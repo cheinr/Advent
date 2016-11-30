@@ -13,35 +13,22 @@ import Router from 'react-native-simple-router';
 export default class AdventMobile extends Component {
   render() {
     // TODO authenticate with database before passing in route
-    // const firstRoute = {
-    //   name: "Home",
-    //   component: HomeContainer
-    // };
-    // return (
-    //     <Router
-    //         firstRoute={firstRoute}
-    //     />
-    // );
-    return null;
+    const firstRoute = {
+      name: "Welcome",
+      component: HomeContainer
+    };
+    return (
+        <Router
+            firstRoute={firstRoute}
+            headerStyle={styles.header}
+        />
+    );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+  header: {
+    backgroundColor: '#5cafec',
   },
 });
 

@@ -6,7 +6,15 @@ var Platform = require('react-native').Platform;
 export default class HomeContainer extends Component {
     constructor() {
         super();
+        this.state = {
+            authenticated: false,
+        };
+        this.login = this.login.bind(this);
         this.nextPage = this.nextPage.bind(this);
+    }
+
+    login() {
+        this.setState({authenticated: true});
     }
 
     nextPage() {
@@ -14,7 +22,10 @@ export default class HomeContainer extends Component {
     }
 
     render() {
-        return <Home/>
+        return <Home
+            login={this.login}
+            authenticated={this.state.authenticated}
+        />
     }
 }
 
