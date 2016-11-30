@@ -36,6 +36,7 @@
     "babel-preset-react": "^6.11.1",
     "babel-preset-stage-1": "^6.13.0",
     "bootstrap": "^3.3.7",
+    "dateformat": "^2.0.0",
     "eonasdan-bootstrap-datetimepicker": "^4.17.42",
     "express": "^4.14.0",
     "express-http-proxy": "^0.10.0",

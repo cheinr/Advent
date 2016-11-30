@@ -44,11 +44,7 @@ export default function GroupInfo(props) {
         {/* group announcements should go here */}
         {/* toggle being able to see users for the group? */}
         {props.announcements.map((announcement, id) =>
-          <div className="panel panel-default">
-            <div className="panel-body">
-              <Announcement key={id} title={announcement.title} content={announcement.content} date={new Date(announcement.date)} group={announcement.groupDTO} />
-            </div>
-          </div>
+          <Announcement key={id} title={announcement.title} content={announcement.content} date={new Date(announcement.date)} group={announcement.groupDTO} />
         )}
       </div>
       <div className="form-group">

@@ -24,7 +24,7 @@ CREATE TABLE announcement
 (
   id BIGINT PRIMARY KEY NOT NULL,
   title VARCHAR(255),
-  content VARCHAR(255),
+  content TEXT,
   date TIMESTAMP,
   group_table_id BIGINT,
   FOREIGN KEY (group_table_id) REFERENCES group_table(id) ON UPDATE NO ACTION
@@ -138,7 +138,31 @@ INSERT INTO user_group (id, user_id, group_table_id, role) VALUES
   (1002, 1000, 1002, 'AmazingRole'),
   (1003, 1000, 1003, 'AmazingRole');
 
-INSERT INTO announcement VALUES (1000, 'Sample Title0', 'Sample Content0', '2012-09-17 18:47:52.69', 1000);
+INSERT INTO announcement VALUES (1000, 'Sample Title0', '# Guttura tum hanc summoque illa
+
+ ## Pavet est hunc
+
+ Lorem markdownum verba, haec Marte, animalia luminis, sine genitoris in
+ **corpora**, pristina revolutaque. Haeret sucus spectans nomina. Aqua vota porta
+ est primus marmore animos carmine vidi, [quam sim](http://equorum-pecudis.org/)
+ tibi aperire peremi calenti operisque procul.
+
+ ## Furens cum suppressis dedit quare orbem fuerit
+
+ Quo remigioque nempe, a pondere sperne: nodus vana efficient mora haustus. Ausum
+ maenades motura! **Tu** calorem nomine.
+
+ ## Pyrrham robora ab indignabere mugitu labor Tenedonque
+
+ Ante ter, ad inter requiemque Iuppiter ossa suspiria verum sunt silet seu nondum
+ validosque viva? Videtur cuius tecto priora, imago **orbem audetis**, sic, et
+ pro sed ille de causamque. Manus partem de Marte insidere femina: poma repetita,
+ domino! Scythiam petiisse auctor **mandere**, facerent misceat.
+
+ - Ense cautes superest odiumque Dryopen ferrum ademit
+ - Navalibus turba miserum valles pervenit acutior possent
+ - Tritonida esset pars digna casus insonuit'
+  , '2012-09-17 18:47:52.69', 1000);
 INSERT INTO announcement VALUES (1001, 'Sample Title1', 'Sample Content1', '2008-11-12', 1000);
 INSERT INTO announcement VALUES (1002, 'Sample Title2', 'Sample Content2', '2008-11-13', 1000);
 INSERT INTO announcement VALUES (1003, 'Sample Title3', 'Sample Content3', '2008-11-14', 1000);
@@ -152,7 +176,7 @@ INSERT INTO announcement VALUES (1010, 'Sample Title10', 'Sample Content10', '20
 INSERT INTO announcement VALUES (1011, 'Sample Title11', 'Sample Content11', '2008-11-22', 1000);
 INSERT INTO announcement VALUES (1012, 'Sample Title12', 'Sample Content12', '2008-11-23', 1000);
 INSERT INTO announcement VALUES (1013, 'Sample Title13', 'Sample Content13', '2008-11-24', 1000);
-INSERT INTO announcement VALUES (1014, 'Sample Title14', 'Sample Content14', '2008-11-25', 1000);
+INSERT INTO announcement VALUES (1014, 'Sample Title14', 'Sample Content14 \n \n This is the first of many announcements', '2008-11-25', 1000);
 
 INSERT INTO event VALUES (1000, 'Super Awesome Event', 'This event takes place from 1pm-1pm', '2028-11-15', '2008-11-15', 'Coover Hall 1000', 0, 1000);
 INSERT INTO event VALUES (1001, 'Super Awesome Event2', 'This event takes place from 1pm-2pm', '2028-11-16', '2008-11-16', 'Coover Hall 1001', 0, 1000);

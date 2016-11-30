@@ -171,3 +171,23 @@
     margin-top: 0;
     margin-bottom: 0;
 }
+
+.no-padding-left {
+    padding-left: 0px !important;
+}
+
+.font-bold {
+    font-weight: bold;
+}
+
+.xs-margin-top {
+    margin-top: 10px !important;
+}
+
+.xs-margin-bottom {
+    margin-bottom: 10px !important;
+}
+
+.no-padding-bottom {
+    padding-bottom: 0px !important;
+}
