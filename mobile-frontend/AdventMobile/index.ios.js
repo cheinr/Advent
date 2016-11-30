@@ -1,22 +1,28 @@
 import React, { Component } from 'react';
 import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View
+    AppRegistry,
+    StyleSheet,
+    Text,
+    View,
+    TouchableHighlight,
+    Image
 } from 'react-native';
 import HomeContainer from './containers/HomeContainer'
-import GroupListContainer from './containers/GroupListContainer'
+import Router from 'react-native-simple-router';
 
 export default class AdventMobile extends Component {
   render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to Advent!
-        </Text>
-      </View>
-    );
+    // TODO authenticate with database before passing in route
+    // const firstRoute = {
+    //   name: "Home",
+    //   component: HomeContainer
+    // };
+    // return (
+    //     <Router
+    //         firstRoute={firstRoute}
+    //     />
+    // );
+    return null;
   }
 }
 
