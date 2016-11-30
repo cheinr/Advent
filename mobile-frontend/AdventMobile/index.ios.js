@@ -5,6 +5,8 @@ import {
   Text,
   View
 } from 'react-native';
+import HomeContainer from './containers/HomeContainer'
+import GroupListContainer from './containers/GroupListContainer'
 
 export default class AdventMobile extends Component {
   render() {
