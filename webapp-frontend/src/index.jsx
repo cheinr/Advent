@@ -78,7 +78,7 @@ ReactDom.render(
       <Route path="/chat/group/:groupId" component={GroupChatContainer} />
       <Route path="/search(/:query)" component={SearchResultsContainer} />
       <Route path="/group/edit/:groupId" component={GroupEditContainer} />
-      <Route path="/event/edit/:eventId" component={EditEventContainer} />
+      <Route path="/event/edit/:groupId/:eventId" component={EditEventContainer} />
     </Route>
   </Router>
 , document.querySelector('.content'));

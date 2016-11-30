@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import EventCreate from '../components/events/EditEvent';
 import axios from 'axios';
 
+
 export default class EditEventContainer extends Component {
     constructor() {
         super();
@@ -41,8 +42,8 @@ export default class EditEventContainer extends Component {
                     id: response.data.id,
                     name: response.data.name,
                     description: response.data.description,
-                    startDate: this.state.start_date != "" ? this.state.start_date.format('YYYY-MM-DD HH:mm:ss') : undefined,
-                    endDate: this.state.end_date != "" ? this.state.end_date.format('YYYY-MM-DD HH:mm:ss') : undefined,
+                    startDate: response.data.startDate,
+                    endDate: response.data.endDate,
                     location: response.data.location,
                     group: response.data.group,
                     eventResponses: response.data.eventResponses,

@@ -25,6 +25,9 @@ public class EventController {
         return eventService.createEvent(event);
     }
 
+    @RequestMapping(value = "/event/edit", method = RequestMethod.POST)
+    public EventDTO editEvent(@RequestBody EventDTO event) { return eventService.createEvent(event);}
+
     // Temp
     @RequestMapping(value = "/event/list", method = RequestMethod.POST)
     public List<EventDTO> getAllEvents() {
