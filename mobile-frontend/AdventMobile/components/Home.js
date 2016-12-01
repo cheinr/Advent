@@ -31,9 +31,21 @@ export default class Home extends React.Component {
                     onPress={this.props.login}
                     title="Login to Google"
                     color="black"
-                    accessibilityLabel="Learn more about this purple button"
                 />
-                {this.props.authenticated ? <Text>Logged in</Text> : null}
+                {this.props.authenticated ?
+                    <View>
+                        <Button
+                            onPress={this.props.login}
+                            title="View Groups"
+                            color="black"
+                        />
+                        <Button
+                            onPress={this.props.login}
+                            title="View Events"
+                            color="black"
+                        />
+                    </View>
+                    : null}
             </View>
         );
     }
