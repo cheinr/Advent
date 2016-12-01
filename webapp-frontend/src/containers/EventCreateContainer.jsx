@@ -15,7 +15,8 @@ export default class EventCreateContainer extends Component {
 	    loading: true,
             isPrivate: false,
 	    typingTimout: null,
-	    locationValid: false
+	    locationValid: false,
+	    formattedAddrs: []
         };
         this.nameChange = this.nameChange.bind(this);
         this.descChange = this.descChange.bind(this);
@@ -89,14 +90,19 @@ export default class EventCreateContainer extends Component {
 	    'address':this.state.location
 	}, function(results, status) {
 	    if(status === "OK") {
+		var formatted_addrs = [];
+		for(var i = 0; i<results.length; i++) {
+		    formatted_addrs.push(results[i].formatted_address);
+		}
 		this.setState({
 		    locationValid: true,
+		    formattedAddrs: formatted_addrs,
 		    coords: [
 			results[0].geometry.location.lat(),
 			results[0].geometry.location.lng()
 		    ]
 		});
-		console.log(this.state.coords);
+		console.log(this.state.formattedAddrs);
 	    } else {
 		this.setState({
 		    locationValid: false,
@@ -161,7 +167,7 @@ export default class EventCreateContainer extends Component {
 			privateChange={this.privateChange}
 			submitForm={this.submitForm}
 			values={this.state}
-		/>
+		    />
 		{map}
 		</div>
             )
