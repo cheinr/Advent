@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
+import { Link } from 'react-router';
 import dateFormat from 'dateformat';
 
 const propTypes = {
@@ -15,17 +16,14 @@ export default function Announcement(props) {
   return (
     <div className="panel panel-default">
       <div className="panel-body no-padding-bottom">
-        <div className="row">
-          <div className="col-xs-1">
-            <a href={props.group.groupPictureUrl}>
-              <img className="media-object media-image" src={props.group.groupPictureUrl} alt="Group" />
-            </a>
-          </div>
-          <div className="col-xs-11 no-padding-left">
-            <h3>
-              <span className="font-bold">{props.group.groupName}</span>
-              &nbsp;posted at {timeString} on {dateString}</h3>
-          </div>
+        <div className="row flex-display">
+          <a className="picture-padding" href={props.group.groupPictureUrl}>
+            <img className="media-object media-image" src={props.group.groupPictureUrl} alt="Group" />
+          </a>
+          <h3>
+            <Link className="font-bold black-link" to={`/group/${props.group.id}`}>{props.group.groupName}</Link>
+            &nbsp;posted at {timeString} on {dateString}
+          </h3>
         </div>
         <div className="row">
           <hr className="xs-margin-bottom xs-margin-top" />

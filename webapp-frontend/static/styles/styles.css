@@ -191,3 +191,20 @@
 .no-padding-bottom {
     padding-bottom: 0px !important;
 }
+
+.picture-padding {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.flex-display {
+    display: flex;
+}
+
+.black-link {
+    color: black;
+}
+
+.black-link:focus, .black-link:hover {
+    color: #373a3c;
+}
