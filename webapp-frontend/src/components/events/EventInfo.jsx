@@ -50,6 +50,10 @@ export default class EventInfo extends Component {
                         Not Going
                     </button>
                 </div>
+                <Link className="btn btn-default" role="button"
+                      to={`/event/edit/${this.props.event.group.id}/${this.props.event.id}`}>
+                    Edit Event
+                </Link>
             </div>
         );
     }

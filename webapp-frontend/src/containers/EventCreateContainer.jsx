@@ -128,9 +128,9 @@ export default class EventCreateContainer extends Component {
         };
         console.log(data);
         axios({method: 'post',
-                url: url,
-                data: data}
-            )
+               url: url,
+               data: data}
+        )
             .then(response => {
                 console.log(response.data);
                 this.context.router.push(`/event/${response.data.id}`);
@@ -138,8 +138,8 @@ export default class EventCreateContainer extends Component {
             .catch(error => {
                 console.log(error);
             });
-    };
 
+    };
     render() {
 	var map = "";
 	if(this.state.locationValid) {

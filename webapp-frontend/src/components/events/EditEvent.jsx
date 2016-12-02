@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 import ReactDatetime from 'react-datetime';
 
-export default class EventCreate extends Component {
-    constructor(props) {
-	super(props);
+export default class EditEvent extends Component {
+    componentDidMount() {
+
     }
 
     render() {
-
         return (
             <div>
-                <h1>Create Event</h1>
+                <h1>Edit Event</h1>
 
                 <form>
                     <div className="form-group">
@@ -26,25 +25,23 @@ export default class EventCreate extends Component {
                                   value={this.props.values.description}/>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="start_date">Start Date and Time</label>
+                        <label htmlFor="start_date">Start Date and Time: {this.props.values.startDate}</label>
                         <ReactDatetime id="start_date"
                                onChange={this.props.startChange}
                                value={this.props.values.start_date}/>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="end_date">End Date and Time</label>
+                        <label htmlFor="end_date">End Date and Time: {this.props.values.endDate}</label>
                         <ReactDatetime id="end_date"
                                onChange={this.props.endChange}
                                value={this.props.values.end_date}/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="location">Location</label>
-                        <input type="text" className="form-control"
-			       id="location"
+                        <input type="text" className="form-control" id="location"
                                onChange={this.props.locChange}
                                value={this.props.values.location}/>
                     </div>
-
                     <div className="checkbox">
                         <label>
                             <input type="checkbox"

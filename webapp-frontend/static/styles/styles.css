@@ -164,3 +164,17 @@
 .img-responsive, .thumbnail a > img, .thumbnail > img {
     max-height: 300px;
 }
+
+.bottom-padded {
+    padding-bottom: 20px;
+}
+
+.black-border {
+    border: 1px solid black;
+    border-radius: 3px;
+}
+
+.no-margin {
+    margin-top: 0;
+    margin-bottom: 0;
+}

@@ -70,12 +70,16 @@ public class GroupController {
 
     @RequestMapping(value = "/group/{id}", method = RequestMethod.GET)
     public GroupDTO getGroupById(@PathVariable Long id) {
-        GroupDTO group = groupService.getGroup(id);
-        return group;
+        return groupService.getGroup(id);
     }
 
     @RequestMapping(value = "/group/user/{userId}", method = RequestMethod.GET)
     public List<GroupDTO> getGroupsForUser(@PathVariable Long userId) {
+        return groupService.getGroupsForUser(userId);
+    }
+
+    @RequestMapping(value = "/group/my-groups", method = RequestMethod.GET)
+    public List<GroupDTO> getGroupsForCurrentUser(@AuthenticationPrincipal Long userId) {
         return groupService.getGroupsForUser(userId);
     }
 }

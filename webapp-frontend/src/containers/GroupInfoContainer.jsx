@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router';
-import GroupInfo from '../components/GroupInfo.jsx';
 import axios from 'axios';
+import { Link } from 'react-router';
+import GroupInfo from '../components/GroupInfo';
 
 export default class GroupInfoContainer extends Component {
     constructor() {
@@ -19,7 +19,7 @@ export default class GroupInfoContainer extends Component {
     }
 
     componentDidMount() {
-        this.getGroup();
+	this.getGroup();
     }
 
     getGroup() {
@@ -30,8 +30,6 @@ export default class GroupInfoContainer extends Component {
             url: url,
         })
             .then((response) => {
-                console.log(response.data);
-		console.log(response.data.userGroups);
 		var userRole = null;
 
 		//check if logged in user is a Moderator of the group
@@ -73,7 +71,6 @@ export default class GroupInfoContainer extends Component {
     }
 
     render() {
-        console.log(this.state);
         return (
 	    <div>
 		<GroupInfo
@@ -86,4 +83,5 @@ export default class GroupInfoContainer extends Component {
 	    </div>
 	)
     }
+
 }

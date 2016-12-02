@@ -19,7 +19,6 @@ export default class UserGroupList extends Component {
     }
     
     render() {
-	console.log(this.props.role);
         return (
             <table className="table table-hover table-bordered">
                 <thead>

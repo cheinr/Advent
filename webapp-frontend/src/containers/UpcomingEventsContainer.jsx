@@ -11,10 +11,9 @@ export default class UpcomingEventsContainer extends React.Component {
   }
 
   componentWillMount() {
-    axios.get(`/api/event/upcoming/user/${localStorage.id}`)
+    axios.get('/api/event/upcoming/current/user')
       .then((response) => {
         this.setState({ events: response.data });
-        console.log(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -26,10 +25,10 @@ export default class UpcomingEventsContainer extends React.Component {
       <div>
         <h2 className="center-text">Upcoming Events</h2>
         <hr />
-        {this.state.events.map((event, id) =>
-          <div className="sidebar-row">
+        {this.state.events.map((event, index) =>
+          <div key={index} className="sidebar-row">
             <UpcomingEvent
-              key={id}
+              key={index}
               eventDate={event.startDate}
               name={event.name}
               description={event.description}

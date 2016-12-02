@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import ReactDom from 'react-dom';
-import EventInfo from '../components/events/EventInfo.jsx';
 import axios from 'axios';
+import EventInfo from '../components/events/EventInfo';
 
 import LocationMap from '../components/LocationMap';
 
@@ -27,7 +26,7 @@ export default class EventInfoContainer extends Component {
     }
 
     componentDidMount() {
-        this.getEvent();
+	this.getEvent();
     }
 
     getEvent() {
@@ -110,10 +109,11 @@ export default class EventInfoContainer extends Component {
 	}
         return (
 	    <div>
-	    <EventInfo event={this.state}
-	    respondToEvent={(message) => this.respondToEvent(message)}
-            />
-	    {map}
+		<EventInfo event={this.state}
+			   respondToEvent={(message) =>
+			       this.respondToEvent(message)}
+		/>
+		{map}
 	    </div>
 	);
     }
