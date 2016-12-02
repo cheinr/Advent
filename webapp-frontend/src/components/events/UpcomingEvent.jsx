@@ -7,7 +7,7 @@ const propTypes = {
   name: React.PropTypes.string,
   description: React.PropTypes.string,
   location: React.PropTypes.string,
-  eventId: React.PropTypes.string,
+  eventId: React.PropTypes.number,
 };
 
 export default function UpcomingEvent(props) {

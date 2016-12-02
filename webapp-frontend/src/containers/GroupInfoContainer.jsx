@@ -33,7 +33,7 @@ export default class GroupInfoContainer extends Component {
   }
 
   getAnnouncements() {
-    axios.get(`/api/announcement/group/${this.props.params.groupId}`)
+    axios.get(`/api/announcement/group/first/10/${this.props.params.groupId}`)
       .then((response) => {
         this.setState({
           announcements: response.data,

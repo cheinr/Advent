@@ -22,14 +22,35 @@ export default function GroupInfo(props) {
     joinOrLeaveButton = <button className="btn btn-danger" onClick={props.leaveGroup}>Leave Group</button>;
   }
 
+  const announcementHeader = props.announcements.length !== 0 ? <b>Announcements:</b> : '';
+
+
   return (
     <div>
       <div className="row pull-down">
         <div className="col-xs-3">
-          <Thumbnail pictureUrl={props.group.groupPictureUrl} altText="User" />
+          <Thumbnail pictureUrl={props.group.groupPictureUrl} altText="Group" />
         </div>
         <div className="col-xs-9">
           <PageHeader title={props.group.name} />
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-xs-12 center-text xs-padding-bottom">
+          <div className="btn-group btn-group-justified" role="group">
+            <div className="btn-group">
+              { joinOrLeaveButton }
+            </div>
+            <Link className="btn btn-default" role="button" to={`/event/create/${props.groupId}`}>
+              Create Event
+            </Link>
+            <Link className="btn btn-default" role="button" to={`/group/edit/${props.groupId}`}>
+              Edit Group
+            </Link>
+            <Link className="btn btn-default" to={`/chat/group/${props.groupId}`}>
+              Group Chat
+            </Link>
+          </div>
         </div>
       </div>
       <div className="form-group">
@@ -40,9 +61,7 @@ export default function GroupInfo(props) {
         <EventList events={props.group.events} />
       </div>
       <div className="form-group">
-        <b>Announcements:</b>
-        {/* group announcements should go here */}
-        {/* toggle being able to see users for the group? */}
+        { announcementHeader }
         {props.announcements.map((announcement, id) =>
           <Announcement key={id} title={announcement.title} content={announcement.content} date={new Date(announcement.date)} group={announcement.groupDTO} />
         )}
@@ -51,16 +70,6 @@ export default function GroupInfo(props) {
         <div><b>Users:</b></div>
         <UserGroupList users={props.group.users} />
       </div>
-      <Link className="btn btn-default" role="button" to={`/event/create/${props.groupId}`}>
-        Create Event
-      </Link>
-      { joinOrLeaveButton }
-      <Link className="btn btn-default" role="button" to={`/group/edit/${props.groupId}`}>
-        Edit Group
-      </Link>
-      <Link className="btn btn-default" to={`/chat/group/${props.groupId}`}>
-        Group Chat
-      </Link>
     </div>
   );
 }

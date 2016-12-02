@@ -208,3 +208,7 @@
 .black-link:focus, .black-link:hover {
     color: #373a3c;
 }
+
+.xs-padding-bottom {
+    padding-bottom: 10px;
+}
