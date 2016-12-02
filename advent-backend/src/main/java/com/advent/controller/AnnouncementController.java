@@ -34,4 +34,9 @@ public class AnnouncementController {
     public List<AnnouncementDTO> getAllAnnouncementsForGroup(@PathVariable Long groupId) {
         return announcementService.getAllAnnouncementsForGroup(groupId);
     }
+
+    @RequestMapping(value = "/announcement/group/first/10/{groupId}", method = RequestMethod.GET)
+    public List<AnnouncementDTO> getFirstTenAnnouncementsForGroup(@PathVariable Long groupId) {
+        return announcementService.getFirstTenAnnouncementsForGroup(groupId);
+    }
 }

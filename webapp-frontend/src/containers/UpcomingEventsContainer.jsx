@@ -29,6 +29,7 @@ export default class UpcomingEventsContainer extends React.Component {
           <div key={index} className="sidebar-row">
             <UpcomingEvent
               key={index}
+              eventId={event.id}
               eventDate={event.startDate}
               name={event.name}
               description={event.description}
