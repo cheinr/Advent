@@ -12,21 +12,6 @@ export default class SideBarContainer extends React.Component {
 	console.log(this.props);
 	return (
 	    <div className="panel-group" id="accordian">
-		<div className="panel panel-default" >
-		    <div className="panel-heading">
-			<h4 className="panel-title">
-			    <a data-toggle="collapse"
-			       data-parent="#accordian" href="#collapse1">
-				Upcoming Events
-			    </a>
-			</h4>
-		    </div>
-		    <div id="collapse1" className="panel-collapse collapse in">
-			<div className="panel-body">
-			    <UpcomingEventsContainer />
-			</div>
-		    </div>
-		</div>
 
 		<div className="panel panel-default" >
 		    <div className="panel-heading">
@@ -46,6 +31,23 @@ export default class SideBarContainer extends React.Component {
 
 		    </div>
 		</div>
+
+		<div className="panel panel-default" >
+		    <div className="panel-heading">
+			<h4 className="panel-title">
+			    <a data-toggle="collapse"
+			       data-parent="#accordian" href="#collapse1">
+				Upcoming Events
+			    </a>
+			</h4>
+		    </div>
+		    <div id="collapse1" className="panel-collapse collapse in">
+			<div className="panel-body">
+			    <UpcomingEventsContainer />
+			</div>
+		    </div>
+		</div>
+
 	    </div>
 	);
     }
