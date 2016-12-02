@@ -24,39 +24,48 @@ export default function GroupInfo(props) {
     buttons = (
       <div className="btn-group btn-group-justified" role="group">
         <div className="btn-group">
-          <button className="btn btn-default" onClick={props.joinGroup}>JoinGroup</button>
+          <button className="btn btn-success" onClick={props.joinGroup}>Join Group</button>
         </div>
-        <Link className="btn btn-success" to={`/chat/group/${props.groupId}`}>Group Chat</Link>
+        <Link className="btn btn-default" to={`/chat/group/${props.groupId}`}>Group Chat</Link>
       </div>
     );
-  } else if (props.roleWithGroup.toUpperCase() === 'Moderator') {
+  } else if (props.roleWithGroup.toUpperCase() === 'MODERATOR') {
     buttons = (
       <div className="btn-group btn-group-justified" role="group">
         <div className="btn-group">
-          <button className="btn btn-default" onClick={props.leaveGroup}>Leave Group</button>
+          <button className="btn btn-danger" onClick={props.leaveGroup}>Leave Group</button>
         </div>
         <Link className="btn btn-default" role="button" to={`/event/create/${props.groupId}`}>Create Event</Link>
-        <Link className="btn btn-success" to={`/chat/group/${props.groupId}`}>Group Chat</Link>
+        <Link className="btn btn-default" to={`/chat/group/${props.groupId}`}>Group Chat</Link>
       </div>
     );
   } else if (props.roleWithGroup.toUpperCase() === 'ADMIN' || props.roleWithGroup.toUpperCase() === 'OWNER') {
     buttons = (
       <div className="btn-group btn-group-justified" role="group">
         <div className="btn-group">
-          <button className="btn btn-default" onClick={props.leaveGroup}>Leave Group</button>
+          <button className="btn btn-danger" onClick={props.leaveGroup}>Leave Group</button>
         </div>
         <Link className="btn btn-default" role="button" to={`/event/create/${props.groupId}`}>Create Event</Link>
-        <Link className="btn btn-success" to={`/chat/group/${props.groupId}`}>Group Chat</Link>
+        <Link className="btn btn-default" to={`/chat/group/${props.groupId}`}>Group Chat</Link>
         <Link className="btn btn-warning" role="button" to={`/group/edit/${props.groupId}`}>Edit Group</Link>
+      </div>
+    );
+  } else if (props.roleWithGroup.toUpperCase() === 'MEMBER') {
+    buttons = (
+      <div className="btn-group btn-group-justified" role="group">
+        <div className="btn-group">
+          <button className="btn btn-danger" onClick={props.leaveGroup}>Leave Group</button>
+        </div>
+        <Link className="btn btn-default" to={`/chat/group/${props.groupId}`}>Group Chat</Link>
       </div>
     );
   } else {
     buttons = (
       <div className="btn-group btn-group-justified" role="group">
         <div className="btn-group">
-          <button className="btn btn-default" onClick={props.joinGroup}>JoinGroup</button>
+          <button className="btn btn-success" onClick={props.joinGroup}>Join Group</button>
         </div>
-        <Link className="btn btn-success" to={`/chat/group/${props.groupId}`}>Group Chat</Link>
+        <Link className="btn btn-default" to={`/chat/group/${props.groupId}`}>Group Chat</Link>
       </div>
     );
   }

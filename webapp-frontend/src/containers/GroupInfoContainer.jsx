@@ -66,6 +66,7 @@ export default class GroupInfoContainer extends Component {
           },
           roleWithGroup: userRole,
         });
+        console.log(userRole);
       })
       .catch((error) => {
         console.log(error);
@@ -75,9 +76,7 @@ export default class GroupInfoContainer extends Component {
   leaveGroup() {
     axios.post(`/api/remove/user/current/group/${this.props.params.groupId}`)
       .then((response) => {
-        this.setState({
-          isUserInGroup: false,
-        });
+        this.getGroup();
       })
       .catch((error) => {
         console.log(error);
@@ -92,9 +91,6 @@ export default class GroupInfoContainer extends Component {
     })
       .then((response) => {
         this.getGroup();
-        this.setState({
-          roleWithGroup: 'MEMBER',
-        });
       })
       .catch((error) => {
         console.log(error);
