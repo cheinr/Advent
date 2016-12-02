@@ -66,7 +66,6 @@ export default class GroupInfoContainer extends Component {
           },
           roleWithGroup: userRole,
         });
-        console.log(userRole);
       })
       .catch((error) => {
         console.log(error);
