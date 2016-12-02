@@ -14,7 +14,7 @@ export default class EditEventContainer extends Component {
             end_date: "",
             location: "",
             isPrivate: false,
-	    geocoder: new google.maps.Geocoder(),
+	    geocoder: null,
 	    locationValid: false
         };
         this.nameChange = this.nameChange.bind(this);
@@ -32,11 +32,9 @@ export default class EditEventContainer extends Component {
 
     getEvent() {
         const url = `http://localhost:3000/api/event/id/${this.props.params.eventId}`;
-        const headers = {'Authorization': localStorage.token};
         axios({
             method: 'get',
-            url: url,
-            headers: headers
+            url: url
         })
             .then(response => {
                 console.log(response.data);
@@ -49,6 +47,7 @@ export default class EditEventContainer extends Component {
                     location: response.data.location,
                     group: response.data.group,
                     eventResponses: response.data.eventResponses,
+		    geocoder: new google.maps.Geocoder(),
                     private: response.data.private,
                 });
 		this.getLocationCoords();
