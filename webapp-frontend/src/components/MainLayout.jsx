@@ -22,6 +22,7 @@ export default class MainLayout extends React.Component {
 
     render() {
 	var children = null;
+	var sidebar = null;
 	console.log("rendering");
 	// this gives children access to user property
 	if(this.state.user === null) {
@@ -34,6 +35,7 @@ export default class MainLayout extends React.Component {
 	} else {
 	    children = React.cloneElement(this.props.children,
 					  { user: this.state.user });
+	    sidebar = <Sidebar user={this.state.user} />;
 	}
 
 	return (
@@ -46,7 +48,7 @@ export default class MainLayout extends React.Component {
 			</div>
 		    </div>
 		    <div className="sidebar sidebar-well">
-			<Sidebar user={this.state.user}/>
+			{sidebar}
 		    </div>
 		</div>
 	    </div>

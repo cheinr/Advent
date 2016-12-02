@@ -19,7 +19,6 @@ const SidebarChatContainer = withRouter(React.createClass( {
     },
 
     componentDidMount : function() {
-	console.log("WHat a bunch of bullshit");
 	this.socket = null;
 
 	var url = `/api/group/user/${this.props.user.id}`;
@@ -36,20 +35,47 @@ const SidebarChatContainer = withRouter(React.createClass( {
 	});
     },
 
+    openChat: function(e) {
+	this.setState({
+	    selectedGroup: this.state.groups[e.target.id]
+	});
+    },
+
+    closeChat: function() {
+	this.setState({
+	    selectedGroup: null
+	});
+    },
+
     render: function() {
 
 	if(this.state.selectedGroup !== null) {
-	    <div className="sidebar-chat">
-		<GroupChat
-		    group={this.state.selectedGroup}
-		    user={this.props.user}
-		/>
-	    </div>
+	    return(
+		<div className="sidebar-chat">
+		    <button onClick={this.closeChat}
+			    className="btn btn-default">
+			back
+		    </button>
+		    <GroupChat
+			group={this.state.selectedGroup}
+			user={this.props.user}
+		    />
+		</div>
+	    );
 	} else {
 	    console.log(this.state.groups);
             return (
 		<div className="sidebar-chat-groups">
-		    {this.state.groups}
+		{
+		    this.state.groups.map((group, id) =>
+			<div key={id}>
+			    <a id={id} onClick={this.openChat} >
+				{group.groupName}
+			    </a>
+			</div>
+		    )
+		}
+
 		</div>
             );
 	}
