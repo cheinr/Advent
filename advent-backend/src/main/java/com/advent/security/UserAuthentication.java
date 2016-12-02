@@ -1,7 +1,6 @@
 package com.advent.security;
 
 import com.advent.dto.UserDTO;
-import com.advent.entity.User;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 
@@ -18,6 +17,7 @@ public class UserAuthentication implements Authentication {
     public UserAuthentication(UserDTO userDTO) {
         this.userDTO = userDTO;
     }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         //TODO - we could store user authorities for access to certain endpoints.
@@ -36,7 +36,6 @@ public class UserAuthentication implements Authentication {
     }
 
     @Override
-    
     public Object getPrincipal() {
         return userDTO.getId();
     }

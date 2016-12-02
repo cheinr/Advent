@@ -1,10 +1,13 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 const propTypes = {
   eventDate: React.PropTypes.any,
   pictureUrl: React.PropTypes.string,
   name: React.PropTypes.string,
   description: React.PropTypes.string,
+  location: React.PropTypes.string,
+  eventId: React.PropTypes.number,
 };
 
 export default function UpcomingEvent(props) {
@@ -21,7 +24,9 @@ export default function UpcomingEvent(props) {
             </a>
           </div>
           <div className="media-body">
-            <h4 className="media-heading">{props.name}</h4>
+            <h4 className="media-heading">
+              <Link className="black-link" to={`/event/${props.eventId}`}>{props.name}</Link>
+            </h4>
             <p>
               {props.description}
             </p>

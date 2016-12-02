@@ -5,6 +5,7 @@ import com.advent.entity.Announcement;
 import com.advent.factory.AnnouncementFactory;
 import com.advent.repo.AnnouncementRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -53,6 +54,17 @@ public class AnnouncementService {
         announcements.forEach(announcement ->
             announcementDTOs.add(announcementFactory.announcementToAnnouncementDTO(announcement))
         );
+
+        return announcementDTOs;
+    }
+
+    public List<AnnouncementDTO> getFirstTenAnnouncementsForGroup(Long groupId) {
+        List<Announcement> announcements = announcementRepo.findFirstTenAnnouncementsByGroup(groupId, new PageRequest(0, 10));
+        List<AnnouncementDTO> announcementDTOs = new ArrayList<>();
+
+        announcements.forEach(announcement ->
+            announcementDTOs.add(announcementFactory.announcementToAnnouncementDTO(announcement)
+        ));
 
         return announcementDTOs;
     }

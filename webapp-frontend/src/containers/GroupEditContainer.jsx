@@ -1,6 +1,6 @@
-import React, {Component } from 'react'
-import GroupEdit from '../components/GroupEdit';
+import React, { Component } from 'react';
 import axios from 'axios';
+import GroupEdit from '../components/GroupEdit';
 
 export default class GroupEditContainer extends Component {
     constructor() {
@@ -106,13 +106,12 @@ export default class GroupEditContainer extends Component {
 	return(
 	    <div>
 		<GroupEdit
-nameChange={this.nameChange}
-descChange={this.descChange}
-submitForm={this.submitForm}
-values={this.state}
+		    nameChange={this.nameChange}
+		    descChange={this.descChange}
+		    submitForm={this.submitForm}
+		    values={this.state}
 		/>
 	    </div>
 	)
     }
-    
 }

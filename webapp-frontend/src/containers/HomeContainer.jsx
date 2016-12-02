@@ -18,15 +18,10 @@ export default class extends React.Component {
   }
 
   getAnnouncementsForUser() {
-    // TODO dszopa 11/6/16 - Once we fix the sign in backend to user the principal, change this
-    const url = `/api/announcement/homepage/user/${localStorage.id}`;
-    const headers = { Authorization: localStorage.token };
-    console.log(headers);
-    console.log(url);
+    const url = '/api/announcement/homepage/current/user';
 
-    axios({ method: 'get', headers, url })
+    axios.get(url)
       .then((response) => {
-        console.log(response.data);
         this.setState({ announcements: response.data });
       })
       .catch((error) => {
@@ -34,7 +29,7 @@ export default class extends React.Component {
         this.setState({
           showErrors: true,
           errorMessage: 'There was an error receiving announcements from the server',
-        })
+        });
       });
   }
 

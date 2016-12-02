@@ -26,6 +26,9 @@ public class EventController {
         return eventService.createEvent(event, userId);
     }
 
+    @RequestMapping(value = "/event/edit", method = RequestMethod.POST)
+    public EventDTO editEvent(@RequestBody EventDTO event, @AuthenticationPrincipal Long userId) { return eventService.createEvent(event, userId);}
+
     // Temp
     @RequestMapping(value = "/event/list", method = RequestMethod.POST)
     public List<EventDTO> getAllEvents() {
@@ -48,9 +51,9 @@ public class EventController {
                 eventResponseDTO.getEventId(), eventResponseDTO.getResponse());
     }
 
-    @RequestMapping(value = "/event/upcoming/user/{userId}", method = RequestMethod.GET)
-    public List<EventDTO> getUpcomingEventsForUser(@PathVariable Long userId) {
-     return eventService.getUpcomingEventsForUser(userId);
+    @RequestMapping(value = "/event/upcoming/current/user", method = RequestMethod.GET)
+    public List<EventDTO> getUpcomingEventsForCurrentUser(@AuthenticationPrincipal Long userId) {
+        return eventService.getUpcomingEventsForUser(userId);
     }
 }
 

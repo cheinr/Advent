@@ -6,12 +6,6 @@ import {withRouter} from 'react-router';
 import ChatMessageContainer from '../components/chats/chat-message-container';
 import ChatMessageSender from '../components/chats/chat-message-sender';
 
-/*
-*  Container meant to be the handler for /chat/group/:groupId
-*  You must give it access to the router in props. (Trying to change this)
-*  (Call withRouter(GroupChatContainer))
-*/
-
 const GroupChatContainer = withRouter(React.createClass( {
   getInitialState() {
     return { messages: [], groupName: "", loading: true };

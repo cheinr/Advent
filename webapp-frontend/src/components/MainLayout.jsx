@@ -1,8 +1,9 @@
 import React from 'react';
 import axios from 'axios';
-import Navbar from '../containers/Navbar';
-import Sidebar from './Sidebar';
 
+import Sidebar from './Sidebar';
+import NavbarContainer from '../containers/NavbarContainer';
+import UpcomingEventsContainer from '../containers/UpcomingEventsContainer';
 
 export default class MainLayout extends React.Component {
     constructor(props) {
@@ -40,7 +41,7 @@ export default class MainLayout extends React.Component {
 
 	return (
 	    <div className="padded-top">
-		<Navbar />
+		<NavbarContainer />
 		<div className="container-fluid">
 		    <div className="col-xs-9">
 			<div>

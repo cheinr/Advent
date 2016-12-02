@@ -1,14 +1,14 @@
 import React from 'react';
 import axios from 'axios';
-import { Link } from 'react-router';
 import ReactMarkdown from 'react-markdown';
-import DynamicGroupPictureThumbnails from '../components/display/groups/DynamicGroupPictureThumbnails';
+import { Link } from 'react-router';
 import Panel from '../components/display/Panel';
 import Thumbnail from '../components/display/Thumbnail';
 import PageHeader from '../components/display/PageHeader';
 import Error from '../components/feedback/Error';
+import DynamicGroupPictureThumbnails from '../components/display/groups/DynamicGroupPictureThumbnails';
 
-export default class ViewUserContainer extends React.Component {
+export default class MyProfileContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -20,30 +20,12 @@ export default class ViewUserContainer extends React.Component {
   }
 
   componentWillMount() {
-    this.getUserInfo(this.props.params.userId);
-    this.getUserGroups(this.props.params.userId);
+    this.getUserInfo();
+    this.getUsersGroups();
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.params.userId !== this.props.params.userId) {
-      this.getUserInfo(nextProps.params.userId);
-      this.getUserGroups(this.props.params.userId);
-    }
-  }
-
-  getUserGroups(userId) {
-    const url = `/api/group/user/${userId}`;
-    axios.get(url)
-      .then((response) => {
-        this.setState({ myGroups: response.data });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
-
-  getUserInfo(userId) {
-    const url = `/api/users/id/${userId}`;
+  getUserInfo() {
+    const url = '/api/users/my-profile';
     axios.get(url)
       .then((response) => {
         this.setState({
@@ -58,6 +40,16 @@ export default class ViewUserContainer extends React.Component {
           showErrors: true,
           errorMessage: 'There was an error receiving the user from the server',
         });
+      });
+  }
+
+  getUsersGroups() {
+    axios.get('/api/group/my-groups')
+      .then((response) => {
+        this.setState({ myGroups: response.data });
+      })
+      .catch((error) => {
+        console.log(error);
       });
   }
 
@@ -81,7 +73,7 @@ export default class ViewUserContainer extends React.Component {
         <DynamicGroupPictureThumbnails groups={this.state.myGroups} />
         <div className="row bottom-padded">
           <div className="col-xs-1">
-            <Link to={`/user/edit/${this.props.params.userId}`}>
+            <Link to={'/user/edit/current/profile'}>
               <button type="button" className="btn btn-default">
                 Edit</button>
             </Link>
