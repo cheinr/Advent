@@ -1,19 +1,21 @@
 import React, { Component } from 'react';
 import EventCreate from '../components/events/EditEvent';
 import axios from 'axios';
-
+import LocationMap from '../components/LocationMap';
 
 export default class EditEventContainer extends Component {
     constructor() {
         super();
         this.state = {
-			id: "",
+	    id: "",
             name: "",
             description: "",
             start_date: "",
             end_date: "",
             location: "",
-            isPrivate: false
+            isPrivate: false,
+	    geocoder: new google.maps.Geocoder(),
+	    locationValid: false
         };
         this.nameChange = this.nameChange.bind(this);
         this.descChange = this.descChange.bind(this);
@@ -23,10 +25,10 @@ export default class EditEventContainer extends Component {
         this.privateChange = this.privateChange.bind(this);
         this.submitForm = this.submitForm.bind(this);
     }
-	
-	componentDidMount() {
-		this.getEvent();
-	}
+    
+    componentDidMount() {
+	this.getEvent();
+    }
 
     getEvent() {
         const url = `http://localhost:3000/api/event/id/${this.props.params.eventId}`;
@@ -47,14 +49,38 @@ export default class EditEventContainer extends Component {
                     location: response.data.location,
                     group: response.data.group,
                     eventResponses: response.data.eventResponses,
-                    private: response.data.private
+                    private: response.data.private,
                 });
+		this.getLocationCoords();
             })
             .catch(error => {
                 console.log(error);
             });
     };
-	
+
+    getLocationCoords() {
+	this.state.geocoder.geocode({
+	    'address':this.state.location
+	}, function(results, status) {
+	    if(status === "OK") {
+		this.setState({
+		    locationValid: true,
+		    coords: [
+			results[0].geometry.location.lat(),
+			results[0].geometry.location.lng()
+		    ]
+		});
+		console.log(this.state.coords);
+	    } else {
+		this.setState({
+		    locationValid: false,
+		});
+		console.log(status);
+	    }
+	}.bind(this));
+    }
+
+    
     nameChange(e) {
         this.setState({name: e.target.value});
     }
@@ -77,7 +103,7 @@ export default class EditEventContainer extends Component {
     submitForm() {
         const url = "http://localhost:3000/api/event/edit/";
         const data = {
-			id: this.state.id,
+	    id: this.state.id,
             name: this.state.name,
             description: this.state.description,
             startDate: this.state.start_date != "" ? this.state.start_date.format('YYYY-MM-DD HH:mm:ss') : undefined,
@@ -90,10 +116,10 @@ export default class EditEventContainer extends Component {
         };
         console.log(data);
         axios({method: 'post',
-                headers: {'Authorization': localStorage.token},
-                url: url,
-                data: data}
-            )
+               headers: {'Authorization': localStorage.token},
+               url: url,
+               data: data}
+        )
             .then(response => {
                 console.log(response.data);
                 this.context.router.push(`/event/${response.data.id}`);
@@ -102,21 +128,30 @@ export default class EditEventContainer extends Component {
                 console.log(error);
             });
     };	
-	
+    
     render() {
+	var map = "";
+	if(this.state.locationValid) {
+	    map = (<LocationMap
+		       lat={this.state.coords[0]}
+		       lng={this.state.coords[1]}
+		   />);
+	}
+
         return (
-        <div>
-            <EventCreate
-                nameChange={this.nameChange}
-                descChange={this.descChange}
-                startChange={this.startChange}
-                endChange={this.endChange}
-                locChange={this.locChange}
-                privateChange={this.privateChange}
-                submitForm={this.submitForm}
-                values={this.state}
-            />
-        </div>
+            <div>
+		<EventCreate
+                    nameChange={this.nameChange}
+                    descChange={this.descChange}
+                    startChange={this.startChange}
+                    endChange={this.endChange}
+                    locChange={this.locChange}
+                    privateChange={this.privateChange}
+                    submitForm={this.submitForm}
+                    values={this.state}
+/>
+		{map}
+            </div>
         )
     }
 }

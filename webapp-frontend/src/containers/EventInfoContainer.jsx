@@ -75,7 +75,7 @@ export default class EventInfoContainer extends Component {
 		});
 		console.log(status);
 	    }
-	}.bind(this));	    
+	}.bind(this));
     }
 
 
