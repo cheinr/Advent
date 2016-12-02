@@ -27,7 +27,7 @@ export default class UpcomingEventsContainer extends React.Component {
         <h2 className="center-text">Upcoming Events</h2>
         <hr />
         {this.state.events.map((event, id) =>
-          <div className="sidebar-row">
+          <div key={id} className="sidebar-row">
             <UpcomingEvent
               key={id}
               eventDate={event.startDate}
