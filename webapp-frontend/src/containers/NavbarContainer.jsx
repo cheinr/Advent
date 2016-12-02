@@ -23,6 +23,7 @@ export default class NavbarContainer extends React.Component {
     };
     this.viewAll = this.viewAll.bind(this);
     this.markAllAsRead = this.markAllAsRead.bind(this);
+    this.markNotificationAsRead = this.markNotificationAsRead.bind(this);
     this.getNotifications = this.getNotifications.bind(this);
   }
 
@@ -35,6 +36,7 @@ export default class NavbarContainer extends React.Component {
   }
 
   getNotifications() {
+    console.log('getNotifications');
     const url = '/api/notification/unread/current/user';
     axios.get(url)
       .then((response) => {
@@ -51,6 +53,18 @@ export default class NavbarContainer extends React.Component {
     axios.get(url)
       .then((response) => {
         this.setState({ notifications: response.data });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  markNotificationAsRead(notificationId) {
+    console.log('mark notification as read');
+    const url = `/api/notification/mark-read/${notificationId}`;
+    axios.post(url)
+      .then((response) => {
+        this.getNotifications();
       })
       .catch((error) => {
         console.log(error);
@@ -95,7 +109,7 @@ export default class NavbarContainer extends React.Component {
                     <NavNotificationPanel numNotifications={this.state.notifications.length} />
                     <NavDropdownContainer className="dropdown-position-bottomright">
                       <DropdownToolbar clickEvent={this.markAllAsRead} numNotifications={this.state.notifications.length} />
-                      <NavNotifications notifications={this.state.notifications} />
+                      <NavNotifications notifications={this.state.notifications} markAsRead={this.markNotificationAsRead} />
                       <NavNotificationFooter clickEvent={this.viewAll} />
                     </NavDropdownContainer>
                   </NavNotificationDropdown>
