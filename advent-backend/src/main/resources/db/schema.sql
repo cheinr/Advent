@@ -72,6 +72,7 @@ CREATE TABLE notification (
 );
 
 INSERT INTO user (id, display_name, email, description, picture_url) VALUES
+(0, 'Colin Heinrichs', 'chein@iastate.edu', 'description', 'http://xacatolicos.com/app/images/avatar/icon-user.png'),
   (1000, 'displayName1', 'szopanator@gmail.com',
    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nec quam non velit aliquet varius et et magna. Sed condimentum, lacus nec sagittis posuere, lacus velit rhoncus diam, vitae blandit lectus neque nec arcu. Curabitur convallis luctus augue. Sed commodo sollicitudin aliquam. Donec at tristique enim, ut ornare quam. Sed at gravida massa. Sed sed dignissim dui. Curabitur a tortor sit amet risus consequat viverra. Cras cursus et massa a ultrices. Suspendisse vitae augue id arcu fringilla varius. Maecenas convallis metus leo, id mattis purus faucibus vitae. Nam posuere ultrices ex a ullamcorper. Nam mi massa, fermentum nec elit a, mattis luctus urna. Nam ut blandit sem, non efficitur odio. Curabitur nisl magna, luctus et tellus sed, egestas mattis mi.',
    'http://xacatolicos.com/app/images/avatar/icon-user.png'),
@@ -132,11 +133,16 @@ INSERT INTO group_table VALUES (1001, 'Group 2', 'http://media.istockphoto.com/p
 INSERT INTO group_table VALUES (1002, 'Group 3', 'https://upload.wikimedia.org/wikipedia/commons/7/73/Lion_waiting_in_Namibia.jpg', 'tags', 'This group likes to take pictures of lions!');
 INSERT INTO group_table VALUES (1003, 'Group 4', 'http://i.dailymail.co.uk/i/pix/2015/11/23/11/2EB9334200000578-0-image-m-63_1448278563713.jpg', 'tags', 'Join the bird watching club today!');
 
+
 INSERT INTO user_group (id, user_id, group_table_id, role) VALUES
-  (1000, 1000, 1000, 'AmazingRole'),
-  (1001, 1000, 1001, 'AmazingRole'),
-  (1002, 1000, 1002, 'AmazingRole'),
-  (1003, 1000, 1003, 'AmazingRole');
+  (1000, 1000, 1000, 'OWNER'),
+  (1001, 1000, 1001, 'MODERATOR'),
+  (1002, 1000, 1002, 'MEMBER'),
+  (1003, 1000, 1003, 'ADMIN'),
+  (1004, 0, 1000, 'ADMIN'),
+  (1005, 0, 1001, 'OWNER'),
+  (1006, 1001, 1000, 'MEMBER'),
+  (1007, 1001, 1001, 'MEMBER');
 
 INSERT INTO announcement VALUES (1000, 'Sample Title0', '# Guttura tum hanc summoque illa
 

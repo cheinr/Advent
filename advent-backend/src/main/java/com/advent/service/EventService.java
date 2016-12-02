@@ -1,14 +1,15 @@
 package com.advent.service;
 
 import com.advent.dto.EventDTO;
+import com.advent.dto.UserDTO;
 import com.advent.entity.Event;
 import com.advent.entity.EventResponse;
+import com.advent.entity.UserGroup;
 import com.advent.factory.EventConverter;
-import com.advent.repo.EventRepo;
-import com.advent.repo.EventResponseRepo;
-import com.advent.repo.GroupRepo;
-import com.advent.repo.UserRepo;
+import com.advent.repo.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -24,11 +25,20 @@ public class EventService {
     @Autowired
     private UserRepo userRepo;
     @Autowired
+    private UserGroupRepo userGroupRepo;
+    @Autowired
     private EventResponseRepo eventResponseRepo;
     @Autowired
     private EventConverter eventConverter;
 
-    public EventDTO createEvent(EventDTO eventDTO) {
+    public EventDTO createEvent(EventDTO eventDTO, Long currentUserId) {
+        UserGroup userGroup = userGroupRepo.findByUserIdAndGroupId(currentUserId, eventDTO.getGroup().getId());
+
+        //don't allow normal users to create events
+        if(!userGroup.getRole().equalsIgnoreCase("ADMIN") && !userGroup.getRole().equalsIgnoreCase("MODERATOR")
+                && !userGroup.getRole().equalsIgnoreCase("OWNER"))
+            return null;
+
         eventDTO.setGroup(groupRepo.findOne(eventDTO.getGroup().getId()));
         Event event = eventRepo.save(eventConverter.eventDTOtoEvent(eventDTO));
         return eventConverter.eventToEventDTO(event);

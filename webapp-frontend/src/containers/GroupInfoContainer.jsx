@@ -15,12 +15,11 @@ export default class GroupInfoContainer extends Component {
         users: [],
         groupPictureUrl: '',
       },
+      roleWithGroup: null,
       announcements: [],
-      isUserInGroup: false,
     };
 
     this.getGroup = this.getGroup.bind(this);
-    this.getIfCurrentUserInGroup = this.getIfCurrentUserInGroup.bind(this);
     this.getAnnouncements = this.getAnnouncements.bind(this);
     this.joinGroup = this.joinGroup.bind(this);
     this.leaveGroup = this.leaveGroup.bind(this);
@@ -28,7 +27,6 @@ export default class GroupInfoContainer extends Component {
 
   componentDidMount() {
     this.getGroup();
-    this.getIfCurrentUserInGroup();
     this.getAnnouncements();
   }
 
@@ -44,23 +42,19 @@ export default class GroupInfoContainer extends Component {
       });
   }
 
-  getIfCurrentUserInGroup() {
-    axios.get(`/api/membership/current/user/group/${this.props.params.groupId}`)
-      .then((response) => {
-        this.setState({
-          isUserInGroup: response.data,
-        });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
-
   getGroup() {
     const url = `/api/group/${this.props.params.groupId}`;
 
     axios.get(url)
       .then((response) => {
+        let userRole = null;
+        // check if loged in user is associated with the group
+        for (let i = 0; i < response.data.userGroups.length; i++) {
+          if (response.data.userGroups[i].user.id === this.props.user.id) {
+            userRole = response.data.userGroups[i].role;
+          }
+        }
+
         this.setState({
           group: {
             id: response.data.id,
@@ -70,6 +64,7 @@ export default class GroupInfoContainer extends Component {
             users: response.data.userGroups,
             groupPictureUrl: response.data.groupPictureUrl,
           },
+          roleWithGroup: userRole,
         });
       })
       .catch((error) => {
@@ -90,9 +85,7 @@ export default class GroupInfoContainer extends Component {
   }
 
   joinGroup() {
-    const role = 'member';
-    // TODO use user id
-    const url = `/api/join/user/${this.props.user.id}/group/${this.props.params.groupId}/role/${role}`;
+    const url = `/api/join/group/${this.props.params.groupId}`;
     axios({
       method: 'post',
       url,
@@ -100,7 +93,7 @@ export default class GroupInfoContainer extends Component {
       .then((response) => {
         this.getGroup();
         this.setState({
-          isUserInGroup: true,
+          roleWithGroup: 'MEMBER',
         });
       })
       .catch((error) => {
@@ -114,10 +107,10 @@ export default class GroupInfoContainer extends Component {
         <GroupInfo
           group={this.state.group}
           groupId={this.props.params.groupId}
-          isInGroup={this.state.isUserInGroup}
           joinGroup={this.joinGroup}
           leaveGroup={this.leaveGroup}
           announcements={this.state.announcements}
+          roleWithGroup={this.state.roleWithGroup}
         />
       </div>
     );

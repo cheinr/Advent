@@ -7,7 +7,7 @@ import PageHeader from '../components/display/PageHeader';
 import Announcement from '../components/display/Announcement';
 
 const propTypes = {
-  isInGroup: React.PropTypes.bool,
+  roleWithGroup: React.PropTypes.string,
   group: React.PropTypes.any,
   announcements: React.PropTypes.array,
   groupId: React.PropTypes.string,
@@ -16,14 +16,50 @@ const propTypes = {
 };
 
 export default function GroupInfo(props) {
-  // Conditionally render join or leave button for the user
-  let joinOrLeaveButton = <button className="btn btn-success" onClick={props.joinGroup}>Join Group</button>;
-  if (props.isInGroup) {
-    joinOrLeaveButton = <button className="btn btn-danger" onClick={props.leaveGroup}>Leave Group</button>;
-  }
-
   const announcementHeader = props.announcements.length !== 0 ? <b>Announcements:</b> : '';
 
+  let buttons = '';
+
+  if (props.roleWithGroup == null) {
+    buttons = (
+      <div className="btn-group btn-group-justified" role="group">
+        <div className="btn-group">
+          <button className="btn btn-default" onClick={props.joinGroup}>JoinGroup</button>
+        </div>
+        <Link className="btn btn-success" to={`/chat/group/${props.groupId}`}>Group Chat</Link>
+      </div>
+    );
+  } else if (props.roleWithGroup.toUpperCase() === 'Moderator') {
+    buttons = (
+      <div className="btn-group btn-group-justified" role="group">
+        <div className="btn-group">
+          <button className="btn btn-default" onClick={props.leaveGroup}>Leave Group</button>
+        </div>
+        <Link className="btn btn-default" role="button" to={`/event/create/${props.groupId}`}>Create Event</Link>
+        <Link className="btn btn-success" to={`/chat/group/${props.groupId}`}>Group Chat</Link>
+      </div>
+    );
+  } else if (props.roleWithGroup.toUpperCase() === 'ADMIN' || props.roleWithGroup.toUpperCase() === 'OWNER') {
+    buttons = (
+      <div className="btn-group btn-group-justified" role="group">
+        <div className="btn-group">
+          <button className="btn btn-default" onClick={props.leaveGroup}>Leave Group</button>
+        </div>
+        <Link className="btn btn-default" role="button" to={`/event/create/${props.groupId}`}>Create Event</Link>
+        <Link className="btn btn-success" to={`/chat/group/${props.groupId}`}>Group Chat</Link>
+        <Link className="btn btn-warning" role="button" to={`/group/edit/${props.groupId}`}>Edit Group</Link>
+      </div>
+    );
+  } else {
+    buttons = (
+      <div className="btn-group btn-group-justified" role="group">
+        <div className="btn-group">
+          <button className="btn btn-default" onClick={props.joinGroup}>JoinGroup</button>
+        </div>
+        <Link className="btn btn-success" to={`/chat/group/${props.groupId}`}>Group Chat</Link>
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -37,20 +73,7 @@ export default function GroupInfo(props) {
       </div>
       <div className="row">
         <div className="col-xs-12 center-text xs-padding-bottom">
-          <div className="btn-group btn-group-justified" role="group">
-            <div className="btn-group">
-              { joinOrLeaveButton }
-            </div>
-            <Link className="btn btn-default" role="button" to={`/event/create/${props.groupId}`}>
-              Create Event
-            </Link>
-            <Link className="btn btn-default" role="button" to={`/group/edit/${props.groupId}`}>
-              Edit Group
-            </Link>
-            <Link className="btn btn-default" to={`/chat/group/${props.groupId}`}>
-              Group Chat
-            </Link>
-          </div>
+          { buttons }
         </div>
       </div>
       <div className="form-group">
