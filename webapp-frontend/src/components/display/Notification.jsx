@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 export default function Notification(props) {
   return (
@@ -10,7 +11,7 @@ export default function Notification(props) {
           </div>
         </div>
         <div className="media-body">
-          <strong className="notification-title"><a href={props.link}>{props.header}</a></strong>
+          <strong className="notification-title"><Link onClick={() => props.onClick()} to={props.link}>{props.header}</Link></strong>
           <p className="notification-desc">{props.message}</p>
         </div>
       </div>

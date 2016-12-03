@@ -190,5 +190,7 @@ INSERT INTO event VALUES (1002, 'Super Awesome Event3', 'This event takes place 
 INSERT INTO event VALUES (1003, 'Super Awesome Event4', 'This event takes place from 1pm-3pm', '2031-11-18', '2008-11-18', 'Coover Hall 1011', 0, 1000);
 INSERT INTO event VALUES (1004, 'This Event is in the past', 'This event should not appear', '2001-11-18', '2008-11-18', 'Coover Hall 1011', 0, 1000);
 
-INSERT INTO notification VALUES (1000, 'Sample Header', 'Sample Message', 'https://google.com', 'MESSAGE', 0, 1000);
-INSERT INTO notification VALUES (1001, 'Sample Header', 'Sample Message', 'https://google.com', 'MESSAGE', 1, 1000);
+INSERT INTO notification VALUES (1000, 'Sample Header', 'Sample Message', 'https://google.com', 'MESSAGE', 1, 1000);
+INSERT INTO notification VALUES (1001, 'Invite for group 1!', 'You have been invited to join group 1!', '/group/1000', 'GROUP', 0, 1000);
+INSERT INTO notification VALUES (1002, 'Invite for event 1!', 'You have been invited to join event 1!', '/event/1000', 'EVENT', 0, 1000);
+INSERT INTO notification VALUES (1003, 'You have a message in group1 chat', 'You have an unread message in group1 chat', '/chat/group/1000', 'MESSAGE', 0, 1000);
