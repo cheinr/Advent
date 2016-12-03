@@ -1,12 +1,14 @@
 package com.advent.service;
 
 import com.advent.dto.EventDTO;
-import com.advent.dto.UserDTO;
 import com.advent.entity.Event;
 import com.advent.entity.EventResponse;
+import com.advent.entity.Notification;
 import com.advent.entity.UserGroup;
 import com.advent.factory.EventConverter;
 import com.advent.repo.*;
+import com.advent.utils.NotificationType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -23,6 +25,8 @@ public class EventService {
     @Autowired
     private GroupRepo groupRepo;
     @Autowired
+    private NotificationRepo notificationRepo;
+    @Autowired
     private UserRepo userRepo;
     @Autowired
     private UserGroupRepo userGroupRepo;
@@ -30,6 +34,8 @@ public class EventService {
     private EventResponseRepo eventResponseRepo;
     @Autowired
     private EventConverter eventConverter;
+    @JsonIgnore
+    private List<UserGroup> userGroups;
 
     public EventDTO createEvent(EventDTO eventDTO, Long currentUserId) {
         UserGroup userGroup = userGroupRepo.findByUserIdAndGroupId(currentUserId, eventDTO.getGroup().getId());
@@ -41,6 +47,19 @@ public class EventService {
 
         eventDTO.setGroup(groupRepo.findOne(eventDTO.getGroup().getId()));
         Event event = eventRepo.save(eventConverter.eventDTOtoEvent(eventDTO));
+        userGroups = eventDTO.getGroup().getUserGroups();
+        for(int i = 0; i < userGroups.size(); i++){
+            Notification note = new Notification();
+            note.setHeader("Invite to "+event.getName());
+            note.setMessage("You have been invited to attend the event"+event.getName());
+            long id = event.getId();
+            String idString = Long.toString(id);
+            note.setLink("/event/"+idString);
+            note.setNotificationType(NotificationType.EVENT);
+            note.setRead(false);
+            note.setUser(userGroups.get(i).getUser());
+            notificationRepo.save(note);
+        }
         return eventConverter.eventToEventDTO(event);
     }
 
