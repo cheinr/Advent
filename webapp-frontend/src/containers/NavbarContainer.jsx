@@ -36,7 +36,6 @@ export default class NavbarContainer extends React.Component {
   }
 
   getNotifications() {
-    console.log('getNotifications');
     const url = '/api/notification/unread/current/user';
     axios.get(url)
       .then((response) => {
@@ -60,7 +59,6 @@ export default class NavbarContainer extends React.Component {
   }
 
   markNotificationAsRead(notificationId) {
-    console.log('mark notification as read');
     const url = `/api/notification/mark-read/${notificationId}`;
     axios.post(url)
       .then((response) => {
