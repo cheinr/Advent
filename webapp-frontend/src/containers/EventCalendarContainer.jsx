@@ -1,53 +1,47 @@
 import React, { Component } from 'react';
-import EventCalendar from '../components/EventCalendar';
 import axios from 'axios';
 import moment from 'moment';
+import EventCalendar from '../components/EventCalendar';
 
 export default class EventCalendarContainer extends Component {
-    constructor() {
-        super();
-        this.state = {
-            events: []
-        };
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      events: [],
+    };
+  }
 
-    componentDidMount() {
-        const url = `http://localhost:3000/api/event/group/${this.props.params.groupId}`;
-        const headers = {'Authorization': localStorage.token};
+  componentDidMount() {
+    const url = `/api/event/group/${this.props.params.groupId}`;
 
-        axios({method: 'post',
-            headers: headers,
-            url: url}
-        )
-            .then(response => {
-                var eventArr = [];
+    axios.post(url)
+      .then((response) => {
+        const eventArr = [];
 
-                console.log(response.data);
-                response.data.map(function(event) {
-                    eventArr.push({
-                        id: event.id,
-                        'title': event.name,
-                        desc: event.description,
-                        'start': moment(event.startDate, 'YYYY-MM-DD HH:mm:ss').toDate(),
-                        'end': moment(event.endDate, 'YYYY-MM-DD HH:mm:ss').toDate()
-                    });
-                });
-                console.log(eventArr);
-                this.setState({events: eventArr});
-            })
-            .catch(error => {
-                console.log(error);
-            });
-    }
+        response.data.map(function(event) {
+          eventArr.push({
+            id: event.id,
+            title: event.name,
+            desc: event.description,
+            start: moment(event.startDate, 'YYYY-MM-DD HH:mm:ss').toDate(),
+            end: moment(event.endDate, 'YYYY-MM-DD HH:mm:ss').toDate(),
+          });
+        });
+        this.setState({ events: eventArr });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
-    render() {
-        return (
-            <div className="calendar-container">
-                <EventCalendar
-                    events={this.state.events}
-                    groupId={this.props.params.groupId}
-                />
-            </div>
-        )
-    }
+  render() {
+    return (
+      <div className="calendar-container">
+        <EventCalendar
+          events={this.state.events}
+          groupId={this.props.params.groupId}
+        />
+      </div>
+    );
+  }
 }

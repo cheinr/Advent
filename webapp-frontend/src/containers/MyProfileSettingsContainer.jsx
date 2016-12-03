@@ -10,7 +10,7 @@ import PageBreak from '../components/display/PageBreak';
 import DynamicGroupThumbnails from '../components/display/groups/DynamicGroupThumbnails';
 import BasicInputField from '../components/input/BasicInputField';
 
-export default class UserSettingContainer extends React.Component {
+export default class MyProfileSettingsContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -28,11 +28,11 @@ export default class UserSettingContainer extends React.Component {
 
   componentWillMount() {
     this.getUserInfo();
-    this.getUsersGroups();
+    this.getUserGroups();
   }
 
   getUserInfo() {
-    axios.get(`/api/users/id/${this.props.params.userId}`)
+    axios.get('/api/users/my-profile')
       .then((response) => {
         this.setState({
           id: response.data.id,
@@ -51,8 +51,8 @@ export default class UserSettingContainer extends React.Component {
       });
   }
 
-  getUsersGroups() {
-    axios.get(`/api/group/user/${this.props.params.userId}`)
+  getUserGroups() {
+    axios.get('/api/group/my-groups')
       .then((response) => {
         this.setState({ myGroups: response.data });
       })

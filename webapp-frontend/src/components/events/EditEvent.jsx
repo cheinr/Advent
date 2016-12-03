@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDatetime from 'react-datetime';
 
-export default class EventCreate extends Component {
+export default class EditEvent extends Component {
     componentDidMount() {
 
     }
@@ -9,7 +9,7 @@ export default class EventCreate extends Component {
     render() {
         return (
             <div>
-                <h1>Create Event</h1>
+                <h1>Edit Event</h1>
 
                 <form>
                     <div className="form-group">
@@ -25,13 +25,13 @@ export default class EventCreate extends Component {
                                   value={this.props.values.description}/>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="start_date">Start Date and Time</label>
+                        <label htmlFor="start_date">Start Date and Time: {this.props.values.startDate}</label>
                         <ReactDatetime id="start_date"
                                onChange={this.props.startChange}
                                value={this.props.values.start_date}/>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="end_date">End Date and Time</label>
+                        <label htmlFor="end_date">End Date and Time: {this.props.values.endDate}</label>
                         <ReactDatetime id="end_date"
                                onChange={this.props.endChange}
                                value={this.props.values.end_date}/>

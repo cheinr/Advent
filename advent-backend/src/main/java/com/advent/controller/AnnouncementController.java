@@ -3,6 +3,7 @@ package com.advent.controller;
 import com.advent.dto.AnnouncementDTO;
 import com.advent.service.AnnouncementService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,13 +25,18 @@ public class AnnouncementController {
         announcementService.deleteAnnouncementById(announcementId);
     }
 
-    @RequestMapping(value = "/announcement/homepage/user/{userId}", method = RequestMethod.GET)
-    public List<AnnouncementDTO> getHomepageAnnouncementsForUser(@PathVariable Long userId) {
+    @RequestMapping(value = "/announcement/homepage/current/user", method = RequestMethod.GET)
+    public List<AnnouncementDTO> getHomepageAnnouncementsForCurrentUser(@AuthenticationPrincipal Long userId) {
         return announcementService.getHomepageAnnouncementsForUser(userId);
     }
 
     @RequestMapping(value = "/announcement/group/{groupId}", method = RequestMethod.GET)
     public List<AnnouncementDTO> getAllAnnouncementsForGroup(@PathVariable Long groupId) {
         return announcementService.getAllAnnouncementsForGroup(groupId);
+    }
+
+    @RequestMapping(value = "/announcement/group/first/10/{groupId}", method = RequestMethod.GET)
+    public List<AnnouncementDTO> getFirstTenAnnouncementsForGroup(@PathVariable Long groupId) {
+        return announcementService.getFirstTenAnnouncementsForGroup(groupId);
     }
 }

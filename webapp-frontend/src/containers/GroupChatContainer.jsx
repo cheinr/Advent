@@ -7,17 +7,15 @@ import ChatMessageContainer from '../components/chats/chat-message-container';
 import ChatMessageSender from '../components/chats/chat-message-sender';
 
 /*
-*  Container meant to be the handler for /chat/group/:groupId
-*  You must give it access to the router in props. (Trying to change this)
-*  (Call withRouter(GroupChatContainer))
-*/
+ *  Container meant to be the handler for /chat/group/:groupId
+ */
 
 const GroupChatContainer = withRouter(React.createClass( {
     getInitialState() {
-	return { messages: [], groupName: "", loading: true };
+	return { messages: [], groupName: '', loading: true };
     },
 
-    componentDidMount : function() {
+    componentDidMount() {
 	this.socket = null;
 
 	var url = `/api/group/${this.props.params.groupId}`;
@@ -37,7 +35,7 @@ const GroupChatContainer = withRouter(React.createClass( {
 		this.render();
 	    } else {
 		//redirect user to main page if this one doesn't exist.
-		//TODO - redirect to previous page?
+		    //TODO - redirect to previous page?
 		this.props.router.replace("/");
 		console.log("group doesn't exist");
 	    }
@@ -46,38 +44,35 @@ const GroupChatContainer = withRouter(React.createClass( {
 	});
     },
 
-    handleMessageSend: function(message) {
+    handleMessageSend(message) {
 	//data to send
 	//TODO - get actual user name
 	var data = {senderName: this.props.user.displayName, message: message,
 		    groupId: this.props.params.groupId};
-        this.socket.emit('chat message', data);
+	this.socket.emit('chat message', data);
     },
 
     connect: function(groupId) {
-        return io().emit("join-room", groupId);
+	return io().emit("join-room", groupId);
     },
-
-    render: function() {
-	if(this.state.loading) {
+    render() {
+	if (this.state.loading) {
 	    return (
 		<div>
-		    <i className="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+		    <i className="fa fa-spinner fa-pulse fa-3x fa-fw" />
 		    <span className="sr-only">Loading...</span>
 		</div>
 	    );
 	} else {
-            return (
+	    return (
 		<div>
 		    <h3>{this.state.groupName} Chat</h3>
 		    <ChatMessageContainer messages={this.state.messages} />
 		    <ChatMessageSender onSend={this.handleMessageSend} />
 		</div>
-            );
+	    );
 	}
     }
 }));
 
 export default GroupChatContainer;
-
-
