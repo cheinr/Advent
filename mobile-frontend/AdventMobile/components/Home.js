@@ -12,18 +12,6 @@ import {
 
 import {GoogleSignin, GoogleSigninButton} from 'react-native-google-signin';
 
-// const MK = require('react-native-material-kit');
-//
-// const {
-//     MKButton,
-//     MKColor,
-// } = MK;
-//
-// MK.setTheme({
-//     primaryColor: '#7E57C2',
-//     accentColor: MKColor.Teal
-// });
-
 export default class Home extends React.Component {
 
     render() {
