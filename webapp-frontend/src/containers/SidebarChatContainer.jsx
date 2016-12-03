@@ -69,28 +69,29 @@ const SidebarChatContainer = withRouter(React.createClass( {
 
     render: function() {
 
-
-	console.log(this.state.selectedGroup);
         return (
 	    <div className="">
-		{
+		{/* FIRST BLOCK - DRAWS GROUP LIST OR BACK BUTTON */
 		((this.state.selectedGroup === null) &&
 		(this.state.groups.map((group, id) =>
 		
-		<button key={id} id={id} onClick={this.openChat} className="btn btn-default btn-block">
+		<button key={id} id={id} onClick={this.openChat}
+			className="btn btn-default btn-block">
 		    <div>
 			<div id={id} className="pull-left">
-			    <p>{group.groupName}</p>
+			    <p id={id}>{group.groupName}</p>
 			</div>
 			<div className="pull-right">
-			    {this.state.groupNotifications[id] &&
-			     <i className="fa fa-circle fa-circle-green"
-				aria-hidden="true"></i>}
-			     {!this.state.groupNotifications[id] &&
-			     <i className="fa fa-circle fa-circle-grey"
-				aria-hidden="true"></i>}
-			     
-		    
+			    {
+			    this.state.groupNotifications[id] &&
+			    <i id={id} className="fa fa-circle fa-circle-green"
+			       aria-hidden="true"></i>
+			    }
+			    {
+			    (!this.state.groupNotifications[id]) &&
+			    <i id={id} className="fa fa-circle fa-circle-grey"
+			       aria-hidden="true"></i>
+			    }
 			</div>
 		    </div>
 		</button>
@@ -99,31 +100,30 @@ const SidebarChatContainer = withRouter(React.createClass( {
 		)))
 		    
 	    ||
-		    
-		    
-		    ((this.state.selectedGroup !== null) &&
-		     ( <button onClick={this.closeChat}
-			       className="btn btn-default">
-			     back
-		     </button>))
-		    
+ 
+	    ((this.state.selectedGroup !== null) &&
+	     (<button onClick={this.closeChat}
+		      className="btn btn-default">back</button>))
+
+		    /*END FIRST BLOCK*/
 		}
-		
-		{   
-		    (this.state.groups.map((group, id) => {
-			return (
-			    <GroupChat
-				group={group}
-				user={this.props.user}
-				key={id}
-				id={id}
-				display={this.state.selectedGroup == id}
-				notifyParent={this.giveGroupNotification}
-			    />
-			);
-		    }))
-		}
-		
+	    
+	    {  /* SECOND BLOCK - DRAWS CHATS (only zero or one can be visible)*/
+		(this.state.groups.map((group, id) => {
+		    return (
+			<GroupChat
+			    group={group}
+			    user={this.props.user}
+			    key={id}
+			    id={id}
+			    display={this.state.selectedGroup == id}
+			    notifyParent={this.giveGroupNotification}
+			/>
+		    );
+		}))
+		/* END SECOND BLOCK */
+	    }
+	    
 	    </div>
         );
     }
