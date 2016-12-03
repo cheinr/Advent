@@ -11,6 +11,10 @@ import DynamicGroupThumbnails from '../components/display/groups/DynamicGroupThu
 import BasicInputField from '../components/input/BasicInputField';
 
 export default class MyProfileSettingsContainer extends React.Component {
+  static get contextTypes() {
+    return { router: React.PropTypes.object.isRequired };
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -23,6 +27,7 @@ export default class MyProfileSettingsContainer extends React.Component {
     };
     this.displayNameChange = this.displayNameChange.bind(this);
     this.descriptionChange = this.descriptionChange.bind(this);
+    this.pictureUrlChange = this.pictureUrlChange.bind(this);
     this.submitForm = this.submitForm.bind(this);
   }
 
@@ -61,6 +66,10 @@ export default class MyProfileSettingsContainer extends React.Component {
       });
   }
 
+  pictureUrlChange(e) {
+    this.setState({ pictureUrl: e.target.value });
+  }
+
   displayNameChange(e) {
     this.setState({ displayName: e.target.value });
   }
@@ -85,6 +94,7 @@ export default class MyProfileSettingsContainer extends React.Component {
           showResults: true,
           showErrors: false,
         });
+        this.context.router.push('/user/current/profile');
       })
       .catch((error) => {
         console.log(error);
@@ -108,7 +118,7 @@ export default class MyProfileSettingsContainer extends React.Component {
           </div>
           <div className="col-xs-9">
             <BasicInputField
-              id={this.state.id}
+              id="displayName"
               label="Display Name"
               onChange={this.displayNameChange}
               value={this.state.displayName}
@@ -116,9 +126,17 @@ export default class MyProfileSettingsContainer extends React.Component {
           </div>
         </div>
         <div className="row">
+          <BasicInputField
+            id="pictureUrl"
+            label="Picture URL"
+            onChange={this.pictureUrlChange}
+            value={this.state.pictureUrl}
+          />
+        </div>
+        <div className="row">
           <div>
             <TextBox
-              id={this.state.id}
+              id="description"
               label="Description"
               onChange={this.descriptionChange}
               value={this.state.description}
