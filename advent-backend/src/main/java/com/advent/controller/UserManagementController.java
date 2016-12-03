@@ -4,6 +4,7 @@ import com.advent.dto.UserDTO;
 import com.advent.service.UserManagementService;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -44,6 +45,11 @@ public class UserManagementController {
 
     @RequestMapping(value = "/users/id/{userId}", method = RequestMethod.GET)
     public UserDTO getUser(@PathVariable Long userId) {
+        return userManagementService.findUser(userId);
+    }
+
+    @RequestMapping(value = "/users/my-profile", method = RequestMethod.GET)
+    public UserDTO getCurrentUser(@AuthenticationPrincipal Long userId) {
         return userManagementService.findUser(userId);
     }
 

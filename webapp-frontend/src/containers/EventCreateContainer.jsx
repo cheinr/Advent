@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import EventCreate from '../components/EventCreate';
+import EventCreate from '../components/events/EventCreate';
+import LocationMap from '../components/LocationMap';
 import axios from 'axios';
 
 export default class EventCreateContainer extends Component {
@@ -11,7 +12,10 @@ export default class EventCreateContainer extends Component {
             start_date: "",
             end_date: "",
             location: "",
-            isPrivate: false
+	    loading: true,
+            isPrivate: false,
+	    typingTimout: null,
+	    locationValid: false
         };
         this.nameChange = this.nameChange.bind(this);
         this.descChange = this.descChange.bind(this);
@@ -20,8 +24,43 @@ export default class EventCreateContainer extends Component {
         this.locChange = this.locChange.bind(this);
         this.privateChange = this.privateChange.bind(this);
         this.submitForm = this.submitForm.bind(this);
+	this.getLocationCoords = this.getLocationCoords.bind(this);
     }
 
+    componentDidMount() {
+	if(this.props.user !== null) {
+	    this.checkUserAuthorization(this.props.user);
+	}
+    }
+
+    componentWillReceiveProps(newProps) {
+	if( newProps.user !== this.props.user) {
+	    this.checkUserAuthorization(newProps.user);
+	}
+    }
+
+    //checks if the user is authorized to make events for this group
+    checkUserAuthorization(user) {
+	var url = `/api/group/${this.props.params.groupId}/members/${user.id}`;
+	axios.get(url).then((resp) => {
+	    if(resp.data.role === null
+	       || (resp.data.role.toUpperCase() !== "ADMIN"
+		&& resp.data.role.toUpperCase() !== "MODERATOR"
+		&& resp.data.role.toUpperCase() !== "OWNER")) {
+		
+		window.location.replace("/");
+	    } else {
+		this.setState({
+		    loading: false,
+		    geocoder: new google.maps.Geocoder()
+		});
+		console.log(resp.data);
+	    }
+	}).catch(function(error) {
+	    console.log(error);
+	});
+    }
+    
     nameChange(e) {
         this.setState({name: e.target.value});
     }
@@ -35,14 +74,39 @@ export default class EventCreateContainer extends Component {
         this.setState({end_date: e});
     }
     locChange(e) {
-        this.setState({location: e.target.value});
+	if(this.state.typingTimeout) clearTimeout(this.state.typingTimeout);
+        this.setState({
+	    location: e.target.value,
+	    typingTimeout: setTimeout(this.getLocationCoords, 1000)
+	});
     }
     privateChange(e) {
         this.setState({isPrivate: e.target.checked});
     }
 
+    getLocationCoords() {
+	this.state.geocoder.geocode({
+	    'address':this.state.location
+	}, function(results, status) {
+	    if(status === "OK") {
+		this.setState({
+		    locationValid: true,
+		    coords: [
+			results[0].geometry.location.lat(),
+			results[0].geometry.location.lng()
+		    ]
+		});
+	    } else {
+		this.setState({
+		    locationValid: false,
+		});
+		console.log(status);
+	    }
+	}.bind(this));	    
+    }
+
     submitForm() {
-        const url = "http://localhost:3000/api/event/create/";
+        const url = "/api/event/create/";
         const data = {
 
             name: this.state.name,
@@ -57,10 +121,9 @@ export default class EventCreateContainer extends Component {
         };
         console.log(data);
         axios({method: 'post',
-                headers: {'Authorization': localStorage.token},
-                url: url,
-                data: data}
-            )
+               url: url,
+               data: data}
+        )
             .then(response => {
                 console.log(response.data);
                 this.context.router.push(`/event/${response.data.id}`);
@@ -68,23 +131,40 @@ export default class EventCreateContainer extends Component {
             .catch(error => {
                 console.log(error);
             });
-    };
 
+    };
     render() {
-        return (
-        <div>
-            <EventCreate
-                nameChange={this.nameChange}
-                descChange={this.descChange}
-                startChange={this.startChange}
-                endChange={this.endChange}
-                locChange={this.locChange}
-                privateChange={this.privateChange}
-                submitForm={this.submitForm}
-                values={this.state}
-            />
-        </div>
-        )
+	var map = "";
+	if(this.state.locationValid) {
+	    map = (<LocationMap
+		       lat={this.state.coords[0]}
+		       lng={this.state.coords[1]}
+		   />);
+	}
+	if(this.state.loading) {
+	    return(
+		<div>
+		    <i className="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+		    <span className="sr-only">Loading...</span>
+		</div>
+	    );
+	} else {
+            return (
+		<div>
+		    <EventCreate
+			nameChange={this.nameChange}
+			descChange={this.descChange}
+			startChange={this.startChange}
+			endChange={this.endChange}
+			locChange={this.locChange}
+			privateChange={this.privateChange}
+			submitForm={this.submitForm}
+			values={this.state}
+		    />
+		{map}
+		</div>
+            )
+	}
     }
 }
 

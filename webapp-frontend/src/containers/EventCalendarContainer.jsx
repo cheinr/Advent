@@ -1,48 +1,42 @@
 import React, { Component } from 'react';
-import EventCalendar from '../components/EventCalendar';
 import axios from 'axios';
 import moment from 'moment';
+import EventCalendar from '../components/EventCalendar';
 import { Link } from 'react-router';
 
 export default class EventCalendarContainer extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            events: []
+            events: [],
         };
         this.exportToGCal = this.exportToGCal.bind(this);
         this.Event = this.Event.bind(this);
         this.EventAgenda = this.EventAgenda.bind(this);
     }
 
-    componentDidMount() {
-        const url = `http://localhost:3000/api/event/group/${this.props.params.groupId}`;
-        const headers = {'Authorization': localStorage.token};
+  componentDidMount() {
+    const url = `/api/event/group/${this.props.params.groupId}`;
 
-        axios({method: 'post',
-            headers: headers,
-            url: url}
-        )
-            .then(response => {
-                var eventArr = [];
+    axios.post(url)
+      .then((response) => {
+        const eventArr = [];
 
-                console.log(response.data);
-                response.data.map(function(event) {
-                    eventArr.push({
-                        id: event.id,
-                        'title': event.name,
-                        desc: event.description,
-                        'start': moment(event.startDate, 'YYYY-MM-DD HH:mm:ss').toDate(),
-                        'end': moment(event.endDate, 'YYYY-MM-DD HH:mm:ss').toDate()
-                    });
-                });
-                console.log(eventArr);
-                this.setState({events: eventArr});
-            })
-            .catch(error => {
-                console.log(error);
-            });
-    }
+        response.data.map(function(event) {
+          eventArr.push({
+            id: event.id,
+            title: event.name,
+            desc: event.description,
+            start: moment(event.startDate, 'YYYY-MM-DD HH:mm:ss').toDate(),
+            end: moment(event.endDate, 'YYYY-MM-DD HH:mm:ss').toDate(),
+          });
+        });
+        this.setState({ events: eventArr });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
     exportToGCal(event) {
         // TOOD post to gcal to create event in google calendars

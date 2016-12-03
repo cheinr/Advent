@@ -24,7 +24,7 @@ CREATE TABLE announcement
 (
   id BIGINT PRIMARY KEY NOT NULL,
   title VARCHAR(255),
-  content VARCHAR(255),
+  content TEXT,
   date TIMESTAMP,
   group_table_id BIGINT,
   FOREIGN KEY (group_table_id) REFERENCES group_table(id) ON UPDATE NO ACTION
@@ -34,8 +34,8 @@ CREATE TABLE event (
   id BIGINT PRIMARY KEY NOT NULL,
   name VARCHAR(255) NOT NULL,
   description VARCHAR(255) NOT NULL,
-  start_date DATE,
-  end_date DATE,
+  start_date TIMESTAMP,
+  end_date TIMESTAMP,
   location VARCHAR(255),
   is_private INTEGER,
   group_table_id BIGINT,
@@ -72,6 +72,7 @@ CREATE TABLE notification (
 );
 
 INSERT INTO user (id, display_name, email, description, picture_url) VALUES
+(0, 'Colin Heinrichs', 'chein@iastate.edu', 'description', 'http://xacatolicos.com/app/images/avatar/icon-user.png'),
   (1000, 'displayName1', 'szopanator@gmail.com',
    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nec quam non velit aliquet varius et et magna. Sed condimentum, lacus nec sagittis posuere, lacus velit rhoncus diam, vitae blandit lectus neque nec arcu. Curabitur convallis luctus augue. Sed commodo sollicitudin aliquam. Donec at tristique enim, ut ornare quam. Sed at gravida massa. Sed sed dignissim dui. Curabitur a tortor sit amet risus consequat viverra. Cras cursus et massa a ultrices. Suspendisse vitae augue id arcu fringilla varius. Maecenas convallis metus leo, id mattis purus faucibus vitae. Nam posuere ultrices ex a ullamcorper. Nam mi massa, fermentum nec elit a, mattis luctus urna. Nam ut blandit sem, non efficitur odio. Curabitur nisl magna, luctus et tellus sed, egestas mattis mi.',
    'http://xacatolicos.com/app/images/avatar/icon-user.png'),
@@ -127,13 +128,47 @@ INSERT INTO user (id, display_name, email, description, picture_url) VALUES
    'http://xacatolicos.com/app/images/avatar/icon-user.png'
   );
 
-INSERT INTO group_table VALUES (1000, 'groupName', 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+PCEtLQpTb3VyY2UgVVJMOiBob2xkZXIuanMvNjR4NjQKQ3JlYXRlZCB3aXRoIEhvbGRlci5qcyAyLjYuMC4KTGVhcm4gbW9yZSBhdCBodHRwOi8vaG9sZGVyanMuY29tCihjKSAyMDEyLTIwMTUgSXZhbiBNYWxvcGluc2t5IC0gaHR0cDovL2ltc2t5LmNvCi0tPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbI2hvbGRlcl8xNTgzNjk1OTQxOSB0ZXh0IHsgZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQgfSBdXT48L3N0eWxlPjwvZGVmcz48ZyBpZD0iaG9sZGVyXzE1ODM2OTU5NDE5Ij48cmVjdCB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiNFRUVFRUUiLz48Zz48dGV4dCB4PSIxMi45NTgzMzM5NjkxMTYyMTEiIHk9IjM2LjY1Ij42NHg2NDwvdGV4dD48L2c+PC9nPjwvc3ZnPg==',
-                                'tags', 'description');
+INSERT INTO group_table VALUES (1000, 'Group 1', 'https://apod.nasa.gov/apod/image/1509/TexasEclipse_Westlake_2642.jpg', 'tags', 'description');
+INSERT INTO group_table VALUES (1001, 'Group 2', 'http://media.istockphoto.com/photos/grey-squirrel-yawning-picture-id473012660?k=6&m=473012660&s=170667a&w=0&h=_3LVLLvzKFXrrmOB9QBKtph2zmgO-nnUdxFfGmTX35w=', 'tags', 'This group has a pretty simple description: we like to look at squirrels.');
+INSERT INTO group_table VALUES (1002, 'Group 3', 'https://upload.wikimedia.org/wikipedia/commons/7/73/Lion_waiting_in_Namibia.jpg', 'tags', 'This group likes to take pictures of lions!');
+INSERT INTO group_table VALUES (1003, 'Group 4', 'http://i.dailymail.co.uk/i/pix/2015/11/23/11/2EB9334200000578-0-image-m-63_1448278563713.jpg', 'tags', 'Join the bird watching club today!');
+
 
 INSERT INTO user_group (id, user_id, group_table_id, role) VALUES
-  (1000, 1000, 1000, 'AmazingRole');
+  (1000, 1000, 1000, 'OWNER'),
+  (1001, 1000, 1001, 'MODERATOR'),
+  (1002, 1000, 1002, 'MEMBER'),
+  (1003, 1000, 1003, 'ADMIN'),
+  (1004, 0, 1000, 'ADMIN'),
+  (1005, 0, 1001, 'OWNER'),
+  (1006, 1001, 1000, 'MEMBER'),
+  (1007, 1001, 1001, 'MEMBER');
 
-INSERT INTO announcement VALUES (1000, 'Sample Title0', 'Sample Content0', '2012-09-17 18:47:52.69', 1000);
+INSERT INTO announcement VALUES (1000, 'Sample Title0', '# Guttura tum hanc summoque illa
+
+ ## Pavet est hunc
+
+ Lorem markdownum verba, haec Marte, animalia luminis, sine genitoris in
+ **corpora**, pristina revolutaque. Haeret sucus spectans nomina. Aqua vota porta
+ est primus marmore animos carmine vidi, [quam sim](http://equorum-pecudis.org/)
+ tibi aperire peremi calenti operisque procul.
+
+ ## Furens cum suppressis dedit quare orbem fuerit
+
+ Quo remigioque nempe, a pondere sperne: nodus vana efficient mora haustus. Ausum
+ maenades motura! **Tu** calorem nomine.
+
+ ## Pyrrham robora ab indignabere mugitu labor Tenedonque
+
+ Ante ter, ad inter requiemque Iuppiter ossa suspiria verum sunt silet seu nondum
+ validosque viva? Videtur cuius tecto priora, imago **orbem audetis**, sic, et
+ pro sed ille de causamque. Manus partem de Marte insidere femina: poma repetita,
+ domino! Scythiam petiisse auctor **mandere**, facerent misceat.
+
+ - Ense cautes superest odiumque Dryopen ferrum ademit
+ - Navalibus turba miserum valles pervenit acutior possent
+ - Tritonida esset pars digna casus insonuit'
+  , '2012-09-17 18:47:52.69', 1000);
 INSERT INTO announcement VALUES (1001, 'Sample Title1', 'Sample Content1', '2008-11-12', 1000);
 INSERT INTO announcement VALUES (1002, 'Sample Title2', 'Sample Content2', '2008-11-13', 1000);
 INSERT INTO announcement VALUES (1003, 'Sample Title3', 'Sample Content3', '2008-11-14', 1000);
@@ -143,11 +178,19 @@ INSERT INTO announcement VALUES (1006, 'Sample Title6', 'Sample Content6', '2008
 INSERT INTO announcement VALUES (1007, 'Sample Title7', 'Sample Content7', '2008-11-18', 1000);
 INSERT INTO announcement VALUES (1008, 'Sample Title8', 'Sample Content8', '2008-11-19', 1000);
 INSERT INTO announcement VALUES (1009, 'Sample Title9', 'Sample Content9', '2008-11-20', 1000);
-INSERT INTO announcement VALUES (1010, 'Sample Title10', 'Sample Content10', '2008-11-21', 1000);
-INSERT INTO announcement VALUES (1011, 'Sample Title11', 'Sample Content11', '2008-11-22', 1000);
-INSERT INTO announcement VALUES (1012, 'Sample Title12', 'Sample Content12', '2008-11-23', 1000);
-INSERT INTO announcement VALUES (1013, 'Sample Title13', 'Sample Content13', '2008-11-24', 1000);
-INSERT INTO announcement VALUES (1014, 'Sample Title14', 'Sample Content14', '2008-11-25', 1000);
+INSERT INTO announcement VALUES (1010, 'Sample Title10', 'Sample Content10', '2008-11-21', 1001);
+INSERT INTO announcement VALUES (1011, 'Sample Title11', 'Sample Content11', '2008-11-22', 1001);
+INSERT INTO announcement VALUES (1012, 'Sample Title12', 'Sample Content12', '2008-11-23', 1001);
+INSERT INTO announcement VALUES (1013, 'Sample Title13', 'Sample Content13', '2008-11-24', 1002);
+INSERT INTO announcement VALUES (1014, 'Sample Title14', 'Sample Content14: This is the first of many announcements', '2008-11-25', 1002);
 
-INSERT INTO notification VALUES (1000, 'Sample Header', 'Sample Message', 'https://google.com', 'MESSAGE', 0, 1000);
-INSERT INTO notification VALUES (1001, 'Sample Header', 'Sample Message', 'https://google.com', 'MESSAGE', 1, 1000);
+INSERT INTO event VALUES (1000, 'Super Awesome Event', 'This event takes place from 1pm-1pm', '2028-11-15', '2008-11-15', 'Coover Hall 1000', 0, 1000);
+INSERT INTO event VALUES (1001, 'Super Awesome Event2', 'This event takes place from 1pm-2pm', '2028-11-16', '2008-11-16', 'Coover Hall 1001', 0, 1000);
+INSERT INTO event VALUES (1002, 'Super Awesome Event3', 'This event takes place from 1pm-3pm', '2018-11-18', '2008-11-18', 'Coover Hall 1011', 0, 1000);
+INSERT INTO event VALUES (1003, 'Super Awesome Event4', 'This event takes place from 1pm-3pm', '2031-11-18', '2008-11-18', 'Coover Hall 1011', 0, 1000);
+INSERT INTO event VALUES (1004, 'This Event is in the past', 'This event should not appear', '2001-11-18', '2008-11-18', 'Coover Hall 1011', 0, 1000);
+
+INSERT INTO notification VALUES (1000, 'Sample Header', 'Sample Message', 'https://google.com', 'MESSAGE', 1, 1000);
+INSERT INTO notification VALUES (1001, 'Invite for group 1!', 'You have been invited to join group 1!', '/group/1000', 'GROUP', 0, 1000);
+INSERT INTO notification VALUES (1002, 'Invite for event 1!', 'You have been invited to join event 1!', '/event/1000', 'EVENT', 0, 1000);
+INSERT INTO notification VALUES (1003, 'You have a message in group1 chat', 'You have an unread message in group1 chat', '/chat/group/1000', 'MESSAGE', 0, 1000);

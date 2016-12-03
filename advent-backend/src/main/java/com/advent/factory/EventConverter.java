@@ -70,7 +70,7 @@ public class EventConverter {
 
     private String dateToString(Date date) {
 
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy HH:mm a");
         if (date != null) {
             return format.format(date);
         }

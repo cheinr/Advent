@@ -15,8 +15,7 @@ import NavPreferences from '../components/display/navbar/NavPreferences';
 import NavLink from '../components/display/navbar/NavLink';
 import SearchBar from '../components/search-bar';
 
-// TODO dszopa 11/5/16 - Rename to NavbarContainer
-export default class Navbar extends React.Component {
+export default class NavbarContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -24,6 +23,7 @@ export default class Navbar extends React.Component {
     };
     this.viewAll = this.viewAll.bind(this);
     this.markAllAsRead = this.markAllAsRead.bind(this);
+    this.markNotificationAsRead = this.markNotificationAsRead.bind(this);
     this.getNotifications = this.getNotifications.bind(this);
   }
 
@@ -31,15 +31,14 @@ export default class Navbar extends React.Component {
     this.getNotifications();
   }
 
-  getNotifications() {
-    const url = `/api/notification/unread/user-id/${localStorage.id}`;
-    const headers = { Authorization: localStorage.token };
-    console.log(headers);
-    console.log(url);
+  onSearchSubmit() {
+    this.props.router.replace('/search?:query');
+  }
 
-    axios({ method: 'get', headers, url })
+  getNotifications() {
+    const url = '/api/notification/unread/current/user';
+    axios.get(url)
       .then((response) => {
-        console.log(response.data);
         this.setState({ notifications: response.data });
       })
       .catch((error) => {
@@ -49,25 +48,19 @@ export default class Navbar extends React.Component {
 
   viewAll() {
     // Axios request to get all notifications, then manipulate state with the notifications
-    const url = `/api/notification/all/user-id/${localStorage.id}`;
-    const headers = { Authorization: localStorage.token };
-
-    axios({ method: 'get', headers, url })
+    const url = '/api/notification/all/current/user';
+    axios.get(url)
       .then((response) => {
         this.setState({ notifications: response.data });
-        console.log(response.data);
       })
       .catch((error) => {
         console.log(error);
       });
   }
 
-  markAllAsRead() {
-    // Axios post to mark all as read, then manipulate state
-    const url = `/api/notification/mark-read/all/${localStorage.id}`;
-    const headers = { Authorization: localStorage.token };
-
-    axios({ method: 'post', headers, url })
+  markNotificationAsRead(notificationId) {
+    const url = `/api/notification/mark-read/${notificationId}`;
+    axios.post(url)
       .then((response) => {
         this.getNotifications();
       })
@@ -76,14 +69,22 @@ export default class Navbar extends React.Component {
       });
   }
 
-    onSearchSubmit() {
-	this.props.router.replace("/search?:query");
-    }
+  markAllAsRead() {
+    // Axios post to mark all as read, then manipulate state
+    const url = '/api/notification/mark-read/all/current/user';
+    axios.post(url)
+      .then((response) => {
+        this.getNotifications();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
   render() {
     return (
       <div>
-        <nav className="navbar navbar-inverse navbar-static-top">
+        <nav className="navbar navbar-inverse navbar-fixed-top">
           <div className="container-fluid">
             <NavHeader>
               <Link className="navbar-brand" to="/">Advent</Link>
@@ -97,19 +98,16 @@ export default class Navbar extends React.Component {
             {/* TODO dszopa 10/25/16 - Fix the fact that stuff is not getting displayed properly by the collapsible */}
             <NavCollapsible>
               <NavNav>
-                {/*TODO dszopa 11/5/16 - Figure out what links we want in the navbar if any, this is an example*/}
-                <NavLink link="/group/create" name="Create Group" />
+                <NavLink link="/my-groups/" name="My Groups" />
               </NavNav>
-	    
-	    <SearchBar />
-	      
+              <SearchBar />
               <NavRight>
                 <NavNav>
                   <NavNotificationDropdown>
                     <NavNotificationPanel numNotifications={this.state.notifications.length} />
                     <NavDropdownContainer className="dropdown-position-bottomright">
                       <DropdownToolbar clickEvent={this.markAllAsRead} numNotifications={this.state.notifications.length} />
-                      <NavNotifications notifications={this.state.notifications} />
+                      <NavNotifications notifications={this.state.notifications} markAsRead={this.markNotificationAsRead} />
                       <NavNotificationFooter clickEvent={this.viewAll} />
                     </NavDropdownContainer>
                   </NavNotificationDropdown>

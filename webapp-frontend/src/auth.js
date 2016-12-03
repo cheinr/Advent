@@ -21,7 +21,6 @@ module.exports = {
         "Authorization": id_token}
     }).then(function(response) { //success
       console.log(response);
-      localStorage.id = response.data.id;
 
       //store the token
       //we will use this token to authenticate with our backend
@@ -44,7 +43,6 @@ module.exports = {
 
   logout(auth2, cb) {
     delete localStorage.token;
-    delete localStorage.id;
     axios.defaults.headers.common["Authorization"] = null;
     auth2.signOut().then(function () {
       if (cb) cb();

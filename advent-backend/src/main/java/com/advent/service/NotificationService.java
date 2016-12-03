@@ -34,6 +34,7 @@ public class NotificationService {
         // There's probably no reason we couldn't just delete them, but to be safe we wont
         Notification notification = notificationRepo.findOne(id);
         notification.setRead(true);
+        notificationRepo.save(notification);
         return notificationFactory.notificationToNotificationDTO(notification);
     }
 

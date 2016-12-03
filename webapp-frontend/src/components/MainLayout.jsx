@@ -1,9 +1,7 @@
 import React from 'react';
-
-import Navbar from '../containers/Navbar';
-import SidebarTopRight from './SidebarTopRight';
-import SidebarBottomRight from './SidebarBottomRight';
 import axios from 'axios';
+import NavbarContainer from '../containers/NavbarContainer';
+import UpcomingEventsContainer from '../containers/UpcomingEventsContainer';
 
 export default class MainLayout extends React.Component {
   constructor(props) {
@@ -12,34 +10,30 @@ export default class MainLayout extends React.Component {
   }
 
   componentDidMount() {
-    axios.get("/api/users/current").then( (resp) => {
-      this.setState({user: resp.data});
-      console.log(resp);
-    }).catch( function(error) {
+    axios.get('/api/users/current').then((resp) => {
+      this.setState({ user: resp.data });
+    }).catch((error) => {
       console.log(error);
     });
   }
+
   render() {
-    //this gives children access to user property
+    // TODO dszopa 11/23/16 - We're gonna want to get rid of this
+    // this gives children access to user property
     const children = React.cloneElement(this.props.children,
-      {user: this.state.user});
+      { user: this.state.user });
 
     return (
-      <div>
-        <Navbar />
+      <div className="padded-top">
+        <NavbarContainer />
         <div className="container-fluid">
           <div className="col-xs-9">
             <div>
               {children}
             </div>
           </div>
-          <div className="col-xs-3">
-            <div className="row">
-              <SidebarTopRight />
-            </div>
-            <div className="row half-vertical">
-              <SidebarBottomRight />
-            </div>
+          <div className="sidebar sidebar-well">
+            <UpcomingEventsContainer />
           </div>
         </div>
       </div>

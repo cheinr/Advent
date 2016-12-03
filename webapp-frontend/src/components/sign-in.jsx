@@ -15,7 +15,7 @@ const SignIn = withRouter(React.createClass({ //withRouter gives this component 
   },
 
   componentDidMount: function() {
-      this.renderGoogleLoginButton();
+    this.renderGoogleLoginButton();
   },
 
   renderGoogleLoginButton: function() {
@@ -31,17 +31,16 @@ const SignIn = withRouter(React.createClass({ //withRouter gives this component 
     });
   },
 
-    render: function() {
-
-	return (
-	    <div className="sign-in-page">
-		<div className="sign-in-container">
-		    <h1 >Advent</h1>
-		    <div className="sign-in-button" id="signin2"></div>
-		</div>
-	    </div>
-	);
-    }
+  render: function() {
+    return (
+      <div className="sign-in-page">
+        <div className="sign-in-container transparent-black-background">
+          <h1 className="white-text">Advent</h1>
+          <div className="sign-in-button" id="signin2"></div>
+        </div>
+      </div>
+    );
+  }
 }));
 
 export default SignIn;
