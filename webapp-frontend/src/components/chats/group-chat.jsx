@@ -33,21 +33,28 @@ export default class GroupChat extends React.Component {
       var data = {senderName: this.props.user.displayName, message: message,
         groupId: this.props.group.id};
         this.socket.emit('chat message', data);
-      }
-
+    }
+    
       connect(groupId) {
         return io().emit("join-room", groupId);
       }
 
 
-      render() {
+    render() {
+	console.log(this.props.display);
+	  if(this.props.display === true) {
+	      return (
+		      <div>
+			  <h3>{this.props.group.groupName} Chat</h3>
+			  <ChatMessageContainer messages={this.state.messages}/>
+			  <ChatMessageSender
+			      onSend={this.handleMessageSend.bind(this)}
+			  />
+		      </div>
+              );
+	  } else {
+	      return null;
+	  }
 
-        return (
-          <div>
-          <h3>{this.props.group.groupName} Chat</h3>
-          <ChatMessageContainer messages={this.state.messages} />
-          <ChatMessageSender onSend={this.handleMessageSend.bind(this)} />
-          </div>
-        );
       }
     }

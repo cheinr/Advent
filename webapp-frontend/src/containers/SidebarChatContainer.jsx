@@ -36,8 +36,9 @@ const SidebarChatContainer = withRouter(React.createClass( {
     },
 
     openChat: function(e) {
+	console.log(e.target.id);
 	this.setState({
-	    selectedGroup: this.state.groups[e.target.id]
+	    selectedGroup: e.target.id
 	});
     },
 
@@ -49,37 +50,51 @@ const SidebarChatContainer = withRouter(React.createClass( {
 
     render: function() {
 
-	if(this.state.selectedGroup !== null) {
-	    return(
-		<div className="sidebar-chat">
-		    <button onClick={this.closeChat}
-			    className="btn btn-default">
-			back
-		    </button>
-		    <GroupChat
-			group={this.state.selectedGroup}
-			user={this.props.user}
-		    />
-		</div>
-	    );
-	} else {
-	    console.log(this.state.groups);
-            return (
-		<div className="sidebar-chat-groups">
-		{
-		    this.state.groups.map((group, id) =>
-			<div key={id}>
-			    <a id={id} onClick={this.openChat} >
-				{group.groupName}
-			    </a>
-			</div>
-		    )
-		}
 
-		</div>
-            );
-	}
+	console.log(this.state.selectedGroup);
+        return (
+	    <div className="sidebar-chat-groups">
+		{
+		    ((this.state.selectedGroup === null) &&
+		     (this.state.groups.map((group, id) =>
+			 
+			 <div key={id}>
+			     <a id={id} onClick={this.openChat}>
+				 {group.groupName}
+			     </a>
+			 </div>
+		     )))
+
+		    ||
+
+		    
+		    ((this.state.selectedGroup !== null) &&
+		    ( <button onClick={this.closeChat}
+			      className="btn btn-default">
+			 back
+		     </button>))
+		    
+		}
+		
+		    {
+			(this.state.groups.map((group, id) => {
+			    console.log('id:' + id + (this.state.selectedGroup == id));
+			   
+			    return (
+				<GroupChat
+				    group={group}
+				    user={this.props.user}
+				    key={id}
+				    display={this.state.selectedGroup == id ? true : false}
+				/>
+			    );
+			}))
+		    }
+		
+	    </div>
+        );
     }
+ 
 }));
              
 export default SidebarChatContainer;
