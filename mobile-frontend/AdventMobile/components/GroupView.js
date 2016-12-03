@@ -14,7 +14,7 @@ export default class GroupList extends React.Component {
         return (
             <Text>
                 Group Name: {this.props.group.groupName}
-
+                {"\n"}
                 Group Description: {this.props.group.description}
             </Text>
         );

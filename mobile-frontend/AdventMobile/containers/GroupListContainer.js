@@ -17,22 +17,26 @@ export default class GroupListContainer extends Component {
 
     _fetchData() {
 
-        fetch('url', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                result: result
-            })
-        })
-            .then((response) => response.json())
-            .then((responseData) => {
-
-                this.setState({groups:responseData});
-            })
-            .done();
+        this.setState({groups:[
+            {
+                id: 1,
+                groupName: "name",
+                descrition: "description"
+            }
+        ]});
+        // fetch('url', {
+        //     method: 'POST',
+        //     headers: {
+        //         'Accept': 'application/json',
+        //         'Content-Type': 'application/json',
+        //     }
+        // })
+        //     .then((response) => response.json())
+        //     .then((responseData) => {
+        //
+        //         this.setState({groups:responseData});
+        //     })
+        //     .done();
     }
 
     groupPage(groupId) {

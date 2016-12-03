@@ -30,12 +30,12 @@ export default class Home extends React.Component {
                 {this.props.authenticated ?
                     <View>
                         <Button
-                            onPress={this.props.login}
+                            onPress={this.props.groupListPage}
                             title="View Groups"
                             color="black"
                         />
                         <Button
-                            onPress={this.props.login}
+                            onPress={this.props.eventListPage}
                             title="View Events"
                             color="black"
                         />

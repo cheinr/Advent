@@ -10,11 +10,19 @@ import {
 
 export default class GroupList extends React.Component {
 
+    constructor(props) {
+
+        super(props);
+
+        this.state = {
+            groups: []
+        };
+        this._renderRow = this._renderRow.bind(this)
+    }
+
     _renderRow(rowData) {
         return (
-            <TouchableHighlight onPress={() => {
-                this.groupPage(rowData.id)
-            }}>
+            <TouchableHighlight onPress={() => this.props.groupPage(rowData.id)}>
                 <View>
                     <View style={styles.row}>
                         <Text style={styles.text}>

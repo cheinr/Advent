@@ -14,23 +14,27 @@ export default class GroupViewContainer extends Component {
     }
 
     _fetchData(groupId) {
-
-        fetch('url/groupId', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                result: result
-            })
-        })
-            .then((response) => response.json())
-            .then((responseData) => {
-
-                this.setState({group:responseData});
-            })
-            .done();
+        this.setState({group:{
+            id: 1,
+            groupName: "name",
+            description: "description"
+        }});
+        // fetch('url/groupId', {
+        //     method: 'POST',
+        //     headers: {
+        //         'Accept': 'application/json',
+        //         'Content-Type': 'application/json',
+        //     },
+        //     body: JSON.stringify({
+        //         result: result
+        //     })
+        // })
+        //     .then((response) => response.json())
+        //     .then((responseData) => {
+        //
+        //         this.setState({group:responseData});
+        //     })
+        //     .done();
     }
 
     componentDidMount() {

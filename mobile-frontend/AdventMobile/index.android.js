@@ -3,38 +3,39 @@ import {
     AppRegistry,
     StyleSheet,
     Text,
-    View
+    View,
+    TouchableHighlight,
+    Image
 } from 'react-native';
+import HomeContainer from './containers/HomeContainer'
+import Router from 'react-native-simple-router';
+import BackButton from './components/BackButton';
 
 export default class AdventMobile extends Component {
   render() {
+    // TODO authenticate with database before passing in route
+    const firstRoute = {
+      name: "Welcome",
+      component: HomeContainer
+    };
     return (
-        <View style={styles.container}>
-          <Text style={styles.welcome}>
-            Welcome to Advent!
-          </Text>
-        </View>
+        <Router
+            firstRoute={firstRoute}
+            headerStyle={styles.header}
+            titleStyle={styles.title}
+            backButtonComponent={BackButton}
+        />
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+  header: {
+    backgroundColor: '#5cafec',
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+  title: {
+    textAlign: "center",
+  }
 });
 
 AppRegistry.registerComponent('AdventMobile', () => AdventMobile);
