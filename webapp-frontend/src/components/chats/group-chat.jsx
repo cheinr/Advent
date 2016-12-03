@@ -21,10 +21,13 @@ export default class GroupChat extends React.Component {
     componentDidMount() {
 
       this.socket.on('chat message', function(msg) {
-        var messages = this.state.messages;
-        messages.push(msg);
-        console.log(messages);
-        this.setState(messages);
+          var messages = this.state.messages;
+	  if(!this.props.display) {
+	      this.props.notifyParent(this.props.id);
+	  }
+          messages.push(msg);
+          console.log(messages);
+          this.setState(messages);
       }.bind(this));
     }
 

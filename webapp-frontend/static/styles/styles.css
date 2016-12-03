@@ -77,7 +77,13 @@
     margin: 15px;
 }
 
+.fa-circle-green {
+    color: #33cc33;
+}
 
+.fa-circle-grey {
+    color: #999999;
+}
 
 .rbc-calendar {
     flex: 1;
