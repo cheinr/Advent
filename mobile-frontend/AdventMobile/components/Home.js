@@ -10,6 +10,8 @@ import {
     Button
 } from 'react-native';
 
+import {GoogleSignin, GoogleSigninButton} from 'react-native-google-signin';
+
 // const MK = require('react-native-material-kit');
 //
 // const {
@@ -27,6 +29,11 @@ export default class Home extends React.Component {
     render() {
         return (
             <View>
+                <GoogleSigninButton
+                    style={{width: 48, height: 48}}
+                    size={GoogleSigninButton.Size.Standard}
+                    color={GoogleSigninButton.Color.Dark}
+                    onPress={this.props.login}/>
                 <Button
                     onPress={this.props.login}
                     title="Login to Google"
