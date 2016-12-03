@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
-import GroupView from './../components/GroupView';
+import EventView from './../components/EventView';
 import { StyleSheet, Image } from 'react-native';
 var Platform = require('react-native').Platform;
 
-export default class GroupViewContainer extends Component {
+export default class EventViewContainer extends Component {
     constructor(props) {
 
         super(props);
 
         this.state = {
-            group: '',
+            event: '',
         };
     }
 
-    _fetchData(groupId) {
+    _fetchData(eventId) {
 
-        fetch('url/groupId', {
+        fetch('url/eventId', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -28,18 +28,18 @@ export default class GroupViewContainer extends Component {
             .then((response) => response.json())
             .then((responseData) => {
 
-                this.setState({group:responseData});
+                this.setState({event:responseData});
             })
             .done();
     }
 
     componentDidMount() {
-        this._fetchData(this.props.groupId)
+        this._fetchData(this.props.eventId)
     }
 
     render() {
-        return <GroupView
-            group={this.state.group}
+        return <EventView
+            event={this.state.event}
         />;
     }
 }

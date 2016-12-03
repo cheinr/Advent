@@ -15,7 +15,7 @@ export default class GroupListContainer extends Component {
         this.groupPage = this.groupPage.bind(this)
     }
 
-    _fetchData(result) {
+    _fetchData() {
 
         fetch('url', {
             method: 'POST',
