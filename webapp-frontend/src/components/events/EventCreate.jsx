@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import ReactDatetime from 'react-datetime';
 
 export default class EventCreate extends Component {
-    componentDidMount() {
-
+    constructor(props) {
+	super(props);
     }
 
     render() {
+
         return (
             <div>
                 <h1>Create Event</h1>
@@ -38,10 +39,12 @@ export default class EventCreate extends Component {
                     </div>
                     <div className="form-group">
                         <label htmlFor="location">Location</label>
-                        <input type="text" className="form-control" id="location"
+                        <input type="text" className="form-control"
+			       id="location"
                                onChange={this.props.locChange}
                                value={this.props.values.location}/>
                     </div>
+
                     <div className="checkbox">
                         <label>
                             <input type="checkbox"
