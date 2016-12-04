@@ -8,7 +8,10 @@
   },
   "dependencies": {
     "react": "15.3.2",
-    "react-native": "0.37.0"
+    "react-native": "0.37.0",
+    "react-native-google-signin": "^0.8.1",
+    "react-native-material-kit": "^0.3.3",
+    "react-native-simple-router": "^0.12.0"
   },
   "jest": {
     "preset": "jest-react-native"

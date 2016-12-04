@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "210674859854",
+    "project_id": "firebase-adventmobile"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:210674859854:android:41a700f266c243dc",
+        "android_client_info": {
+          "package_name": "com.adventmobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "210674859854-od1a4u1db63sgsn90lnf9c280srb3fm8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.adventmobile",
+            "certificate_hash": "D712182612A0730FE38BF016D8FF2C4BAD7AFE76"
+          }
+        },
+        {
+          "client_id": "210674859854-hb6e8mjh6vpd9996v3v47ffl86m1r59i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0UoknSsjoX_4GWX9xgdKBv7qq5NPTgPE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

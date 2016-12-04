@@ -17,4 +17,7 @@ public interface EventRepo extends JpaRepository<Event, Long> {
 
     @Query("select e from Event e inner join e.group.userGroups u where u.user.id = :userId AND e.startDate >= CURRENT_DATE ORDER BY e.startDate ASC")
     List<Event> findUpcomingEventsForUser(@Param("userId") Long userId);
+
+    @Query("select e from Event e inner join e.group.userGroups u where u.user.email = :email AND e.startDate >= CURRENT_DATE ORDER BY e.startDate ASC")
+    List<Event> findUpcomingEventsForEmail(@Param("email") String email);
 }

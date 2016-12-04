@@ -6,7 +6,6 @@ import com.advent.entity.UserGroup;
 import com.advent.repo.UserGroupRepo;
 import com.advent.service.GroupService;
 import com.advent.service.UserGroupService;
-import com.advent.service.impl.UserManagementServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -81,5 +80,11 @@ public class GroupController {
     @RequestMapping(value = "/group/my-groups", method = RequestMethod.GET)
     public List<GroupDTO> getGroupsForCurrentUser(@AuthenticationPrincipal Long userId) {
         return groupService.getGroupsForUser(userId);
+    }
+
+    @RequestMapping(value = "/auth/group/my-groups/{email:.+}", method = RequestMethod.GET)
+    public List<GroupDTO> getGroupsForUser(@PathVariable String email) {
+        System.out.println(email);
+        return groupService.getGroupsForEmail(email);
     }
 }
