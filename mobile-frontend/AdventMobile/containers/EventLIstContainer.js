@@ -15,39 +15,46 @@ export default class GroupListContainer extends Component {
         this.eventPage = this.eventPage.bind(this)
     }
 
-    _fetchData() {
+    _fetchData(userEmail) {
 
-        fetch('url', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
+        this.setState({events:[
+            {
+                id: 1,
+                name: userEmail,
+                description: "description"
             },
-            body: JSON.stringify({
-                result: result
-            })
-        })
-            .then((response) => response.json())
-            .then((responseData) => {
-
-                this.setState({events:responseData});
-            })
-            .done();
+        ]});
+        // fetch('http://proj-309-la-03.cs.iastate.edu/api/auth/event/my-events/' + userEmail, {
+        //     method: 'POST',
+        //     headers: {
+        //         'Accept': 'application/json',
+        //         'Content-Type': 'application/json',
+        //     },
+        //     body: JSON.stringify({
+        //         result: result
+        //     })
+        // })
+        //     .then((response) => response.json())
+        //     .then((responseData) => {
+        //
+        //         this.setState({events:responseData});
+        //     })
+        //     .done();
     }
 
-    eventPage(eventId) {
+    eventPage(event) {
 
         this.props.toRoute({
             name: "Event",
             component: EventViewContainer,
             passProps: {
-                eventId: eventId,
+                event: event,
             }
         });
     }
 
     componentDidMount() {
-        this._fetchData()
+        this._fetchData(this.props.user.email)
     }
 
     render() {

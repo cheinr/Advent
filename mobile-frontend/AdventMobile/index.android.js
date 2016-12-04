@@ -61,7 +61,7 @@ export default class AdventMobile extends Component {
     try {
       await GoogleSignin.configure({
 
-          scopes: ['email', 'profile'],
+          scopes: ['https://www.googleapis.com/auth/plus.login'],
         webClientId: '210674859854-hb6e8mjh6vpd9996v3v47ffl86m1r59i.apps.googleusercontent.com',
         offlineAccess: true
       });

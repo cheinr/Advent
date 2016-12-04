@@ -24,7 +24,10 @@ export default class HomeContainer extends Component {
 
         this.props.toRoute({
             name: "Group List",
-            component: GroupListContainer
+            component: GroupListContainer,
+            passProps: {
+                user: this.props.user
+            }
         });
     }
 
@@ -32,7 +35,10 @@ export default class HomeContainer extends Component {
 
         this.props.toRoute({
             name: "Event List",
-            component: EventListContainer
+            component: EventListContainer,
+            passProps: {
+                user: this.props.user
+            }
         });
     }
 

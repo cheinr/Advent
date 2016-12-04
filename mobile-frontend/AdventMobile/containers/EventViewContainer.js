@@ -7,39 +7,11 @@ export default class EventViewContainer extends Component {
     constructor(props) {
 
         super(props);
-
-        this.state = {
-            event: '',
-        };
-    }
-
-    _fetchData(eventId) {
-
-        fetch('url/eventId', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                result: result
-            })
-        })
-            .then((response) => response.json())
-            .then((responseData) => {
-
-                this.setState({event:responseData});
-            })
-            .done();
-    }
-
-    componentDidMount() {
-        this._fetchData(this.props.eventId)
     }
 
     render() {
         return <EventView
-            event={this.state.event}
+            event={this.props.event}
         />;
     }
 }

@@ -22,7 +22,7 @@ export default class GroupList extends React.Component {
 
     _renderRow(rowData) {
         return (
-            <TouchableHighlight onPress={() => this.props.groupPage(rowData.id)}>
+            <TouchableHighlight onPress={() => this.props.groupPage(rowData)}>
                 <View>
                     <View style={styles.row}>
                         <Text style={styles.text}>

@@ -82,8 +82,9 @@ public class GroupController {
         return groupService.getGroupsForUser(userId);
     }
 
-    @RequestMapping(value = "/auth/group/my-groups/{email}", method = RequestMethod.GET)
+    @RequestMapping(value = "/auth/group/my-groups/{email:.+}", method = RequestMethod.GET)
     public List<GroupDTO> getGroupsForUser(@PathVariable String email) {
+        System.out.println(email);
         return groupService.getGroupsForEmail(email);
     }
 }
