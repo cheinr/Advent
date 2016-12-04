@@ -57,5 +57,10 @@ public class EventController {
     public List<EventDTO> getUpcomingEventsForCurrentUser(@AuthenticationPrincipal Long userId) {
         return eventService.getUpcomingEventsForUser(userId);
     }
+
+    @RequestMapping(value = "/auth/event/my-events/{email}", method = RequestMethod.GET)
+    public List<EventDTO> getGroupsForUser(@PathVariable String email) {
+        return eventService.getUpcomingEventsForEmail(email);
+    }
 }
 

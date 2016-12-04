@@ -42,6 +42,8 @@ export default class HomeContainer extends Component {
             groupListPage={this.groupListPage}
             eventListPage={this.eventListPage}
             authenticated={this.state.authenticated}
+            user={this.props.user}
+            signOut={this.props.signOut}
         />
     }
 }

@@ -1,15 +1,12 @@
 package com.advent.service;
 
 import com.advent.dto.EventDTO;
-import com.advent.dto.UserDTO;
 import com.advent.entity.Event;
 import com.advent.entity.EventResponse;
 import com.advent.entity.UserGroup;
 import com.advent.factory.EventConverter;
 import com.advent.repo.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -69,6 +66,17 @@ public class EventService {
 
     public List<EventDTO> getUpcomingEventsForUser(Long userId) {
         List<Event> upcomingEvents = eventRepo.findUpcomingEventsForUser(userId);
+        List<EventDTO> upcomingEventDTOs = new ArrayList<>();
+
+        for (Event event : upcomingEvents) {
+            upcomingEventDTOs.add(eventConverter.eventToEventDTO(event));
+        }
+
+        return upcomingEventDTOs;
+    }
+
+    public List<EventDTO> getUpcomingEventsForEmail(String email) {
+        List<Event> upcomingEvents = eventRepo.findUpcomingEventsForEmail(email);
         List<EventDTO> upcomingEventDTOs = new ArrayList<>();
 
         for (Event event : upcomingEvents) {
