@@ -16,30 +16,22 @@ export default class GroupListContainer extends Component {
     }
 
     _fetchData(userEmail) {
-
-        this.setState({events:[
-            {
-                id: 1,
-                name: userEmail,
-                description: "description"
+        fetch('http://proj-309-la-03.cs.iastate.edu/api/auth/event/my-events/' + userEmail, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
             },
-        ]});
-        // fetch('http://proj-309-la-03.cs.iastate.edu/api/auth/event/my-events/' + userEmail, {
-        //     method: 'POST',
-        //     headers: {
-        //         'Accept': 'application/json',
-        //         'Content-Type': 'application/json',
-        //     },
-        //     body: JSON.stringify({
-        //         result: result
-        //     })
-        // })
-        //     .then((response) => response.json())
-        //     .then((responseData) => {
-        //
-        //         this.setState({events:responseData});
-        //     })
-        //     .done();
+            body: JSON.stringify({
+                result: result
+            })
+        })
+            .then((response) => response.json())
+            .then((responseData) => {
+
+                this.setState({events:responseData});
+            })
+            .done();
     }
 
     eventPage(event) {
