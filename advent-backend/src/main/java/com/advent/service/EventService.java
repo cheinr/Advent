@@ -84,12 +84,7 @@ public class EventService {
         List<EventDTO> upcomingEventDTOs = new ArrayList<>();
 
         for (Event event : upcomingEvents) {
-            if(event.getPrivate() == false) {
                 upcomingEventDTOs.add(eventConverter.eventToEventDTO(event));
-            } else if(userGroupRepo.findByUserIdAndGroupId(userId, event.getGroup().getId()) != null) {
-                System.out.println("UserGroup: " + userGroupRepo.findByUserIdAndGroupId(userId, event.getGroup().getId()));
-                upcomingEventDTOs.add(eventConverter.eventToEventDTO(event));
-            }
         }
 
         return upcomingEventDTOs;
