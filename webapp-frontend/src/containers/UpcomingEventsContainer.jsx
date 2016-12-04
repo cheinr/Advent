@@ -25,6 +25,7 @@ export default class UpcomingEventsContainer extends React.Component {
       <div>
         <h2 className="center-text">Upcoming Events</h2>
         <hr />
+
         {this.state.events.map((event, index) =>
           <div key={index} className="sidebar-row">
             <UpcomingEvent

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import EventCreate from '../components/events/EventCreate';
 import LocationMap from '../components/LocationMap';
 import axios from 'axios';

@@ -3,9 +3,11 @@ package com.advent.service;
 import com.advent.dto.EventDTO;
 import com.advent.entity.Event;
 import com.advent.entity.EventResponse;
+import com.advent.entity.Notification;
 import com.advent.entity.UserGroup;
 import com.advent.factory.EventConverter;
 import com.advent.repo.*;
+import com.advent.utils.NotificationType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,8 @@ public class EventService {
     private EventRepo eventRepo;
     @Autowired
     private GroupRepo groupRepo;
+    @Autowired
+    private NotificationRepo notificationRepo;
     @Autowired
     private UserRepo userRepo;
     @Autowired
@@ -38,6 +42,17 @@ public class EventService {
 
         eventDTO.setGroup(groupRepo.findOne(eventDTO.getGroup().getId()));
         Event event = eventRepo.save(eventConverter.eventDTOtoEvent(eventDTO));
+        List<UserGroup> userGroups = eventDTO.getGroup().getUserGroups();
+        for(int i = 0; i < userGroups.size(); i++){
+            Notification notification = new Notification();
+            notification.setHeader("Invite to " + event.getName());
+            notification.setMessage("You have been invited to attend the event " + event.getName());
+            notification.setLink("/event/" + Long.toString(event.getId()));
+            notification.setNotificationType(NotificationType.EVENT);
+            notification.setRead(false);
+            notification.setUser(userGroups.get(i).getUser());
+            notificationRepo.save(notification);
+        }
         return eventConverter.eventToEventDTO(event);
     }
 

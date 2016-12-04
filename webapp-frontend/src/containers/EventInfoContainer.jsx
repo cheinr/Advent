@@ -5,6 +5,7 @@ import EventInfo from '../components/events/EventInfo';
 import LocationMap from '../components/LocationMap';
 
 export default class EventInfoContainer extends Component {
+
     constructor() {
         super();
         this.state = {
@@ -117,4 +118,5 @@ export default class EventInfoContainer extends Component {
 	    </div>
 	);
     }
+
 }
