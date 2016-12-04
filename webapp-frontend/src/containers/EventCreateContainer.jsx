@@ -82,6 +82,7 @@ export default class EventCreateContainer extends Component {
 	});
     }
     privateChange(e) {
+	console.log(e.target.checked);
         this.setState({isPrivate: e.target.checked});
     }
 
@@ -107,6 +108,7 @@ export default class EventCreateContainer extends Component {
     }
 
     submitForm() {
+	console.log('isPrivate: ' + this.state.isPrivate);
         const url = "/api/event/create/";
         const data = {
 
@@ -118,7 +120,7 @@ export default class EventCreateContainer extends Component {
             group: {
                 id: this.props.params.groupId
             },
-            isPrivate: this.state.isPrivate
+            private: this.state.isPrivate
         };
         console.log(data);
         axios({method: 'post',

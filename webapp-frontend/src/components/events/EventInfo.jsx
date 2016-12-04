@@ -8,6 +8,7 @@ export default class EventInfo extends Component {
     }
 
     render() {
+	console.log(this.props.event.private);
         return (
             <div>
                 <h1>Event Information</h1>
@@ -22,7 +23,7 @@ export default class EventInfo extends Component {
                             {this.props.event.group.groupName}
                         </Link>
                     </div>
-                    <div>Private: {this.props.event.private}</div>
+                    <div>Private: {this.props.event.private ? "Yes":"No"}</div>
 
                     <div>Going:
                         <UserList users={this.props.event.eventResponses.filter(function(e) {
