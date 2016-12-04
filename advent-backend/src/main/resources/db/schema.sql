@@ -184,11 +184,11 @@ INSERT INTO announcement VALUES (1012, 'Sample Title12', 'Sample Content12', '20
 INSERT INTO announcement VALUES (1013, 'Sample Title13', 'Sample Content13', '2008-11-24', 1002);
 INSERT INTO announcement VALUES (1014, 'Sample Title14', 'Sample Content14: This is the first of many announcements', '2008-11-25', 1002);
 
-INSERT INTO event VALUES (1000, 'Super Awesome Event', 'This event takes place from 1pm-1pm', '2028-11-15', '2008-11-15', 'Coover Hall 1000', 0, 1000);
-INSERT INTO event VALUES (1001, 'Super Awesome Event2', 'This event takes place from 1pm-2pm', '2028-11-16', '2008-11-16', 'Coover Hall 1001', 0, 1000);
-INSERT INTO event VALUES (1002, 'Super Awesome Event3', 'This event takes place from 1pm-3pm', '2018-11-18', '2008-11-18', 'Coover Hall 1011', 0, 1000);
-INSERT INTO event VALUES (1003, 'Super Awesome Event4', 'This event takes place from 1pm-3pm', '2031-11-18', '2008-11-18', 'Coover Hall 1011', 0, 1000);
-INSERT INTO event VALUES (1004, 'This Event is in the past', 'This event should not appear', '2001-11-18', '2008-11-18', 'Coover Hall 1011', 0, 1000);
+INSERT INTO event VALUES (1000, 'Super Awesome Event', 'This event takes place from 1pm-1pm', '2016-12-03 00:00:12', '2016-12-03 00:12:12', 'Coover Hall 1000', 0, 1000);
+INSERT INTO event VALUES (1001, 'Super Awesome Event2', 'This event takes place from 1pm-2pm', '2017-01-02 00:10:00', '2017-01-02 01:11:11', 'Coover Hall 1001', 0, 1000);
+INSERT INTO event VALUES (1002, 'Super Awesome Event3', 'This event takes place from 1pm-3pm', '2018-11-18 00:10:00', '2018-11-18 00:10:01', 'Coover Hall 1011', 0, 1000);
+INSERT INTO event VALUES (1003, 'Super Awesome Event4', 'This event takes place from 1pm-3pm', '2031-11-18 00:10:00', '2031-11-18 00:10:01', 'Coover Hall 1011', 0, 1000);
+INSERT INTO event VALUES (1004, 'This Event is in the past', 'This event should not appear', '2001-11-18 00:10:00', '2001-11-18 00:10:01', 'Coover Hall 1011', 0, 1000);
 
 INSERT INTO notification VALUES (1000, 'Sample Header', 'Sample Message', 'https://google.com', 'MESSAGE', 1, 1000);
 INSERT INTO notification VALUES (1001, 'Invite for group 1!', 'You have been invited to join group 1!', '/group/1000', 'GROUP', 0, 1000);
