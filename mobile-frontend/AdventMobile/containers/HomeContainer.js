@@ -56,5 +56,8 @@ export default class HomeContainer extends Component {
 
 const fontFamily = Platform.OS === 'ios' ? "HelveticaNeue-CondensedBold" : 'impact';
 const styles = StyleSheet.create({
-
+    button: {
+        margin: 10,
+        height: 30
+    }
 });

@@ -25,8 +25,14 @@ export default class GroupList extends React.Component {
             <TouchableHighlight onPress={() => this.props.groupPage(rowData)}>
                 <View>
                     <View style={styles.row}>
-                        <Text style={styles.text}>
+                        <Text style={styles.title}>
                             {rowData.groupName}
+                        </Text>
+                        <Text>
+                        {"\n"}
+                        </Text>
+                        <Text style={styles.text}>
+                            {rowData.description}
                         </Text>
                     </View>
                 </View>
@@ -49,16 +55,21 @@ export default class GroupList extends React.Component {
 
 var styles = StyleSheet.create({
     row: {
-        flexDirection: 'row',
-        justifyContent: 'center',
         padding: 10,
+        height: 100,
         backgroundColor: '#F6F6F6',
+        borderBottomColor: "black",
+        borderBottomWidth: 1,
     },
     thumb: {
         width: 64,
         height: 64,
     },
+    title: {
+        fontSize: 18,
+        fontWeight: 'bold',
+    },
+
     text: {
-        flex: 1,
     },
 });

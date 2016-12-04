@@ -43,7 +43,7 @@ export default class GroupListContainer extends Component {
     }
 
     componentDidMount() {
-        this._fetchData(this.props.user.email)
+        this._fetchData(this.props.user ? this.props.user.email : "")
     }
 
     render() {

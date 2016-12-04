@@ -26,7 +26,7 @@ export default class GroupListContainer extends Component {
             .then((response) => response.json())
             .then((responseData) => {
 
-                this.setState({groups:responseData});
+                this.setState({events:responseData});
             })
             .done();
     }
@@ -43,7 +43,7 @@ export default class GroupListContainer extends Component {
     }
 
     componentDidMount() {
-        this._fetchData(this.props.user.email)
+        this._fetchData(this.props.user ? this.props.user.email : "")
     }
 
     render() {
