@@ -1,21 +1,65 @@
 {
   "name": "advent",
   "version": "0.0.1",
+  "description": "The web frontend for Advent, made with React.",
   "main": "server.js",
   "author": "clai",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "test": "mocha --compilers js:babel-core/register test/**/*.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://git.linux.iastate.edu/309Fall2016/LA-03-Advent"
   },
   "devDependencies": {
-    "webpack-dev-middleware": "^1.8.2"
+    "babel-cli": "^6.16.0",
+    "babel-core": "^6.17.0",
+    "babel-preset-es2015": "^6.16.0",
+    "chai": "^3.5.0",
+    "enzyme": "^2.5.1",
+    "eslint": "^3.7.0",
+    "eslint-config-airbnb": "^12.0.0",
+    "eslint-plugin-import": "^1.16.0",
+    "eslint-plugin-json": "^1.2.0",
+    "eslint-plugin-jsx-a11y": "^2.2.2",
+    "eslint-plugin-react": "^6.3.0",
+    "mocha": "^3.1.2",
+    "react-addons-test-utils": "^15.3.2"
   },
   "dependencies": {
+    "axios": "^0.14.0",
+    "babel": "^6.5.2",
+    "babel-core": "^6.14.0",
+    "babel-loader": "^6.2.5",
+    "babel-preset-es2015": "^6.14.0",
+    "babel-preset-react": "^6.11.1",
+    "babel-preset-stage-1": "^6.13.0",
+    "bootstrap": "^3.3.7",
+    "dateformat": "^2.0.0",
+    "eonasdan-bootstrap-datetimepicker": "^4.17.42",
     "express": "^4.14.0",
+    "express-http-proxy": "^0.10.0",
+    "http-proxy-middleware": "^0.17.2",
+    "jquery": "^3.1.1",
+    "json-loader": "^0.5.4",
+    "markdown": "^0.5.0",
+    "material-ui": "^0.15.4",
+    "moment": "^2.15.2",
+    "proxy-middleware": "^0.15.0",
     "react": "^15.3.2",
+    "react-big-calendar": "^0.11.0",
+    "react-datetime": "^2.6.0",
     "react-dom": "^15.3.2",
+    "react-markdown": "^2.4.2",
     "react-redux": "^4.4.5",
     "react-router": "^2.8.1",
+    "react-tap-event-plugin": "^1.0.0",
     "redux": "^3.6.0",
-    "webpack": "^1.13.2"
+    "serve-favicon": "^2.3.2",
+    "socket.io": "^1.5.1",
+    "socket.io-client": "^1.5.1",
+    "webpack": "^1.13.2",
+    "webpack-dev-middleware": "^1.8.2"
   }
 }

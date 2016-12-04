@@ -5,6 +5,7 @@ import com.advent.dto.UserDTO;
 import com.advent.entity.User;
 import com.advent.factory.UserFactory;
 import com.advent.repo.UserRepo;
+import com.advent.service.impl.UserManagementServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -39,10 +40,13 @@ public class UserManagementServiceImplUTest extends AbstractServiceUTest {
     @Test
     public void saveUser() throws Exception {
         when(userFactory.userDTOToUser(userDTO)).thenReturn(user);
+        when(userRepo.save(user)).thenReturn(user);
+        when(userFactory.userToUserDTO(user)).thenReturn(userDTO);
 
         UserDTO returnedUserDTO = userManagementService.saveUser(userDTO);
 
         verify(userFactory, times(1)).userDTOToUser(userDTO);
+        verify(userFactory, times(1)).userToUserDTO(user);
         verify(userRepo, times(1)).save(user);
         assertEquals(userDTO, returnedUserDTO);
     }
@@ -52,6 +56,13 @@ public class UserManagementServiceImplUTest extends AbstractServiceUTest {
         userDTO.setId(1L);
 
         userManagementService.deleteUser(userDTO);
+
+        verify(userRepo, times(1)).delete(1L);
+    }
+
+    @Test
+    public void deleteUserById() throws Exception {
+        userManagementService.deleteUserById(1L);
 
         verify(userRepo, times(1)).delete(1L);
     }
@@ -69,18 +80,6 @@ public class UserManagementServiceImplUTest extends AbstractServiceUTest {
     }
 
     @Test
-    public void findUserByUsername() throws Exception {
-        when(userRepo.findByUsername("username")).thenReturn(user);
-        when(userFactory.userToUserDTO(user)).thenReturn(userDTO);
-
-        UserDTO returnedUserDTO = userManagementService.findUserByUsername("username");
-
-        verify(userRepo, times(1)).findByUsername("username");
-        verify(userFactory, times(1)).userToUserDTO(user);
-        assertEquals(userDTO, returnedUserDTO);
-    }
-
-    @Test
     public void findUserByEmail() throws Exception {
         when(userRepo.findByEmail("email")).thenReturn(user);
         when(userFactory.userToUserDTO(user)).thenReturn(userDTO);
@@ -90,6 +89,21 @@ public class UserManagementServiceImplUTest extends AbstractServiceUTest {
         verify(userRepo, times(1)).findByEmail("email");
         verify(userFactory, times(1)).userToUserDTO(user);
         assertEquals(userDTO, returnedUserDTO);
+    }
+
+    @Test
+    public void findAllUserByDisplayName() throws Exception {
+        List<User> users = Arrays.asList(user);
+        List<UserDTO> userDTOs = Arrays.asList(userDTO);
+
+        when(userRepo.findAllByDisplayName("displayName")).thenReturn(users);
+        when(userFactory.userToUserDTO(user)).thenReturn(userDTO);
+
+        List<UserDTO> returnedUserDTOs = userManagementService.findUsersByDisplayName("displayName");
+
+        verify(userRepo, times(1)).findAllByDisplayName("displayName");
+        verify(userFactory, times(1)).userToUserDTO(any(User.class));
+        assertEquals(userDTOs, returnedUserDTOs);
     }
 
     @Test

@@ -2,7 +2,7 @@ package com.advent.controller;
 
 import com.advent.config.AbstractControllerUTest;
 import com.advent.dto.UserDTO;
-import com.advent.service.interfaces.UserManagementService;
+import com.advent.service.UserManagementService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
@@ -43,12 +43,12 @@ public class UserManagementControllerUTest extends AbstractControllerUTest {
     }
 
     @Test
-    public void createUser() throws Exception {
+    public void saveUser() throws Exception {
         String userDTOJson = mapper.writeValueAsString(userDTO);
 
         when(userManagementService.saveUser(any(UserDTO.class))).thenReturn(userDTO);
 
-        ResultActions result = mockMvc.perform(post("/api/users/create")
+        ResultActions result = mockMvc.perform(post("/api/users/save")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(userDTOJson))
                 .andExpect(status().isOk());
@@ -68,6 +68,14 @@ public class UserManagementControllerUTest extends AbstractControllerUTest {
     }
 
     @Test
+    public void deleteUserById() throws Exception {
+        mockMvc.perform(post("/api/users/delete/id/{userId}", 1L))
+                .andExpect(status().isOk());
+
+        verify(userManagementService, times(1)).deleteUserById(1L);
+    }
+
+    @Test
     public void getUser() throws Exception {
         when(userManagementService.findUser(1L)).thenReturn(userDTO);
 
@@ -75,17 +83,6 @@ public class UserManagementControllerUTest extends AbstractControllerUTest {
                 .andExpect(status().isOk());
 
         verify(userManagementService, times(1)).findUser(1L);
-        JSONAssert.assertEquals(mapper.writeValueAsString(userDTO), result.andReturn().getResponse().getContentAsString(), false);
-    }
-
-    @Test
-    public void getUserByUsername() throws Exception {
-        when(userManagementService.findUserByUsername("username")).thenReturn(userDTO);
-
-        ResultActions result = mockMvc.perform(get("/api/users/username/{username}", "username"))
-                .andExpect(status().isOk());
-
-        verify(userManagementService, times(1)).findUserByUsername("username");
         JSONAssert.assertEquals(mapper.writeValueAsString(userDTO), result.andReturn().getResponse().getContentAsString(), false);
     }
 
@@ -98,6 +95,19 @@ public class UserManagementControllerUTest extends AbstractControllerUTest {
 
         verify(userManagementService, times(1)).findUserByEmail("email");
         JSONAssert.assertEquals(mapper.writeValueAsString(userDTO), result.andReturn().getResponse().getContentAsString(), false);
+    }
+
+    @Test
+    public void getUsersByDisplayName() throws Exception {
+        List<UserDTO> userDTOs = Arrays.asList(userDTO);
+
+        when(userManagementService.findUsersByDisplayName("displayName")).thenReturn(userDTOs);
+
+        ResultActions result = mockMvc.perform(get("/api/users/display_name/{displayName}", "displayName"))
+                .andExpect(status().isOk());
+
+        verify(userManagementService, times(1)).findUsersByDisplayName("displayName");
+        JSONAssert.assertEquals(mapper.writeValueAsString(userDTOs), result.andReturn().getResponse().getContentAsString(), false);
     }
 
     @Test
