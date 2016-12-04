@@ -17,4 +17,7 @@ public interface GroupRepo extends JpaRepository<Group, Long> {
 
     @Query("select g from Group g inner join g.userGroups u where u.user.id = :userId ORDER BY g.groupName ASC")
     List<Group> findGroupsForUser(@Param("userId") Long userId);
+
+    @Query("select g from Group g inner join g.userGroups u where u.user.email = :email ORDER BY g.groupName ASC")
+    List<Group> findGroupsForUserEmail(@Param("email") String email);
 }

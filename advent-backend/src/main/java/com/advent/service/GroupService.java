@@ -51,4 +51,15 @@ public class GroupService {
 
         return groupDTOs;
     }
+
+    public List<GroupDTO> getGroupsForEmail(String email) {
+        List<Group> groups = groupRepo.findGroupsForUserEmail(email);
+        List<GroupDTO> groupDTOs = new ArrayList<>();
+
+        for (Group group : groups) {
+            groupDTOs.add(groupConverter.groupToGroupDTO(group));
+        }
+
+        return groupDTOs;
+    }
 }

@@ -89,4 +89,15 @@ public class EventService {
 
         return upcomingEventDTOs;
     }
+
+    public List<EventDTO> getUpcomingEventsForEmail(String email) {
+        List<Event> upcomingEvents = eventRepo.findUpcomingEventsForEmail(email);
+        List<EventDTO> upcomingEventDTOs = new ArrayList<>();
+
+        for (Event event : upcomingEvents) {
+            upcomingEventDTOs.add(eventConverter.eventToEventDTO(event));
+        }
+
+        return upcomingEventDTOs;
+    }
 }

@@ -1,7 +1,4 @@
 apply plugin: "com.android.application"
-
-import com.android.build.OutputFile
-
 /**
  * The react.gradle file registers a task for each build variant (e.g. bundleDebugJsAndAssets
  * and bundleReleaseJsAndAssets).
@@ -104,31 +101,47 @@ android {
             include "armeabi-v7a", "x86"
         }
     }
+    signingConfigs {
+        release {
+            storeFile file(MYAPP_RELEASE_STORE_FILE)
+            storePassword MYAPP_RELEASE_STORE_PASSWORD
+            keyAlias MYAPP_RELEASE_KEY_ALIAS
+            keyPassword MYAPP_RELEASE_KEY_PASSWORD
+        }
+    }
     buildTypes {
         release {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+
+            signingConfig signingConfigs.release
         }
     }
     // applicationVariants are e.g. debug, release
-    applicationVariants.all { variant ->
-        variant.outputs.each { output ->
-            // For each separate APK per architecture, set a unique version code as described here:
-            // http://tools.android.com/tech-docs/new-build-system/user-guide/apk-splits
-            def versionCodes = ["armeabi-v7a":1, "x86":2]
-            def abi = output.getFilter(OutputFile.ABI)
-            if (abi != null) {  // null for the universal-debug, universal-release variants
-                output.versionCodeOverride =
-                        versionCodes.get(abi) * 1048576 + defaultConfig.versionCode
-            }
-        }
-    }
+//    applicationVariants.all { variant ->
+//        variant.outputs.each { output ->
+//            // For each separate APK per architecture, set a unique version code as described here:
+//            // http://tools.android.com/tech-docs/new-build-system/user-guide/apk-splits
+//            def versionCodes = ["armeabi-v7a":1, "x86":2]
+////            def abi = output.getFilter(OutputFile.ABI)
+////            if (true) {  // null for the universal-debug, universal-release variants
+////                output.versionCodeOverride =
+////                        2 * 1048576 + defaultConfig.versionCode
+////            }
+//        }
+//    }
 }
 
 dependencies {
+    compile project(':react-native-material-kit')
+    compile(project(":react-native-google-signin")){
+        exclude group: "com.google.android.gms" // very important
+    }
     compile fileTree(dir: "libs", include: ["*.jar"])
     compile "com.android.support:appcompat-v7:23.0.1"
     compile "com.facebook.react:react-native:+"  // From node_modules
+
+    compile 'com.google.android.gms:play-services-auth:9.2.1' // should be at least 9.0.0
 }
 
 // Run this once to be able to run the application with BUCK
@@ -137,3 +150,5 @@ task copyDownloadableDepsToLibs(type: Copy) {
     from configurations.compile
     into 'libs'
 }
+
+apply plugin: 'com.google.gms.google-services' // <--- this should be the last line
