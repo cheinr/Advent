@@ -55,12 +55,22 @@ export default class GroupInfoContainer extends Component {
           }
         }
 
+	  var events = [];
+	  if(userRole == null) {
+	      for(var i=0; i<response.data.events.length; i++) {
+		  if(!response.data.events[i].private) {
+		      events.push(response.data.events[i]);
+		  }
+	      }
+	  } else {
+	      events = response.data.events;
+	  }
         this.setState({
           group: {
             id: response.data.id,
             name: response.data.groupName,
             description: response.data.description,
-            events: response.data.events,
+            events: events,
             users: response.data.userGroups,
             groupPictureUrl: response.data.groupPictureUrl,
           },
