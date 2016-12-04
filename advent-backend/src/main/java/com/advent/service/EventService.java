@@ -84,7 +84,7 @@ public class EventService {
         List<EventDTO> upcomingEventDTOs = new ArrayList<>();
 
         for (Event event : upcomingEvents) {
-            upcomingEventDTOs.add(eventConverter.eventToEventDTO(event));
+                upcomingEventDTOs.add(eventConverter.eventToEventDTO(event));
         }
 
         return upcomingEventDTOs;

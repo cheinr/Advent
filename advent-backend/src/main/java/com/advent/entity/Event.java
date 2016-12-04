@@ -1,5 +1,6 @@
 package com.advent.entity;
 
+import com.advent.converter.BooleanConverter;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -11,35 +12,21 @@ import java.util.List;
 @Table(name = "event")
 public class Event {
 
+
+    private Long id;
+    private String name;
+    private String description;
+    private Date startDate;
+    private Date endDate;
+    private String location;
+    private Boolean isPrivate;
+    private List<EventResponse> eventResponses;
+    private Group group;
+
     @Id
     @Column(name = "id", unique = true, nullable = false, length = 20)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
     @SequenceGenerator(name = "generator", sequenceName = "event_seq", allocationSize = 1)
-    private Long id;
-    @Column(name = "name")
-    private String name;
-    @Column(name = "description")
-    private String description;
-    @Column(name = "start_date")
-    @Temporal(TemporalType.TIMESTAMP)
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date startDate;
-    @Column(name = "end_date")
-    @Temporal(TemporalType.TIMESTAMP)
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date endDate;
-    @Column(name = "location")
-    private String location;
-    @Column(name = "is_private")
-    private Boolean isPrivate;
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "event")
-    @JsonIgnore
-    private List<EventResponse> eventResponses;
-    @ManyToOne
-    @JoinColumn(name = "group_table_id", nullable = false)
-    @JsonIgnore
-    private Group group;
-
     public Long getId() {
         return id;
     }
@@ -48,6 +35,7 @@ public class Event {
         this.id = id;
     }
 
+    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -56,6 +44,7 @@ public class Event {
         this.name = name;
     }
 
+    @Column(name = "description")
     public String getDescription() {
         return description;
     }
@@ -64,6 +53,9 @@ public class Event {
         this.description = description;
     }
 
+    @Column(name = "start_date")
+    @Temporal(TemporalType.TIMESTAMP)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     public Date getStartDate() {
         return startDate;
     }
@@ -72,6 +64,9 @@ public class Event {
         this.startDate = startDate;
     }
 
+    @Column(name = "end_date")
+    @Temporal(TemporalType.TIMESTAMP)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     public Date getEndDate() {
         return endDate;
     }
@@ -80,6 +75,7 @@ public class Event {
         this.endDate = endDate;
     }
 
+    @Column(name = "location")
     public String getLocation() {
         return location;
     }
@@ -88,6 +84,7 @@ public class Event {
         this.location = location;
     }
 
+    @Column(name = "is_private")
     public Boolean getPrivate() {
         return isPrivate;
     }
@@ -96,6 +93,9 @@ public class Event {
         isPrivate = aPrivate;
     }
 
+    @ManyToOne
+    @JoinColumn(name = "group_table_id", nullable = false)
+    @JsonIgnore
     public Group getGroup() {
         return group;
     }
@@ -104,6 +104,8 @@ public class Event {
         this.group = group;
     }
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "event")
+    @JsonIgnore
     public List<EventResponse> getEventResponses() {
         return eventResponses;
     }
