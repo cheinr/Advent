@@ -34,7 +34,7 @@ public class Announcement {
         this.title = title;
     }
 
-    @Column(name = "content")
+    @Column(name = "content", columnDefinition = "TEXT")
     public String getContent() {
         return content;
     }

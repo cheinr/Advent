@@ -45,7 +45,7 @@ public class Group {
         this.groupName = groupName;
     }
 
-    @Column(name = "group_picture_url")
+    @Column(name = "group_picture_url", columnDefinition = "TEXT")
     public String getGroupPictureUrl() {
         return groupPictureUrl;
     }

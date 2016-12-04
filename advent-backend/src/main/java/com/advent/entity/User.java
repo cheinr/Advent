@@ -53,7 +53,7 @@ public class User {
         this.email = email;
     }
 
-    @Column(name = "description")
+    @Column(name = "description", columnDefinition = "TEXT")
     public String getDescription() {
         return description;
     }
