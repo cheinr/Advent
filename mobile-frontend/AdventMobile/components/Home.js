@@ -17,10 +17,6 @@ export default class Home extends React.Component {
             <View>
                 <View>
                     <Button
-                        onPress={()=> this.props.signOut()}
-                        title="Sign out"
-                    />
-                    <Button
                         onPress={this.props.groupListPage}
                         title="View Groups"
                         color="black"
@@ -30,9 +26,10 @@ export default class Home extends React.Component {
                         title="View Events"
                         color="black"
                     />
-                    <Text>
-                        {JSON.stringify(this.props.user)}
-                    </Text>
+                    <Button
+                        onPress={()=> this.props.signOut()}
+                        title="Sign out"
+                    />
                 </View>
             </View>
         );

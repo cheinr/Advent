@@ -17,19 +17,16 @@ export default class GroupListContainer extends Component {
 
     _fetchData(userEmail) {
         fetch('http://proj-309-la-03.cs.iastate.edu/api/auth/event/my-events/' + userEmail, {
-            method: 'POST',
+            method: 'GET',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                result: result
-            })
+            }
         })
             .then((response) => response.json())
             .then((responseData) => {
 
-                this.setState({events:responseData});
+                this.setState({groups:responseData});
             })
             .done();
     }
