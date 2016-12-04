@@ -22,7 +22,7 @@ export default class EventList extends React.Component {
 
     _renderRow(rowData) {
         return (
-            <TouchableHighlight onPress={() => this.eventPage(rowData)}>
+            <TouchableHighlight onPress={() => this.props.eventPage(rowData)}>
                 <View>
                     <View style={styles.row}>
                         <Text style={styles.text}>
